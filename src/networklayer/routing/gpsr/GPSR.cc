@@ -25,8 +25,6 @@
 
 Define_Module(GPSR);
 
-#define GPSR_EV EV << "GPSR at " << getHostName() << " "
-
 // TODO: use some header?
 static double const NaN = 0.0 / 0.0;
 
@@ -134,13 +132,13 @@ void GPSR::processMessage(cMessage * message)
 
 void GPSR::scheduleBeaconTimer()
 {
-    GPSR_EV << "Scheduling beacon timer" << endl;
+    EV_DEBUG << "Scheduling beacon timer" << endl;
     scheduleAt(simTime() + beaconInterval, beaconTimer);
 }
 
 void GPSR::processBeaconTimer()
 {
-    GPSR_EV << "Processing beacon timer" << endl;
+    EV_DEBUG << "Processing beacon timer" << endl;
     Address selfAddress = getSelfAddress();
     if (!selfAddress.isUnspecified()) {
         sendBeacon(createBeacon(), uniform(0, maxJitter).dbl());
@@ -157,7 +155,7 @@ void GPSR::processBeaconTimer()
 
 void GPSR::schedulePurgeNeighborsTimer()
 {
-    GPSR_EV << "Scheduling purge neighbors timer" << endl;
+    EV_DEBUG << "Scheduling purge neighbors timer" << endl;
     simtime_t nextExpiration = getNextNeighborExpiration();
     if (nextExpiration == SimTime::getMaxTime()) {
         if (purgeNeighborsTimer->isScheduled())
@@ -177,7 +175,7 @@ void GPSR::schedulePurgeNeighborsTimer()
 
 void GPSR::processPurgeNeighborsTimer()
 {
-    GPSR_EV << "Processing purge neighbors timer" << endl;
+    EV_DEBUG << "Processing purge neighbors timer" << endl;
     purgeNeighbors();
     schedulePurgeNeighborsTimer();
 }
@@ -218,7 +216,7 @@ GPSRBeacon * GPSR::createBeacon()
 
 void GPSR::sendBeacon(GPSRBeacon * beacon, double delay)
 {
-    GPSR_EV << "Sending beacon: address = " << beacon->getAddress() << ", position = " << beacon->getPosition() << endl;
+    EV_INFO << "Sending beacon: address = " << beacon->getAddress() << ", position = " << beacon->getPosition() << endl;
     INetworkProtocolControlInfo * networkProtocolControlInfo = addressType->createNetworkProtocolControlInfo();
     networkProtocolControlInfo->setProtocol(IP_PROT_MANET);
     networkProtocolControlInfo->setHopLimit(255);
@@ -234,7 +232,7 @@ void GPSR::sendBeacon(GPSRBeacon * beacon, double delay)
 
 void GPSR::processBeacon(GPSRBeacon * beacon)
 {
-    GPSR_EV << "Processing beacon: address = " << beacon->getAddress() << ", position = " << beacon->getPosition() << endl;
+    EV_INFO << "Processing beacon: address = " << beacon->getAddress() << ", position = " << beacon->getPosition() << endl;
     neighborPositionTable.setPosition(beacon->getAddress(), beacon->getPosition());
     delete beacon;
 }
@@ -348,11 +346,6 @@ double GPSR::getNeighborAngle(const Address & address)
 // address
 //
 
-std::string GPSR::getHostName()
-{
-    return host->getFullName();
-}
-
 Address GPSR::getSelfAddress()
 {
     return routingTable->getRouterIdAsGeneric();
@@ -426,7 +419,7 @@ std::vector<Address> GPSR::getPlanarNeighbors()
 
 Address GPSR::getNextPlanarNeighborCounterClockwise(Address & startNeighborAddress, double startNeighborAngle)
 {
-    GPSR_EV << "Finding next planar neighbor (counter clockwise): startAddress = " << startNeighborAddress << ", startAngle = " << startNeighborAngle << endl;
+    EV_DEBUG << "Finding next planar neighbor (counter clockwise): startAddress = " << startNeighborAddress << ", startAngle = " << startNeighborAngle << endl;
     Address & bestNeighborAddress = startNeighborAddress;
     double bestNeighborAngleDifference = 2 * PI;
     std::vector<Address> neighborAddresses = getPlanarNeighbors();
@@ -436,7 +429,7 @@ Address GPSR::getNextPlanarNeighborCounterClockwise(Address & startNeighborAddre
         double neighborAngleDifference = neighborAngle - startNeighborAngle;
         if (neighborAngleDifference < 0)
             neighborAngleDifference += 2 * PI;
-        GPSR_EV << "Trying next planar neighbor (counter clockwise): address = " << neighborAddress << ", angle = " << neighborAngle << endl;
+        EV_DEBUG << "Trying next planar neighbor (counter clockwise): address = " << neighborAddress << ", angle = " << neighborAngle << endl;
         if (neighborAngleDifference != 0 && neighborAngleDifference < bestNeighborAngleDifference) {
             bestNeighborAngleDifference = neighborAngleDifference;
             bestNeighborAddress = neighborAddress;
@@ -462,7 +455,7 @@ Address GPSR::findNextHop(INetworkDatagram * datagram, const Address & destinati
 
 Address GPSR::findGreedyRoutingNextHop(INetworkDatagram * datagram, const Address & destination)
 {
-    GPSR_EV << "Finding next hop using greedy routing: destination = " << destination << endl;
+    EV_DEBUG << "Finding next hop using greedy routing: destination = " << destination << endl;
     GPSRPacket * packet = check_and_cast<GPSRPacket *>(dynamic_cast<cPacket *>(datagram)->getEncapsulatedPacket());
     Address selfAddress = getSelfAddress();
     Coord selfPosition = mobility->getCurrentPosition();
@@ -480,7 +473,7 @@ Address GPSR::findGreedyRoutingNextHop(INetworkDatagram * datagram, const Addres
         }
     }
     if (bestNeighbor.isUnspecified()) {
-        GPSR_EV << "Switching to perimeter routing: destination = " << destination << endl;
+        EV_DEBUG << "Switching to perimeter routing: destination = " << destination << endl;
         packet->setRoutingMode(GPSR_PERIMETER_ROUTING);
         packet->setPerimeterRoutingStartPosition(selfPosition);
         packet->setCurrentFaceFirstSenderAddress(selfAddress);
@@ -493,7 +486,7 @@ Address GPSR::findGreedyRoutingNextHop(INetworkDatagram * datagram, const Addres
 
 Address GPSR::findPerimeterRoutingNextHop(INetworkDatagram * datagram, const Address & destination)
 {
-    GPSR_EV << "Finding next hop using perimeter routing: destination = " << destination << endl;
+    EV_DEBUG << "Finding next hop using perimeter routing: destination = " << destination << endl;
     GPSRPacket * packet = check_and_cast<GPSRPacket *>(dynamic_cast<cPacket *>(datagram)->getEncapsulatedPacket());
     Address selfAddress = getSelfAddress();
     Coord selfPosition = mobility->getCurrentPosition();
@@ -502,7 +495,7 @@ Address GPSR::findPerimeterRoutingNextHop(INetworkDatagram * datagram, const Add
     double selfDistance = (destinationPosition - selfPosition).length();
     double perimeterRoutingStartDistance = (destinationPosition - perimeterRoutingStartPosition).length();
     if (selfDistance < perimeterRoutingStartDistance) {
-        GPSR_EV << "Switching to greedy routing: destination = " << destination << endl;
+        EV_DEBUG << "Switching to greedy routing: destination = " << destination << endl;
         packet->setRoutingMode(GPSR_GREEDY_ROUTING);
         packet->setPerimeterRoutingStartPosition(Coord());
         packet->setPerimeterRoutingForwardPosition(Coord());
@@ -520,19 +513,19 @@ Address GPSR::findPerimeterRoutingNextHop(INetworkDatagram * datagram, const Add
                 nextNeighborAddress = getNextPlanarNeighborCounterClockwise(nextNeighborAddress, getNeighborAngle(nextNeighborAddress));
             if (nextNeighborAddress.isUnspecified())
                 break;
-            GPSR_EV << "Intersecting towards next hop: nextNeighbor = " << nextNeighborAddress << ", firstSender = " << firstSenderAddress << ", firstReceiver = " << firstReceiverAddress << ", destination = " << destination << endl;
+            EV_DEBUG << "Intersecting towards next hop: nextNeighbor = " << nextNeighborAddress << ", firstSender = " << firstSenderAddress << ", firstReceiver = " << firstReceiverAddress << ", destination = " << destination << endl;
             Coord nextNeighborPosition = getNeighborPosition(nextNeighborAddress);
             Coord intersection = intersectSections(perimeterRoutingStartPosition, destinationPosition, selfPosition, nextNeighborPosition);
             hasIntersection = !isNaN(intersection.x);
             if (hasIntersection) {
-                GPSR_EV << "Edge to next hop intersects: intersection = " << intersection << ", nextNeighbor = " << nextNeighborAddress << ", firstSender = " << firstSenderAddress << ", firstReceiver = " << firstReceiverAddress << ", destination = " << destination << endl;
+                EV_DEBUG << "Edge to next hop intersects: intersection = " << intersection << ", nextNeighbor = " << nextNeighborAddress << ", firstSender = " << firstSenderAddress << ", firstReceiver = " << firstReceiverAddress << ", destination = " << destination << endl;
                 packet->setCurrentFaceFirstSenderAddress(selfAddress);
                 packet->setCurrentFaceFirstReceiverAddress(Address());
             }
         }
         while (hasIntersection);
         if (firstSenderAddress == selfAddress && firstReceiverAddress == nextNeighborAddress) {
-            GPSR_EV << "End of perimeter reached: firstSender = " << firstSenderAddress << ", firstReceiver = " << firstReceiverAddress << ", destination = " << destination << endl;
+            EV_DEBUG << "End of perimeter reached: firstSender = " << firstSenderAddress << ", firstReceiver = " << firstReceiverAddress << ", destination = " << destination << endl;
             return Address();
         }
         else {
@@ -551,14 +544,14 @@ INetfilter::IHook::Result GPSR::routeDatagram(INetworkDatagram * datagram, const
 {
     const Address & source = datagram->getSourceAddress();
     const Address & destination = datagram->getDestinationAddress();
-    GPSR_EV << "Finding next hop: source = " << source << ", destination = " << destination << endl;
+    EV_INFO << "Finding next hop: source = " << source << ", destination = " << destination << endl;
     nextHop = findNextHop(datagram, destination);
     if (nextHop.isUnspecified()) {
-        GPSR_EV << "No next hop found, dropping packet: source = " << source << ", destination = " << destination << endl;
+        EV_WARN << "No next hop found, dropping packet: source = " << source << ", destination = " << destination << endl;
         return DROP;
     }
     else {
-        GPSR_EV << "Next hop found: source = " << source << ", destination = " << destination << ", nextHop: " << nextHop << endl;
+        EV_INFO << "Next hop found: source = " << source << ", destination = " << destination << ", nextHop: " << nextHop << endl;
         GPSRPacket * packet = check_and_cast<GPSRPacket *>(dynamic_cast<cPacket *>(datagram)->getEncapsulatedPacket());
         packet->setSenderAddress(getSelfAddress());
         // KLUDGE: find output interface
@@ -638,7 +631,7 @@ void GPSR::receiveChangeNotification(int category, const cObject *details)
 {
     Enter_Method("receiveChangeNotification");
     if (category == NF_LINK_BREAK) {
-        GPSR_EV << "Received link break" << endl;
+        EV_WARN << "Received link break" << endl;
         // TODO: shall we remove the neighbor?
     }
 }
