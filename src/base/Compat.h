@@ -21,51 +21,6 @@
 #include <iostream>
 #include <omnetpp.h>
 
-#ifndef EV_FATAL
-// TODO: #if OMNETPP_VERSION < 0x0500
-// FIXME: eventually remove these forward compatibility macros
-#define EV_FATAL EV
-#define EV_ERROR EV
-#define EV_WARN  EV
-#define EV_INFO  EV
-#define EV_DEBUG EV
-#define EV_TRACE EV
-
-#define EV_FATAL_S EV
-#define EV_ERROR_S EV
-#define EV_WARN_S  EV
-#define EV_INFO_S  EV
-#define EV_DEBUG_S EV
-#define EV_TRACE_S EV
-
-#define EV_FATAL_P ev.printf
-#define EV_ERROR_P ev.printf
-#define EV_WARN_P  ev.printf
-#define EV_INFO_P  ev.printf
-#define EV_DEBUG_P ev.printf
-#define EV_TRACE_P ev.printf
-
-#define EV_FATAL_PS ev.printf
-#define EV_ERROR_PS ev.printf
-#define EV_WARN_PS  ev.printf
-#define EV_INFO_PS  ev.printf
-#define EV_DEBUG_PS ev.printf
-#define EV_TRACE_PS ev.printf
-
-#define EV_S EV
-
-#define EV_GLOBAL_STREAM
-
-class cLogStream : public std::ostream
-{
-    public:
-        static cLogStream globalStream;
-};
-
-#endif
-
-#endif
-
 #ifdef _MSC_VER
 // complementary error function, not in MSVC
 double INET_API erfc(double x);
@@ -129,5 +84,7 @@ T check_and_cast(const P *p)
     }
     return ret;
 }
+
+#endif
 
 #endif
