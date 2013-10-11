@@ -38,7 +38,7 @@ BGPRouting::~BGPRouting(void)
 
 int BGPRouting::numInitStages() const
 {
-    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, STAGE_ROUTINGTABLE_COMPLETED) + 1;
+    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, STAGE_DO_INIT_ROUTING_PROTOCOLS) + 1;
     return stages;
 }
 
@@ -54,7 +54,7 @@ void BGPRouting::initialize(int stage)
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
     }
-    if (stage == STAGE_ROUTINGTABLE_COMPLETED) // we must wait until IPv4RoutingTable is completely initialized
+    if (stage == STAGE_DO_INIT_ROUTING_PROTOCOLS) // we must wait until IPv4RoutingTable is completely initialized
     {
         _rt = IPv4RoutingTableAccess().get();
         _inft = InterfaceTableAccess().get();
