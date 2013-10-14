@@ -145,7 +145,7 @@ void UDPBasicApp::processStart()
         Address result;
         AddressResolver().tryResolve(token, result);
         if (result.isUnspecified())
-            EV << "cannot resolve destination address: " << token << endl;
+            EV_ERROR << "cannot resolve destination address: " << token << endl;
         else
             destAddresses.push_back(result);
     }
@@ -205,7 +205,7 @@ void UDPBasicApp::handleMessageWhenUp(cMessage *msg)
     }
     else if (msg->getKind() == UDP_I_ERROR)
     {
-        EV << "Ignoring UDP error report\n";
+        EV_WARN << "Ignoring UDP error report\n";
         delete msg;
     }
     else
@@ -224,7 +224,7 @@ void UDPBasicApp::handleMessageWhenUp(cMessage *msg)
 void UDPBasicApp::processPacket(cPacket *pk)
 {
     emit(rcvdPkSignal, pk);
-    EV << "Received packet: " << UDPSocket::getReceivedPacketInfo(pk) << endl;
+    EV_INFO << "Received packet: " << UDPSocket::getReceivedPacketInfo(pk) << endl;
     delete pk;
     numReceived++;
 }
