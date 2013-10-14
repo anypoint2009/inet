@@ -88,7 +88,7 @@ void EtherMACFullDuplex::handleMessage(cMessage *msg)
 
 void EtherMACFullDuplex::handleSelfMessage(cMessage *msg)
 {
-    EV << "Self-message " << msg << " received\n";
+    EV_TRACE << "Self-message " << msg << " received\n";
 
     if (msg == endTxMsg)
         handleEndTxPeriod();
@@ -103,7 +103,7 @@ void EtherMACFullDuplex::handleSelfMessage(cMessage *msg)
 void EtherMACFullDuplex::startFrameTransmission()
 {
     ASSERT(curTxFrame);
-    EV << "Transmitting a copy of frame " << curTxFrame << endl;
+    EV_DETAIL << "Transmitting a copy of frame " << curTxFrame << endl;
 
     EtherFrame *frame = curTxFrame->dup();  // note: we need to duplicate the frame because we emit a signal with it in endTxPeriod()
 
@@ -117,7 +117,7 @@ void EtherMACFullDuplex::startFrameTransmission()
     frame->addByteLength(PREAMBLE_BYTES+SFD_BYTES);
 
     // send
-    EV << "Starting transmission of " << frame << endl;
+    EV_INFO << "Transmission of " << frame << " started.\n";
     send(frame, physOutGate);
 
     scheduleAt(transmissionChannel->getTransmissionFinishTime(), endTxMsg);
@@ -131,7 +131,7 @@ void EtherMACFullDuplex::processFrameFromUpperLayer(EtherFrame *frame)
 
     frame->setFrameByteLength(frame->getByteLength());
 
-    EV << "Received frame from upper layer: " << frame << endl;
+    EV_INFO << "Received " << frame << " from upper layer." << endl;
 
     emit(packetReceivedFromUpperSignal, frame);
 
@@ -149,7 +149,7 @@ void EtherMACFullDuplex::processFrameFromUpperLayer(EtherFrame *frame)
 
     if (!connected || disabled)
     {
-        EV << (!connected ? "Interface is not connected" : "MAC is disabled") << " -- dropping packet " << frame << endl;
+        EV_WARN << (!connected ? "Interface is not connected" : "MAC is disabled") << " -- dropping packet " << frame << endl;
         emit(dropPkFromHLIfaceDownSignal, frame);
         numDroppedPkFromHLIfaceDown++;
         delete frame;
@@ -183,7 +183,7 @@ void EtherMACFullDuplex::processFrameFromUpperLayer(EtherFrame *frame)
                   "(or if this is normal, increase txQueueLimit!)",
                   txQueue.innerQueue->getQueueLimit());
         // store frame and possibly begin transmitting
-        EV << "Frame " << frame << " arrived from higher layers, enqueueing\n";
+        EV_DETAIL << "Frame " << frame << " arrived from higher layers, enqueueing\n";
         txQueue.innerQueue->insertFrame(frame);
 
         if (!curTxFrame && !txQueue.innerQueue->empty())
@@ -196,11 +196,11 @@ void EtherMACFullDuplex::processFrameFromUpperLayer(EtherFrame *frame)
 
 void EtherMACFullDuplex::processMsgFromNetwork(EtherTraffic *msg)
 {
-    EV << "Received frame from network: " << msg << endl;
+    EV_INFO << "Reception of " << msg << " started." << endl;
 
     if (!connected || disabled)
     {
-        EV << (!connected ? "Interface is not connected" : "MAC is disabled") << " -- dropping msg " << msg << endl;
+        EV_WARN << (!connected ? "Interface is not connected" : "MAC is disabled") << " -- dropping msg " << msg << endl;
         if (dynamic_cast<EtherFrame *>(msg))    // do not count JAM and IFG packets
         {
             emit(dropPkIfaceDownSignal, msg);
@@ -242,6 +242,7 @@ void EtherMACFullDuplex::processMsgFromNetwork(EtherTraffic *msg)
         }
         else
         {
+            EV_INFO << "Reception of " << frame << " successfully completed." << endl;
             processReceivedDataFrame((EtherFrame *)frame);
         }
     }
@@ -253,7 +254,7 @@ void EtherMACFullDuplex::handleEndIFGPeriod()
         error("Not in WAIT_IFG_STATE at the end of IFG period");
 
     // End of IFG period, okay to transmit
-    EV << "IFG elapsed" << endl;
+    EV_DETAIL << "IFG elapsed" << endl;
 
     beginSendFrames();
 }
@@ -282,7 +283,7 @@ void EtherMACFullDuplex::handleEndTxPeriod()
         emit(txPkSignal, curTxFrame);
     }
 
-    EV << "Transmission of " << curTxFrame << " successfully completed\n";
+    EV_INFO << "Transmission of " << curTxFrame << " successfully completed.\n";
     delete curTxFrame;
     curTxFrame = NULL;
     lastTxFinishTime = simTime();
@@ -291,14 +292,14 @@ void EtherMACFullDuplex::handleEndTxPeriod()
     if (pauseUnitsRequested > 0)
     {
         // if we received a PAUSE frame recently, go into PAUSE state
-        EV << "Going to PAUSE mode for " << pauseUnitsRequested << " time units\n";
+        EV_DETAIL << "Going to PAUSE mode for " << pauseUnitsRequested << " time units\n";
 
         scheduleEndPausePeriod(pauseUnitsRequested);
         pauseUnitsRequested = 0;
     }
     else
     {
-        EV << "Start IFG period\n";
+        EV_DETAIL << "Start IFG period\n";
         scheduleEndIFGPeriod();
     }
 }
@@ -318,7 +319,7 @@ void EtherMACFullDuplex::handleEndPausePeriod()
     if (transmitState != PAUSE_STATE)
         error("End of PAUSE event occurred when not in PAUSE_STATE!");
 
-    EV << "Pause finished, resuming transmissions\n";
+    EV_DETAIL << "Pause finished, resuming transmissions\n";
     beginSendFrames();
 }
 
@@ -338,6 +339,7 @@ void EtherMACFullDuplex::processReceivedDataFrame(EtherFrame *frame)
     numFramesPassedToHL++;
     emit(packetSentToUpperSignal, frame);
     // pass up to upper layer
+    EV_INFO << "Sending " << frame << " to upper layer.\n";
     send(frame, "upperLayerOut");
 }
 
@@ -345,14 +347,14 @@ void EtherMACFullDuplex::processPauseCommand(int pauseUnits)
 {
     if (transmitState == TX_IDLE_STATE)
     {
-        EV << "PAUSE frame received, pausing for " << pauseUnitsRequested << " time units\n";
+        EV_DETAIL << "PAUSE frame received, pausing for " << pauseUnitsRequested << " time units\n";
         if (pauseUnits > 0)
             scheduleEndPausePeriod(pauseUnits);
     }
     else if (transmitState == PAUSE_STATE)
     {
-        EV << "PAUSE frame received, pausing for " << pauseUnitsRequested
-           << " more time units from now\n";
+        EV_DETAIL << "PAUSE frame received, pausing for " << pauseUnitsRequested
+                 << " more time units from now\n";
         cancelEvent(endPauseMsg);
 
         if (pauseUnits > 0)
@@ -362,7 +364,7 @@ void EtherMACFullDuplex::processPauseCommand(int pauseUnits)
     {
         // transmitter busy -- wait until it finishes with current frame (endTx)
         // and then it'll go to PAUSE state
-        EV << "PAUSE frame received, storing pause request\n";
+        EV_DETAIL << "PAUSE frame received, storing pause request\n";
         pauseUnitsRequested = pauseUnits;
     }
 }
@@ -387,7 +389,7 @@ void EtherMACFullDuplex::beginSendFrames()
     if (curTxFrame)
     {
         // Other frames are queued, transmit next frame
-        EV << "Transmit next frame in output queue\n";
+        EV_DETAIL << "Transmit next frame in output queue\n";
         startFrameTransmission();
     }
     else
@@ -397,7 +399,7 @@ void EtherMACFullDuplex::beginSendFrames()
         if (!txQueue.extQueue){
             // Output only for internal queue (we cannot be shure that there
             //are no other frames in external queue)
-            EV << "No more frames to send, transmitter set to idle\n";
+            EV_DETAIL << "No more frames to send, transmitter set to idle\n";
         }
     }
 }
