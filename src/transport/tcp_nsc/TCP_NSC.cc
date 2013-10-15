@@ -213,7 +213,7 @@ Address const & TCP_NSC::mapNsc2Remote(uint32_t nscAddrP)
 }
 // x == mapNsc2Remote(mapRemote2Nsc(x))
 
-int TCP_NSC::numInitStages() const { return STAGE_NODESTATUS_AVAILABLE + 1; }
+int TCP_NSC::numInitStages() const { return STAGE_LOCAL_PLUS_1 + 1; }
 
 void TCP_NSC::initialize(int stage)
 {
@@ -240,7 +240,7 @@ void TCP_NSC::initialize(int stage)
         testingS = netw->hasPar("testing") && netw->par("testing").boolValue();
         logverboseS = !testingS && netw->hasPar("logverbose") && netw->par("logverbose").boolValue();
     }
-    if (stage == STAGE_NODESTATUS_AVAILABLE)
+    if (stage == STAGE_LOCAL_PLUS_1)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

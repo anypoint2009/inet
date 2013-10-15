@@ -30,7 +30,7 @@ simsignal_t TCPGenericSrvApp::sentPkSignal = SIMSIGNAL_NULL;
 
 int TCPGenericSrvApp::numInitStages() const
 {
-    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, NEWSTAGE_APPLICATIONS) + 1;
+    static int stages = std::max(STAGE_LOCAL_PLUS_1, NEWSTAGE_APPLICATIONS) + 1;
     return stages;
 }
 
@@ -66,7 +66,7 @@ void TCPGenericSrvApp::initialize(int stage)
         socket.bind(localAddress[0] ? AddressResolver().resolve(localAddress) : Address(), localPort);
         socket.listen();
     }
-    if (stage == STAGE_NODESTATUS_AVAILABLE)
+    if (stage == STAGE_LOCAL_PLUS_1)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

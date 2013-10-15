@@ -59,7 +59,7 @@ IPv6Route *IPv6RoutingTable::createNewRoute(IPv6Address destPrefix, int prefixLe
 
 int IPv6RoutingTable::numInitStages() const
 {
-    static int stages = std::max(STAGE_NOTIFICATIONBOARD_AVAILABLE, NEWSTAGE_L3_INITIALIZATION) + 1;
+    static int stages = std::max(STAGE_LOCAL_PLUS_1, NEWSTAGE_L3_INITIALIZATION) + 1;
     return stages;
 }
 
@@ -88,7 +88,7 @@ void IPv6RoutingTable::initialize(int stage)
         mipv6Support = false; // 4.9.07 - CB
 #endif /* WITH_xMIPv6 */
     }
-    if (stage == STAGE_NOTIFICATIONBOARD_AVAILABLE)
+    if (stage == STAGE_LOCAL_PLUS_1)
     {
         //TODO isNodeUp???
 

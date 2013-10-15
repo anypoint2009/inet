@@ -41,7 +41,7 @@ simsignal_t RTP::rcvdPkSignal = SIMSIGNAL_NULL;
 // methods inherited from cSimpleModule
 //
 
-int RTP::numInitStages() const { return STAGE_NODESTATUS_AVAILABLE + 1; }
+int RTP::numInitStages() const { return STAGE_LOCAL_PLUS_1 + 1; }
 
 void RTP::initialize(int stage)
 {
@@ -58,7 +58,7 @@ void RTP::initialize(int stage)
 
         rcvdPkSignal = registerSignal("rcvdPk");
     }
-    if (stage == STAGE_NODESTATUS_AVAILABLE)
+    if (stage == STAGE_LOCAL_PLUS_1)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

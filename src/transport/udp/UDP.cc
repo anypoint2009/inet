@@ -117,7 +117,7 @@ UDP::~UDP()
 
 int UDP::numInitStages() const
 {
-    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, NEWSTAGE_TRANSPORT) + 1;
+    static int stages = std::max(STAGE_LOCAL_PLUS_1, NEWSTAGE_TRANSPORT) + 1;
     return stages;
 }
 
@@ -155,7 +155,7 @@ void UDP::initialize(int stage)
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(IP_PROT_UDP);
     }
-    if (stage == STAGE_NODESTATUS_AVAILABLE)
+    if (stage == STAGE_LOCAL_PLUS_1)
     {
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;

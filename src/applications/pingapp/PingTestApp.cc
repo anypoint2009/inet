@@ -48,7 +48,7 @@ simsignal_t PingTestApp::pingTxSeqSignal = SIMSIGNAL_NULL;
 simsignal_t PingTestApp::pingRxSeqSignal = SIMSIGNAL_NULL;
 
 
-int PingTestApp::numInitStages() const { return STAGE_NODESTATUS_AVAILABLE + 1; }
+int PingTestApp::numInitStages() const { return STAGE_LOCAL_PLUS_1 + 1; }
 
 void PingTestApp::initialize(int stage)
 {
@@ -95,7 +95,7 @@ void PingTestApp::initialize(int stage)
             scheduleAt(startTime, msg);
         }
     }
-    if (stage == STAGE_NODESTATUS_AVAILABLE)
+    if (stage == STAGE_LOCAL_PLUS_1)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

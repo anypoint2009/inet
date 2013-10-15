@@ -22,7 +22,7 @@ Define_Module(TCPSrvHostApp);
 
 int TCPSrvHostApp::numInitStages() const
 {
-    int stages = std::max(STAGE_NODESTATUS_AVAILABLE, NEWSTAGE_APPLICATIONS) + 1;
+    int stages = std::max(STAGE_LOCAL_PLUS_1, NEWSTAGE_APPLICATIONS) + 1;
     return stages;
 }
 
@@ -43,7 +43,7 @@ void TCPSrvHostApp::initialize(int stage)
         serverSocket.bind(localAddress[0] ? Address(localAddress) : Address(), localPort);
         serverSocket.listen();
     }
-    if (stage == STAGE_NODESTATUS_AVAILABLE)
+    if (stage == STAGE_LOCAL_PLUS_1)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

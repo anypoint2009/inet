@@ -67,7 +67,7 @@ static char *fgetline(FILE *fp)
     return line;
 }
 
-int MACRelayUnitBase::numInitStages() const { return STAGE_NODESTATUS_AVAILABLE + 1; }
+int MACRelayUnitBase::numInitStages() const { return STAGE_LOCAL_PLUS_1 + 1; }
 
 void MACRelayUnitBase::initialize(int stage)
 {
@@ -104,7 +104,7 @@ void MACRelayUnitBase::initialize(int stage)
 
         WATCH_MAP(addresstable);
     }
-    if (stage == STAGE_NODESTATUS_AVAILABLE)
+    if (stage == STAGE_LOCAL_PLUS_1)
     {
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;

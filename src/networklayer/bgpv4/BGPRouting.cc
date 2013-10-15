@@ -38,7 +38,7 @@ BGPRouting::~BGPRouting(void)
 
 int BGPRouting::numInitStages() const
 {
-    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, NEWSTAGE_ROUTING) + 1;
+    static int stages = std::max(STAGE_LOCAL_PLUS_1, NEWSTAGE_ROUTING) + 1;
     return stages;
 }
 
@@ -46,7 +46,7 @@ void BGPRouting::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_NODESTATUS_AVAILABLE)
+    if (stage == STAGE_LOCAL_PLUS_1)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

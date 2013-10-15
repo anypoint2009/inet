@@ -34,7 +34,7 @@
 #include "NodeStatus.h"
 
 
-int HttpServerBase::numInitStages() const { return std::max(STAGE_NODESTATUS_AVAILABLE + 1, HttpNodeBase::numInitStages()); }
+int HttpServerBase::numInitStages() const { return std::max(STAGE_LOCAL_PLUS_1 + 1, HttpNodeBase::numInitStages()); }
 
 void HttpServerBase::initialize(int stage)
 {
@@ -153,7 +153,7 @@ void HttpServerBase::initialize(int stage)
         WATCH(textResourcesServed);
         WATCH(badRequests);
     }
-    if (stage == STAGE_NODESTATUS_AVAILABLE)
+    if (stage == STAGE_LOCAL_PLUS_1)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

@@ -29,7 +29,7 @@ Define_Module(TraCIDemo);
 
 int TraCIDemo::numInitStages() const
 {
-    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, NEWSTAGE_APPLICATIONS) + 1;
+    static int stages = std::max(STAGE_LOCAL_PLUS_1, NEWSTAGE_APPLICATIONS) + 1;
     return stages;
 }
 
@@ -42,7 +42,7 @@ void TraCIDemo::initialize(int stage)
         mobilityStateChangedSignal = registerSignal("mobilityStateChanged");
         sentMessage = false;
     }
-    if (stage == STAGE_NODESTATUS_AVAILABLE)
+    if (stage == STAGE_LOCAL_PLUS_1)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

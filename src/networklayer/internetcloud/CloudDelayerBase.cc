@@ -41,14 +41,14 @@ CloudDelayerBase::~CloudDelayerBase()
 
 int CloudDelayerBase::numInitStages() const
 {
-    return STAGE_IP_LAYER_READY_FOR_HOOK_REGISTRATION + 1;
+    return STAGE_LOCAL_PLUS_1 + 1;
 }
 
 void CloudDelayerBase::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_IP_LAYER_READY_FOR_HOOK_REGISTRATION)
+    if (stage == STAGE_LOCAL_PLUS_1)
     {
         ipv4Layer = check_and_cast<IPv4*>(getModuleByPath("^.ip"));
         ipv4Layer->registerHook(0, this);

@@ -33,7 +33,7 @@ static std::ostream& operator<<(std::ostream& out, cMessage *msg)
 
 int Ieee80211MgmtBase::numInitStages() const
 {
-    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, STAGE_MACADDRESS_AVAILABLE) + 1;
+    static int stages = std::max(STAGE_LOCAL_PLUS_1, STAGE_MACADDRESS_AVAILABLE) + 1;
     return stages;
 }
 
@@ -58,7 +58,7 @@ void Ieee80211MgmtBase::initialize(int stage)
         // configuration
         frameCapacity = par("frameCapacity");
     }
-    if (stage == STAGE_NODESTATUS_AVAILABLE)
+    if (stage == STAGE_LOCAL_PLUS_1)
     {
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;

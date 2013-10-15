@@ -65,14 +65,14 @@ Define_Module(NetfilterInfoHook);
 
 int NetfilterInfoHook::numInitStages() const
 {
-    return STAGE_IP_LAYER_READY_FOR_HOOK_REGISTRATION + 1;
+    return STAGE_LOCAL_PLUS_1 + 1;
 }
 
 void NetfilterInfoHook::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_IP_LAYER_READY_FOR_HOOK_REGISTRATION)
+    if (stage == STAGE_LOCAL_PLUS_1)
     {
         netfilter = check_and_cast<INetfilter*>(findModuleWhereverInNode("ip", this));
         netfilter->registerHook(0, this);

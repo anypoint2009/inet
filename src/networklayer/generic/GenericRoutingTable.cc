@@ -46,7 +46,7 @@ GenericRoutingTable::~GenericRoutingTable()
 
 int GenericRoutingTable::numInitStages() const
 {
-    static int stages = std::max(STAGE_INTERFACEENTRY_REGISTERED, std::max(NEWSTAGE_L3_STATICROUTES, STAGE_NOTIFICATIONBOARD_AVAILABLE)) + 1;
+    static int stages = std::max(STAGE_INTERFACEENTRY_REGISTERED, std::max(NEWSTAGE_L3_STATICROUTES, STAGE_LOCAL_PLUS_1)) + 1;
 
     return stages;
 }
@@ -79,7 +79,7 @@ void GenericRoutingTable::initialize(int stage)
         WATCH(multicastForwardingEnabled);
         WATCH(routerId);
     }
-    if (stage == STAGE_NOTIFICATIONBOARD_AVAILABLE)
+    if (stage == STAGE_LOCAL_PLUS_1)
     {
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         nb->subscribe(this, NF_INTERFACE_CREATED);

@@ -44,7 +44,7 @@ Ieee80211MgmtAP::~Ieee80211MgmtAP()
 
 int Ieee80211MgmtAP::numInitStages() const
 {
-    static int stages = std::max(STAGE_NOTIFICATIONBOARD_AVAILABLE, STAGE_NODESTATUS_AVAILABLE) + 1;
+    static int stages = std::max(STAGE_LOCAL_PLUS_1, STAGE_LOCAL_PLUS_1) + 1;
     return std::max(Ieee80211MgmtAPBase::numInitStages(), stages);
 }
 
@@ -74,12 +74,12 @@ void Ieee80211MgmtAP::initialize(int stage)
         // start beacon timer (randomize startup time)
         beaconTimer = new cMessage("beaconTimer");
     }
-    if (stage == STAGE_NOTIFICATIONBOARD_AVAILABLE)
+    if (stage == STAGE_LOCAL_PLUS_1)
     {
         // subscribe for notifications
         nb->subscribe(this, NF_RADIO_CHANNEL_CHANGED);
     }
-    if (stage == STAGE_NODESTATUS_AVAILABLE)
+    if (stage == STAGE_LOCAL_PLUS_1)
     {
         if (isOperational)
             scheduleAt(simTime()+uniform(0, beaconInterval), beaconTimer);

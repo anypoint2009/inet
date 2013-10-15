@@ -50,7 +50,7 @@ void VoIPStreamReceiver::initSignals()
     delaySignal = registerSignal("delay");
 }
 
-int VoIPStreamReceiver::numInitStages() const { return STAGE_NODESTATUS_AVAILABLE + 1; }
+int VoIPStreamReceiver::numInitStages() const { return STAGE_LOCAL_PLUS_1 + 1; }
 
 void VoIPStreamReceiver::initialize(int stage)
 {
@@ -78,7 +78,7 @@ void VoIPStreamReceiver::initialize(int stage)
         socket.setOutputGate(gate("udpOut"));
         socket.bind(localPort);
     }
-    if (stage == STAGE_NODESTATUS_AVAILABLE)
+    if (stage == STAGE_LOCAL_PLUS_1)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
