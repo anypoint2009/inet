@@ -46,7 +46,7 @@ GenericRoutingTable::~GenericRoutingTable()
 
 int GenericRoutingTable::numInitStages() const
 {
-    static int stages = std::max(STAGE_INTERFACEENTRY_REGISTERED, std::max(NEWSTAGE_L3_STATICROUTES, STAGE_LOCAL_PLUS_1)) + 1;
+    static int stages = std::max(NEWSTAGE_L3_INITIALIZATION, std::max(NEWSTAGE_L3_STATICROUTES, STAGE_LOCAL_PLUS_1)) + 1;
 
     return stages;
 }
@@ -88,7 +88,7 @@ void GenericRoutingTable::initialize(int stage)
         nb->subscribe(this, NF_INTERFACE_CONFIG_CHANGED);
         nb->subscribe(this, NF_INTERFACE_IPv4CONFIG_CHANGED);
     }
-    if (stage == STAGE_INTERFACEENTRY_REGISTERED)
+    if (stage == NEWSTAGE_L3_INITIALIZATION)
     {
 //        // L2 modules register themselves in stage 0, so we can only configure
 //        // the interfaces in stage 1.

@@ -333,7 +333,7 @@ int IGMPv2::numInitStages() const
     static int stages = std::max(std::max(
             NEWSTAGE_TRANSPORT,
             STAGE_LOCAL_PLUS_1),
-            STAGE_INTERFACEENTRY_REGISTERED
+            NEWSTAGE_L3_INITIALIZATION
             ) + 1;
     return stages;
 }
@@ -403,7 +403,7 @@ void IGMPv2::initialize(int stage)
         nb->subscribe(this, NF_IPv4_MCAST_JOIN);
         nb->subscribe(this, NF_IPv4_MCAST_LEAVE);
     }
-    if (stage == STAGE_INTERFACEENTRY_REGISTERED)
+    if (stage == NEWSTAGE_L3_INITIALIZATION)
     {
         for (int i = 0; i < (int)ift->getNumInterfaces(); ++i)
         {

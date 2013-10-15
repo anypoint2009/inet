@@ -62,7 +62,7 @@ InterfaceTable::~InterfaceTable()
     delete [] tmpInterfaceList;
 }
 
-int InterfaceTable::numInitStages() const { return STAGE_INTERFACEENTRY_REGISTERED + 1; }
+int InterfaceTable::numInitStages() const { return NEWSTAGE_L3_INITIALIZATION + 1; }
 
 void InterfaceTable::initialize(int stage)
 {
@@ -74,7 +74,7 @@ void InterfaceTable::initialize(int stage)
         nb = NotificationBoardAccess().get();
         WATCH_PTRVECTOR(idToInterface);
     }
-    if (stage == STAGE_INTERFACEENTRY_REGISTERED)
+    if (stage == NEWSTAGE_L3_INITIALIZATION)
     {
         updateDisplayString();
     }
