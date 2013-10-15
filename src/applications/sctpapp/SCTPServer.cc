@@ -36,7 +36,7 @@ Define_Module(SCTPServer);
 
 int SCTPServer::numInitStages() const
 {
-    static int stages = std::max(STAGE_LOCAL_PLUS_1, NEWSTAGE_APPLICATIONS) + 1;
+    static int stages = std::max(NEWSTAGE_APPLICATIONS, NEWSTAGE_APPLICATIONS) + 1;
     return stages;
 }
 
@@ -111,7 +111,7 @@ void SCTPServer::initialize(int stage)
             socket->setStreamPriority(streamNum, (uint32) atoi(token));
         }
     }
-    if (stage == STAGE_LOCAL_PLUS_1)
+    if (stage == NEWSTAGE_APPLICATIONS)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

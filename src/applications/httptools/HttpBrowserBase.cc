@@ -57,7 +57,7 @@ HttpBrowserBase::~HttpBrowserBase()
     cancelAndDelete(eventTimer);
 }
 
-int HttpBrowserBase::numInitStages() const { return STAGE_LOCAL_PLUS_1 + 1; }
+int HttpBrowserBase::numInitStages() const { return NEWSTAGE_APPLICATIONS + 1; }
 
 void HttpBrowserBase::initialize(int stage)
 {
@@ -161,7 +161,7 @@ void HttpBrowserBase::initialize(int stage)
 
         eventTimer = new cMessage("eventTimer");
     }
-    if (stage == STAGE_LOCAL_PLUS_1) //TODO change to STAGE_INIT_APPLICATION
+    if (stage == NEWSTAGE_APPLICATIONS) //TODO change to STAGE_INIT_APPLICATION
     {
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
 

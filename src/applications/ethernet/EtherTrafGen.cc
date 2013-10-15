@@ -44,7 +44,7 @@ EtherTrafGen::~EtherTrafGen()
     cancelAndDelete(timerMsg);
 }
 
-int EtherTrafGen::numInitStages() const { return STAGE_LOCAL_PLUS_1 + 1; }
+int EtherTrafGen::numInitStages() const { return NEWSTAGE_APPLICATIONS + 1; }
 
 void EtherTrafGen::initialize(int stage)
 {
@@ -74,7 +74,7 @@ void EtherTrafGen::initialize(int stage)
         if (stopTime >= SIMTIME_ZERO && stopTime < startTime)
             error("Invalid startTime/stopTime parameters");
     }
-    if (stage == STAGE_LOCAL_PLUS_1)
+    if (stage == NEWSTAGE_APPLICATIONS)
     {
         if (isGenerator())
             timerMsg = new cMessage("generateNextPacket");

@@ -45,7 +45,7 @@ EtherAppCli::~EtherAppCli()
     cancelAndDelete(timerMsg);
 }
 
-int EtherAppCli::numInitStages() const { return STAGE_LOCAL_PLUS_1 + 1; }
+int EtherAppCli::numInitStages() const { return NEWSTAGE_APPLICATIONS + 1; }
 
 void EtherAppCli::initialize(int stage)
 {
@@ -75,7 +75,7 @@ void EtherAppCli::initialize(int stage)
         if (stopTime >= SIMTIME_ZERO && stopTime < startTime)
             error("Invalid startTime/stopTime parameters");
     }
-    if (stage == STAGE_LOCAL_PLUS_1)
+    if (stage == NEWSTAGE_APPLICATIONS)
     {
         if (isGenerator())
             timerMsg = new cMessage("generateNextPacket");

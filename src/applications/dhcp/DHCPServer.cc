@@ -45,7 +45,7 @@ DHCPServer::~DHCPServer()
 
 int DHCPServer::numInitStages() const
 {
-    static int stages = std::max(STAGE_LOCAL_PLUS_1, NEWSTAGE_APPLICATIONS) + 1;
+    static int stages = std::max(NEWSTAGE_APPLICATIONS, NEWSTAGE_APPLICATIONS) + 1;
     return stages;
 }
 
@@ -68,7 +68,7 @@ void DHCPServer::initialize(int stage)
         // process delay
         proc_delay = 0.001; // 100ms
     }
-    if (stage == STAGE_LOCAL_PLUS_1)
+    if (stage == NEWSTAGE_APPLICATIONS)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

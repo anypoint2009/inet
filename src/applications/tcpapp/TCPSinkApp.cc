@@ -40,7 +40,7 @@ void TCPSinkApp::initialize(int stage)
         WATCH(bytesRcvd);
         rcvdPkSignal = registerSignal("rcvdPk");
     }
-    if (stage == STAGE_LOCAL_PLUS_1)
+    if (stage == NEWSTAGE_APPLICATIONS)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

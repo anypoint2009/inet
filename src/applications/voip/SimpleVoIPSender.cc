@@ -40,7 +40,7 @@ SimpleVoIPSender::~SimpleVoIPSender()
 
 int SimpleVoIPSender::numInitStages() const
 {
-    int stages = std::max(STAGE_LOCAL_PLUS_1, NEWSTAGE_APPLICATIONS) + 1;
+    int stages = std::max(NEWSTAGE_APPLICATIONS, NEWSTAGE_APPLICATIONS) + 1;
     return stages;
 }
 
@@ -67,7 +67,7 @@ void SimpleVoIPSender::initialize(int stage)
         localPort = par("localPort");
         destPort = par("destPort");
     }
-    if (stage == STAGE_LOCAL_PLUS_1)
+    if (stage == NEWSTAGE_APPLICATIONS)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
