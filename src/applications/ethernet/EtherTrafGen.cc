@@ -52,7 +52,7 @@ void EtherTrafGen::initialize(int stage)
 
     // we can only initialize in the 2nd stage (stage==1), because
     // assignment of "auto" MAC addresses takes place in stage 0
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         sendInterval = &par("sendInterval");
         numPacketsPerBurst = &par("numPacketsPerBurst");

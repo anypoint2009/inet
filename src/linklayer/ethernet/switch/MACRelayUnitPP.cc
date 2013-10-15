@@ -58,7 +58,7 @@ void MACRelayUnitPP::initialize(int stage)
 {
     MACRelayUnitBase::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         numProcessedFrames = numDroppedFrames = 0;
         WATCH(numProcessedFrames);

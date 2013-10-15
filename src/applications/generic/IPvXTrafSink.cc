@@ -34,7 +34,7 @@ simsignal_t IPvXTrafSink::rcvdPkSignal = SIMSIGNAL_NULL;
 
 int IPvXTrafSink::numInitStages() const
 {
-    static int stages = std::max(STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP, STAGE_DO_INIT_APPLICATION) + 1;
+    static int stages = std::max(NEWSTAGE_TRANSPORT, NEWSTAGE_APPLICATIONS) + 1;
     return stages;
 }
 
@@ -42,19 +42,19 @@ void IPvXTrafSink::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         numReceived = 0;
         WATCH(numReceived);
         rcvdPkSignal = registerSignal("rcvdPk");
     }
-    if (stage == STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP)
+    if (stage == NEWSTAGE_TRANSPORT)
     {
         int protocol = par("protocol");
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(protocol);
     }
-    if (stage == STAGE_DO_INIT_APPLICATION)
+    if (stage == NEWSTAGE_APPLICATIONS)
     {
         ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
 

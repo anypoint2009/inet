@@ -65,7 +65,7 @@ void HttpBrowserBase::initialize(int stage)
 
     HttpNodeBase::initialize(stage);
 
-    if (stage==STAGE_DO_LOCAL)
+    if (stage==NEWSTAGE_LOCAL_INITIALIZATION)
     {
         cXMLElement *rootelement = par("config").xmlValue();
         if (rootelement==NULL)

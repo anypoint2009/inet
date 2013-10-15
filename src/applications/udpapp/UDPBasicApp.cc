@@ -40,13 +40,13 @@ UDPBasicApp::~UDPBasicApp()
     cancelAndDelete(selfMsg);
 }
 
-int UDPBasicApp::numInitStages() const { return std::max(STAGE_DO_LOCAL + 1, AppBase::numInitStages()); }
+int UDPBasicApp::numInitStages() const { return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, AppBase::numInitStages()); }
 
 void UDPBasicApp::initialize(int stage)
 {
     AppBase::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         numSent = 0;
         numReceived = 0;

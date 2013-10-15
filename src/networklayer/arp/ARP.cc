@@ -76,7 +76,7 @@ void ARP::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         sentReqSignal = registerSignal("sentReq");
         sentReplySignal = registerSignal("sentReply");
@@ -106,7 +106,7 @@ void ARP::initialize(int stage)
     }
     if (stage == STAGE_IP_ADDRESS_AVAILABLE)
     {
-        ASSERT(stage > STAGE_DO_CONFIGURE_IP_ADDRESSES);
+        ASSERT(stage > NEWSTAGE_L3_IPADDRESSES);
         ASSERT(stage >= STAGE_NOTIFICATIONBOARD_AVAILABLE);
         ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
         ASSERT(stage >= STAGE_INTERFACEENTRY_REGISTERED);

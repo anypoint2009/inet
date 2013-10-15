@@ -50,13 +50,13 @@ PingApp::~PingApp()
     cancelAndDelete(timer);
 }
 
-int PingApp::numInitStages() const { return STAGE_DO_INIT_APPLICATION + 1; }
+int PingApp::numInitStages() const { return NEWSTAGE_APPLICATIONS + 1; }
 
 void PingApp::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         // read params
         // (defer reading srcAddr/destAddr to when ping starts, maybe
@@ -93,7 +93,7 @@ void PingApp::initialize(int stage)
         // references
         timer = new cMessage("sendPing");
     }
-    if (stage == STAGE_DO_INIT_APPLICATION)
+    if (stage == NEWSTAGE_APPLICATIONS)
     {
         // startup
         nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

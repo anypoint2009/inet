@@ -40,7 +40,7 @@ void HttpServerBase::initialize(int stage)
 {
     HttpNodeBase::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         EV_DEBUG << "Initializing server component\n";
 

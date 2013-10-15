@@ -30,7 +30,7 @@ void Ieee80211MgmtAPBase::initialize(int stage)
 {
     Ieee80211MgmtBase::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         isConnectedToHL = gate("upperLayerOut")->getPathEndGate()->isConnected();
         const char * encDec = par("encapDecap").stringValue();

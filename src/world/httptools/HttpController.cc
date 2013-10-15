@@ -41,7 +41,7 @@ void HttpController::initialize(int stage)
 
     EV_DEBUG << "Initializing stage " << stage << endl;
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         EV_INFO << "Initializing HTTP controller. First stage" << endl;
 

@@ -76,7 +76,7 @@ static std::ostream& operator<<(std::ostream& os, const TCPConnection& conn)
 
 int TCP::numInitStages() const
 {
-    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP) + 1;
+    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, NEWSTAGE_TRANSPORT) + 1;
     return stages;
 }
 
@@ -84,7 +84,7 @@ void TCP::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         const char *q;
         q = par("sendQueueClass");
@@ -112,7 +112,7 @@ void TCP::initialize(int stage)
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
     }
-    if (stage == STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP)
+    if (stage == NEWSTAGE_TRANSPORT)
     {
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(IP_PROT_TCP);

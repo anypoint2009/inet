@@ -48,7 +48,7 @@ void MACBase::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         nb = NotificationBoardAccess().getIfExists();
     }

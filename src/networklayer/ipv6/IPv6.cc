@@ -53,7 +53,7 @@ int IPv6::numInitStages() const { return STAGE_NODESTATUS_AVAILABLE + 1; }
 
 void IPv6::initialize(int stage)
 {
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         QueueBase::initialize();
 

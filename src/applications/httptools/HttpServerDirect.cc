@@ -35,14 +35,13 @@ Define_Module(HttpServerDirect);
 
 int HttpServerDirect::numInitStages() const
 {
-    return std::max(0 + 1, HttpServerBase::numInitStages());
+    return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, HttpServerBase::numInitStages());
 }
 
 void HttpServerDirect::initialize(int stage)
 {
     HttpServerBase::initialize(stage);
-
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         EV_DEBUG << "Initializing direct server component\n";
 

@@ -90,13 +90,13 @@ void SCTP::bindPortForUDP()
     udpSocket.bind(SCTP_UDP_PORT);
 }
 
-int SCTP::numInitStages() const { return STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP + 1; }
+int SCTP::numInitStages() const { return NEWSTAGE_TRANSPORT + 1; }
 
 void SCTP::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         this->auth = (bool)par("auth");
         this->pktdrop = (bool)par("packetDrop");
@@ -125,7 +125,7 @@ void SCTP::initialize(int stage)
         }
     }
 
-    if (stage == STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP)
+    if (stage == NEWSTAGE_TRANSPORT)
     {
         IPSocket socket(gate("to_ip"));
         socket.registerProtocol(IP_PROT_SCTP);

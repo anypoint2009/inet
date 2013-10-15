@@ -48,13 +48,13 @@ UDPVideoStreamSvr::~UDPVideoStreamSvr()
         cancelAndDelete(it->second.timer);
 }
 
-int UDPVideoStreamSvr::numInitStages() const { return std::max(STAGE_DO_LOCAL + 1, AppBase::numInitStages()); }
+int UDPVideoStreamSvr::numInitStages() const { return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, AppBase::numInitStages()); }
 
 void UDPVideoStreamSvr::initialize(int stage)
 {
     AppBase::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         sendInterval = &par("sendInterval");
         packetLen = &par("packetLen");

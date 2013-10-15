@@ -47,13 +47,13 @@ TraCIScenarioManager::~TraCIScenarioManager() {
     cancelAndDelete(executeOneTimestepTrigger);
 }
 
-int TraCIScenarioManager::numInitStages() const { return STAGE_DO_LOCAL + 1; }
+int TraCIScenarioManager::numInitStages() const { return NEWSTAGE_LOCAL_INITIALIZATION + 1; }
 
 void TraCIScenarioManager::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         connectAt = par("connectAt");
         firstStepAt = par("firstStepAt");

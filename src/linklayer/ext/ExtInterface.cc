@@ -38,14 +38,14 @@
 Define_Module(ExtInterface);
 
 
-int ExtInterface::numInitStages() const { return std::max((int)STAGE_DO_REGISTER_INTERFACE + 1, MACBase::numInitStages()); }
+int ExtInterface::numInitStages() const { return std::max((int)NEWSTAGE_L2_INITIALIZATION + 1, MACBase::numInitStages()); }
 
 void ExtInterface::initialize(int stage)
 {
     MACBase::initialize(stage);
 
     // subscribe at scheduler for external messages
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         if (dynamic_cast<cSocketRTScheduler *>(simulation.getScheduler()) != NULL)
         {
@@ -67,7 +67,7 @@ void ExtInterface::initialize(int stage)
         WATCH(numRcvd);
         WATCH(numDropped);
     }
-    if (stage == STAGE_DO_REGISTER_INTERFACE)
+    if (stage == NEWSTAGE_L2_INITIALIZATION)
     {
         registerInterface();
     }

@@ -85,14 +85,14 @@ void OLSR_ETX_LinkQualityTimer::expire()
 ///
 ///
 
-int OLSR_ETX::numInitStages() const { return STAGE_DO_INIT_ROUTING_PROTOCOLS + 1; }
+int OLSR_ETX::numInitStages() const { return NEWSTAGE_ROUTING + 1; }
 
 void
 OLSR_ETX::initialize(int stage)
 {
     OLSR::initialize(stage);
 
-    if (stage == STAGE_DO_INIT_ROUTING_PROTOCOLS)
+    if (stage == NEWSTAGE_ROUTING)
     {
         if (isInMacLayer())
             OlsrAddressSize::ADDR_SIZE = 6;

@@ -74,14 +74,14 @@ void TraCIMobility::Statistics::recordScalars(cSimpleModule& module)
 
 int TraCIMobility::numInitStages() const
 {
-    return std::max(STAGE_DO_LOCAL + 1, MobilityBase::numInitStages());
+    return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, MobilityBase::numInitStages());
 }
 
 void TraCIMobility::initialize(int stage)
 {
     //TODO why call the base::initialize() at the end?
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         accidentCount = par("accidentCount");
 

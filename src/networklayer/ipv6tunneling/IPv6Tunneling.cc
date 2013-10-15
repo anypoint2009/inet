@@ -67,7 +67,7 @@ void IPv6Tunneling::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         ift = InterfaceTableAccess().get();
         rt = check_and_cast<IPv6RoutingTable *>(getModuleByPath(par("routingTableModule")));

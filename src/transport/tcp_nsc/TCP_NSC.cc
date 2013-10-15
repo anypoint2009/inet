@@ -221,7 +221,7 @@ void TCP_NSC::initialize(int stage)
 
     tcpEV << this << ": initialize stage " << stage << endl;
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         const char *q;
         q = par("sendQueueClass");
@@ -248,7 +248,7 @@ void TCP_NSC::initialize(int stage)
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
     }
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         const char* stackName = this->par(stackNameParamNameS).stringValue();
 
@@ -258,7 +258,7 @@ void TCP_NSC::initialize(int stage)
         pStackM->if_attach(localInnerIpS.str().c_str(), localInnerMaskS.str().c_str(), 1500);
         pStackM->add_default_gateway(localInnerGwS.str().c_str());
     }
-    if (stage == STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP)
+    if (stage == NEWSTAGE_TRANSPORT)
     {
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(IP_PROT_TCP);

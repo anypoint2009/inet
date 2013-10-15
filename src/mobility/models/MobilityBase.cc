@@ -55,14 +55,14 @@ MobilityBase::MobilityBase()
     lastPosition = Coord::ZERO;
 }
 
-int MobilityBase::numInitStages() const {return STAGE_DO_INITIALIZE_AND_PUBLISH_LOCATION + 1;}
+int MobilityBase::numInitStages() const {return NEWSTAGE_PHYSICALENV_SECOND + 1;}
 
 void MobilityBase::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
     EV_TRACE << "initializing MobilityBase stage " << stage << endl;
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         mobilityStateChangedSignal = registerSignal("mobilityStateChanged");
         constraintAreaMin.x = par("constraintAreaMinX");
@@ -80,7 +80,7 @@ void MobilityBase::initialize(int stage)
         }
     }
     // initial position is set in stage 1 to allow subscribers to start listening in stage 0
-    if (stage == STAGE_DO_INITIALIZE_AND_PUBLISH_LOCATION)
+    if (stage == NEWSTAGE_PHYSICALENV_SECOND)
         initializePosition();
 }
 

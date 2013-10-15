@@ -40,7 +40,7 @@ void AppBase::finish()
 
 int AppBase::numInitStages() const
 {
-    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, STAGE_DO_INIT_APPLICATION) + 1;
+    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, NEWSTAGE_APPLICATIONS) + 1;
     return stages;
 }
 
@@ -48,7 +48,7 @@ void AppBase::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         isOperational = false;
     }
@@ -57,7 +57,7 @@ void AppBase::initialize(int stage)
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isOperational = !nodeStatus || nodeStatus->getState() == NodeStatus::UP;
     }
-    if (stage == STAGE_DO_INIT_APPLICATION)
+    if (stage == NEWSTAGE_APPLICATIONS)
     {
         if (isOperational)
             startApp(NULL);

@@ -34,18 +34,18 @@ TraCIScenarioManagerLaunchd::~TraCIScenarioManagerLaunchd()
 {
 }
 
-int TraCIScenarioManagerLaunchd::numInitStages() const { return std::max(TraCIScenarioManager::numInitStages(), STAGE_DO_TRACI_LAUNCH + 1); }
+int TraCIScenarioManagerLaunchd::numInitStages() const { return std::max(TraCIScenarioManager::numInitStages(), NEWSTAGE_PHYSICALENV_INITIALIZATION + 1); }
 
 void TraCIScenarioManagerLaunchd::initialize(int stage)
 {
     //TODO why call the base initialize() at the end?
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         launchConfig = par("launchConfig").xmlValue();
         seed = par("seed");
     }
-    if (stage == STAGE_DO_TRACI_LAUNCH)
+    if (stage == NEWSTAGE_PHYSICALENV_INITIALIZATION)
     {
         cXMLElementList basedir_nodes = launchConfig->getElementsByTagName("basedir");
         if (basedir_nodes.size() == 0) {

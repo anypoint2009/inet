@@ -196,7 +196,7 @@ void DSRUUTimer::cancel()
 
 int DSRUU::numInitStages() const
 {
-    static int stages = std::max(STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP, STAGE_DO_INIT_ROUTING_PROTOCOLS) + 1;
+    static int stages = std::max(NEWSTAGE_TRANSPORT, NEWSTAGE_ROUTING) + 1;
     return stages;
 }
 
@@ -205,13 +205,13 @@ void DSRUU::initialize(int stage)
     cSimpleModule::initialize(stage);
 
     //current_time =simTime();
-    if (stage == STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP)
+    if (stage == NEWSTAGE_TRANSPORT)
     {
         IPSocket ipSocket(gate("to_ip"));
         ipSocket.registerProtocol(IP_PROT_MANET);
         ipSocket.registerProtocol(IP_PROT_DSR);
     }
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         for (int i = 0; i < CONFVAL_MAX; i++)
         {
@@ -328,7 +328,7 @@ void DSRUU::initialize(int stage)
         etx_timer.setOwer(this);
     }
 
-    if (stage == STAGE_DO_INIT_ROUTING_PROTOCOLS)
+    if (stage == NEWSTAGE_ROUTING)
     {
         /* Search the 80211 interface */
         inet_rt = IPv4RoutingTableAccess().get();

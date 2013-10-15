@@ -35,13 +35,13 @@
 Define_Module(MPLS);
 
 
-int MPLS::numInitStages() const { return STAGE_DO_LOCAL + 1; }
+int MPLS::numInitStages() const { return NEWSTAGE_LOCAL_INITIALIZATION + 1; }
 
 void MPLS::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         // interfaceTable must be initialized
 

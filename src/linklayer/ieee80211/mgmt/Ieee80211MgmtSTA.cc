@@ -96,7 +96,7 @@ void Ieee80211MgmtSTA::initialize(int stage)
 {
     Ieee80211MgmtBase::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         isScanning = false;
         isAssociated = false;

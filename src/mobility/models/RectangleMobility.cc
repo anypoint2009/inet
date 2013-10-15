@@ -32,7 +32,7 @@ RectangleMobility::RectangleMobility()
 
 int RectangleMobility::numInitStages() const
 {
-    return std::max(STAGE_DO_LOCAL + 1, MovingMobilityBase::numInitStages());
+    return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, MovingMobilityBase::numInitStages());
 }
 
 void RectangleMobility::initialize(int stage)
@@ -40,7 +40,7 @@ void RectangleMobility::initialize(int stage)
     MovingMobilityBase::initialize(stage);
 
     EV_TRACE << "initializing RectangleMobility stage " << stage << endl;
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         speed = par("speed");
         stationary = (speed == 0);

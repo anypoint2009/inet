@@ -105,13 +105,13 @@ Batman::~Batman()
     hna_chg_list.clear();
 }
 
-int Batman::numInitStages() const  { return STAGE_DO_INIT_ROUTING_PROTOCOLS + 1; }
+int Batman::numInitStages() const  { return NEWSTAGE_ROUTING + 1; }
 
 void Batman::initialize(int stage)
 {
     ManetRoutingBase::initialize(stage);
 
-    if (stage == STAGE_DO_INIT_ROUTING_PROTOCOLS)
+    if (stage == NEWSTAGE_ROUTING)
     {
         found_ifs = 0;
 
@@ -139,7 +139,7 @@ void Batman::initialize(int stage)
 
         int32_t download_speed = 0, upload_speed = 0;
 
-        ASSERT(stage > STAGE_DO_ASSIGN_ROUTERID);
+        ASSERT(stage > NEWSTAGE_L3_STATICROUTES);
 
         ASSERT(stage >= STAGE_IP_LAYER_READY_FOR_HOOK_REGISTRATION);
         ASSERT(stage >= STAGE_NOTIFICATIONBOARD_AVAILABLE);

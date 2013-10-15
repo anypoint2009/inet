@@ -67,7 +67,7 @@ void EtherMAC::initialize(int stage)
 {
     EtherMACBase::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         endRxMsg = new cMessage("EndReception", ENDRECEPTION);
         endBackoffMsg = new cMessage("EndBackoff", ENDBACKOFF);

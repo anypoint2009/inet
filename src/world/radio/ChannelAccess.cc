@@ -46,7 +46,7 @@ ChannelAccess::~ChannelAccess()
 
 int ChannelAccess::numInitStages() const
 {
-    return STAGE_DO_REGISTER_RADIO + 1;
+    return NEWSTAGE_L1_INITIALIZATION + 1;
 }
 
 /**
@@ -57,9 +57,9 @@ void ChannelAccess::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
-        ASSERT(stage < STAGE_DO_INITIALIZE_AND_PUBLISH_LOCATION);
+        ASSERT(stage < NEWSTAGE_PHYSICALENV_SECOND);
         cc = getChannelControl();
         nb = NotificationBoardAccess().get();
         hostModule = findContainingNode(this, true);
@@ -70,9 +70,9 @@ void ChannelAccess::initialize(int stage)
         mobilityStateChangedSignal = registerSignal("mobilityStateChanged");
         hostModule->subscribe(mobilityStateChangedSignal, this);
     }
-    if (stage == STAGE_DO_REGISTER_RADIO)
+    if (stage == NEWSTAGE_L1_INITIALIZATION)
     {
-        ASSERT(stage > STAGE_DO_INITIALIZE_AND_PUBLISH_LOCATION);
+        ASSERT(stage > NEWSTAGE_PHYSICALENV_SECOND);
         if (!positionUpdateArrived)
         {
             radioPos.x = parseInt(hostModule->getDisplayString().getTagArg("p", 0), -1);

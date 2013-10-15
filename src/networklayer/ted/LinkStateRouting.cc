@@ -39,14 +39,14 @@ LinkStateRouting::~LinkStateRouting()
     cancelAndDelete(announceMsg);
 }
 
-int LinkStateRouting::numInitStages() const { return STAGE_DO_INIT_ROUTING_PROTOCOLS + 1; }
+int LinkStateRouting::numInitStages() const { return NEWSTAGE_ROUTING + 1; }
 
 void LinkStateRouting::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
     // we have to wait until routerId gets assigned in stage 3
-    if (stage == STAGE_DO_INIT_ROUTING_PROTOCOLS)
+    if (stage == NEWSTAGE_ROUTING)
     {
         ASSERT(stage >= STAGE_ROUTERID_AVAILABLE);
         ASSERT(stage >= STAGE_NOTIFICATIONBOARD_AVAILABLE);
@@ -77,7 +77,7 @@ void LinkStateRouting::initialize(int stage)
         announceMsg = new cMessage("announce");
         scheduleAt(simTime() + exponential(0.01), announceMsg);
 
-        ASSERT(stage >= STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP);
+        ASSERT(stage >= NEWSTAGE_TRANSPORT);
         IPSocket socket(gate("ipOut"));
         socket.registerProtocol(IP_PROT_OSPF);
     }

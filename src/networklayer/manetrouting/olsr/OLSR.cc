@@ -447,11 +447,11 @@ OLSR_MsgTimer::expire()
 
 ///
 ///
-int OLSR::numInitStages() const { return STAGE_DO_INIT_ROUTING_PROTOCOLS + 1; }
+int OLSR::numInitStages() const { return NEWSTAGE_ROUTING + 1; }
 
 void OLSR::initialize(int stage)
 {
-    if (stage == STAGE_DO_INIT_ROUTING_PROTOCOLS)
+    if (stage == NEWSTAGE_ROUTING)
     {
 
        if (isInMacLayer())

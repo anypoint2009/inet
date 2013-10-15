@@ -42,20 +42,20 @@ int TelnetApp::checkedScheduleAt(simtime_t t, cMessage *msg)
     return 0;
 }
 
-int TelnetApp::numInitStages() const { return std::max(STAGE_DO_INIT_APPLICATION + 1, TCPGenericCliAppBase::numInitStages()); }
+int TelnetApp::numInitStages() const { return std::max(NEWSTAGE_APPLICATIONS + 1, TCPGenericCliAppBase::numInitStages()); }
 
 
 void TelnetApp::initialize(int stage)
 {
     TCPGenericCliAppBase::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         numCharsToType = numLinesToType = 0;
         WATCH(numCharsToType);
         WATCH(numLinesToType);
     }
-    if (stage == STAGE_DO_INIT_APPLICATION)
+    if (stage == NEWSTAGE_APPLICATIONS)
     {
         ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
 

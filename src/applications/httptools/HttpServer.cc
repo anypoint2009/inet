@@ -34,14 +34,14 @@ Define_Module(HttpServer);
 
 int HttpServer::numInitStages() const
 {
-    return std::max(STAGE_DO_INIT_APPLICATION + 1, HttpServerBase::numInitStages());
+    return std::max(NEWSTAGE_APPLICATIONS + 1, HttpServerBase::numInitStages());
 }
 
 void HttpServer::initialize(int stage)
 {
     HttpServerBase::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         numBroken = 0;
         socketsOpened = 0;
@@ -49,7 +49,7 @@ void HttpServer::initialize(int stage)
         WATCH(numBroken);
         WATCH(socketsOpened);
     }
-    if (stage == STAGE_DO_INIT_APPLICATION)
+    if (stage == NEWSTAGE_APPLICATIONS)
     {
         EV_DEBUG << "Initializing server component (sockets version)" << endl;
 

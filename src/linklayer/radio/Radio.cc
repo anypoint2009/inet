@@ -57,8 +57,8 @@ int Radio::numInitStages() const
 {
     static int stages = std::max(std::max(
             STAGE_BATTERY_READY_FOR_DEVICE_REGISTRATION,
-            STAGE_DO_PUBLISH_RADIOSTATE),
-            STAGE_DO_REGISTER_RADIO
+            NEWSTAGE_L1_INITIALIZATION),
+            NEWSTAGE_L1_INITIALIZATION
             ) + 1;
     return std::max(ChannelAccess::numInitStages(), stages);
 }
@@ -69,7 +69,7 @@ void Radio::initialize(int stage)
 
     EV << "Initializing Radio, stage=" << stage << endl;
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         gate("radioIn")->setDeliverOnReceptionStart(true);
 
@@ -185,7 +185,7 @@ void Radio::initialize(int stage)
     {
         registerBattery();
     }
-    if (stage == STAGE_DO_PUBLISH_RADIOSTATE)
+    if (stage == NEWSTAGE_L1_INITIALIZATION)
     {
         ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
         ASSERT(stage >= STAGE_NOTIFICATIONBOARD_AVAILABLE);
@@ -199,7 +199,7 @@ void Radio::initialize(int stage)
             nb->fireChangeNotification(NF_RADIO_CHANNEL_CHANGED, &rs);
         }
     }
-    if (stage == STAGE_DO_REGISTER_RADIO)
+    if (stage == NEWSTAGE_L1_INITIALIZATION)
     {
         ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
         ASSERT(stage >= STAGE_CHANNELCONTROL_AVAILABLE);

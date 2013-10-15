@@ -42,13 +42,13 @@ void EtherMACFullDuplex::initialize(int stage)
 {
     EtherMACBase::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         if (!par("duplexMode").boolValue())
             throw cRuntimeError("Half duplex operation is not supported by EtherMACFullDuplex, use the EtherMAC module for that! (Please enable csmacdSupport on EthernetInterface)");
     }
 
-    if (stage == STAGE_DO_REGISTER_INTERFACE)
+    if (stage == NEWSTAGE_L2_INITIALIZATION)
     {
         beginSendFrames();      //FIXME choose an another stage for it
     }

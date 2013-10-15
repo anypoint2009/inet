@@ -26,14 +26,14 @@ simsignal_t TCPSinkApp::rcvdPkSignal = SIMSIGNAL_NULL;
 
 int TCPSinkApp::numInitStages() const
 {
-    return STAGE_DO_INIT_APPLICATION + 1;
+    return NEWSTAGE_APPLICATIONS + 1;
 }
 
 void TCPSinkApp::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
 
         bytesRcvd = 0;
@@ -48,7 +48,7 @@ void TCPSinkApp::initialize(int stage)
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
     }
-    if (stage == STAGE_DO_INIT_APPLICATION)
+    if (stage == NEWSTAGE_APPLICATIONS)
     {
         ASSERT(stage >= STAGE_TRANSPORT_LAYER_AVAILABLE);
         ASSERT(stage >= STAGE_IP_ADDRESS_AVAILABLE);

@@ -45,7 +45,7 @@ DHCPServer::~DHCPServer()
 
 int DHCPServer::numInitStages() const
 {
-    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, STAGE_DO_INIT_APPLICATION) + 1;
+    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, NEWSTAGE_APPLICATIONS) + 1;
     return stages;
 }
 
@@ -53,7 +53,7 @@ void DHCPServer::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         numSent = 0;
         numReceived = 0;
@@ -76,7 +76,7 @@ void DHCPServer::initialize(int stage)
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
     }
-    if (stage == STAGE_DO_INIT_APPLICATION)
+    if (stage == NEWSTAGE_APPLICATIONS)
     {
         ASSERT(stage >= STAGE_INTERFACEENTRY_REGISTERED);
         ASSERT(stage >= STAGE_NOTIFICATIONBOARD_AVAILABLE);

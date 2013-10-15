@@ -57,7 +57,7 @@ SCTPClient::~SCTPClient()
 
 int SCTPClient::numInitStages() const
 {
-    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, STAGE_DO_INIT_APPLICATION) + 1;
+    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, NEWSTAGE_APPLICATIONS) + 1;
     return stages;
 }
 
@@ -66,7 +66,7 @@ void SCTPClient::initialize(int stage)
     cSimpleModule::initialize(stage);
 
     sctpEV3 << "initialize SCTP Client stage "<< stage << endl;
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         numSessions = numBroken = packetsSent = packetsRcvd = bytesSent = echoedBytesSent = bytesRcvd = 0;
 
@@ -109,7 +109,7 @@ void SCTPClient::initialize(int stage)
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
     }
-    if (stage == STAGE_DO_INIT_APPLICATION)
+    if (stage == NEWSTAGE_APPLICATIONS)
     {
         ASSERT(stage >= STAGE_IP_ADDRESS_AVAILABLE);
         // parameters

@@ -54,7 +54,7 @@ void PingTestApp::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         // read params
         // (defer reading srcAddr/destAddr to when ping starts, maybe

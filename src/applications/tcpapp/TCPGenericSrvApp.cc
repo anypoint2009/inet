@@ -30,7 +30,7 @@ simsignal_t TCPGenericSrvApp::sentPkSignal = SIMSIGNAL_NULL;
 
 int TCPGenericSrvApp::numInitStages() const
 {
-    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, STAGE_DO_INIT_APPLICATION) + 1;
+    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, NEWSTAGE_APPLICATIONS) + 1;
     return stages;
 }
 
@@ -38,7 +38,7 @@ void TCPGenericSrvApp::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         delay = par("replyDelay");
         maxMsgDelay = 0;
@@ -53,7 +53,7 @@ void TCPGenericSrvApp::initialize(int stage)
         WATCH(bytesRcvd);
         WATCH(bytesSent);
     }
-    if (stage == STAGE_DO_INIT_APPLICATION)
+    if (stage == NEWSTAGE_APPLICATIONS)
     {
         ASSERT(stage >= STAGE_TRANSPORT_LAYER_AVAILABLE);
         ASSERT(stage >= STAGE_IP_ADDRESS_AVAILABLE);

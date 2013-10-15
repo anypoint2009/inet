@@ -39,7 +39,7 @@ int Ieee80211MgmtBase::numInitStages() const
 
 void Ieee80211MgmtBase::initialize(int stage)
 {
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         PassiveQueueBase::initialize();
 

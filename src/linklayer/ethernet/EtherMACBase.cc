@@ -162,7 +162,7 @@ EtherMACBase::~EtherMACBase()
 
 int EtherMACBase::numInitStages() const
 {
-    static int stages = STAGE_DO_REGISTER_INTERFACE + 1;
+    static int stages = NEWSTAGE_L2_INITIALIZATION + 1;
     return std::max(stages, MACBase::numInitStages());
 }
 
@@ -170,7 +170,7 @@ void EtherMACBase::initialize(int stage)
 {
     MACBase::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         physInGate = gate("phys$i");
         physOutGate = gate("phys$o");
@@ -183,7 +183,7 @@ void EtherMACBase::initialize(int stage)
         initializeMACAddress();
         initializeStatistics();
     }
-    if (stage == STAGE_DO_REGISTER_INTERFACE)
+    if (stage == NEWSTAGE_L2_INITIALIZATION)
     {
         registerInterface(); // needs MAC address
         ASSERT(stage >= STAGE_IPASSIVEQUEUE_AVAILABLE); // should be stage larger than 0 for use queue module member functions
@@ -191,7 +191,7 @@ void EtherMACBase::initialize(int stage)
         initializeQueueModule();
         readChannelParameters(true);
     }
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         lastTxFinishTime = -1.0; // not equals with current simtime.
 

@@ -105,7 +105,7 @@ Ieee80211Mac::~Ieee80211Mac()
 
 int Ieee80211Mac::numInitStages() const
 {
-    static int stages = std::max(STAGE_DO_SUBSCRIBE_TO_RADIOSTATE_NOTIFICATIONS, STAGE_DO_REGISTER_INTERFACE) + 1;
+    static int stages = std::max(STAGE_DO_SUBSCRIBE_TO_RADIOSTATE_NOTIFICATIONS, NEWSTAGE_L2_INITIALIZATION) + 1;
     return std::max(stages, WirelessMacBase::numInitStages());
 }
 
@@ -116,7 +116,7 @@ void Ieee80211Mac::initialize(int stage)
     WirelessMacBase::initialize(stage);
 
     //TODO: revise it: it's too big; should revise stages, too!!!
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         int numQueues = 1;
         if (par("EDCA"))
@@ -296,13 +296,13 @@ void Ieee80211Mac::initialize(int stage)
         // subscribe for the information of the carrier sense
         nb->subscribe(this, NF_RADIOSTATE_CHANGED);
     }
-    if (stage == STAGE_DO_REGISTER_INTERFACE)
+    if (stage == NEWSTAGE_L2_INITIALIZATION)
     {
         // interface
         if (isInterfaceRegistered().isUnspecified()) //TODO do we need multi-MAC feature? if so, should they share interfaceEntry??  --Andras
             registerInterface();
     }
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         // obtain pointer to external queue
         initializeQueueModule();  //FIXME STAGE: this should be in L2 initialization!!!!

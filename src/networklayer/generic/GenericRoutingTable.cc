@@ -46,7 +46,7 @@ GenericRoutingTable::~GenericRoutingTable()
 
 int GenericRoutingTable::numInitStages() const
 {
-    static int stages = std::max(STAGE_INTERFACEENTRY_REGISTERED, std::max(STAGE_DO_ASSIGN_ROUTERID, STAGE_NOTIFICATIONBOARD_AVAILABLE)) + 1;
+    static int stages = std::max(STAGE_INTERFACEENTRY_REGISTERED, std::max(NEWSTAGE_L3_STATICROUTES, STAGE_NOTIFICATIONBOARD_AVAILABLE)) + 1;
 
     return stages;
 }
@@ -55,7 +55,7 @@ void GenericRoutingTable::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         // get a pointer to the NotificationBoard module and IInterfaceTable
         nb = NotificationBoardAccess().get();
@@ -113,7 +113,7 @@ void GenericRoutingTable::initialize(int stage)
 //        if (strcmp(routerIdStr, "") && strcmp(routerIdStr, "auto"))
 //            routerId = IPv4Address(routerIdStr);
     }
-    if (stage == STAGE_DO_ASSIGN_ROUTERID)
+    if (stage == NEWSTAGE_L3_STATICROUTES)
     {
         ASSERT(stage >= STAGE_IP_ADDRESS_AVAILABLE);
         // routerID selection must be after stage==STAGE_AUTOCONFIGURE_ADDRESSES

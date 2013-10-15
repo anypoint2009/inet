@@ -84,7 +84,7 @@ TCP_lwIP::TCP_lwIP()
 
 int TCP_lwIP::numInitStages() const
 {
-    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, std::max(STAGE_DO_LOCAL, STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP)) + 1;
+    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, std::max(NEWSTAGE_LOCAL_INITIALIZATION, NEWSTAGE_TRANSPORT)) + 1;
     return stages;
 }
 
@@ -94,7 +94,7 @@ void TCP_lwIP::initialize(int stage)
 
     tcpEV << this << ": initialize stage " << stage << endl;
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         const char *q;
         q = par("sendQueueClass");
@@ -125,7 +125,7 @@ void TCP_lwIP::initialize(int stage)
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
     }
-    if (stage == STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP)
+    if (stage == NEWSTAGE_TRANSPORT)
     {
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(IP_PROT_TCP);

@@ -137,7 +137,7 @@ void MultiFieldClassifier::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         numOutGates = gateSize("outs");
 

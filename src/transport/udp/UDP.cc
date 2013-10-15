@@ -117,7 +117,7 @@ UDP::~UDP()
 
 int UDP::numInitStages() const
 {
-    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP) + 1;
+    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, NEWSTAGE_TRANSPORT) + 1;
     return stages;
 }
 
@@ -125,7 +125,7 @@ void UDP::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         WATCH_PTRMAP(socketsByIdMap);
         WATCH_MAP(socketsByPortMap);
@@ -150,7 +150,7 @@ void UDP::initialize(int stage)
 
         isOperational = false;
     }
-    if (stage == STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP)
+    if (stage == NEWSTAGE_TRANSPORT)
     {
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(IP_PROT_UDP);

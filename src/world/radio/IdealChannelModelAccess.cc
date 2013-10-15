@@ -46,7 +46,7 @@ void IdealChannelModelAccess::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         cc = dynamic_cast<IdealChannelModel *>(simulation.getModuleByPath("channelControl"));
         if (!cc)

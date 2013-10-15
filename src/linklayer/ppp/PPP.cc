@@ -53,7 +53,7 @@ PPP::~PPP()
 int PPP::numInitStages() const
 {
     return std::max(MACBase::numInitStages(),
-            (int)std::max(STAGE_CHANNEL_AVAILABLE, STAGE_DO_REGISTER_INTERFACE) + 1);
+            (int)std::max(STAGE_CHANNEL_AVAILABLE, NEWSTAGE_L2_INITIALIZATION) + 1);
 }
 
 void PPP::initialize(int stage)
@@ -61,7 +61,7 @@ void PPP::initialize(int stage)
     MACBase::initialize(stage);
 
     // all initialization is done in the first stage
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         txQueue.setName("txQueue");
         endTransmissionEvent = new cMessage("pppEndTxEvent");
@@ -112,7 +112,7 @@ void PPP::initialize(int stage)
         // if we're connected, get the gate with transmission rate
         datarateChannel = connected ? physOutGate->getTransmissionChannel() : NULL;
     }
-    if (stage == STAGE_DO_REGISTER_INTERFACE)
+    if (stage == NEWSTAGE_L2_INITIALIZATION)
     {
         // register our interface entry in IInterfaceTable
         registerInterface();
@@ -120,7 +120,7 @@ void PPP::initialize(int stage)
         // prepare to fire notifications
         notifDetails.setInterfaceEntry(interfaceEntry);
 
-        ASSERT(stage > STAGE_DO_LOCAL);       // stage should be larger than 0 for call queueModule member function
+        ASSERT(stage > NEWSTAGE_LOCAL_INITIALIZATION);       // stage should be larger than 0 for call queueModule member function
         // request first frame to send
         if (queueModule && 0 == queueModule->getNumPendingRequests())
         {

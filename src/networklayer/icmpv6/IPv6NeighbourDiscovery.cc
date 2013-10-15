@@ -63,7 +63,7 @@ IPv6NeighbourDiscovery::~IPv6NeighbourDiscovery()
 
 int IPv6NeighbourDiscovery::numInitStages() const
 {
-    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, STAGE_DO_SET_INTERFACEENTRY_RTR_ADV_INTERVAL) + 1;
+    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, NEWSTAGE_L3_STATICROUTES) + 1;
     return stages;
 }
 
@@ -82,7 +82,7 @@ void IPv6NeighbourDiscovery::initialize(int stage)
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
     }
-    if (stage == STAGE_DO_SET_INTERFACEENTRY_RTR_ADV_INTERVAL)
+    if (stage == NEWSTAGE_L3_STATICROUTES)
     {
         ASSERT(stage >= STAGE_INTERFACEENTRY_IP_PROTOCOLDATA_AVAILABLE);
         ASSERT(stage >= STAGE_INTERFACEENTRY_REGISTERED);

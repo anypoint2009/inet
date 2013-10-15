@@ -331,7 +331,7 @@ void IGMPv2::deleteRouterGroupData(InterfaceEntry *ie, const IPv4Address &group)
 int IGMPv2::numInitStages() const
 {
     static int stages = std::max(std::max(
-            STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP,
+            NEWSTAGE_TRANSPORT,
             STAGE_NOTIFICATIONBOARD_AVAILABLE),
             STAGE_INTERFACEENTRY_REGISTERED
             ) + 1;
@@ -342,7 +342,7 @@ void IGMPv2::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         ift = InterfaceTableAccess().get();
         rt = check_and_cast<IIPv4RoutingTable *>(getModuleByPath(par("routingTableModule")));
@@ -392,7 +392,7 @@ void IGMPv2::initialize(int stage)
         WATCH(numLeavesSent);
         WATCH(numLeavesRecv);
     }
-    if (stage == STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP)
+    if (stage == NEWSTAGE_TRANSPORT)
     {
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(IP_PROT_IGMP);

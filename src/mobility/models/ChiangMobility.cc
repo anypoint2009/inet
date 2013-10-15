@@ -40,7 +40,7 @@ ChiangMobility::ChiangMobility()
 
 int ChiangMobility::numInitStages() const
 {
-    return std::max(STAGE_DO_LOCAL + 1, LineSegmentsMobilityBase::numInitStages());
+    return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, LineSegmentsMobilityBase::numInitStages());
 }
 
 void ChiangMobility::initialize(int stage)
@@ -48,7 +48,7 @@ void ChiangMobility::initialize(int stage)
     LineSegmentsMobilityBase::initialize(stage);
 
     EV_TRACE << "initializing ChiangMobility stage " << stage << endl;
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         stateTransitionUpdateInterval = par("stateTransitionUpdateInterval");
         speed = par("speed");

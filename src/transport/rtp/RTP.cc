@@ -47,7 +47,7 @@ void RTP::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         _leaveSession = false;
         appInGate = findGate("appIn");

@@ -71,9 +71,9 @@ int IPv4RoutingTable::numInitStages() const
     static int stages = std::max(std::max(std::max(std::max(
             STAGE_NOTIFICATIONBOARD_AVAILABLE,
             STAGE_NODESTATUS_AVAILABLE),
-            STAGE_DO_ASSIGN_ROUTERID),
-            STAGE_DO_ADD_STATIC_ROUTES),
-            STAGE_DO_ASSIGN_ROUTERID) + 1;
+            NEWSTAGE_L3_STATICROUTES),
+            NEWSTAGE_L3_STATICROUTES),
+            NEWSTAGE_L3_STATICROUTES) + 1;
     return stages;
 }
 
@@ -81,7 +81,7 @@ void IPv4RoutingTable::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
     {
         // get a pointer to the NotificationBoard module and IInterfaceTable
         nb = NotificationBoardAccess().get();
@@ -116,7 +116,7 @@ void IPv4RoutingTable::initialize(int stage)
                 routerId = IPv4Address(routerIdStr);
         }
     }
-    if (stage == STAGE_DO_ADD_STATIC_ROUTES)
+    if (stage == NEWSTAGE_L3_STATICROUTES)
     {
         ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
 
@@ -131,7 +131,7 @@ void IPv4RoutingTable::initialize(int stage)
                 error("Error reading routing table file %s", filename);
         }
     }
-    if (stage == STAGE_DO_ASSIGN_ROUTERID)
+    if (stage == NEWSTAGE_L3_STATICROUTES)
     {
         ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
         ASSERT(stage >= STAGE_INTERFACEENTRY_IP_PROTOCOLDATA_AVAILABLE);
