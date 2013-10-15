@@ -305,7 +305,7 @@ void Ieee80211Mac::initialize(int stage)
     if (stage == STAGE_DO_LOCAL)
     {
         // obtain pointer to external queue
-        initializeQueueModule();
+        initializeQueueModule();  //FIXME STAGE: this should be in L2 initialization!!!!
 
         // state variables
         fsm.setName("Ieee80211Mac State Machine");
