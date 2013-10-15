@@ -52,8 +52,7 @@ PPP::~PPP()
 
 int PPP::numInitStages() const
 {
-    return std::max(MACBase::numInitStages(),
-            (int)std::max(STAGE_CHANNEL_AVAILABLE, NEWSTAGE_L2_INITIALIZATION) + 1);
+    return NEWSTAGE_L2_INITIALIZATION + 1;
 }
 
 void PPP::initialize(int stage)
@@ -104,9 +103,7 @@ void PPP::initialize(int stage)
 
         // remember the output gate now, to speed up send()
         physOutGate = gate("phys$o");
-    }
-    if (stage == STAGE_CHANNEL_AVAILABLE)
-    {
+
         // we're connected if other end of connection path is an input gate
         bool connected = physOutGate->getPathEndGate()->getType() == cGate::INPUT;
         // if we're connected, get the gate with transmission rate

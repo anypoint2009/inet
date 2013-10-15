@@ -78,8 +78,7 @@ IPv4NetworkConfigurator::RouteInfo *IPv4NetworkConfigurator::RoutingTableInfo::f
 
 int IPv4NetworkConfigurator::numInitStages() const
 {
-    static int stages = std::max(NEWSTAGE_L3_INITIALIZATION, STAGE_ROUTING_PROTOCOLS_INITIALIZED) + 1;
-    return stages;
+    return NEWSTAGE_ROUTING + 2;
 }
 
 void IPv4NetworkConfigurator::initialize(int stage)
@@ -98,7 +97,7 @@ void IPv4NetworkConfigurator::initialize(int stage)
     }
     if (stage == NEWSTAGE_L3_INITIALIZATION)
         ensureConfigurationComputed(topology);
-    if (stage == STAGE_ROUTING_PROTOCOLS_INITIALIZED)
+    if (stage == NEWSTAGE_ROUTING + 1)
         dumpConfiguration();
 }
 

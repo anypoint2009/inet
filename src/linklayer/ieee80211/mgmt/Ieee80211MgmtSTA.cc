@@ -88,7 +88,7 @@ std::ostream& operator<<(std::ostream& os, const Ieee80211MgmtSTA::AssociatedAPI
 
 int Ieee80211MgmtSTA::numInitStages() const
 {
-    static int stages = std::max(STAGE_NOTIFICATIONBOARD_AVAILABLE, STAGE_CHANNELCONTROL_NUMCHANNELS_AVAILABLE) + 1;
+    static int stages = std::max(STAGE_NOTIFICATIONBOARD_AVAILABLE, NEWSTAGE_L2_INITIALIZATION) + 1;
     return std::max(Ieee80211MgmtBase::numInitStages(), stages);
 }
 
@@ -111,7 +111,7 @@ void Ieee80211MgmtSTA::initialize(int stage)
         WATCH(assocAP);
         WATCH_LIST(apList);
     }
-    if (stage == STAGE_CHANNELCONTROL_NUMCHANNELS_AVAILABLE)
+    if (stage == NEWSTAGE_L2_INITIALIZATION)
     {
         // determine numChannels (needed when we're told to scan "all" channels)
         IChannelControl *cc = ChannelAccess::getChannelControl();

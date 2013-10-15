@@ -186,8 +186,6 @@ void EtherMACBase::initialize(int stage)
     if (stage == NEWSTAGE_L2_INITIALIZATION)
     {
         registerInterface(); // needs MAC address
-        ASSERT(stage >= STAGE_IPASSIVEQUEUE_AVAILABLE); // should be stage larger than 0 for use queue module member functions
-        ASSERT(stage >= STAGE_CHANNEL_AVAILABLE);
         initializeQueueModule();
         readChannelParameters(true);
     }

@@ -55,12 +55,7 @@ Radio::Radio() : rs(this->getId())
 
 int Radio::numInitStages() const
 {
-    static int stages = std::max(std::max(
-            STAGE_BATTERY_READY_FOR_DEVICE_REGISTRATION,
-            NEWSTAGE_L1_INITIALIZATION),
-            NEWSTAGE_L1_INITIALIZATION
-            ) + 1;
-    return std::max(ChannelAccess::numInitStages(), stages);
+    return NEWSTAGE_L1_INITIALIZATION + 1;
 }
 
 void Radio::initialize(int stage)
@@ -181,13 +176,11 @@ void Radio::initialize(int stage)
         else
             updateStringInterval = 0;
     }
-    if (stage == STAGE_BATTERY_READY_FOR_DEVICE_REGISTRATION)
-    {
-        registerBattery();
-    }
     if (stage == NEWSTAGE_L1_INITIALIZATION)
     {
+        registerBattery();
         ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
+        ASSERT(stage >= STAGE_CHANNELCONTROL_AVAILABLE);
         ASSERT(stage >= STAGE_NOTIFICATIONBOARD_AVAILABLE);
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         bool isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
@@ -197,16 +190,7 @@ void Radio::initialize(int stage)
             // subscribe in stage STAGE_OTHER_MODULES_AVAILABLE
             nb->fireChangeNotification(NF_RADIOSTATE_CHANGED, &rs);
             nb->fireChangeNotification(NF_RADIO_CHANNEL_CHANGED, &rs);
-        }
-    }
-    if (stage == NEWSTAGE_L1_INITIALIZATION)
-    {
-        ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
-        ASSERT(stage >= STAGE_CHANNELCONTROL_AVAILABLE);
-        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
-        bool isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
-        if (isOperational)
-        {
+
             // tell initial channel number to ChannelControl; should be done in
             // stage==STAGE_REGISTER_RADIO or later, because base class initializes myRadioRef in that stage
             cc->setRadioChannel(myRadioRef, rs.getChannelNumber());
