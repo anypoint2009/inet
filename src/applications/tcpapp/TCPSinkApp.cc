@@ -47,9 +47,7 @@ void TCPSinkApp::initialize(int stage)
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
-    }
-    if (stage == NEWSTAGE_APPLICATIONS)
-    {
+
         // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
         // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
 

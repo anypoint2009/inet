@@ -48,7 +48,10 @@ UDPVideoStreamSvr::~UDPVideoStreamSvr()
         cancelAndDelete(it->second.timer);
 }
 
-int UDPVideoStreamSvr::numInitStages() const { return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, AppBase::numInitStages()); }
+int UDPVideoStreamSvr::numInitStages() const
+{
+    return std::max(NEWSTAGE_APPLICATIONS + 1, AppBase::numInitStages());
+}
 
 void UDPVideoStreamSvr::initialize(int stage)
 {

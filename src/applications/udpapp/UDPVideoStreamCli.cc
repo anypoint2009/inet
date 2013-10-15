@@ -30,7 +30,10 @@ Define_Module(UDPVideoStreamCli);
 
 simsignal_t UDPVideoStreamCli::rcvdPkSignal = SIMSIGNAL_NULL;
 
-int UDPVideoStreamCli::numInitStages() const { return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, AppBase::numInitStages()); }
+int UDPVideoStreamCli::numInitStages() const
+{
+    return std::max(NEWSTAGE_APPLICATIONS + 1, AppBase::numInitStages());
+}
 
 void UDPVideoStreamCli::initialize(int stage)
 {

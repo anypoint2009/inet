@@ -66,7 +66,10 @@ UDPBasicBurst::~UDPBasicBurst()
     cancelAndDelete(timerNext);
 }
 
-int UDPBasicBurst::numInitStages() const { return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, AppBase::numInitStages()); }
+int UDPBasicBurst::numInitStages() const
+{
+    return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, AppBase::numInitStages());
+}
 
 void UDPBasicBurst::initialize(int stage)
 {

@@ -27,7 +27,10 @@
 Define_Module(TraCITestApp);
 
 
-int TraCITestApp::numInitStages() const {return NEWSTAGE_APPLICATIONS + 1;}
+int TraCITestApp::numInitStages() const
+{
+    return NEWSTAGE_APPLICATIONS + 1;
+}
 
 void TraCITestApp::initialize(int stage)
 {

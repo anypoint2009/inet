@@ -50,7 +50,10 @@ PingApp::~PingApp()
     cancelAndDelete(timer);
 }
 
-int PingApp::numInitStages() const { return NEWSTAGE_APPLICATIONS + 1; }
+int PingApp::numInitStages() const
+{
+    return NEWSTAGE_APPLICATIONS + 1;
+}
 
 void PingApp::initialize(int stage)
 {

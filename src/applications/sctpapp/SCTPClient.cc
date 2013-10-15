@@ -57,8 +57,7 @@ SCTPClient::~SCTPClient()
 
 int SCTPClient::numInitStages() const
 {
-    static int stages = std::max(NEWSTAGE_APPLICATIONS, NEWSTAGE_APPLICATIONS) + 1;
-    return stages;
+    return NEWSTAGE_APPLICATIONS + 1;
 }
 
 void SCTPClient::initialize(int stage)
@@ -108,9 +107,7 @@ void SCTPClient::initialize(int stage)
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
-    }
-    if (stage == NEWSTAGE_APPLICATIONS)
-    {
+
         // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
         // parameters
         const char *addressesString = par("localAddress");

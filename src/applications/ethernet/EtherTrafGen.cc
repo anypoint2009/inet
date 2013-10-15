@@ -44,7 +44,10 @@ EtherTrafGen::~EtherTrafGen()
     cancelAndDelete(timerMsg);
 }
 
-int EtherTrafGen::numInitStages() const { return NEWSTAGE_APPLICATIONS + 1; }
+int EtherTrafGen::numInitStages() const
+{
+    return NEWSTAGE_APPLICATIONS + 1;
+}
 
 void EtherTrafGen::initialize(int stage)
 {

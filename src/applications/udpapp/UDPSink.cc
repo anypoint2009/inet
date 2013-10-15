@@ -25,7 +25,10 @@ Define_Module(UDPSink);
 simsignal_t UDPSink::rcvdPkSignal = SIMSIGNAL_NULL;
 
 
-int UDPSink::numInitStages() const { return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, AppBase::numInitStages()); }
+int UDPSink::numInitStages() const
+{
+    return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, AppBase::numInitStages());
+}
 
 void UDPSink::initialize(int stage)
 {

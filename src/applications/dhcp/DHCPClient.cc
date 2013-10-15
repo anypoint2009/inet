@@ -48,8 +48,7 @@ DHCPClient::~DHCPClient()
 
 int DHCPClient::numInitStages() const
 {
-    static int stages = std::max(NEWSTAGE_APPLICATIONS, NEWSTAGE_APPLICATIONS) + 1;
-    return stages;
+    return NEWSTAGE_APPLICATIONS + 1;
 }
 
 void DHCPClient::initialize(int stage)
@@ -87,9 +86,7 @@ void DHCPClient::initialize(int stage)
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
-    }
-    if (stage == NEWSTAGE_APPLICATIONS)
-    {
+
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
         // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);

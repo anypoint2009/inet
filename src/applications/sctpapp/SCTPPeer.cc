@@ -72,7 +72,7 @@ SCTPPeer::~SCTPPeer()
 
 int SCTPPeer::numInitStages() const
 {
-    static int stages = std::max(NEWSTAGE_APPLICATIONS, NEWSTAGE_APPLICATIONS) + 1;
+    return NEWSTAGE_APPLICATIONS + 1;
 }
 
 void SCTPPeer::initialize(int stage)
@@ -136,9 +136,7 @@ void SCTPPeer::initialize(int stage)
         schedule = false;
         shutdownReceived = false;
         sendAllowed = true;
-    }
-    if (stage == NEWSTAGE_APPLICATIONS)
-    {
+
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;

@@ -34,8 +34,7 @@ simsignal_t IPvXTrafSink::rcvdPkSignal = SIMSIGNAL_NULL;
 
 int IPvXTrafSink::numInitStages() const
 {
-    static int stages = std::max(NEWSTAGE_TRANSPORT, NEWSTAGE_APPLICATIONS) + 1;
-    return stages;
+    return NEWSTAGE_APPLICATIONS + 1;
 }
 
 void IPvXTrafSink::initialize(int stage)
@@ -48,14 +47,12 @@ void IPvXTrafSink::initialize(int stage)
         WATCH(numReceived);
         rcvdPkSignal = registerSignal("rcvdPk");
     }
-    if (stage == NEWSTAGE_TRANSPORT)
+    if (stage == NEWSTAGE_APPLICATIONS)
     {
         int protocol = par("protocol");
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(protocol);
-    }
-    if (stage == NEWSTAGE_APPLICATIONS)
-    {
+
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
 
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

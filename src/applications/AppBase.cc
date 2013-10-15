@@ -40,8 +40,7 @@ void AppBase::finish()
 
 int AppBase::numInitStages() const
 {
-    static int stages = std::max(NEWSTAGE_APPLICATIONS, NEWSTAGE_APPLICATIONS) + 1;
-    return stages;
+    return NEWSTAGE_APPLICATIONS + 1;
 }
 
 void AppBase::initialize(int stage)
@@ -56,9 +55,6 @@ void AppBase::initialize(int stage)
     {
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isOperational = !nodeStatus || nodeStatus->getState() == NodeStatus::UP;
-    }
-    if (stage == NEWSTAGE_APPLICATIONS)
-    {
         if (isOperational)
             startApp(NULL);
     }

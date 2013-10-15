@@ -32,7 +32,10 @@ simsignal_t EtherAppSrv::sentPkSignal = SIMSIGNAL_NULL;
 simsignal_t EtherAppSrv::rcvdPkSignal = SIMSIGNAL_NULL;
 
 
-int EtherAppSrv::numInitStages() const { return NEWSTAGE_APPLICATIONS + 1; }
+int EtherAppSrv::numInitStages() const
+{
+    return NEWSTAGE_APPLICATIONS + 1;
+}
 
 void EtherAppSrv::initialize(int stage)
 {

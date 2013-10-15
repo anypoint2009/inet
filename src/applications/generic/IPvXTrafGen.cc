@@ -47,8 +47,7 @@ IPvXTrafGen::~IPvXTrafGen()
 
 int IPvXTrafGen::numInitStages() const
 {
-    static int stages = std::max(NEWSTAGE_TRANSPORT, NEWSTAGE_APPLICATIONS) + 1;
-    return stages;
+    return NEWSTAGE_APPLICATIONS + 1;
 }
 
 void IPvXTrafGen::initialize(int stage)
@@ -77,13 +76,11 @@ void IPvXTrafGen::initialize(int stage)
         WATCH(numSent);
         WATCH(numReceived);
     }
-    if (stage == NEWSTAGE_TRANSPORT)
+    if (stage == NEWSTAGE_APPLICATIONS)
     {
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(protocol);
-    }
-    if (stage == NEWSTAGE_APPLICATIONS)
-    {
+
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
         // ASSERT(stage >= NEWSTAGE:TRANSPORT);
 

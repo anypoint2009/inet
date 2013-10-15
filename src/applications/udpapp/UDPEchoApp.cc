@@ -25,7 +25,10 @@ Define_Module(UDPEchoApp);
 simsignal_t UDPEchoApp::pkSignal = SIMSIGNAL_NULL;
 
 
-int UDPEchoApp::numInitStages() const { return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, AppBase::numInitStages()); }
+int UDPEchoApp::numInitStages() const
+{
+    return std::max(NEWSTAGE_APPLICATIONS + 1, AppBase::numInitStages());
+}
 
 void UDPEchoApp::initialize(int stage)
 {
