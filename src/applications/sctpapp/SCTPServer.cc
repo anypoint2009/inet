@@ -84,8 +84,8 @@ void SCTPServer::initialize(int stage)
     }
     if (stage == NEWSTAGE_APPLICATIONS)
     {
-        ASSERT(stage >= STAGE_TRANSPORT_LAYER_AVAILABLE);
-        ASSERT(stage >= STAGE_IP_ADDRESS_AVAILABLE);
+        // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
+        // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
 
         const char *addressesString = par("localAddress");
         AddressVector addresses = AddressResolver().resolve(cStringTokenizer(addressesString).asVector());

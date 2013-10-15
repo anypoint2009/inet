@@ -118,7 +118,7 @@ void IPv4RoutingTable::initialize(int stage)
     }
     if (stage == NEWSTAGE_L3_STATICROUTES)
     {
-        ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
+        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
 
         if (isNodeUp) {
             // L2 modules register themselves in stage 0, so we can only configure
@@ -133,9 +133,9 @@ void IPv4RoutingTable::initialize(int stage)
     }
     if (stage == NEWSTAGE_L3_STATICROUTES)
     {
-        ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
-        ASSERT(stage >= STAGE_INTERFACEENTRY_IP_PROTOCOLDATA_AVAILABLE);
-        ASSERT(stage >= STAGE_IP_ADDRESS_AVAILABLE);
+        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
+        // ASSERT(stage >= STAGE:INTERFACEENTRY_IP_PROTOCOLDATA_AVAILABLE);
+        // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
 
         // routerID selection must be after stage==2 when network autoconfiguration
         // assigns interface addresses

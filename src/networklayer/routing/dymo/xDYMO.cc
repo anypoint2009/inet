@@ -122,8 +122,8 @@ void xDYMO::initialize(int stage)
     }
     if (stage == NEWSTAGE_ROUTING)
     {
-        ASSERT(stage >= STAGE_IP_LAYER_READY_FOR_HOOK_REGISTRATION);
-        ASSERT(stage >= STAGE_NOTIFICATIONBOARD_AVAILABLE);
+        // ASSERT(stage >= STAGE:IP_LAYER_READY_FOR_HOOK_REGISTRATION);
+        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         notificationBoard->subscribe(this, NF_LINK_BREAK);
         addressType = getSelfAddress().getAddressType();
         networkProtocol->registerHook(0, this);

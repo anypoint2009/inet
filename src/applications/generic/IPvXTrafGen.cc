@@ -84,8 +84,8 @@ void IPvXTrafGen::initialize(int stage)
     }
     if (stage == NEWSTAGE_APPLICATIONS)
     {
-        ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
-        ASSERT(stage >= NEWSTAGE_TRANSPORT);
+        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
+        // ASSERT(stage >= NEWSTAGE:TRANSPORT);
 
         timer = new cMessage("sendTimer");
         nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

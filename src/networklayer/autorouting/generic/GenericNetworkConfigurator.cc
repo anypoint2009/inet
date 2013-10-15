@@ -54,7 +54,7 @@ void GenericNetworkConfigurator::initialize(int stage)
 
     if (stage == NEWSTAGE_L3_INITIALIZATION)
     {
-        ASSERT(stage >= STAGE_INTERFACEENTRY_REGISTERED);
+        // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
 
         long initializeStartTime = clock();
 

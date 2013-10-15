@@ -50,10 +50,10 @@ void TED::initialize(int stage)
     // assigned in stage 3
     if (stage == NEWSTAGE_ROUTING)
     {
-        ASSERT(stage >= STAGE_ROUTERID_AVAILABLE);
-        ASSERT(stage >= STAGE_IP_ADDRESS_AVAILABLE);
-        ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
-        ASSERT(stage >= STAGE_INTERFACEENTRY_IP_PROTOCOLDATA_AVAILABLE);
+        // ASSERT(stage >= STAGE:ROUTERID_AVAILABLE);
+        // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
+        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
+        // ASSERT(stage >= STAGE:INTERFACEENTRY_IP_PROTOCOLDATA_AVAILABLE);
 
         maxMessageId = 0;
 

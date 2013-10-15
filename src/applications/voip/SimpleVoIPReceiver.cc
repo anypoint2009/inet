@@ -101,7 +101,7 @@ void SimpleVoIPReceiver::initialize(int stage)
     }
     if (stage == NEWSTAGE_APPLICATIONS)
     {
-        ASSERT(stage >= STAGE_TRANSPORT_LAYER_AVAILABLE);
+        // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
 
         int port = par("localPort");
         EV << "VoIPReceiver::initialize - binding to port: local:" << port << endl;

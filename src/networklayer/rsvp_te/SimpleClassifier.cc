@@ -36,7 +36,7 @@ void SimpleClassifier::initialize(int stage)
     }
     if (stage == NEWSTAGE_ROUTING)
     {
-        ASSERT(stage > NEWSTAGE_L3_STATICROUTES); // we have to wait until routerId gets assigned in stage 3
+        // ASSERT(stage > NEWSTAGE:L3_STATICROUTES); // we have to wait until routerId gets assigned in stage 3
         IPv4RoutingTableAccess routingTableAccess;
         IIPv4RoutingTable *rt = routingTableAccess.get();
         routerId = rt->getRouterId();

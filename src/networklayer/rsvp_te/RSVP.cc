@@ -87,7 +87,7 @@ void RSVP::initialize(int stage)
         // process traffic configuration
         readTrafficFromXML(par("traffic").xmlValue());
 
-        ASSERT(stage >= NEWSTAGE_TRANSPORT);
+        // ASSERT(stage >= NEWSTAGE:TRANSPORT);
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(IP_PROT_RSVP);
     }

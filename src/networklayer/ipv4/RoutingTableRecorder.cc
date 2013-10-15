@@ -260,7 +260,7 @@ void RoutingTableRecorder::initialize(int stage)
 
     if (stage == STAGE_NOTIFICATIONBOARD_AVAILABLE)
     {
-        ASSERT(stage >= STAGE_NOTIFICATIONBOARD_AVAILABLE);
+        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         if (par("enabled").boolValue())
             hookListeners();
     }

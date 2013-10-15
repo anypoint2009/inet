@@ -292,7 +292,7 @@ void Ieee80211Mac::initialize(int stage)
     }
     if (stage == STAGE_DO_SUBSCRIBE_TO_RADIOSTATE_NOTIFICATIONS)
     {
-        ASSERT(stage >= STAGE_NOTIFICATIONBOARD_AVAILABLE);
+        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         // subscribe for the information of the carrier sense
         nb->subscribe(this, NF_RADIOSTATE_CHANGED);
     }

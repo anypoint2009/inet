@@ -94,8 +94,8 @@ void SCTPPeer::initialize(int stage)
     }
     if (stage == NEWSTAGE_APPLICATIONS)
     {
-        ASSERT(stage >= STAGE_TRANSPORT_LAYER_AVAILABLE);
-        ASSERT(stage >= STAGE_IP_ADDRESS_AVAILABLE);
+        // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
+        // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
 
         // parameters
         const char *addressesString = par("localAddress");

@@ -106,10 +106,10 @@ void ARP::initialize(int stage)
     }
     if (stage == STAGE_IP_ADDRESS_AVAILABLE)
     {
-        ASSERT(stage > NEWSTAGE_L3_IPADDRESSES);
-        ASSERT(stage >= STAGE_NOTIFICATIONBOARD_AVAILABLE);
-        ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
-        ASSERT(stage >= STAGE_INTERFACEENTRY_REGISTERED);
+        // ASSERT(stage > NEWSTAGE:L3_IPADDRESSES);
+        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
+        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
+        // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
 
         ift = InterfaceTableAccess().get();
         rt = check_and_cast<IIPv4RoutingTable *>(getModuleByPath(par("routingTableModule")));

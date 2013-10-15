@@ -81,7 +81,7 @@ void GenericRoutingTable::initialize(int stage)
     }
     if (stage == STAGE_NOTIFICATIONBOARD_AVAILABLE)
     {
-        ASSERT(stage >= STAGE_NOTIFICATIONBOARD_AVAILABLE);
+        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         nb->subscribe(this, NF_INTERFACE_CREATED);
         nb->subscribe(this, NF_INTERFACE_DELETED);
         nb->subscribe(this, NF_INTERFACE_STATE_CHANGED);
@@ -115,7 +115,7 @@ void GenericRoutingTable::initialize(int stage)
     }
     if (stage == NEWSTAGE_L3_STATICROUTES)
     {
-        ASSERT(stage >= STAGE_IP_ADDRESS_AVAILABLE);
+        // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
         // routerID selection must be after stage==STAGE_AUTOCONFIGURE_ADDRESSES
         // when network autoconfiguration assigns interface addresses
         configureRouterId();

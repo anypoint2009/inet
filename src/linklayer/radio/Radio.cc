@@ -179,9 +179,9 @@ void Radio::initialize(int stage)
     if (stage == NEWSTAGE_L1_INITIALIZATION)
     {
         registerBattery();
-        ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
-        ASSERT(stage >= STAGE_CHANNELCONTROL_AVAILABLE);
-        ASSERT(stage >= STAGE_NOTIFICATIONBOARD_AVAILABLE);
+        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
+        // ASSERT(stage >= STAGE:CHANNELCONTROL_AVAILABLE);
+        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         bool isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
         if (isOperational)
@@ -202,7 +202,7 @@ void Radio::initialize(int stage)
         }
         else
         {
-            ASSERT(stage > STAGE_NOTIFICATIONBOARD_AVAILABLE);
+            // ASSERT(stage > STAGE:NOTIFICATIONBOARD_AVAILABLE);
             setRadioState(RadioState::OFF);
             // tell initial values to MAC; must be done in stage 1, because they
             // subscribe in stage 0

@@ -59,7 +59,7 @@ void MACBase::initialize(int stage)
     }
     if (stage == numInitStages() - 1)
     {
-        ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
+        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
         updateOperationalFlag(isNodeUp());  // needs to be done when interface is already registered (=last stage)
     }
 }

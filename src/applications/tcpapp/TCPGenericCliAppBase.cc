@@ -47,8 +47,8 @@ void TCPGenericCliAppBase::initialize(int stage)
     }
     if (stage == NEWSTAGE_APPLICATIONS)
     {
-        ASSERT(stage >= STAGE_IP_ADDRESS_AVAILABLE);
-        ASSERT(stage >= STAGE_TRANSPORT_LAYER_AVAILABLE);
+        // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
+        // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
         // parameters
         const char *localAddress = par("localAddress");
         int localPort = par("localPort");

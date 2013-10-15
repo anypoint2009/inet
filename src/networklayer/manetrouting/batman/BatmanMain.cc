@@ -139,10 +139,10 @@ void Batman::initialize(int stage)
 
         int32_t download_speed = 0, upload_speed = 0;
 
-        ASSERT(stage > NEWSTAGE_L3_STATICROUTES);
+        // ASSERT(stage > NEWSTAGE:L3_STATICROUTES);
 
-        ASSERT(stage >= STAGE_IP_LAYER_READY_FOR_HOOK_REGISTRATION);
-        ASSERT(stage >= STAGE_NOTIFICATIONBOARD_AVAILABLE);
+        // ASSERT(stage >= STAGE:IP_LAYER_READY_FOR_HOOK_REGISTRATION);
+        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         registerRoutingModule();
         //createTimerQueue();
 

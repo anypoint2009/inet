@@ -116,8 +116,8 @@ void DYMOUM::initialize(int stage)
 
         /* Search the 80211 interface */
 
-        ASSERT(stage >= STAGE_IP_LAYER_READY_FOR_HOOK_REGISTRATION);
-        ASSERT(stage >= STAGE_NOTIFICATIONBOARD_AVAILABLE);
+        // ASSERT(stage >= STAGE:IP_LAYER_READY_FOR_HOOK_REGISTRATION);
+        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         registerRoutingModule();
 
         NS_DEV_NR = getWlanInterfaceIndexByAddress();
@@ -193,7 +193,7 @@ void DYMOUM::initialize(int stage)
             linkLayerFeeback();
         if ((bool) par("promiscuous"))
         {
-            ASSERT(stage >= STAGE_NOTIFICATIONBOARD_AVAILABLE);
+            // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
             linkPromiscuous();
         }
 

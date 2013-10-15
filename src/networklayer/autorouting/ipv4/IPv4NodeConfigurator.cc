@@ -72,16 +72,16 @@ void IPv4NodeConfigurator::initialize(int stage)
     }
     if (stage == NEWSTAGE_L3_INITIALIZATION)
     {
-        ASSERT(stage >= STAGE_INTERFACEENTRY_REGISTERED);
-        ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
+        // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
+        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
 
         if (!nodeStatus || nodeStatus->getState() == NodeStatus::UP)
             prepareNode();
     }
     if (stage == NEWSTAGE_L3_IPADDRESSES)
     {
-        ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
-        ASSERT(stage > NEWSTAGE_L3_INITIALIZATION);
+        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
+        // ASSERT(stage > NEWSTAGE:L3_INITIALIZATION);
 
         if ((!nodeStatus || nodeStatus->getState() == NodeStatus::UP) && networkConfigurator)
             configureNode();
