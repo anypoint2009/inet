@@ -213,7 +213,7 @@ Address const & TCP_NSC::mapNsc2Remote(uint32_t nscAddrP)
 }
 // x == mapNsc2Remote(mapRemote2Nsc(x))
 
-int TCP_NSC::numInitStages() const { return STAGE_LOCAL_PLUS_1 + 1; }
+int TCP_NSC::numInitStages() const { return NEWSTAGE_TRANSPORT + 1; }
 
 void TCP_NSC::initialize(int stage)
 {
@@ -239,27 +239,21 @@ void TCP_NSC::initialize(int stage)
         cModule *netw = simulation.getSystemModule();
         testingS = netw->hasPar("testing") && netw->par("testing").boolValue();
         logverboseS = !testingS && netw->hasPar("logverbose") && netw->par("logverbose").boolValue();
-    }
-    if (stage == STAGE_LOCAL_PLUS_1)
-    {
-        bool isOperational;
-        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
-        isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
-        if (!isOperational)
-            throw cRuntimeError("This module doesn't support starting in node DOWN state");
-    }
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
-    {
+
+        // load the stack
         const char* stackName = this->par(stackNameParamNameS).stringValue();
-
         int bufferSize = (int)(this->par(bufferSizeParamNameS).longValue());
-
         loadStack(stackName, bufferSize);
         pStackM->if_attach(localInnerIpS.str().c_str(), localInnerMaskS.str().c_str(), 1500);
         pStackM->add_default_gateway(localInnerGwS.str().c_str());
     }
     if (stage == NEWSTAGE_TRANSPORT)
     {
+        bool isOperational;
+        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
+        isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
+        if (!isOperational)
+            throw cRuntimeError("This module doesn't support starting in node DOWN state");
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(IP_PROT_TCP);
     }

@@ -40,7 +40,7 @@ RTCP::RTCP()
     _senderInfo = NULL;
 }
 
-int RTCP::numInitStages() const { return STAGE_LOCAL_PLUS_1 + 1; }
+int RTCP::numInitStages() const { return NEWSTAGE_TRANSPORT + 1; }
 
 void RTCP::initialize(int stage)
 {
@@ -60,7 +60,7 @@ void RTCP::initialize(int stage)
 
         rcvdPkSignal = registerSignal("rcvdPk");
     }
-    if (stage == STAGE_LOCAL_PLUS_1)
+    if (stage == NEWSTAGE_TRANSPORT)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
