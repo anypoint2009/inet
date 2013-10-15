@@ -89,12 +89,15 @@ enum InetInitStages
     NUM_STAGES,
 
     //---------------
+    //EZ MIND LOCAL+1:
     STAGE_NODESTATUS_AVAILABLE = NEWSTAGE_LOCAL_INITIALIZATION + 1,        // NodeStatus module knows the initial status of the node
     STAGE_IP_LAYER_READY_FOR_HOOK_REGISTRATION = NEWSTAGE_LOCAL_INITIALIZATION + 1,      // The IP layer ready for calling the registerHook() function
     STAGE_NOTIFICATIONBOARD_AVAILABLE = 0, // note: it is ready right after it constructor call... //NEWSTAGE_LOCAL_INITIALIZATION + 1,      // The NotificationBoard ready for calling the subscribe() and fireChangeNotification() functions
     STAGE_ANNOTATIONMANAGER_AVAILABLE = NEWSTAGE_LOCAL_INITIALIZATION + 1,
     STAGE_CHANNELCONTROL_AVAILABLE = NEWSTAGE_LOCAL_INITIALIZATION + 1,      // registerRadio(), setChannel(), etc. available in IChannelControl module
     STAGE_INTERFACETABLE_READY_FOR_INTERFACE_REGISTRATION = NEWSTAGE_LOCAL_INITIALIZATION + 1,
+
+    //EZEK KESOBBIEK:
     STAGE_MACADDRESS_AVAILABLE = NEWSTAGE_L2_INITIALIZATION + 1,
     STAGE_INTERFACEENTRY_REGISTERED = NEWSTAGE_L2_INITIALIZATION + 1,
     STAGE_TRANSPORT_LAYER_AVAILABLE = NEWSTAGE_TRANSPORT + 1, //_max_(STAGE_NODESTATUS_AVAILABLE + 1, NEWSTAGE_TRANSPORT + 1),
