@@ -252,13 +252,16 @@ RoutingTableRecorder::~RoutingTableRecorder()
 {
 }
 
-int RoutingTableRecorder::numInitStages() const  {return STAGE_LOCAL_PLUS_1 + 1;}
+int RoutingTableRecorder::numInitStages() const
+{
+    return NEWSTAGE_L3_INITIALIZATION + 1;
+}
 
 void RoutingTableRecorder::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_LOCAL_PLUS_1)
+    if (stage == NEWSTAGE_L3_INITIALIZATION)
     {
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         if (par("enabled").boolValue())

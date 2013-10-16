@@ -68,13 +68,7 @@ IPv4RoutingTable::~IPv4RoutingTable()
 
 int IPv4RoutingTable::numInitStages() const
 {
-    static int stages = std::max(std::max(std::max(std::max(
-            STAGE_LOCAL_PLUS_1,
-            STAGE_LOCAL_PLUS_1),
-            NEWSTAGE_L3_STATICROUTES),
-            NEWSTAGE_L3_STATICROUTES),
-            NEWSTAGE_L3_STATICROUTES) + 1;
-    return stages;
+    return NEWSTAGE_L3_STATICROUTES + 1;
 }
 
 void IPv4RoutingTable::initialize(int stage)
@@ -104,7 +98,7 @@ void IPv4RoutingTable::initialize(int stage)
         nb->subscribe(this, NF_INTERFACE_CONFIG_CHANGED);
         nb->subscribe(this, NF_INTERFACE_IPv4CONFIG_CHANGED);
     }
-    if (stage == STAGE_LOCAL_PLUS_1)
+    if (stage == NEWSTAGE_L3_INITIALIZATION)
     {
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isNodeUp = !nodeStatus || nodeStatus->getState() == NodeStatus::UP;

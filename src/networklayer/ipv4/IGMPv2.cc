@@ -330,12 +330,7 @@ void IGMPv2::deleteRouterGroupData(InterfaceEntry *ie, const IPv4Address &group)
 
 int IGMPv2::numInitStages() const
 {
-    static int stages = std::max(std::max(
-            NEWSTAGE_TRANSPORT,
-            STAGE_LOCAL_PLUS_1),
-            NEWSTAGE_L3_INITIALIZATION
-            ) + 1;
-    return stages;
+    return NEWSTAGE_TRANSPORT + 1;
 }
 
 void IGMPv2::initialize(int stage)

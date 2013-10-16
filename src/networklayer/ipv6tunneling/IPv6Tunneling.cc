@@ -61,7 +61,10 @@ IPv6Tunneling::IPv6Tunneling()
     rt = NULL;
 }
 
-int IPv6Tunneling::numInitStages() const { return STAGE_LOCAL_PLUS_1 + 1; }
+int IPv6Tunneling::numInitStages() const
+{
+    return NEWSTAGE_L3_INITIALIZATION + 1;
+}
 
 void IPv6Tunneling::initialize(int stage)
 {
@@ -77,7 +80,7 @@ void IPv6Tunneling::initialize(int stage)
 
         WATCH_MAP(tunnels);
     }
-    if (stage == STAGE_LOCAL_PLUS_1)
+    if (stage == NEWSTAGE_L3_INITIALIZATION)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

@@ -63,18 +63,14 @@ IPv6NeighbourDiscovery::~IPv6NeighbourDiscovery()
 
 int IPv6NeighbourDiscovery::numInitStages() const
 {
-    static int stages = std::max(STAGE_LOCAL_PLUS_1, NEWSTAGE_L3_STATICROUTES) + 1;
-    return stages;
+    return NEWSTAGE_L3_STATICROUTES + 1;
 }
 
 void IPv6NeighbourDiscovery::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    // We have to wait until the 3rd stage (stage 2) with scheduling messages,
-    // because interface registration and IPv6 configuration takes places
-    // in the first two stages.
-    if (stage == STAGE_LOCAL_PLUS_1)
+    if (stage == NEWSTAGE_L3_INITIALIZATION)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

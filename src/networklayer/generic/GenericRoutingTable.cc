@@ -46,9 +46,7 @@ GenericRoutingTable::~GenericRoutingTable()
 
 int GenericRoutingTable::numInitStages() const
 {
-    static int stages = std::max(NEWSTAGE_L3_INITIALIZATION, std::max(NEWSTAGE_L3_STATICROUTES, STAGE_LOCAL_PLUS_1)) + 1;
-
-    return stages;
+    return NEWSTAGE_L3_STATICROUTES;
 }
 
 void GenericRoutingTable::initialize(int stage)
