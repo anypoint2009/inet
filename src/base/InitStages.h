@@ -72,6 +72,8 @@ enum InetInitStages
      */
     NEWSTAGE_L3_IPADDRESSES = 8,
 
+    NEWSTAGE_L3_ADDRESSES_AVAILABLE = 9,  //FIXME merge into NEWSTAGE_L3_STATICROUTES (same number!!), and rename that to NEWSTAGE_L3_THIRD?
+
     /**
      * ADD_STATIC_ROUTES, SET_INTERFACEENTRY_RTR_ADV_INTERVAL, ASSIGN_ROUTERID
      */
@@ -85,7 +87,7 @@ enum InetInitStages
     /**
      * REGISTER_TRANSPORTPROTOCOLID_IN_IP
      */
-    NEWSTAGE_TRANSPORT = 11,
+    NEWSTAGE_TRANSPORT = 11,   //FIXME used many times in *routing* protocols, replace those with STAGE_ROUTING!!
 
     /**
      * TODO
@@ -105,13 +107,6 @@ enum InetInitStages
     NEWSTAGE_APPLICATIONS_SECOND = 15,
 
     NUM_STAGES,
-
-    //---------------
-    //EZ MIND LOCAL+1:
-    STAGE_LOCAL_PLUS_1 = NEWSTAGE_LOCAL_INITIALIZATION + 1,        // NodeStatus module knows the initial status of the node
-
-    //EZEK KESOBBIEK:
-    STAGE_IP_ADDRESS_AVAILABLE = NEWSTAGE_L3_IPADDRESSES + 1,
 };
 
 #endif // __INET_INITSTAGES

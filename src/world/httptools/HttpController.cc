@@ -35,7 +35,7 @@ Define_Module(HttpController);
 
 int HttpController::numInitStages() const
 {
-    return STAGE_LOCAL_PLUS_1 + 1;
+    return NEWSTAGE_APPLICATIONS + 1;
 }
 
 void HttpController::initialize(int stage)
@@ -68,7 +68,7 @@ void HttpController::initialize(int stage)
         pspecial = 0.0; // No special events by default
         totalLookups = 0;
     }
-    if (stage == STAGE_LOCAL_PLUS_1)
+    if (stage == NEWSTAGE_APPLICATIONS)
     {
         // Two stages are required to finalize the initialization of the random object for the site selection
         // once the final number of web sites is known.

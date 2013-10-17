@@ -100,7 +100,7 @@ void xDYMO::initialize(int stage)
         IPSocket socket(gate("ipOut"));
         socket.registerProtocol(IP_PROT_MANET);
     }
-    if (stage == STAGE_IP_ADDRESS_AVAILABLE)
+    if (stage == NEWSTAGE_L3_ADDRESSES_AVAILABLE)
     {
         AddressResolver addressResolver;
         cStringTokenizer tokenizer(clientAddresses);

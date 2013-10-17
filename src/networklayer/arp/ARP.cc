@@ -70,7 +70,10 @@ ARP::ARP()
     nb = NULL;
 }
 
-int ARP::numInitStages() const { return STAGE_IP_ADDRESS_AVAILABLE + 1; }
+int ARP::numInitStages() const
+{
+    return NEWSTAGE_L3_ADDRESSES_AVAILABLE + 1;
+}
 
 void ARP::initialize(int stage)
 {
@@ -104,7 +107,7 @@ void ARP::initialize(int stage)
         WATCH_PTRMAP(arpCache);
         WATCH_PTRMAP(globalArpCache);
     }
-    if (stage == STAGE_IP_ADDRESS_AVAILABLE)
+    if (stage == NEWSTAGE_L3_ADDRESSES_AVAILABLE)  // IP addresses should be available
     {
         // ASSERT(stage > NEWSTAGE:L3_IPADDRESSES);
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
