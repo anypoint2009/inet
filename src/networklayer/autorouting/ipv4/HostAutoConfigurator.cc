@@ -30,13 +30,17 @@
 Define_Module(HostAutoConfigurator);
 
 
-int HostAutoConfigurator::numInitStages() const { return NEWSTAGE_L3_IPADDRESSES + 1; }
+int HostAutoConfigurator::numInitStages() const
+{
+    return NEWSTAGE_L3_IPADDRESSES + 1;
+}
 
 void HostAutoConfigurator::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_L3_IPADDRESSES) {
+    if (stage == NEWSTAGE_L3_IPADDRESSES)
+    {
         setupNetworkLayer();
     }
 }
