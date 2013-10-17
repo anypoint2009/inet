@@ -33,8 +33,7 @@ simsignal_t Ieee80211AgentSTA::dropConfirmSignal = SIMSIGNAL_NULL;
 
 int Ieee80211AgentSTA::numInitStages() const
 {
-    static int stages = std::max(STAGE_LOCAL_PLUS_1, STAGE_INTERFACEENTRY_REGISTERED) + 1;
-    return stages;
+    return NEWSTAGE_L2_SECOND + 1;
 }
 
 void Ieee80211AgentSTA::initialize(int stage)
@@ -73,11 +72,11 @@ void Ieee80211AgentSTA::initialize(int stage)
 
         myIface = NULL;
     }
-    if (stage == STAGE_LOCAL_PLUS_1)
+    if (stage == NEWSTAGE_SUBSCRIPTIONS)
     {
         nb->subscribe(this, NF_L2_BEACON_LOST);
     }
-    if (stage == STAGE_INTERFACEENTRY_REGISTERED)
+    if (stage == NEWSTAGE_L2_SECOND)
     {
         InterfaceTable *ift = (InterfaceTable*)InterfaceTableAccess().getIfExists();
         if (ift)

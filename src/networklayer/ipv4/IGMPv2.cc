@@ -392,7 +392,7 @@ void IGMPv2::initialize(int stage)
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(IP_PROT_IGMP);
     }
-    if (stage == STAGE_LOCAL_PLUS_1)
+    if (stage == NEWSTAGE_SUBSCRIPTIONS)
     {
         nb->subscribe(this, NF_INTERFACE_DELETED);
         nb->subscribe(this, NF_IPv4_MCAST_JOIN);

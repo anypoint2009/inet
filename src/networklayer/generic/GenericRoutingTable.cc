@@ -46,7 +46,7 @@ GenericRoutingTable::~GenericRoutingTable()
 
 int GenericRoutingTable::numInitStages() const
 {
-    return NEWSTAGE_L3_STATICROUTES;
+    return NEWSTAGE_L3_STATICROUTES + 1;
 }
 
 void GenericRoutingTable::initialize(int stage)
@@ -77,7 +77,7 @@ void GenericRoutingTable::initialize(int stage)
         WATCH(multicastForwardingEnabled);
         WATCH(routerId);
     }
-    if (stage == STAGE_LOCAL_PLUS_1)
+    if (stage == NEWSTAGE_SUBSCRIPTIONS)
     {
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         nb->subscribe(this, NF_INTERFACE_CREATED);

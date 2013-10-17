@@ -34,7 +34,7 @@ enum InetInitStages
     /**
      * TODO: this could be done in stage 0...
      */
-    STAGE_DO_SUBSCRIBE_TO_RADIOSTATE_NOTIFICATIONS = 1,  //FIXME this is only used in 802.11MAC, and could be done in stage 0 when signals are used
+    NEWSTAGE_SUBSCRIPTIONS = 1,  //FIXME this is only used in 802.11MAC, and could be done in stage 0 when signals are used
 
     /**
      * Physical environment (mobility, obstacles, battery, annotations, etc); Traci-launch
@@ -57,35 +57,40 @@ enum InetInitStages
     NEWSTAGE_L2_INITIALIZATION = 5,
 
     /**
+     * TODO
+     */
+    NEWSTAGE_L2_SECOND = 6,
+
+    /**
      * IPV6ROUTINGTABLE_XMIPV6_SETTINGS, ADD_IP_PROTOCOLDATA_TO_INTERFACEENTRY, COMPUTE_IP_AUTOCONFIGURATION,
      * isOperational, IPv4::registerHook
      */
-    NEWSTAGE_L3_INITIALIZATION = 6,
+    NEWSTAGE_L3_INITIALIZATION = 7,
 
     /**
      * CONFIGURE_IP_ADDRESSES
      */
-    NEWSTAGE_L3_IPADDRESSES = 7,
+    NEWSTAGE_L3_IPADDRESSES = 8,
 
     /**
      * ADD_STATIC_ROUTES, SET_INTERFACEENTRY_RTR_ADV_INTERVAL, ASSIGN_ROUTERID
      */
-    NEWSTAGE_L3_STATICROUTES = 8,
+    NEWSTAGE_L3_STATICROUTES = 9,
 
     /**
      * REGISTER_TRANSPORTPROTOCOLID_IN_IP
      */
-    NEWSTAGE_TRANSPORT = 9,
+    NEWSTAGE_TRANSPORT = 10,
 
     /**
      * INIT_ROUTING_PROTOCOLS
      */
-    NEWSTAGE_ROUTING = 10,
+    NEWSTAGE_ROUTING = 11,
 
     /**
      * INIT_APPLICATION
      */
-    NEWSTAGE_APPLICATIONS = 11,
+    NEWSTAGE_APPLICATIONS = 12,
 
     NUM_STAGES,
 
@@ -95,7 +100,6 @@ enum InetInitStages
 
     //EZEK KESOBBIEK:
     STAGE_MACADDRESS_AVAILABLE = NEWSTAGE_L2_INITIALIZATION + 1,
-    STAGE_INTERFACEENTRY_REGISTERED = NEWSTAGE_L2_INITIALIZATION + 1,
     STAGE_TRANSPORT_LAYER_AVAILABLE = NEWSTAGE_TRANSPORT + 1, //_max_(STAGE_LOCAL_PLUS_1 + 1, NEWSTAGE_TRANSPORT + 1),
     STAGE_LOCATION_AVAILABLE = NEWSTAGE_PHYSICALENV_SECOND + 1,
     STAGE_IP_ADDRESS_AVAILABLE = NEWSTAGE_L3_IPADDRESSES + 1,

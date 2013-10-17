@@ -33,7 +33,10 @@
 Define_Module(HttpController);
 
 
-int HttpController::numInitStages() const { return STAGE_LOCAL_PLUS_1 + 1; }
+int HttpController::numInitStages() const
+{
+    return STAGE_LOCAL_PLUS_1 + 1;
+}
 
 void HttpController::initialize(int stage)
 {

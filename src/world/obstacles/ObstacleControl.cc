@@ -29,7 +29,10 @@ Define_Module(ObstacleControl);
 ObstacleControl::~ObstacleControl() {
 }
 
-int ObstacleControl::numInitStages() const { return STAGE_LOCAL_PLUS_1 + 1; }
+int ObstacleControl::numInitStages() const
+{
+    return NEWSTAGE_SUBSCRIPTIONS + 1;
+}
 
 void ObstacleControl::initialize(int stage)
 {
@@ -42,7 +45,7 @@ void ObstacleControl::initialize(int stage)
 
         obstaclesXml = par("obstacles");
     }
-    if (stage == STAGE_LOCAL_PLUS_1)
+    if (stage == NEWSTAGE_PHYSICALENV_INITIALIZATION)
     {
         annotations = AnnotationManagerAccess().getIfExists();
         if (annotations)

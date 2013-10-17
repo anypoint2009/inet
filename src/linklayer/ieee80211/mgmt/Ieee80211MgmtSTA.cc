@@ -88,8 +88,7 @@ std::ostream& operator<<(std::ostream& os, const Ieee80211MgmtSTA::AssociatedAPI
 
 int Ieee80211MgmtSTA::numInitStages() const
 {
-    static int stages = std::max(STAGE_LOCAL_PLUS_1, NEWSTAGE_L2_INITIALIZATION) + 1;
-    return std::max(Ieee80211MgmtBase::numInitStages(), stages);
+    return std::max(Ieee80211MgmtBase::numInitStages(), NEWSTAGE_L2_INITIALIZATION + 1);
 }
 
 void Ieee80211MgmtSTA::initialize(int stage)
@@ -117,7 +116,7 @@ void Ieee80211MgmtSTA::initialize(int stage)
         IChannelControl *cc = ChannelAccess::getChannelControl();
         numChannels = cc->getNumChannels();
     }
-    if (stage == STAGE_LOCAL_PLUS_1)
+    if (stage == NEWSTAGE_SUBSCRIPTIONS)
     {
         nb->subscribe(this, NF_LINK_FULL_PROMISCUOUS);
     }

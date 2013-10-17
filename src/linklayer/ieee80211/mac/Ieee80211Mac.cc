@@ -105,8 +105,7 @@ Ieee80211Mac::~Ieee80211Mac()
 
 int Ieee80211Mac::numInitStages() const
 {
-    static int stages = std::max(STAGE_DO_SUBSCRIBE_TO_RADIOSTATE_NOTIFICATIONS, NEWSTAGE_L2_INITIALIZATION) + 1;
-    return std::max(stages, WirelessMacBase::numInitStages());
+    return std::max(NEWSTAGE_L2_INITIALIZATION + 1, WirelessMacBase::numInitStages());
 }
 
 void Ieee80211Mac::initialize(int stage)
@@ -290,7 +289,7 @@ void Ieee80211Mac::initialize(int stage)
         endReserve = new cMessage("Reserve");
         mediumStateChange = new cMessage("MediumStateChange");
     }
-    if (stage == STAGE_DO_SUBSCRIBE_TO_RADIOSTATE_NOTIFICATIONS)
+    if (stage == NEWSTAGE_SUBSCRIPTIONS)
     {
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         // subscribe for the information of the carrier sense
