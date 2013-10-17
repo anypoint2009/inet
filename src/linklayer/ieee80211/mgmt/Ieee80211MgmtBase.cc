@@ -33,7 +33,7 @@ static std::ostream& operator<<(std::ostream& out, cMessage *msg)
 
 int Ieee80211MgmtBase::numInitStages() const
 {
-    return STAGE_MACADDRESS_AVAILABLE + 1;
+    return NEWSTAGE_L2_SECOND + 1;
 }
 
 void Ieee80211MgmtBase::initialize(int stage)
@@ -62,7 +62,7 @@ void Ieee80211MgmtBase::initialize(int stage)
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
     }
-    if (stage == STAGE_MACADDRESS_AVAILABLE)
+    if (stage == NEWSTAGE_L2_SECOND)
     {
         // obtain our address from MAC
         cModule *mac = getParentModule()->getSubmodule("mac");

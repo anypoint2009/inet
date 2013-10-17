@@ -90,7 +90,10 @@ void SCTP::bindPortForUDP()
     udpSocket.bind(SCTP_UDP_PORT);
 }
 
-int SCTP::numInitStages() const { return NEWSTAGE_TRANSPORT + 1; }
+int SCTP::numInitStages() const
+{
+    return NEWSTAGE_TRANSPORT_SECOND + 1;
+}
 
 void SCTP::initialize(int stage)
 {
@@ -117,7 +120,7 @@ void SCTP::initialize(int stage)
         }
     }
 
-    if (stage == STAGE_TRANSPORT_LAYER_AVAILABLE)
+    if (stage == NEWSTAGE_TRANSPORT_SECOND)
     {
         if (par("udpEncapsEnabled").boolValue())
         {
