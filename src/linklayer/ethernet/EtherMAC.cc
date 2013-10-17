@@ -60,7 +60,7 @@ EtherMAC::~EtherMAC()
 
 int EtherMAC::numInitStages() const
 {
-    return std::max(0 + 1, EtherMACBase::numInitStages());
+    return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, EtherMACBase::numInitStages());
 }
 
 void EtherMAC::initialize(int stage)

@@ -35,7 +35,7 @@ EtherMACFullDuplex::EtherMACFullDuplex()
 
 int EtherMACFullDuplex::numInitStages() const
 {
-    return std::max(0 + 1, EtherMACBase::numInitStages());
+    return std::max(NEWSTAGE_L2_INITIALIZATION + 1, EtherMACBase::numInitStages());
 }
 
 void EtherMACFullDuplex::initialize(int stage)

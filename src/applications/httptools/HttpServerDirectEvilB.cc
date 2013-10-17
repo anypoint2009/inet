@@ -36,7 +36,7 @@ Define_Module(HttpServerDirectEvilB);
 
 int HttpServerDirectEvilB::numInitStages() const
 {
-    return std::max(0 + 1, HttpServerDirect::numInitStages());
+    return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, HttpServerDirect::numInitStages());
 }
 
 void HttpServerDirectEvilB::initialize(int stage)

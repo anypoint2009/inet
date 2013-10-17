@@ -35,7 +35,7 @@ simsignal_t WirelessMacBase::packetReceivedFromUpperSignal = SIMSIGNAL_NULL;
 
 int WirelessMacBase::numInitStages() const
 {
-    return std::max(0 + 1, MACBase::numInitStages());
+    return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, MACBase::numInitStages());
 }
 
 void WirelessMacBase::initialize(int stage)

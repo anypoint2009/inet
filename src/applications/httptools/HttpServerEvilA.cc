@@ -35,7 +35,7 @@ Define_Module(HttpServerEvilA);
 
 int HttpServerEvilA::numInitStages() const
 {
-    return std::max(0 + 1, HttpServer::numInitStages());
+    return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, HttpServer::numInitStages());
 }
 
 void HttpServerEvilA::initialize(int stage)

@@ -56,7 +56,7 @@ MACRelayUnitNP::~MACRelayUnitNP()
 
 int MACRelayUnitNP::numInitStages() const
 {
-    return std::max(0 + 1, MACRelayUnitBase::numInitStages());
+    return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, MACRelayUnitBase::numInitStages());
 }
 
 void MACRelayUnitNP::initialize(int stage)
