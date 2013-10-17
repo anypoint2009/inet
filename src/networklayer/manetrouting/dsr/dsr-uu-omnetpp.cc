@@ -196,8 +196,7 @@ void DSRUUTimer::cancel()
 
 int DSRUU::numInitStages() const
 {
-    static int stages = std::max(NEWSTAGE_TRANSPORT, NEWSTAGE_ROUTING) + 1;
-    return stages;
+    return NEWSTAGE_ROUTING + 1;
 }
 
 void DSRUU::initialize(int stage)
@@ -205,7 +204,7 @@ void DSRUU::initialize(int stage)
     cSimpleModule::initialize(stage);
 
     //current_time =simTime();
-    if (stage == NEWSTAGE_TRANSPORT)
+    if (stage == NEWSTAGE_ROUTING)
     {
         IPSocket ipSocket(gate("to_ip"));
         ipSocket.registerProtocol(IP_PROT_MANET);

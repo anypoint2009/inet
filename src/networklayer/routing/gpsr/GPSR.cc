@@ -65,8 +65,7 @@ GPSR::~GPSR()
 
 int GPSR::numInitStages() const
 {
-    static int stages = std::max(NEWSTAGE_TRANSPORT, NEWSTAGE_ROUTING) + 1;
-    return stages;
+    return NEWSTAGE_ROUTING + 1;
 }
 
 void GPSR::initialize(int stage)
@@ -95,13 +94,11 @@ void GPSR::initialize(int stage)
         scheduleBeaconTimer();
         schedulePurgeNeighborsTimer();
     }
-    if (stage == NEWSTAGE_TRANSPORT)
+    if (stage == NEWSTAGE_ROUTING)
     {
         IPSocket socket(gate("ipOut"));
         socket.registerProtocol(IP_PROT_MANET);
-    }
-    if (stage == NEWSTAGE_ROUTING)
-    {
+
         // ASSERT(stage >= STAGE:IP_LAYER_READY_FOR_HOOK_REGISTRATION);
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         globalPositionTable.clear();

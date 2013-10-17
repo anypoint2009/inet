@@ -35,13 +35,11 @@ void DSDV_2::initialize(int stage)
         ift = NULL;
         rt = NULL;
     }
-    if (stage == NEWSTAGE_TRANSPORT)
+    if (stage == NEWSTAGE_ROUTING)
     {
         IPSocket socket(gate("to_ip"));
         socket.registerProtocol(IP_PROT_MANET);
-    }
-    if (stage == NEWSTAGE_ROUTING)
-    {
+
         ift = InterfaceTableAccess().get();
         /* Search the 80211 interface */
         int  num_80211 = 0;

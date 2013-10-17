@@ -58,7 +58,10 @@ xDYMO::~xDYMO()
 // module interface
 //
 
-int xDYMO::numInitStages() const { return NEWSTAGE_ROUTING + 1; }
+int xDYMO::numInitStages() const
+{
+    return NEWSTAGE_ROUTING + 1;
+}
 
 void xDYMO::initialize(int stage)
 {
@@ -95,7 +98,7 @@ void xDYMO::initialize(int stage)
         // internal
         expungeTimer = new cMessage("ExpungeTimer");
     }
-    if (stage == NEWSTAGE_TRANSPORT)
+    if (stage == NEWSTAGE_ROUTING)
     {
         IPSocket socket(gate("ipOut"));
         socket.registerProtocol(IP_PROT_MANET);
