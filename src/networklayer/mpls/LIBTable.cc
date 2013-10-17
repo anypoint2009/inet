@@ -21,7 +21,10 @@
 Define_Module(LIBTable);
 
 
-int LIBTable::numInitStages() const { return STAGE_ROUTERID_AVAILABLE + 1; }
+int LIBTable::numInitStages() const
+{
+    return NEWSTAGE_L3_FOURTH + 1;
+}
 
 void LIBTable::initialize(int stage)
 {
@@ -33,7 +36,7 @@ void LIBTable::initialize(int stage)
 
         WATCH_VECTOR(lib);
     }
-    if (stage == STAGE_ROUTERID_AVAILABLE)
+    if (stage == NEWSTAGE_L3_FOURTH)
     {
         IPv4RoutingTableAccess routingTableAccess;
         IIPv4RoutingTable *rt = routingTableAccess.get();
