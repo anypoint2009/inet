@@ -45,12 +45,12 @@ Define_Module(IPv4);
 
 int IPv4::numInitStages() const
 {
-    return NEWSTAGE_L3_INITIALIZATION + 1;
+    return INITSTAGE_NETWORK_LAYER + 1;
 }
 
 void IPv4::initialize(int stage)
 {
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         QueueBase::initialize();
 
@@ -87,7 +87,7 @@ void IPv4::initialize(int stage)
         WATCH(numUnroutable);
         WATCH(numForwarded);
     }
-    if (stage == NEWSTAGE_L3_INITIALIZATION)
+    if (stage == INITSTAGE_NETWORK_LAYER)
     {
         isUp = isNodeUp();
     }

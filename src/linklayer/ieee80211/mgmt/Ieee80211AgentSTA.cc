@@ -33,14 +33,14 @@ simsignal_t Ieee80211AgentSTA::dropConfirmSignal = SIMSIGNAL_NULL;
 
 int Ieee80211AgentSTA::numInitStages() const
 {
-    return NEWSTAGE_L2_SECOND + 1;
+    return INITSTAGE_LINK_LAYER_2 + 1;
 }
 
 void Ieee80211AgentSTA::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         // read parameters
         activeScan = par("activeScan");
@@ -72,11 +72,11 @@ void Ieee80211AgentSTA::initialize(int stage)
 
         myIface = NULL;
     }
-    if (stage == NEWSTAGE_SUBSCRIPTIONS)
+    if (stage == INITSTAGE_LOCAL)
     {
         nb->subscribe(this, NF_L2_BEACON_LOST);
     }
-    if (stage == NEWSTAGE_L2_SECOND)
+    if (stage == INITSTAGE_LINK_LAYER_2)
     {
         InterfaceTable *ift = (InterfaceTable*)InterfaceTableAccess().getIfExists();
         if (ift)

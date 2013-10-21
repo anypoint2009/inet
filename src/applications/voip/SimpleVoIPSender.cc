@@ -40,7 +40,7 @@ SimpleVoIPSender::~SimpleVoIPSender()
 
 int SimpleVoIPSender::numInitStages() const
 {
-    return NEWSTAGE_APPLICATIONS + 1;
+    return INITSTAGE_APPLICATION_LAYER + 1;
 }
 
 void SimpleVoIPSender::initialize(int stage)
@@ -50,7 +50,7 @@ void SimpleVoIPSender::initialize(int stage)
     cSimpleModule::initialize(stage);
 
     // avoid multiple initializations
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         talkspurtDuration = 0;
         silenceDuration = 0;
@@ -66,7 +66,7 @@ void SimpleVoIPSender::initialize(int stage)
         localPort = par("localPort");
         destPort = par("destPort");
     }
-    if (stage == NEWSTAGE_APPLICATIONS)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

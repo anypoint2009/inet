@@ -27,14 +27,14 @@ simsignal_t UDPEchoApp::pkSignal = SIMSIGNAL_NULL;
 
 int UDPEchoApp::numInitStages() const
 {
-    return std::max(NEWSTAGE_APPLICATIONS + 1, AppBase::numInitStages());
+    return std::max(INITSTAGE_APPLICATION_LAYER + 1, AppBase::numInitStages());
 }
 
 void UDPEchoApp::initialize(int stage)
 {
     AppBase::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         // init statistics
         pkSignal = registerSignal("pk");

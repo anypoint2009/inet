@@ -25,13 +25,13 @@
 Define_Module(GlobalARP);
 
 
-int GlobalARP::numInitStages() const { return NEWSTAGE_LOCAL_INITIALIZATION + 1; }
+int GlobalARP::numInitStages() const { return INITSTAGE_LOCAL + 1; }
 
 void GlobalARP::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         ift = InterfaceTableAccess().get();
         nicOutBaseGateId = gateSize("nicOut")==0 ? -1 : gate("nicOut", 0)->getId();

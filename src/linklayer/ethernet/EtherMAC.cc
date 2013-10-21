@@ -60,14 +60,14 @@ EtherMAC::~EtherMAC()
 
 int EtherMAC::numInitStages() const
 {
-    return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, EtherMACBase::numInitStages());
+    return std::max(INITSTAGE_LOCAL + 1, EtherMACBase::numInitStages());
 }
 
 void EtherMAC::initialize(int stage)
 {
     EtherMACBase::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         endRxMsg = new cMessage("EndReception", ENDRECEPTION);
         endBackoffMsg = new cMessage("EndBackoff", ENDBACKOFF);

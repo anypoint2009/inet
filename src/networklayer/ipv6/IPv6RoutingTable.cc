@@ -59,14 +59,14 @@ IPv6Route *IPv6RoutingTable::createNewRoute(IPv6Address destPrefix, int prefixLe
 
 int IPv6RoutingTable::numInitStages() const
 {
-    return NEWSTAGE_L3_INITIALIZATION + 1;
+    return INITSTAGE_NETWORK_LAYER + 1;
 }
 
 void IPv6RoutingTable::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         WATCH_PTRVECTOR(routeList);
         WATCH_MAP(destCache); // FIXME commented out for now
@@ -87,7 +87,7 @@ void IPv6RoutingTable::initialize(int stage)
         mipv6Support = false; // 4.9.07 - CB
 #endif /* WITH_xMIPv6 */
     }
-    if (stage == NEWSTAGE_SUBSCRIPTIONS)
+    if (stage == INITSTAGE_LOCAL)
     {
         //TODO isNodeUp???
 
@@ -99,7 +99,7 @@ void IPv6RoutingTable::initialize(int stage)
         nb->subscribe(this, NF_INTERFACE_CONFIG_CHANGED);
         nb->subscribe(this, NF_INTERFACE_IPv6CONFIG_CHANGED);
     }
-    if (stage == NEWSTAGE_L3_INITIALIZATION)
+    if (stage == INITSTAGE_NETWORK_LAYER)
     {
         // add IPv6InterfaceData to interfaces
         for (int i=0; i<ift->getNumInterfaces(); i++)

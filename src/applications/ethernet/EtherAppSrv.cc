@@ -34,14 +34,14 @@ simsignal_t EtherAppSrv::rcvdPkSignal = SIMSIGNAL_NULL;
 
 int EtherAppSrv::numInitStages() const
 {
-    return NEWSTAGE_APPLICATIONS + 1;
+    return INITSTAGE_APPLICATION_LAYER + 1;
 }
 
 void EtherAppSrv::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         localSAP = par("localSAP");
 
@@ -53,7 +53,7 @@ void EtherAppSrv::initialize(int stage)
         WATCH(packetsSent);
         WATCH(packetsReceived);
     }
-    if (stage == NEWSTAGE_APPLICATIONS)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
 

@@ -25,14 +25,14 @@ simsignal_t TCPGenericCliAppBase::sentPkSignal = SIMSIGNAL_NULL;
 
 int TCPGenericCliAppBase::numInitStages() const
 {
-    return NEWSTAGE_APPLICATIONS + 1;
+    return INITSTAGE_APPLICATION_LAYER + 1;
 }
 
 void TCPGenericCliAppBase::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         numSessions = numBroken = packetsSent = packetsRcvd = bytesSent = bytesRcvd = 0;
 
@@ -48,7 +48,7 @@ void TCPGenericCliAppBase::initialize(int stage)
         WATCH(bytesSent);
         WATCH(bytesRcvd);
     }
-    if (stage == NEWSTAGE_APPLICATIONS)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
         // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);

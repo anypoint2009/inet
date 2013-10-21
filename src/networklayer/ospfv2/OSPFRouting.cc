@@ -45,7 +45,7 @@ OSPFRouting::~OSPFRouting()
     delete ospfRouter;
 }
 
-int OSPFRouting::numInitStages() const { return NEWSTAGE_ROUTING + 1; }
+int OSPFRouting::numInitStages() const { return INITSTAGE_ROUTING_PROTOCOLS + 1; }
 
 void OSPFRouting::initialize(int stage)
 {
@@ -53,7 +53,7 @@ void OSPFRouting::initialize(int stage)
 
     // we have to wait for stage 2 until interfaces are registered (stage 0)
     // and routerId is assigned (stage 3)
-    if (stage == NEWSTAGE_ROUTING)
+    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
         // ASSERT(stage >= STAGE:ROUTERID_AVAILABLE);
         // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
@@ -63,7 +63,7 @@ void OSPFRouting::initialize(int stage)
         if (isUp)
             createOspfRouter();
     }
-    if (stage == NEWSTAGE_ROUTING)  //FIXME replace to STAGE_REGISTER_IP_PROTOCOL_ID
+    if (stage == INITSTAGE_ROUTING_PROTOCOLS)  //FIXME replace to STAGE_REGISTER_IP_PROTOCOL_ID
     {
         // ASSERT(stage >= NEWSTAGE:TRANSPORT);
         IPSocket ipSocket(gate("ipOut"));

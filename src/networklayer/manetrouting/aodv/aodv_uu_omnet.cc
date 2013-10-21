@@ -65,7 +65,7 @@ int AODVUU::totalRerrSend=0;
 int AODVUU::totalRerrRec=0;
 #endif
 
-int NS_CLASS numInitStages() const  { return NEWSTAGE_ROUTING + 1; }
+int NS_CLASS numInitStages() const  { return INITSTAGE_ROUTING_PROTOCOLS + 1; }
 
 void NS_CLASS initialize(int stage)
 {
@@ -76,7 +76,7 @@ void NS_CLASS initialize(int stage)
        after binding them! The desired default values should be set in
        ~ns/tcl/lib/ns-default.tcl instead.
      */
-    if (stage == NEWSTAGE_ROUTING)
+    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
 #ifndef AODV_GLOBAL_STATISTISTIC
         iswrite = false;

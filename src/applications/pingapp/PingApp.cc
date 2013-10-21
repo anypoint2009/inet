@@ -52,14 +52,14 @@ PingApp::~PingApp()
 
 int PingApp::numInitStages() const
 {
-    return NEWSTAGE_APPLICATIONS + 1;
+    return INITSTAGE_APPLICATION_LAYER + 1;
 }
 
 void PingApp::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         // read params
         // (defer reading srcAddr/destAddr to when ping starts, maybe
@@ -96,7 +96,7 @@ void PingApp::initialize(int stage)
         // references
         timer = new cMessage("sendPing");
     }
-    if (stage == NEWSTAGE_APPLICATIONS)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         // startup
         nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

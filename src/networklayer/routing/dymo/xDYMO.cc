@@ -60,14 +60,14 @@ xDYMO::~xDYMO()
 
 int xDYMO::numInitStages() const
 {
-    return NEWSTAGE_ROUTING + 1;
+    return INITSTAGE_ROUTING_PROTOCOLS + 1;
 }
 
 void xDYMO::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         // DYMO parameters from RFC
         clientAddresses = par("clientAddresses");
@@ -98,12 +98,12 @@ void xDYMO::initialize(int stage)
         // internal
         expungeTimer = new cMessage("ExpungeTimer");
     }
-    if (stage == NEWSTAGE_ROUTING)
+    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
         IPSocket socket(gate("ipOut"));
         socket.registerProtocol(IP_PROT_MANET);
     }
-    if (stage == NEWSTAGE_L3_ADDRESSES_AVAILABLE)
+    if (stage == INITSTAGE_NETWORK_LAYER_3)
     {
         AddressResolver addressResolver;
         cStringTokenizer tokenizer(clientAddresses);
@@ -123,7 +123,7 @@ void xDYMO::initialize(int stage)
             clientAddressAndPrefixLengthPairs.push_back(std::pair<Address, int>(address, prefixLength));
         }
     }
-    if (stage == NEWSTAGE_ROUTING)
+    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
         // ASSERT(stage >= STAGE:IP_LAYER_READY_FOR_HOOK_REGISTRATION);
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);

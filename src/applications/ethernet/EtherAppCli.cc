@@ -47,14 +47,14 @@ EtherAppCli::~EtherAppCli()
 
 int EtherAppCli::numInitStages() const
 {
-    return NEWSTAGE_APPLICATIONS + 1;
+    return INITSTAGE_APPLICATION_LAYER + 1;
 }
 
 void EtherAppCli::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         reqLength = &par("reqLength");
         respLength = &par("respLength");
@@ -78,7 +78,7 @@ void EtherAppCli::initialize(int stage)
         if (stopTime >= SIMTIME_ZERO && stopTime < startTime)
             error("Invalid startTime/stopTime parameters");
     }
-    if (stage == NEWSTAGE_APPLICATIONS)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         if (isGenerator())
             timerMsg = new cMessage("generateNextPacket");

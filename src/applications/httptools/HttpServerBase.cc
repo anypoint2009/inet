@@ -36,14 +36,14 @@
 
 int HttpServerBase::numInitStages() const
 {
-    return std::max(NEWSTAGE_APPLICATIONS + 1, HttpNodeBase::numInitStages());
+    return std::max(INITSTAGE_APPLICATION_LAYER + 1, HttpNodeBase::numInitStages());
 }
 
 void HttpServerBase::initialize(int stage)
 {
     HttpNodeBase::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         EV_DEBUG << "Initializing server component\n";
 
@@ -156,7 +156,7 @@ void HttpServerBase::initialize(int stage)
         WATCH(textResourcesServed);
         WATCH(badRequests);
     }
-    if (stage == NEWSTAGE_APPLICATIONS)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

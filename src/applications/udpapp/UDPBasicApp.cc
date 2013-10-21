@@ -42,14 +42,14 @@ UDPBasicApp::~UDPBasicApp()
 
 int UDPBasicApp::numInitStages() const
 {
-    return std::max(NEWSTAGE_APPLICATIONS + 1, AppBase::numInitStages());
+    return std::max(INITSTAGE_APPLICATION_LAYER + 1, AppBase::numInitStages());
 }
 
 void UDPBasicApp::initialize(int stage)
 {
     AppBase::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         numSent = 0;
         numReceived = 0;

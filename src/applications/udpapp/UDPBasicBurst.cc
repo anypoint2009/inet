@@ -68,14 +68,14 @@ UDPBasicBurst::~UDPBasicBurst()
 
 int UDPBasicBurst::numInitStages() const
 {
-    return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, AppBase::numInitStages());
+    return std::max(INITSTAGE_LOCAL + 1, AppBase::numInitStages());
 }
 
 void UDPBasicBurst::initialize(int stage)
 {
     AppBase::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         counter = 0;
         numSent = 0;

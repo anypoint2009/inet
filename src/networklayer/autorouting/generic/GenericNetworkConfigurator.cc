@@ -45,14 +45,14 @@ static void printElapsedTime(const char *name, long startTime)
 }
 
 
-int GenericNetworkConfigurator::numInitStages() const { return NEWSTAGE_L3_INITIALIZATION + 1; }
+int GenericNetworkConfigurator::numInitStages() const { return INITSTAGE_NETWORK_LAYER + 1; }
 
 #define T(CODE)  {long startTime=clock(); CODE; printElapsedTime(#CODE, startTime);}
 void GenericNetworkConfigurator::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_L3_INITIALIZATION)
+    if (stage == INITSTAGE_NETWORK_LAYER)
     {
         // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
 

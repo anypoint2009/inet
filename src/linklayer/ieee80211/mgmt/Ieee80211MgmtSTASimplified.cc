@@ -29,7 +29,7 @@ void Ieee80211MgmtSTASimplified::initialize(int stage)
 {
     Ieee80211MgmtBase::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         accessPointAddress.setAddress(par("accessPointAddress").stringValue());
         receiveSequence = 0;

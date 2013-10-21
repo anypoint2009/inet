@@ -47,7 +47,7 @@ IPvXTrafGen::~IPvXTrafGen()
 
 int IPvXTrafGen::numInitStages() const
 {
-    return NEWSTAGE_APPLICATIONS + 1;
+    return INITSTAGE_APPLICATION_LAYER + 1;
 }
 
 void IPvXTrafGen::initialize(int stage)
@@ -56,7 +56,7 @@ void IPvXTrafGen::initialize(int stage)
 
     // because of IPvXAddressResolver, we need to wait until interfaces are registered,
     // address auto-assignment takes place etc.
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         rcvdPkSignal = registerSignal("rcvdPk");
         sentPkSignal = registerSignal("sentPk");
@@ -76,7 +76,7 @@ void IPvXTrafGen::initialize(int stage)
         WATCH(numSent);
         WATCH(numReceived);
     }
-    if (stage == NEWSTAGE_APPLICATIONS)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(protocol);

@@ -72,14 +72,14 @@ ARP::ARP()
 
 int ARP::numInitStages() const
 {
-    return NEWSTAGE_L3_ADDRESSES_AVAILABLE + 1;
+    return INITSTAGE_NETWORK_LAYER_3 + 1;
 }
 
 void ARP::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         sentReqSignal = registerSignal("sentReq");
         sentReplySignal = registerSignal("sentReply");
@@ -107,7 +107,7 @@ void ARP::initialize(int stage)
         WATCH_PTRMAP(arpCache);
         WATCH_PTRMAP(globalArpCache);
     }
-    if (stage == NEWSTAGE_L3_ADDRESSES_AVAILABLE)  // IP addresses should be available
+    if (stage == INITSTAGE_NETWORK_LAYER_3)  // IP addresses should be available
     {
         // ASSERT(stage > NEWSTAGE:L3_IPADDRESSES);
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);

@@ -25,14 +25,14 @@ Define_Module(EchoProtocol);
 
 int EchoProtocol::numInitStages() const
 {
-    return NEWSTAGE_TRANSPORT + 1;
+    return INITSTAGE_TRANSPORT_LAYER + 1;
 }
 
 void EchoProtocol::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_TRANSPORT)
+    if (stage == INITSTAGE_TRANSPORT_LAYER)
     {
         IPSocket socket(gate("sendOut"));
         socket.registerProtocol(IP_PROT_ICMP);

@@ -27,14 +27,14 @@ simsignal_t UDPSink::rcvdPkSignal = SIMSIGNAL_NULL;
 
 int UDPSink::numInitStages() const
 {
-    return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, AppBase::numInitStages());
+    return std::max(INITSTAGE_LOCAL + 1, AppBase::numInitStages());
 }
 
 void UDPSink::initialize(int stage)
 {
     AppBase::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         numReceived = 0;
         WATCH(numReceived);

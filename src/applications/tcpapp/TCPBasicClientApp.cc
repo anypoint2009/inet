@@ -38,13 +38,13 @@ TCPBasicClientApp::~TCPBasicClientApp()
 
 int TCPBasicClientApp::numInitStages() const
 {
-    return std::max(NEWSTAGE_APPLICATIONS + 1, TCPGenericCliAppBase::numInitStages());
+    return std::max(INITSTAGE_APPLICATION_LAYER + 1, TCPGenericCliAppBase::numInitStages());
 }
 
 void TCPBasicClientApp::initialize(int stage)
 {
     TCPGenericCliAppBase::initialize(stage);
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         numRequestsToSend = 0;
         earlySend = false;  // TBD make it parameter
@@ -56,7 +56,7 @@ void TCPBasicClientApp::initialize(int stage)
         if (stopTime >= SIMTIME_ZERO && stopTime < startTime)
             error("Invalid startTime/stopTime parameters");
     }
-    if (stage == NEWSTAGE_APPLICATIONS)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
 

@@ -68,14 +68,14 @@ IPv4RoutingTable::~IPv4RoutingTable()
 
 int IPv4RoutingTable::numInitStages() const
 {
-    return NEWSTAGE_L3_STATICROUTES + 1;
+    return INITSTAGE_NETWORK_LAYER_3 + 1;
 }
 
 void IPv4RoutingTable::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         // get a pointer to the NotificationBoard module and IInterfaceTable
         nb = NotificationBoardAccess().get();
@@ -90,7 +90,7 @@ void IPv4RoutingTable::initialize(int stage)
         WATCH(multicastForward);
         WATCH(routerId);
     }
-    if (stage == NEWSTAGE_SUBSCRIPTIONS)
+    if (stage == INITSTAGE_LOCAL)
     {
         nb->subscribe(this, NF_INTERFACE_CREATED);
         nb->subscribe(this, NF_INTERFACE_DELETED);
@@ -98,7 +98,7 @@ void IPv4RoutingTable::initialize(int stage)
         nb->subscribe(this, NF_INTERFACE_CONFIG_CHANGED);
         nb->subscribe(this, NF_INTERFACE_IPv4CONFIG_CHANGED);
     }
-    if (stage == NEWSTAGE_L3_INITIALIZATION)
+    if (stage == INITSTAGE_NETWORK_LAYER)
     {
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isNodeUp = !nodeStatus || nodeStatus->getState() == NodeStatus::UP;
@@ -110,7 +110,7 @@ void IPv4RoutingTable::initialize(int stage)
                 routerId = IPv4Address(routerIdStr);
         }
     }
-    if (stage == NEWSTAGE_L3_STATICROUTES)
+    if (stage == INITSTAGE_NETWORK_LAYER_3)
     {
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
 
@@ -125,7 +125,7 @@ void IPv4RoutingTable::initialize(int stage)
                 error("Error reading routing table file %s", filename);
         }
     }
-    if (stage == NEWSTAGE_L3_STATICROUTES)
+    if (stage == INITSTAGE_NETWORK_LAYER_3)
     {
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
         // ASSERT(stage >= STAGE:INTERFACEENTRY_IP_PROTOCOLDATA_AVAILABLE);

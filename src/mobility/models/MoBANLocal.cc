@@ -55,7 +55,7 @@ MoBANLocal::MoBANLocal()
 
 int MoBANLocal::numInitStages() const
 {
-    return std::max(LineSegmentsMobilityBase::numInitStages(), NEWSTAGE_PHYSICALENV_SECOND + 1);
+    return std::max(LineSegmentsMobilityBase::numInitStages(), INITSTAGE_PHYSICAL_ENVIRONMENT_2 + 1);
 }
 
 void MoBANLocal::initialize(int stage)
@@ -63,7 +63,7 @@ void MoBANLocal::initialize(int stage)
     LineSegmentsMobilityBase::initialize(stage);
 
     EV_TRACE << "initializing MoBANLocal stage " << stage << endl;
-    if (stage == NEWSTAGE_PHYSICALENV_SECOND)
+    if (stage == INITSTAGE_PHYSICAL_ENVIRONMENT_2)
         updateVisualRepresentation();
 }
 

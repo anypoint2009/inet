@@ -33,12 +33,12 @@ static std::ostream& operator<<(std::ostream& out, cMessage *msg)
 
 int Ieee80211MgmtBase::numInitStages() const
 {
-    return NEWSTAGE_L2_SECOND + 1;
+    return INITSTAGE_LINK_LAYER_2 + 1;
 }
 
 void Ieee80211MgmtBase::initialize(int stage)
 {
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         PassiveQueueBase::initialize();
 
@@ -57,12 +57,12 @@ void Ieee80211MgmtBase::initialize(int stage)
         // configuration
         frameCapacity = par("frameCapacity");
     }
-    if (stage == NEWSTAGE_L2_INITIALIZATION)
+    if (stage == INITSTAGE_LINK_LAYER)
     {
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
     }
-    if (stage == NEWSTAGE_L2_SECOND)
+    if (stage == INITSTAGE_LINK_LAYER_2)
     {
         // obtain our address from MAC
         cModule *mac = getParentModule()->getSubmodule("mac");

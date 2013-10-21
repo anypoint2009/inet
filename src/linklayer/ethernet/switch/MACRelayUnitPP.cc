@@ -51,14 +51,14 @@ MACRelayUnitPP::~MACRelayUnitPP()
 
 int MACRelayUnitPP::numInitStages() const
 {
-    return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, MACRelayUnitBase::numInitStages());
+    return std::max(INITSTAGE_LOCAL + 1, MACRelayUnitBase::numInitStages());
 }
 
 void MACRelayUnitPP::initialize(int stage)
 {
     MACRelayUnitBase::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         numProcessedFrames = numDroppedFrames = 0;
         WATCH(numProcessedFrames);

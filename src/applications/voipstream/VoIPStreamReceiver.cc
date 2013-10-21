@@ -52,14 +52,14 @@ void VoIPStreamReceiver::initSignals()
 
 int VoIPStreamReceiver::numInitStages() const
 {
-    return NEWSTAGE_APPLICATIONS + 1;
+    return INITSTAGE_APPLICATION_LAYER + 1;
 }
 
 void VoIPStreamReceiver::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         initSignals();
 
@@ -81,7 +81,7 @@ void VoIPStreamReceiver::initialize(int stage)
         socket.setOutputGate(gate("udpOut"));
         socket.bind(localPort);
     }
-    if (stage == NEWSTAGE_APPLICATIONS)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

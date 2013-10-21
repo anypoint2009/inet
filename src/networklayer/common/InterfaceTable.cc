@@ -62,19 +62,19 @@ InterfaceTable::~InterfaceTable()
     delete [] tmpInterfaceList;
 }
 
-int InterfaceTable::numInitStages() const { return NEWSTAGE_L3_INITIALIZATION + 1; }
+int InterfaceTable::numInitStages() const { return INITSTAGE_NETWORK_LAYER + 1; }
 
 void InterfaceTable::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         // get a pointer to the NotificationBoard module
         nb = NotificationBoardAccess().get();
         WATCH_PTRVECTOR(idToInterface);
     }
-    if (stage == NEWSTAGE_L3_INITIALIZATION)
+    if (stage == INITSTAGE_NETWORK_LAYER)
     {
         updateDisplayString();
     }

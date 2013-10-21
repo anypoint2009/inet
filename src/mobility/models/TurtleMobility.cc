@@ -33,7 +33,7 @@ TurtleMobility::TurtleMobility()
 
 int TurtleMobility::numInitStages() const
 {
-    return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, LineSegmentsMobilityBase::numInitStages());
+    return std::max(INITSTAGE_LOCAL + 1, LineSegmentsMobilityBase::numInitStages());
 }
 
 void TurtleMobility::initialize(int stage)
@@ -41,7 +41,7 @@ void TurtleMobility::initialize(int stage)
     LineSegmentsMobilityBase::initialize(stage);
 
     EV_TRACE << "initializing TurtleMobility stage " << stage << endl;
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         WATCH(speed);
         WATCH(angle);

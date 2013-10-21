@@ -44,18 +44,18 @@ MACBase::~MACBase()
 
 int MACBase::numInitStages() const
 {
-    return NEWSTAGE_SUBSCRIPTIONS + 1;
+    return INITSTAGE_LOCAL + 1;
 }
 
 void MACBase::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         nb = NotificationBoardAccess().getIfExists();
     }
-    if (stage == NEWSTAGE_SUBSCRIPTIONS)
+    if (stage == INITSTAGE_LOCAL)
     {
         if (nb)
             nb->subscribe(this, NF_INTERFACE_DELETED);

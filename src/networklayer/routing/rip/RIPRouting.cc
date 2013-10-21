@@ -146,13 +146,13 @@ simsignal_t RIPRouting::rcvdResponseSignal = SIMSIGNAL_NULL;
 simsignal_t RIPRouting::badResponseSignal = SIMSIGNAL_NULL;
 simsignal_t RIPRouting::numRoutesSignal = SIMSIGNAL_NULL;
 
-int RIPRouting::numInitStages() const { return NEWSTAGE_ROUTING + 1; }
+int RIPRouting::numInitStages() const { return INITSTAGE_ROUTING_PROTOCOLS + 1; }
 
 void RIPRouting::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         host = findContainingNode(this);
         ift = InterfaceTableAccess().get();
@@ -188,7 +188,7 @@ void RIPRouting::initialize(int stage)
         badResponseSignal = registerSignal("badResponse");
         numRoutesSignal = registerSignal("numRoutes");
     }
-    if (stage == NEWSTAGE_ROUTING)
+    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     { // interfaces and static routes are already initialized
         // ASSERT(stage >= STAGE:ROUTERID_AVAILABLE);
         // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);

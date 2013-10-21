@@ -46,14 +46,14 @@ GenericRoutingTable::~GenericRoutingTable()
 
 int GenericRoutingTable::numInitStages() const
 {
-    return NEWSTAGE_L3_STATICROUTES + 1;
+    return INITSTAGE_NETWORK_LAYER_3 + 1;
 }
 
 void GenericRoutingTable::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         // get a pointer to the NotificationBoard module and IInterfaceTable
         nb = NotificationBoardAccess().get();
@@ -77,7 +77,7 @@ void GenericRoutingTable::initialize(int stage)
         WATCH(multicastForwardingEnabled);
         WATCH(routerId);
     }
-    if (stage == NEWSTAGE_SUBSCRIPTIONS)
+    if (stage == INITSTAGE_LOCAL)
     {
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         nb->subscribe(this, NF_INTERFACE_CREATED);
@@ -86,7 +86,7 @@ void GenericRoutingTable::initialize(int stage)
         nb->subscribe(this, NF_INTERFACE_CONFIG_CHANGED);
         nb->subscribe(this, NF_INTERFACE_IPv4CONFIG_CHANGED);
     }
-    if (stage == NEWSTAGE_L3_INITIALIZATION)
+    if (stage == INITSTAGE_NETWORK_LAYER)
     {
 //        // L2 modules register themselves in stage 0, so we can only configure
 //        // the interfaces in stage 1.
@@ -111,7 +111,7 @@ void GenericRoutingTable::initialize(int stage)
 //        if (strcmp(routerIdStr, "") && strcmp(routerIdStr, "auto"))
 //            routerId = IPv4Address(routerIdStr);
     }
-    if (stage == NEWSTAGE_L3_STATICROUTES)
+    if (stage == INITSTAGE_NETWORK_LAYER_3)
     {
         // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
         // routerID selection must be after stage==STAGE_AUTOCONFIGURE_ADDRESSES

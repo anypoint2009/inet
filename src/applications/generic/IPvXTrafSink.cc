@@ -34,20 +34,20 @@ simsignal_t IPvXTrafSink::rcvdPkSignal = SIMSIGNAL_NULL;
 
 int IPvXTrafSink::numInitStages() const
 {
-    return NEWSTAGE_APPLICATIONS + 1;
+    return INITSTAGE_APPLICATION_LAYER + 1;
 }
 
 void IPvXTrafSink::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         numReceived = 0;
         WATCH(numReceived);
         rcvdPkSignal = registerSignal("rcvdPk");
     }
-    if (stage == NEWSTAGE_APPLICATIONS)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         int protocol = par("protocol");
         IPSocket ipSocket(gate("ipOut"));

@@ -48,14 +48,14 @@ DHCPClient::~DHCPClient()
 
 int DHCPClient::numInitStages() const
 {
-    return NEWSTAGE_APPLICATIONS + 1;
+    return INITSTAGE_APPLICATION_LAYER + 1;
 }
 
 void DHCPClient::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         timer_t1 = NULL;
         timer_t2 = NULL;
@@ -79,7 +79,7 @@ void DHCPClient::initialize(int stage)
         bootpc_port = 68; // client
         bootps_port = 67; // server
     }
-    if (stage == NEWSTAGE_APPLICATIONS)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

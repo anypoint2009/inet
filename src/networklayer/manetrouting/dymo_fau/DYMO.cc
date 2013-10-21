@@ -53,13 +53,13 @@ DYMO::DYMO()
     DYMO_INTERFACES = NULL;
 }
 
-int DYMO::numInitStages() const { return NEWSTAGE_ROUTING + 1; }
+int DYMO::numInitStages() const { return INITSTAGE_ROUTING_PROTOCOLS + 1; }
 
 void DYMO::initialize(int stage)
 {
     ManetRoutingBase::initialize(stage);
 
-    if (stage == NEWSTAGE_ROUTING)
+    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
         ownSeqNumLossTimeout = new DYMO_Timer(this, "OwnSeqNumLossTimeout");
         WATCH_PTR(ownSeqNumLossTimeout);

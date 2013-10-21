@@ -63,14 +63,14 @@ IPv6NeighbourDiscovery::~IPv6NeighbourDiscovery()
 
 int IPv6NeighbourDiscovery::numInitStages() const
 {
-    return NEWSTAGE_L3_STATICROUTES + 1;
+    return INITSTAGE_NETWORK_LAYER_3 + 1;
 }
 
 void IPv6NeighbourDiscovery::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_L3_INITIALIZATION)
+    if (stage == INITSTAGE_NETWORK_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
@@ -78,7 +78,7 @@ void IPv6NeighbourDiscovery::initialize(int stage)
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
     }
-    if (stage == NEWSTAGE_L3_STATICROUTES)
+    if (stage == INITSTAGE_NETWORK_LAYER_3)
     {
         // ASSERT(stage >= STAGE:INTERFACEENTRY_IP_PROTOCOLDATA_AVAILABLE);
         // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);

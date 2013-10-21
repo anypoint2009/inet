@@ -23,20 +23,20 @@ Define_Module(LIBTable);
 
 int LIBTable::numInitStages() const
 {
-    return NEWSTAGE_L3_FOURTH + 1;
+    return INITSTAGE_NETWORK_LAYER_4 + 1;
 }
 
 void LIBTable::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         maxLabel = 0;
 
         WATCH_VECTOR(lib);
     }
-    if (stage == NEWSTAGE_L3_FOURTH)
+    if (stage == INITSTAGE_NETWORK_LAYER_4)
     {
         IPv4RoutingTableAccess routingTableAccess;
         IIPv4RoutingTable *rt = routingTableAccess.get();

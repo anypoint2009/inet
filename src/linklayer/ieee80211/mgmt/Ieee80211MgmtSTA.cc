@@ -88,14 +88,14 @@ std::ostream& operator<<(std::ostream& os, const Ieee80211MgmtSTA::AssociatedAPI
 
 int Ieee80211MgmtSTA::numInitStages() const
 {
-    return std::max(Ieee80211MgmtBase::numInitStages(), NEWSTAGE_L2_INITIALIZATION + 1);
+    return std::max(Ieee80211MgmtBase::numInitStages(), INITSTAGE_LINK_LAYER + 1);
 }
 
 void Ieee80211MgmtSTA::initialize(int stage)
 {
     Ieee80211MgmtBase::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         isScanning = false;
         isAssociated = false;
@@ -110,13 +110,13 @@ void Ieee80211MgmtSTA::initialize(int stage)
         WATCH(assocAP);
         WATCH_LIST(apList);
     }
-    if (stage == NEWSTAGE_L2_INITIALIZATION)
+    if (stage == INITSTAGE_LINK_LAYER)
     {
         // determine numChannels (needed when we're told to scan "all" channels)
         IChannelControl *cc = ChannelAccess::getChannelControl();
         numChannels = cc->getNumChannels();
     }
-    if (stage == NEWSTAGE_SUBSCRIPTIONS)
+    if (stage == INITSTAGE_LOCAL)
     {
         nb->subscribe(this, NF_LINK_FULL_PROMISCUOUS);
     }

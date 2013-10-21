@@ -71,13 +71,13 @@ int DYMOUM::totalRerrRec = 0;
 std::map<ManetAddress,u_int32_t *> DYMOUM::mapSeqNum;
 
 
-int DYMOUM::numInitStages() const  { return NEWSTAGE_ROUTING + 1; }
+int DYMOUM::numInitStages() const  { return INITSTAGE_ROUTING_PROTOCOLS + 1; }
 
 void DYMOUM::initialize(int stage)
 {
     ManetRoutingBase::initialize(stage);
 
-    if (stage == NEWSTAGE_ROUTING)
+    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
 
 #ifndef DYMO_UM_GLOBAL_STATISTISTIC

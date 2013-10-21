@@ -63,14 +63,14 @@ SimpleVoIPReceiver::~SimpleVoIPReceiver()
 
 int SimpleVoIPReceiver::numInitStages() const
 {
-    return NEWSTAGE_APPLICATIONS + 1;
+    return INITSTAGE_APPLICATION_LAYER + 1;
 }
 
 void SimpleVoIPReceiver::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         emodel_Ie = par("emodel_Ie");
         emodel_Bpl = par("emodel_Bpl");
@@ -90,7 +90,7 @@ void SimpleVoIPReceiver::initialize(int stage)
         mosSignal = registerSignal("VoIPMosSignal");
         taildropLossRateSignal = registerSignal("VoIPTaildropLossRate");
     }
-    if (stage == NEWSTAGE_APPLICATIONS)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

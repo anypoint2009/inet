@@ -78,14 +78,14 @@ IPv4NetworkConfigurator::RouteInfo *IPv4NetworkConfigurator::RoutingTableInfo::f
 
 int IPv4NetworkConfigurator::numInitStages() const
 {
-    return NEWSTAGE_ROUTING + 2;
+    return INITSTAGE_ROUTING_PROTOCOLS + 2;
 }
 
 void IPv4NetworkConfigurator::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         assignAddressesParameter = par("assignAddresses");
         assignDisjunctSubnetAddressesParameter = par("assignDisjunctSubnetAddresses");
@@ -95,9 +95,9 @@ void IPv4NetworkConfigurator::initialize(int stage)
         optimizeRoutesParameter = par("optimizeRoutes");
         configuration = par("config");
     }
-    if (stage == NEWSTAGE_L3_INITIALIZATION)
+    if (stage == INITSTAGE_NETWORK_LAYER)
         ensureConfigurationComputed(topology);
-    if (stage == NEWSTAGE_ROUTING + 1)
+    if (stage == INITSTAGE_ROUTING_PROTOCOLS + 1)
         dumpConfiguration();
 }
 

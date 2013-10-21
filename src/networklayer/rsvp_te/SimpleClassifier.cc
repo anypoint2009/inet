@@ -23,18 +23,18 @@
 Define_Module(SimpleClassifier);
 
 
-int SimpleClassifier::numInitStages() const { return NEWSTAGE_ROUTING + 1; }
+int SimpleClassifier::numInitStages() const { return INITSTAGE_ROUTING_PROTOCOLS + 1; }
 
 void SimpleClassifier::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         maxLabel = 0;
         WATCH_VECTOR(bindings);
     }
-    if (stage == NEWSTAGE_ROUTING)
+    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
         // ASSERT(stage > NEWSTAGE:L3_STATICROUTES); // we have to wait until routerId gets assigned in stage 3
         IPv4RoutingTableAccess routingTableAccess;

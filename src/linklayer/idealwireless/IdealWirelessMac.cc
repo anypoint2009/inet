@@ -64,13 +64,13 @@ void IdealWirelessMac::clearQueue()
     queueModule->clear();
 }
 
-int IdealWirelessMac::numInitStages() const { return std::max((int)NEWSTAGE_L2_INITIALIZATION + 1, WirelessMacBase::numInitStages()); }
+int IdealWirelessMac::numInitStages() const { return std::max((int)INITSTAGE_LINK_LAYER + 1, WirelessMacBase::numInitStages()); }
 
 void IdealWirelessMac::initialize(int stage)
 {
     WirelessMacBase::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         outStandingRequests = 0;
         lastTransmitStartTime = -1.0;
@@ -94,7 +94,7 @@ void IdealWirelessMac::initialize(int stage)
 
         initializeMACAddress();
     }
-    if (stage == NEWSTAGE_L2_INITIALIZATION)
+    if (stage == INITSTAGE_LINK_LAYER)
     {
         // register our interface entry in IInterfaceTable
         registerInterface();

@@ -24,13 +24,13 @@ using namespace DiffservUtil;
 Define_Module(TokenBucketMeter);
 
 
-int TokenBucketMeter::numInitStages() const { return NEWSTAGE_L3_INITIALIZATION + 1; }
+int TokenBucketMeter::numInitStages() const { return INITSTAGE_NETWORK_LAYER + 1; }
 
 void TokenBucketMeter::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         numRcvd = 0;
         numRed = 0;
@@ -41,7 +41,7 @@ void TokenBucketMeter::initialize(int stage)
         colorAwareMode = par("colorAwareMode");
         Tc = CBS;
     }
-    if (stage == NEWSTAGE_L3_INITIALIZATION)
+    if (stage == INITSTAGE_NETWORK_LAYER)
     {
         const char *cirStr = par("cir");
         CIR = parseInformationRate(cirStr, "cir", *this, 0);

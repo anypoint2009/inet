@@ -31,21 +31,21 @@ ObstacleControl::~ObstacleControl() {
 
 int ObstacleControl::numInitStages() const
 {
-    return NEWSTAGE_SUBSCRIPTIONS + 1;
+    return INITSTAGE_LOCAL + 1;
 }
 
 void ObstacleControl::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         obstacles.clear();
         cacheEntries.clear();
 
         obstaclesXml = par("obstacles");
     }
-    if (stage == NEWSTAGE_PHYSICALENV_INITIALIZATION)
+    if (stage == INITSTAGE_PHYSICAL_ENVIRONMENT)
     {
         annotations = AnnotationManagerAccess().getIfExists();
         if (annotations)

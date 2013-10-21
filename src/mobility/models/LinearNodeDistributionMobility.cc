@@ -33,7 +33,7 @@ LinearNodeDistributionMobility::LinearNodeDistributionMobility()
 
 int LinearNodeDistributionMobility::numInitStages() const
 {
-    return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, StationaryMobility::numInitStages());
+    return std::max(INITSTAGE_LOCAL + 1, StationaryMobility::numInitStages());
 }
 
 void LinearNodeDistributionMobility::initialize(int stage)
@@ -41,7 +41,7 @@ void LinearNodeDistributionMobility::initialize(int stage)
     StationaryMobility::initialize(stage);
 
     EV_TRACE << "initializing LinearNodeDistributionMobility stage " << stage << endl;
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         initialX = par("initialX").doubleValue();
         initialY = par("initialY").doubleValue();

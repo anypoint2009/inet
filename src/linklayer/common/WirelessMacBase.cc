@@ -35,14 +35,14 @@ simsignal_t WirelessMacBase::packetReceivedFromUpperSignal = SIMSIGNAL_NULL;
 
 int WirelessMacBase::numInitStages() const
 {
-    return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, MACBase::numInitStages());
+    return std::max(INITSTAGE_LOCAL + 1, MACBase::numInitStages());
 }
 
 void WirelessMacBase::initialize(int stage)
 {
     MACBase::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         upperLayerIn = findGate("upperLayerIn");
         upperLayerOut = findGate("upperLayerOut");

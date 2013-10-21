@@ -51,7 +51,7 @@ RSVP::~RSVP()
     // TODO cancelAndDelete timers in all data structures
 }
 
-int RSVP::numInitStages() const { return NEWSTAGE_ROUTING + 1; }
+int RSVP::numInitStages() const { return INITSTAGE_ROUTING_PROTOCOLS + 1; }
 
 void RSVP::initialize(int stage)
 {
@@ -60,7 +60,7 @@ void RSVP::initialize(int stage)
     // we have to wait for stage 2 until interfaces get registered (stage 0)
     // and get their auto-assigned IP addresses (stage 2); routerId gets
     // assigned in state 3
-    if (stage == NEWSTAGE_ROUTING)
+    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
         tedmod = TEDAccess().get();
         rt = IPv4RoutingTableAccess().get();

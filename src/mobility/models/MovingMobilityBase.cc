@@ -44,7 +44,7 @@ void MovingMobilityBase::initialize(int stage)
     MobilityBase::initialize(stage);
 
     EV_TRACE << "initializing MovingMobilityBase stage " << stage << endl;
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION) {
+    if (stage == INITSTAGE_LOCAL) {
         moveTimer = new cMessage("move");
         updateInterval = par("updateInterval");
     }

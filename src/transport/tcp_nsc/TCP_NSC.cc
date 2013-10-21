@@ -213,7 +213,7 @@ Address const & TCP_NSC::mapNsc2Remote(uint32_t nscAddrP)
 }
 // x == mapNsc2Remote(mapRemote2Nsc(x))
 
-int TCP_NSC::numInitStages() const { return NEWSTAGE_TRANSPORT + 1; }
+int TCP_NSC::numInitStages() const { return INITSTAGE_TRANSPORT_LAYER + 1; }
 
 void TCP_NSC::initialize(int stage)
 {
@@ -221,7 +221,7 @@ void TCP_NSC::initialize(int stage)
 
     tcpEV << this << ": initialize stage " << stage << endl;
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         const char *q;
         q = par("sendQueueClass");
@@ -247,7 +247,7 @@ void TCP_NSC::initialize(int stage)
         pStackM->if_attach(localInnerIpS.str().c_str(), localInnerMaskS.str().c_str(), 1500);
         pStackM->add_default_gateway(localInnerGwS.str().c_str());
     }
-    if (stage == NEWSTAGE_TRANSPORT)
+    if (stage == INITSTAGE_TRANSPORT_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

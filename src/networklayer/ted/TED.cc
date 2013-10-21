@@ -39,7 +39,7 @@ TED::~TED()
 {
 }
 
-int TED::numInitStages() const { return NEWSTAGE_ROUTING + 1; }
+int TED::numInitStages() const { return INITSTAGE_ROUTING_PROTOCOLS + 1; }
 
 void TED::initialize(int stage)
 {
@@ -48,7 +48,7 @@ void TED::initialize(int stage)
     // we have to wait for stage 2 until interfaces get registered (stage 0)
     // and get their auto-assigned IPv4 addresses (stage 2); routerId gets
     // assigned in stage 3
-    if (stage == NEWSTAGE_ROUTING)
+    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
         // ASSERT(stage >= STAGE:ROUTERID_AVAILABLE);
         // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);

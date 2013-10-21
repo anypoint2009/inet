@@ -38,14 +38,14 @@ BGPRouting::~BGPRouting(void)
 
 int BGPRouting::numInitStages() const
 {
-    return NEWSTAGE_ROUTING + 1;
+    return INITSTAGE_ROUTING_PROTOCOLS + 1;
 }
 
 void BGPRouting::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_ROUTING)
+    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

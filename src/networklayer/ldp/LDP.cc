@@ -100,7 +100,7 @@ LDP::~LDP()
     //socketMap.deleteSockets();
 }
 
-int LDP::numInitStages() const  {return NEWSTAGE_APPLICATIONS + 1;}
+int LDP::numInitStages() const  {return INITSTAGE_APPLICATION_LAYER + 1;}
 
 void LDP::initialize(int stage)
 {
@@ -110,7 +110,7 @@ void LDP::initialize(int stage)
     //FIXME register to InterfaceEntry changes, for detecting the interface add/delete, and detecting multicast config changes:
     //      should be refresh the udpSockets vector when interface added/deleted, or isMulticast() value changed.
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         holdTime = par("holdTime").doubleValue();
         helloInterval = par("helloInterval").doubleValue();
@@ -129,7 +129,7 @@ void LDP::initialize(int stage)
 
         maxFecid = 0;
     }
-    if (stage == NEWSTAGE_APPLICATIONS)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
         // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);

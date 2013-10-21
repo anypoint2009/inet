@@ -35,20 +35,20 @@ EtherMACFullDuplex::EtherMACFullDuplex()
 
 int EtherMACFullDuplex::numInitStages() const
 {
-    return std::max(NEWSTAGE_L2_INITIALIZATION + 1, EtherMACBase::numInitStages());
+    return std::max(INITSTAGE_LINK_LAYER + 1, EtherMACBase::numInitStages());
 }
 
 void EtherMACFullDuplex::initialize(int stage)
 {
     EtherMACBase::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         if (!par("duplexMode").boolValue())
             throw cRuntimeError("Half duplex operation is not supported by EtherMACFullDuplex, use the EtherMAC module for that! (Please enable csmacdSupport on EthernetInterface)");
     }
 
-    if (stage == NEWSTAGE_L2_INITIALIZATION)
+    if (stage == INITSTAGE_LINK_LAYER)
     {
         beginSendFrames();      //FIXME choose an another stage for it
     }

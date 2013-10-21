@@ -57,7 +57,7 @@ SCTPClient::~SCTPClient()
 
 int SCTPClient::numInitStages() const
 {
-    return NEWSTAGE_APPLICATIONS + 1;
+    return INITSTAGE_APPLICATION_LAYER + 1;
 }
 
 void SCTPClient::initialize(int stage)
@@ -65,7 +65,7 @@ void SCTPClient::initialize(int stage)
     cSimpleModule::initialize(stage);
 
     sctpEV3 << "initialize SCTP Client stage "<< stage << endl;
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         numSessions = numBroken = packetsSent = packetsRcvd = bytesSent = echoedBytesSent = bytesRcvd = 0;
 
@@ -100,7 +100,7 @@ void SCTPClient::initialize(int stage)
         rcvdPkSignal = registerSignal("rcvdPk");
         echoedPkSignal = registerSignal("echoedPk");
     }
-    if (stage == NEWSTAGE_APPLICATIONS)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

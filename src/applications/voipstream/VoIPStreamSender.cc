@@ -56,12 +56,12 @@ void VoIPStreamSender::Buffer::clear(int framesize)
 
 int VoIPStreamSender::numInitStages() const
 {
-    return NEWSTAGE_APPLICATIONS + 1;
+    return INITSTAGE_APPLICATION_LAYER + 1;
 }
 
 void VoIPStreamSender::initialize(int stage)
 {
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         voipHeaderSize = par("voipHeaderSize");
         voipSilenceThreshold = par("voipSilenceThreshold");
@@ -85,7 +85,7 @@ void VoIPStreamSender::initialize(int stage)
         localPort = par("localPort");
         destPort = par("destPort");
     }
-    if (stage == NEWSTAGE_APPLICATIONS)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

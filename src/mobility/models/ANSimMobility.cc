@@ -44,7 +44,7 @@ ANSimMobility::ANSimMobility()
 
 int ANSimMobility::numInitStages() const
 {
-    return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, LineSegmentsMobilityBase::numInitStages());
+    return std::max(INITSTAGE_LOCAL + 1, LineSegmentsMobilityBase::numInitStages());
 }
 
 void ANSimMobility::initialize(int stage)
@@ -52,7 +52,7 @@ void ANSimMobility::initialize(int stage)
     LineSegmentsMobilityBase::initialize(stage);
 
     EV_TRACE << "initializing ANSimMobility stage " << stage << endl;
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         nodeId = par("nodeId");
         if (nodeId == -1)

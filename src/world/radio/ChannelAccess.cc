@@ -46,7 +46,7 @@ ChannelAccess::~ChannelAccess()
 
 int ChannelAccess::numInitStages() const
 {
-    return NEWSTAGE_L1_INITIALIZATION + 1;
+    return INITSTAGE_PHYSICAL_LAYER + 1;
 }
 
 /**
@@ -57,7 +57,7 @@ void ChannelAccess::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         // ASSERT(stage < NEWSTAGE:PHYSICALENV_SECOND);
         cc = getChannelControl();
@@ -70,7 +70,7 @@ void ChannelAccess::initialize(int stage)
         mobilityStateChangedSignal = registerSignal("mobilityStateChanged");
         hostModule->subscribe(mobilityStateChangedSignal, this);
     }
-    if (stage == NEWSTAGE_L1_INITIALIZATION)
+    if (stage == INITSTAGE_PHYSICAL_LAYER)
     {
         // ASSERT(stage > NEWSTAGE:PHYSICALENV_SECOND);
         if (!positionUpdateArrived)

@@ -59,7 +59,7 @@ HttpBrowserBase::~HttpBrowserBase()
 
 int HttpBrowserBase::numInitStages() const
 {
-    return NEWSTAGE_APPLICATIONS + 1;
+    return INITSTAGE_APPLICATION_LAYER + 1;
 }
 
 void HttpBrowserBase::initialize(int stage)
@@ -68,7 +68,7 @@ void HttpBrowserBase::initialize(int stage)
 
     HttpNodeBase::initialize(stage);
 
-    if (stage==NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage==INITSTAGE_LOCAL)
     {
         cXMLElement *rootelement = par("config").xmlValue();
         if (rootelement==NULL)
@@ -164,7 +164,7 @@ void HttpBrowserBase::initialize(int stage)
 
         eventTimer = new cMessage("eventTimer");
     }
-    if (stage == NEWSTAGE_APPLICATIONS)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
 

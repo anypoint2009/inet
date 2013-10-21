@@ -52,7 +52,7 @@ PPP::~PPP()
 
 int PPP::numInitStages() const
 {
-    return NEWSTAGE_L2_INITIALIZATION + 1;
+    return INITSTAGE_LINK_LAYER + 1;
 }
 
 void PPP::initialize(int stage)
@@ -60,7 +60,7 @@ void PPP::initialize(int stage)
     MACBase::initialize(stage);
 
     // all initialization is done in the first stage
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         txQueue.setName("txQueue");
         endTransmissionEvent = new cMessage("pppEndTxEvent");
@@ -109,7 +109,7 @@ void PPP::initialize(int stage)
         // if we're connected, get the gate with transmission rate
         datarateChannel = connected ? physOutGate->getTransmissionChannel() : NULL;
     }
-    if (stage == NEWSTAGE_L2_INITIALIZATION)
+    if (stage == INITSTAGE_LINK_LAYER)
     {
         // register our interface entry in IInterfaceTable
         registerInterface();

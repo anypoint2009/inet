@@ -76,7 +76,7 @@ static std::ostream& operator<<(std::ostream& os, const TCPConnection& conn)
 
 int TCP::numInitStages() const
 {
-    static int stages = std::max(NEWSTAGE_TRANSPORT, NEWSTAGE_TRANSPORT) + 1;
+    static int stages = std::max(INITSTAGE_TRANSPORT_LAYER, INITSTAGE_TRANSPORT_LAYER) + 1;
     return stages;
 }
 
@@ -84,7 +84,7 @@ void TCP::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         const char *q;
         q = par("sendQueueClass");
@@ -107,7 +107,7 @@ void TCP::initialize(int stage)
         testing = netw->hasPar("testing") && netw->par("testing").boolValue();
         logverbose = !testing && netw->hasPar("logverbose") && netw->par("logverbose").boolValue();
     }
-    if (stage == NEWSTAGE_TRANSPORT)
+    if (stage == INITSTAGE_TRANSPORT_LAYER)
     {
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;

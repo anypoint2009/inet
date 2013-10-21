@@ -56,14 +56,14 @@ MACRelayUnitNP::~MACRelayUnitNP()
 
 int MACRelayUnitNP::numInitStages() const
 {
-    return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, MACRelayUnitBase::numInitStages());
+    return std::max(INITSTAGE_LOCAL + 1, MACRelayUnitBase::numInitStages());
 }
 
 void MACRelayUnitNP::initialize(int stage)
 {
     MACRelayUnitBase::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         bufferLevel.setName("buffer level");
         queue.setName("queue");

@@ -30,14 +30,14 @@ simsignal_t NodeStatus::nodeStatusChangedSignal = SIMSIGNAL_NULL;
 
 int NodeStatus::numInitStages() const
 {
-    return NEWSTAGE_LOCAL_INITIALIZATION + 1;
+    return INITSTAGE_LOCAL + 1;
 }
 
 void NodeStatus::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         nodeStatusChangedSignal = registerSignal("nodeStatusChanged");
         state = getStateByName(par("initialStatus"));

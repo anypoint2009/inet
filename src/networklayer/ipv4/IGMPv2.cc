@@ -330,14 +330,14 @@ void IGMPv2::deleteRouterGroupData(InterfaceEntry *ie, const IPv4Address &group)
 
 int IGMPv2::numInitStages() const
 {
-    return NEWSTAGE_TRANSPORT + 1;
+    return INITSTAGE_TRANSPORT_LAYER + 1;
 }
 
 void IGMPv2::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         ift = InterfaceTableAccess().get();
         rt = check_and_cast<IIPv4RoutingTable *>(getModuleByPath(par("routingTableModule")));
@@ -387,18 +387,18 @@ void IGMPv2::initialize(int stage)
         WATCH(numLeavesSent);
         WATCH(numLeavesRecv);
     }
-    if (stage == NEWSTAGE_TRANSPORT)
+    if (stage == INITSTAGE_TRANSPORT_LAYER)
     {
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(IP_PROT_IGMP);
     }
-    if (stage == NEWSTAGE_SUBSCRIPTIONS)
+    if (stage == INITSTAGE_LOCAL)
     {
         nb->subscribe(this, NF_INTERFACE_DELETED);
         nb->subscribe(this, NF_IPv4_MCAST_JOIN);
         nb->subscribe(this, NF_IPv4_MCAST_LEAVE);
     }
-    if (stage == NEWSTAGE_L3_INITIALIZATION)
+    if (stage == INITSTAGE_NETWORK_LAYER)
     {
         for (int i = 0; i < (int)ift->getNumInterfaces(); ++i)
         {

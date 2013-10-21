@@ -90,13 +90,13 @@ xMIPv6::~xMIPv6()
     }
 }
 
-int xMIPv6::numInitStages() const { return NEWSTAGE_L3_INITIALIZATION + 1; }
+int xMIPv6::numInitStages() const { return INITSTAGE_NETWORK_LAYER + 1; }
 
 void xMIPv6::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         EV << "Initializing xMIPv6 module" << endl;
 
@@ -118,7 +118,7 @@ void xMIPv6::initialize(int stage)
 
         tunneling = IPv6TunnelingAccess().get(); // access to tunneling module, 21.08.07 - CB
     }
-    if (stage == NEWSTAGE_L3_INITIALIZATION)
+    if (stage == INITSTAGE_NETWORK_LAYER)
     {
         // moved rt6 initialization to here, as we should
         // set the MIPv6 flag as soon as possible for use

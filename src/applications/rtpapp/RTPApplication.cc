@@ -29,7 +29,7 @@ Define_Module(RTPApplication)
 
 int RTPApplication::numInitStages() const
 {
-    return NEWSTAGE_APPLICATIONS + 1;
+    return INITSTAGE_APPLICATION_LAYER + 1;
 }
 
 void RTPApplication::initialize(int stage)
@@ -38,7 +38,7 @@ void RTPApplication::initialize(int stage)
 
     // because of AddressResolver, we need to wait until interfaces are registered,
     // address auto-assignment takes place etc.
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         // the common name (CNAME) of this host
         _commonName = par("commonName");
@@ -68,7 +68,7 @@ void RTPApplication::initialize(int stage)
         ssrc = 0;
         isActiveSession = false;
     }
-    if (stage == NEWSTAGE_APPLICATIONS)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
         // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);

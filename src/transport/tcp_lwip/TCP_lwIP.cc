@@ -84,7 +84,7 @@ TCP_lwIP::TCP_lwIP()
 
 int TCP_lwIP::numInitStages() const
 {
-    static int stages = std::max(NEWSTAGE_TRANSPORT, std::max(NEWSTAGE_LOCAL_INITIALIZATION, NEWSTAGE_TRANSPORT)) + 1;
+    static int stages = std::max(INITSTAGE_TRANSPORT_LAYER, std::max(INITSTAGE_LOCAL, INITSTAGE_TRANSPORT_LAYER)) + 1;
     return stages;
 }
 
@@ -94,7 +94,7 @@ void TCP_lwIP::initialize(int stage)
 
     tcpEV << this << ": initialize stage " << stage << endl;
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         const char *q;
         q = par("sendQueueClass");
@@ -117,7 +117,7 @@ void TCP_lwIP::initialize(int stage)
         pLwipFastTimerM = new cMessage("lwip_fast_timer");
         tcpEV << "TCP_lwIP " << this << " has stack " << pLwipTcpLayerM << "\n";
     }
-    if (stage == NEWSTAGE_TRANSPORT)
+    if (stage == INITSTAGE_TRANSPORT_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

@@ -128,7 +128,7 @@ void Ns2MotionMobility::parseFile(const char *filename)
 
 int Ns2MotionMobility::numInitStages() const
 {
-    return std::max(NEWSTAGE_LOCAL_INITIALIZATION + 1, LineSegmentsMobilityBase::numInitStages());
+    return std::max(INITSTAGE_LOCAL + 1, LineSegmentsMobilityBase::numInitStages());
 }
 
 void Ns2MotionMobility::initialize(int stage)
@@ -136,7 +136,7 @@ void Ns2MotionMobility::initialize(int stage)
     LineSegmentsMobilityBase::initialize(stage);
 
     EV_TRACE << "initializing Ns2MotionMobility stage " << stage << endl;
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         scrollX = par("scrollX");
         scrollY = par("scrollY");

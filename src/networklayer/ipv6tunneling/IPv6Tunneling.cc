@@ -63,14 +63,14 @@ IPv6Tunneling::IPv6Tunneling()
 
 int IPv6Tunneling::numInitStages() const
 {
-    return NEWSTAGE_L3_INITIALIZATION + 1;
+    return INITSTAGE_NETWORK_LAYER + 1;
 }
 
 void IPv6Tunneling::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         ift = InterfaceTableAccess().get();
         rt = check_and_cast<IPv6RoutingTable *>(getModuleByPath(par("routingTableModule")));
@@ -80,7 +80,7 @@ void IPv6Tunneling::initialize(int stage)
 
         WATCH_MAP(tunnels);
     }
-    if (stage == NEWSTAGE_L3_INITIALIZATION)
+    if (stage == INITSTAGE_NETWORK_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

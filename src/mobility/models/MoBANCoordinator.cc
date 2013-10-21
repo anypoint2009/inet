@@ -52,7 +52,7 @@ Define_Module(MoBANCoordinator);
 
 int MoBANCoordinator::numInitStages() const
 {
-    return std::max(NEWSTAGE_PHYSICALENV_INITIALIZATION + 1, LineSegmentsMobilityBase::numInitStages());
+    return std::max(INITSTAGE_PHYSICAL_ENVIRONMENT + 1, LineSegmentsMobilityBase::numInitStages());
 }
 
 void MoBANCoordinator::initialize(int stage)
@@ -60,7 +60,7 @@ void MoBANCoordinator::initialize(int stage)
     LineSegmentsMobilityBase::initialize(stage);
 
     EV_TRACE << "initializing MoBANCoordinator stage " << stage << endl;
-    if (stage == NEWSTAGE_PHYSICALENV_INITIALIZATION)
+    if (stage == INITSTAGE_PHYSICAL_ENVIRONMENT)
     {
         useMobilityPattern = par("useMobilityPattern").boolValue();
         collectLocalModules(getParentModule());

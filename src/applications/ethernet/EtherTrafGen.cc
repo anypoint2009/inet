@@ -46,7 +46,7 @@ EtherTrafGen::~EtherTrafGen()
 
 int EtherTrafGen::numInitStages() const
 {
-    return NEWSTAGE_APPLICATIONS + 1;
+    return INITSTAGE_APPLICATION_LAYER + 1;
 }
 
 void EtherTrafGen::initialize(int stage)
@@ -55,7 +55,7 @@ void EtherTrafGen::initialize(int stage)
 
     // we can only initialize in the 2nd stage (stage==1), because
     // assignment of "auto" MAC addresses takes place in stage 0
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         sendInterval = &par("sendInterval");
         numPacketsPerBurst = &par("numPacketsPerBurst");
@@ -77,7 +77,7 @@ void EtherTrafGen::initialize(int stage)
         if (stopTime >= SIMTIME_ZERO && stopTime < startTime)
             error("Invalid startTime/stopTime parameters");
     }
-    if (stage == NEWSTAGE_APPLICATIONS)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         if (isGenerator())
             timerMsg = new cMessage("generateNextPacket");

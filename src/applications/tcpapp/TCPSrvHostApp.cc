@@ -22,14 +22,14 @@ Define_Module(TCPSrvHostApp);
 
 int TCPSrvHostApp::numInitStages() const
 {
-    return NEWSTAGE_APPLICATIONS + 1;
+    return INITSTAGE_APPLICATION_LAYER + 1;
 }
 
 void TCPSrvHostApp::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_APPLICATIONS)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
         // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);

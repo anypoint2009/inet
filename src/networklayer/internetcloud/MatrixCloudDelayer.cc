@@ -137,7 +137,7 @@ void MatrixCloudDelayer::initialize(int stage)
 {
     CloudDelayerBase::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         host = findContainingNode(this);
         ift = InterfaceTableAccess().get(this);

@@ -37,7 +37,7 @@ void RandomWPMobility::initialize(int stage)
 {
     LineSegmentsMobilityBase::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         stationary = (par("speed").getType()=='L' || par("speed").getType()=='D') && (double)par("speed") == 0;
     }

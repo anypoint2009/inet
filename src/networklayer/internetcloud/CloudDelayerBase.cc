@@ -41,14 +41,14 @@ CloudDelayerBase::~CloudDelayerBase()
 
 int CloudDelayerBase::numInitStages() const
 {
-    return NEWSTAGE_L3_INITIALIZATION + 1;
+    return INITSTAGE_NETWORK_LAYER + 1;
 }
 
 void CloudDelayerBase::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_L3_INITIALIZATION)
+    if (stage == INITSTAGE_NETWORK_LAYER)
     {
         ipv4Layer = check_and_cast<IPv4*>(getModuleByPath("^.ip"));
         ipv4Layer->registerHook(0, this);

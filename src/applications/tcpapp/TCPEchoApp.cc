@@ -27,14 +27,14 @@ simsignal_t TCPEchoApp::sentPkSignal = SIMSIGNAL_NULL;
 
 int TCPEchoApp::numInitStages() const
 {
-    return NEWSTAGE_APPLICATIONS + 1;
+    return INITSTAGE_APPLICATION_LAYER + 1;
 }
 
 void TCPEchoApp::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         delay = par("echoDelay");
         echoFactor = par("echoFactor");
@@ -51,7 +51,7 @@ void TCPEchoApp::initialize(int stage)
 
         nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
     }
-    if (stage == NEWSTAGE_APPLICATIONS)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
         // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);

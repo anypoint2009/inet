@@ -37,17 +37,17 @@ IPv4NodeConfigurator::IPv4NodeConfigurator()
 }
 
 EXECUTE_ON_STARTUP(
-    ASSERT(NEWSTAGE_L3_IPADDRESSES >= NEWSTAGE_LOCAL_INITIALIZATION);
-    ASSERT(NEWSTAGE_L3_IPADDRESSES >= NEWSTAGE_L3_INITIALIZATION);
+    ASSERT(INITSTAGE_NETWORK_LAYER_2 >= INITSTAGE_LOCAL);
+    ASSERT(INITSTAGE_NETWORK_LAYER_2 >= INITSTAGE_NETWORK_LAYER);
 );
 
-int IPv4NodeConfigurator::numInitStages() const { return NEWSTAGE_L3_IPADDRESSES + 1; }
+int IPv4NodeConfigurator::numInitStages() const { return INITSTAGE_NETWORK_LAYER_2 + 1; }
 
 void IPv4NodeConfigurator::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         cModule *node = findContainingNode(this);
         if (!node)
@@ -70,7 +70,7 @@ void IPv4NodeConfigurator::initialize(int stage)
             networkConfigurator = check_and_cast<IPv4NetworkConfigurator *>(module);
         }
     }
-    if (stage == NEWSTAGE_L3_INITIALIZATION)
+    if (stage == INITSTAGE_NETWORK_LAYER)
     {
         // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
@@ -78,7 +78,7 @@ void IPv4NodeConfigurator::initialize(int stage)
         if (!nodeStatus || nodeStatus->getState() == NodeStatus::UP)
             prepareNode();
     }
-    if (stage == NEWSTAGE_L3_IPADDRESSES)
+    if (stage == INITSTAGE_NETWORK_LAYER_2)
     {
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
         // ASSERT(stage > NEWSTAGE:L3_INITIALIZATION);

@@ -105,13 +105,13 @@ Batman::~Batman()
     hna_chg_list.clear();
 }
 
-int Batman::numInitStages() const  { return NEWSTAGE_ROUTING + 1; }
+int Batman::numInitStages() const  { return INITSTAGE_ROUTING_PROTOCOLS + 1; }
 
 void Batman::initialize(int stage)
 {
     ManetRoutingBase::initialize(stage);
 
-    if (stage == NEWSTAGE_ROUTING)
+    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
         found_ifs = 0;
 

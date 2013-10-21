@@ -55,7 +55,7 @@ Radio::Radio() : rs(this->getId())
 
 int Radio::numInitStages() const
 {
-    return NEWSTAGE_L1_INITIALIZATION + 1;
+    return INITSTAGE_PHYSICAL_LAYER + 1;
 }
 
 void Radio::initialize(int stage)
@@ -64,7 +64,7 @@ void Radio::initialize(int stage)
 
     EV << "Initializing Radio, stage=" << stage << endl;
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         gate("radioIn")->setDeliverOnReceptionStart(true);
 
@@ -176,7 +176,7 @@ void Radio::initialize(int stage)
         else
             updateStringInterval = 0;
     }
-    if (stage == NEWSTAGE_L1_INITIALIZATION)
+    if (stage == INITSTAGE_PHYSICAL_LAYER)
     {
         registerBattery();
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);

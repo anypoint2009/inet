@@ -65,14 +65,14 @@ GPSR::~GPSR()
 
 int GPSR::numInitStages() const
 {
-    return NEWSTAGE_ROUTING + 1;
+    return INITSTAGE_ROUTING_PROTOCOLS + 1;
 }
 
 void GPSR::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         // GPSR parameters
         planarizationMode = (GPSRPlanarizationMode)(int)par("planarizationMode");
@@ -94,7 +94,7 @@ void GPSR::initialize(int stage)
         scheduleBeaconTimer();
         schedulePurgeNeighborsTimer();
     }
-    if (stage == NEWSTAGE_ROUTING)
+    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
         IPSocket socket(gate("ipOut"));
         socket.registerProtocol(IP_PROT_MANET);

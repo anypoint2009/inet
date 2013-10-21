@@ -39,14 +39,14 @@ LinkStateRouting::~LinkStateRouting()
     cancelAndDelete(announceMsg);
 }
 
-int LinkStateRouting::numInitStages() const { return NEWSTAGE_ROUTING + 1; }
+int LinkStateRouting::numInitStages() const { return INITSTAGE_ROUTING_PROTOCOLS + 1; }
 
 void LinkStateRouting::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
     // we have to wait until routerId gets assigned in stage 3
-    if (stage == NEWSTAGE_ROUTING)
+    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
         // ASSERT(stage >= STAGE:ROUTERID_AVAILABLE);
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);

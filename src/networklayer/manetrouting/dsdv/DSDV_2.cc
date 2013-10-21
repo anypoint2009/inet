@@ -22,20 +22,20 @@
 Define_Module(DSDV_2);
 
 
-int DSDV_2::numInitStages() const  { return NEWSTAGE_ROUTING + 1; }
+int DSDV_2::numInitStages() const  { return INITSTAGE_ROUTING_PROTOCOLS + 1; }
 
 void DSDV_2::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
     //reads from omnetpp.ini
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         sequencenumber = 0;
         ift = NULL;
         rt = NULL;
     }
-    if (stage == NEWSTAGE_ROUTING)
+    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
         IPSocket socket(gate("to_ip"));
         socket.registerProtocol(IP_PROT_MANET);

@@ -41,7 +41,7 @@ IdealRadio::IdealRadio()
 
 int IdealRadio::numInitStages() const
 {
-    return std::max(NEWSTAGE_L1_INITIALIZATION + 1, IdealChannelModelAccess::numInitStages());
+    return std::max(INITSTAGE_PHYSICAL_LAYER + 1, IdealChannelModelAccess::numInitStages());
 }
 
 void IdealRadio::initialize(int stage)
@@ -50,7 +50,7 @@ void IdealRadio::initialize(int stage)
 
     EV << "Initializing IdealRadio, stage=" << stage << endl;
 
-    if (stage == NEWSTAGE_LOCAL_INITIALIZATION)
+    if (stage == INITSTAGE_LOCAL)
     {
         inTransmit = false;
         concurrentReceives = 0;
@@ -72,7 +72,7 @@ void IdealRadio::initialize(int stage)
         // signals
         radioStateSignal = registerSignal("radioState");
     }
-    if (stage == NEWSTAGE_L1_INITIALIZATION)
+    if (stage == INITSTAGE_PHYSICAL_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
