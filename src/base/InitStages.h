@@ -21,85 +21,105 @@
 #define __INET_INITSTAGES
 
 
-//NOTE: to make naming consistent with lifecycle stage constants, rename these constants to be similar to these:
-// STAGE_LOCAL, STAGE_PHYSICAL_LAYER, STAGE_LINK_LAYER, STAGE_NETWORK_LAYER, STAGE_TRANSPORT_LAYER, STAGE_ROUTING_PROTOCOLS, STAGE_APPLICATION_LAYER
-enum InetInitStages
+/**
+ * Initialization stages.
+ */
+enum InitStages
 {
     /**
-     * Local initialization. MAC assigns auto addresses and adjusts the "address" module parameter;
-     * NodeStatus, NotificationBoard, IPassiveQueue, etc are available for other modules.
+     * Local initializations. Initializations that don't use or affect
+     * other modules take place (e.g. reading of parameters); modules may
+     * subscribe to notifications. NodeStatus, NotificationBoard, IPassiveQueue,
+     * etc. are available for other modules after this stage.
      */
     INITSTAGE_LOCAL = 0,
 
     /**
-     * Physical environment (mobility, obstacles, battery, annotations, etc); Traci-launch
+     * Physical environment initializations (mobility, obstacles, battery, annotations, etc).
      */
-    INITSTAGE_PHYSICAL_ENVIRONMENT = 2,
+    INITSTAGE_PHYSICAL_ENVIRONMENT = 1,
 
     /**
-     * INITIALIZE_AND_PUBLISH_LOCATION
+     * Additional physical environment initializations that depend on the previous stage.
+     * Some mobility modules (namely group mobility) compute and publish locations in this stage,
+     * because they learn their mobility coordinator in the previous stage.
      */
-    INITSTAGE_PHYSICAL_ENVIRONMENT_2 = 3,
+    INITSTAGE_PHYSICAL_ENVIRONMENT_2 = 2,
 
     /**
-     * PUBLISH_RADIOSTATE, REGISTER_RADIO in ChannelController
+     * Initialization of the physical layer of protocol stacks. Radio publishes the initial RadioState;
+     * radios are registered in ChannelController.
      */
-    INITSTAGE_PHYSICAL_LAYER = 4,
+    INITSTAGE_PHYSICAL_LAYER = 3,
 
     /**
-     * REGISTER_INTERFACE, GENERATE_MACADDRESS = 5,
+     * Initialization of link-layer protocols. Automatic MAC addresses are
+     * assigned; interfaces are registered in InterfaceTable.
      */
-    INITSTAGE_LINK_LAYER = 5,
+    INITSTAGE_LINK_LAYER = 4,
 
     /**
-     * TODO
+     * Additional link-layer initializations that depend on the previous stage.
      */
-    INITSTAGE_LINK_LAYER_2 = 6,
+    INITSTAGE_LINK_LAYER_2 = 5,
 
     /**
-     * IPV6ROUTINGTABLE_XMIPV6_SETTINGS, ADD_IP_PROTOCOLDATA_TO_INTERFACEENTRY, COMPUTE_IP_AUTOCONFIGURATION,
-     * isOperational, IPv4::registerHook
+     * Initialization of network-layer protocols, stage 1. Network configurators
+     * (e.g. IPv4NetworkConfigurator) run in this stage and compute IP addresses
+     * and static routes; protocol-specific data (e.g. IPv4InterfaceData)
+     * are added to InterfaceEntry; netf7ilter hooks are registered in IPv4; etc.
      */
-    INITSTAGE_NETWORK_LAYER = 7,
+    INITSTAGE_NETWORK_LAYER = 6,
 
     /**
-     * CONFIGURE_IP_ADDRESSES
+     * Initialization of network-layer protocols, stage 2. IP addresses
+     * are assigned in this stage.
      */
-    INITSTAGE_NETWORK_LAYER_2 = 8,
+    INITSTAGE_NETWORK_LAYER_2 = 7,
 
     /**
-     * ADD_STATIC_ROUTES, SET_INTERFACEENTRY_RTR_ADV_INTERVAL, ASSIGN_ROUTERID
+     * Initialization of network-layer protocols, stage 3. Static routes
+     * are added, routerIDs are computed, etc.
      */
-    INITSTAGE_NETWORK_LAYER_3 = 9,
+    INITSTAGE_NETWORK_LAYER_3 = 8,
 
     /**
-     * TODO (LIBTable reads routerID)
+     * Initialization of network-layer protocols, stage 4. Exists because
+     * LIBTable needs to read routerID.
      */
-    INITSTAGE_NETWORK_LAYER_4 = 10,
+    INITSTAGE_NETWORK_LAYER_4 = 9,
 
     /**
-     * REGISTER_TRANSPORTPROTOCOLID_IN_IP
+     * Initialization of transport-layer protocols. Transport protocols register
+     * their protocol IDs in IP, etc.
      */
-    INITSTAGE_TRANSPORT_LAYER = 11,   //FIXME used many times in *routing* protocols, replace those with STAGE_ROUTING!!
+    INITSTAGE_TRANSPORT_LAYER = 10,
 
     /**
-     * TODO
+     * Initialization of transport-layer protocols, 2nd stage. Exists because SCTP
+     * may be transported over UDP.
      */
-    INITSTAGE_TRANSPORT_LAYER_2 = 12,
+    INITSTAGE_TRANSPORT_LAYER_2 = 11,
 
     /**
-     * INIT_ROUTING_PROTOCOLS
+     * Initialization of routing protocols.
      */
-    INITSTAGE_ROUTING_PROTOCOLS = 13,
+    INITSTAGE_ROUTING_PROTOCOLS = 12,
 
     /**
-     * INIT_APPLICATION
+     * Initialization of applications.
      */
-    INITSTAGE_APPLICATION_LAYER = 14,
+    INITSTAGE_APPLICATION_LAYER = 13,
 
-    INITSTAGE_APPLICATION_LAYER_2 = 15,
+    /**
+     * Operations that no other initializations can depend on, e.g. display string updates.
+     */
+    INITSTAGE_LAST = 14,
 
-    NUM_STAGES,
+    /**
+     * The number of initialization stages.
+     */
+    NUM_INIT_STAGES,
 };
 
 #endif // __INET_INITSTAGES
