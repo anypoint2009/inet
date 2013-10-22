@@ -91,7 +91,7 @@ void GPSR::initialize(int stage)
         scheduleBeaconTimer();
         schedulePurgeNeighborsTimer();
     }
-    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
+    else if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
         IPSocket socket(gate("ipOut"));
         socket.registerProtocol(IP_PROT_MANET);

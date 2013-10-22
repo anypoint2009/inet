@@ -93,7 +93,7 @@ void PingApp::initialize(int stage)
         // references
         timer = new cMessage("sendPing");
     }
-    if (stage == INITSTAGE_APPLICATION_LAYER)
+    else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         // startup
         nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

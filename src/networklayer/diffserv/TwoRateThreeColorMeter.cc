@@ -45,7 +45,7 @@ void TwoRateThreeColorMeter::initialize(int stage)
         Tp = PBS;
         Tc = CBS;
     }
-    if (stage == INITSTAGE_NETWORK_LAYER)
+    else if (stage == INITSTAGE_NETWORK_LAYER)
     {
         PIR = parseInformationRate(par("pir"), "pir", *this, 0);
         CIR = parseInformationRate(par("cir"), "cir", *this, 0);

@@ -55,7 +55,7 @@ void TelnetApp::initialize(int stage)
         WATCH(numCharsToType);
         WATCH(numLinesToType);
     }
-    if (stage == INITSTAGE_APPLICATION_LAYER)
+    else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
 

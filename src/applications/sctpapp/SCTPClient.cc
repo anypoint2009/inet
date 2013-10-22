@@ -97,7 +97,7 @@ void SCTPClient::initialize(int stage)
         rcvdPkSignal = registerSignal("rcvdPk");
         echoedPkSignal = registerSignal("echoedPk");
     }
-    if (stage == INITSTAGE_APPLICATION_LAYER)
+    else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

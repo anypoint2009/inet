@@ -41,7 +41,7 @@ void TokenBucketMeter::initialize(int stage)
         colorAwareMode = par("colorAwareMode");
         Tc = CBS;
     }
-    if (stage == INITSTAGE_NETWORK_LAYER)
+    else if (stage == INITSTAGE_NETWORK_LAYER)
     {
         const char *cirStr = par("cir");
         CIR = parseInformationRate(cirStr, "cir", *this, 0);

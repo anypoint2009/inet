@@ -64,7 +64,7 @@ void DHCPServer::initialize(int stage)
         // process delay
         proc_delay = 0.001; // 100ms
     }
-    if (stage == INITSTAGE_APPLICATION_LAYER)
+    else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

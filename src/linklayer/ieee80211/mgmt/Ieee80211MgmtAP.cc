@@ -75,7 +75,7 @@ void Ieee80211MgmtAP::initialize(int stage)
         // subscribe for notifications
         nb->subscribe(this, NF_RADIO_CHANNEL_CHANGED);
     }
-    if (stage == INITSTAGE_LINK_LAYER)
+    else if (stage == INITSTAGE_LINK_LAYER)
     {
         if (isOperational)
             scheduleAt(simTime()+uniform(0, beaconInterval), beaconTimer);

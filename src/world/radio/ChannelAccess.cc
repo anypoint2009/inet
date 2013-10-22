@@ -67,7 +67,7 @@ void ChannelAccess::initialize(int stage)
         mobilityStateChangedSignal = registerSignal("mobilityStateChanged");
         hostModule->subscribe(mobilityStateChangedSignal, this);
     }
-    if (stage == INITSTAGE_PHYSICAL_LAYER)
+    else if (stage == INITSTAGE_PHYSICAL_LAYER)
     {
         // ASSERT(stage > NEWSTAGE:PHYSICALENV_SECOND);
         if (!positionUpdateArrived)

@@ -44,7 +44,7 @@ void IPvXTrafSink::initialize(int stage)
         WATCH(numReceived);
         rcvdPkSignal = registerSignal("rcvdPk");
     }
-    if (stage == INITSTAGE_APPLICATION_LAYER)
+    else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         int protocol = par("protocol");
         IPSocket ipSocket(gate("ipOut"));

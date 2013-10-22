@@ -104,7 +104,7 @@ void ARP::initialize(int stage)
         WATCH_PTRMAP(arpCache);
         WATCH_PTRMAP(globalArpCache);
     }
-    if (stage == INITSTAGE_NETWORK_LAYER_3)  // IP addresses should be available
+    else if (stage == INITSTAGE_NETWORK_LAYER_3)  // IP addresses should be available
     {
         // ASSERT(stage > NEWSTAGE:L3_IPADDRESSES);
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);

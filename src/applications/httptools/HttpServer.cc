@@ -46,7 +46,7 @@ void HttpServer::initialize(int stage)
         WATCH(numBroken);
         WATCH(socketsOpened);
     }
-    if (stage == INITSTAGE_APPLICATION_LAYER)
+    else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         EV_DEBUG << "Initializing server component (sockets version)" << endl;
 

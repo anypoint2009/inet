@@ -94,7 +94,7 @@ void IdealWirelessMac::initialize(int stage)
 
         initializeMACAddress();
     }
-    if (stage == INITSTAGE_LINK_LAYER)
+    else if (stage == INITSTAGE_LINK_LAYER)
     {
         // register our interface entry in IInterfaceTable
         registerInterface();

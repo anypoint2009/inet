@@ -45,7 +45,7 @@ void TCPGenericCliAppBase::initialize(int stage)
         WATCH(bytesSent);
         WATCH(bytesRcvd);
     }
-    if (stage == INITSTAGE_APPLICATION_LAYER)
+    else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
         // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);

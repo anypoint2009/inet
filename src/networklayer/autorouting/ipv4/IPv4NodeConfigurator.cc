@@ -70,7 +70,7 @@ void IPv4NodeConfigurator::initialize(int stage)
             networkConfigurator = check_and_cast<IPv4NetworkConfigurator *>(module);
         }
     }
-    if (stage == INITSTAGE_NETWORK_LAYER)
+    else if (stage == INITSTAGE_NETWORK_LAYER)
     {
         // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
@@ -78,7 +78,7 @@ void IPv4NodeConfigurator::initialize(int stage)
         if (!nodeStatus || nodeStatus->getState() == NodeStatus::UP)
             prepareNode();
     }
-    if (stage == INITSTAGE_NETWORK_LAYER_2)
+    else if (stage == INITSTAGE_NETWORK_LAYER_2)
     {
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
         // ASSERT(stage > NEWSTAGE:L3_INITIALIZATION);

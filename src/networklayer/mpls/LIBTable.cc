@@ -33,7 +33,7 @@ void LIBTable::initialize(int stage)
 
         WATCH_VECTOR(lib);
     }
-    if (stage == INITSTAGE_NETWORK_LAYER_4)
+    else if (stage == INITSTAGE_NETWORK_LAYER_4)
     {
         IPv4RoutingTableAccess routingTableAccess;
         IIPv4RoutingTable *rt = routingTableAccess.get();
