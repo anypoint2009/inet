@@ -51,9 +51,6 @@ void MACBase::initialize(int stage)
     if (stage == INITSTAGE_LOCAL)
     {
         nb = NotificationBoardAccess().getIfExists();
-    }
-    if (stage == INITSTAGE_LOCAL)
-    {
         if (nb)
             nb->subscribe(this, NF_INTERFACE_DELETED);
     }

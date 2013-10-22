@@ -178,15 +178,7 @@ void EtherMACBase::initialize(int stage)
 
         initializeMACAddress();
         initializeStatistics();
-    }
-    else if (stage == INITSTAGE_LINK_LAYER)
-    {
-        registerInterface(); // needs MAC address
-        initializeQueueModule();
-        readChannelParameters(true);
-    }
-    if (stage == INITSTAGE_LOCAL)
-    {
+
         lastTxFinishTime = -1.0; // not equals with current simtime.
 
         // initialize self messages
@@ -205,6 +197,12 @@ void EtherMACBase::initialize(int stage)
         WATCH(pauseUnitsRequested);
 
         subscribe(POST_MODEL_CHANGE, this);
+    }
+    else if (stage == INITSTAGE_LINK_LAYER)
+    {
+        registerInterface(); // needs MAC address
+        initializeQueueModule();
+        readChannelParameters(true);
     }
 }
 

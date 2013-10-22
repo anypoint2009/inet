@@ -201,12 +201,6 @@ void DSRUU::initialize(int stage)
     cSimpleModule::initialize(stage);
 
     //current_time =simTime();
-    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
-    {
-        IPSocket ipSocket(gate("to_ip"));
-        ipSocket.registerProtocol(IP_PROT_MANET);
-        ipSocket.registerProtocol(IP_PROT_DSR);
-    }
     if (stage == INITSTAGE_LOCAL)
     {
         for (int i = 0; i < CONFVAL_MAX; i++)
@@ -323,9 +317,12 @@ void DSRUU::initialize(int stage)
         ack_timer.setOwer(this);
         etx_timer.setOwer(this);
     }
-
-    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
+    else if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
+        IPSocket ipSocket(gate("to_ip"));
+        ipSocket.registerProtocol(IP_PROT_MANET);
+        ipSocket.registerProtocol(IP_PROT_DSR);
+
         /* Search the 80211 interface */
         inet_rt = IPv4RoutingTableAccess().get();
         inet_ift = InterfaceTableAccess().get();

@@ -116,19 +116,17 @@ void SCTP::initialize(int stage)
             testTimeout = (simtime_t)netw->par("testTimeout");
         }
     }
-
+    else if (stage == INITSTAGE_TRANSPORT_LAYER)
+    {
+        IPSocket socket(gate("to_ip"));
+        socket.registerProtocol(IP_PROT_SCTP);
+    }
     else if (stage == INITSTAGE_TRANSPORT_LAYER_2)
     {
         if (par("udpEncapsEnabled").boolValue())
         {
             bindPortForUDP();
         }
-    }
-
-    else if (stage == INITSTAGE_TRANSPORT_LAYER)
-    {
-        IPSocket socket(gate("to_ip"));
-        socket.registerProtocol(IP_PROT_SCTP);
     }
 }
 

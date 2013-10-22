@@ -338,7 +338,11 @@ void IGMPv2::initialize(int stage)
     {
         ift = InterfaceTableAccess().get();
         rt = check_and_cast<IIPv4RoutingTable *>(getModuleByPath(par("routingTableModule")));
+
         nb = NotificationBoardAccess().get();
+        nb->subscribe(this, NF_INTERFACE_DELETED);
+        nb->subscribe(this, NF_IPv4_MCAST_JOIN);
+        nb->subscribe(this, NF_IPv4_MCAST_LEAVE);
 
         enabled = par("enabled");
         externalRouter = gate("routerIn")->isPathOK() && gate("routerOut")->isPathOK();
@@ -384,17 +388,6 @@ void IGMPv2::initialize(int stage)
         WATCH(numLeavesSent);
         WATCH(numLeavesRecv);
     }
-    else if (stage == INITSTAGE_TRANSPORT_LAYER)
-    {
-        IPSocket ipSocket(gate("ipOut"));
-        ipSocket.registerProtocol(IP_PROT_IGMP);
-    }
-    if (stage == INITSTAGE_LOCAL)
-    {
-        nb->subscribe(this, NF_INTERFACE_DELETED);
-        nb->subscribe(this, NF_IPv4_MCAST_JOIN);
-        nb->subscribe(this, NF_IPv4_MCAST_LEAVE);
-    }
     else if (stage == INITSTAGE_NETWORK_LAYER)
     {
         for (int i = 0; i < (int)ift->getNumInterfaces(); ++i)
@@ -404,6 +397,11 @@ void IGMPv2::initialize(int stage)
                 configureInterface(ie);
         }
         nb->subscribe(this, NF_INTERFACE_CREATED);
+    }
+    else if (stage == INITSTAGE_TRANSPORT_LAYER)
+    {
+        IPSocket ipSocket(gate("ipOut"));
+        ipSocket.registerProtocol(IP_PROT_IGMP);
     }
 }
 

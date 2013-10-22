@@ -66,14 +66,11 @@ void Ieee80211MgmtAP::initialize(int stage)
         //TBD fill in supportedRates
 
         nb = NotificationBoardAccess().get();
+        // subscribe for notifications
+        nb->subscribe(this, NF_RADIO_CHANNEL_CHANGED);
 
         // start beacon timer (randomize startup time)
         beaconTimer = new cMessage("beaconTimer");
-    }
-    if (stage == INITSTAGE_LOCAL)
-    {
-        // subscribe for notifications
-        nb->subscribe(this, NF_RADIO_CHANNEL_CHANGED);
     }
     else if (stage == INITSTAGE_LINK_LAYER)
     {

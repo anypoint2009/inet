@@ -55,6 +55,10 @@ void OSPFRouting::initialize(int stage)
     // and routerId is assigned (stage 3)
     if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
+        // ASSERT(stage >= NEWSTAGE:TRANSPORT);
+        IPSocket ipSocket(gate("ipOut"));
+        ipSocket.registerProtocol(IP_PROT_OSPF);
+
         // ASSERT(stage >= STAGE:ROUTERID_AVAILABLE);
         // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
@@ -62,12 +66,6 @@ void OSPFRouting::initialize(int stage)
         isUp = isNodeUp();
         if (isUp)
             createOspfRouter();
-    }
-    if (stage == INITSTAGE_ROUTING_PROTOCOLS)  //FIXME replace to STAGE_REGISTER_IP_PROTOCOL_ID
-    {
-        // ASSERT(stage >= NEWSTAGE:TRANSPORT);
-        IPSocket ipSocket(gate("ipOut"));
-        ipSocket.registerProtocol(IP_PROT_OSPF);
     }
 }
 

@@ -66,7 +66,7 @@ void RoutingTableRecorder::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == INITSTAGE_LOCAL)
+    if (stage == INITSTAGE_NETWORK_LAYER)
     {
         if (par("enabled").boolValue())
             hookListeners();

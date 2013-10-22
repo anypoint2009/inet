@@ -52,6 +52,7 @@ void Ieee80211AgentSTA::initialize(int stage)
             channelsToScan.push_back(atoi(token));
 
         nb = NotificationBoardAccess().get();
+        nb->subscribe(this, NF_L2_BEACON_LOST);
 
         // JcM add: get the default ssid, if there is one.
         default_ssid = par("default_ssid").stringValue();
@@ -68,10 +69,6 @@ void Ieee80211AgentSTA::initialize(int stage)
         scheduleAt(simTime()+startingTime, new cMessage("startUp", MK_STARTUP));
 
         myIface = NULL;
-    }
-    if (stage == INITSTAGE_LOCAL)
-    {
-        nb->subscribe(this, NF_L2_BEACON_LOST);
     }
     else if (stage == INITSTAGE_LINK_LAYER_2)
     {

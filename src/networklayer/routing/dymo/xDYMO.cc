@@ -95,12 +95,7 @@ void xDYMO::initialize(int stage)
         // internal
         expungeTimer = new cMessage("ExpungeTimer");
     }
-    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
-    {
-        IPSocket socket(gate("ipOut"));
-        socket.registerProtocol(IP_PROT_MANET);
-    }
-    if (stage == INITSTAGE_NETWORK_LAYER_3)
+    else if (stage == INITSTAGE_NETWORK_LAYER_3)
     {
         AddressResolver addressResolver;
         cStringTokenizer tokenizer(clientAddresses);
@@ -120,8 +115,11 @@ void xDYMO::initialize(int stage)
             clientAddressAndPrefixLengthPairs.push_back(std::pair<Address, int>(address, prefixLength));
         }
     }
-    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
+    else if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
+        IPSocket socket(gate("ipOut"));
+        socket.registerProtocol(IP_PROT_MANET);
+
         // ASSERT(stage >= STAGE:IP_LAYER_READY_FOR_HOOK_REGISTRATION);
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         notificationBoard->subscribe(this, NF_LINK_BREAK);
