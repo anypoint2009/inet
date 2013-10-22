@@ -398,7 +398,7 @@ void IGMPv2::initialize(int stage)
         }
         nb->subscribe(this, NF_INTERFACE_CREATED);
     }
-    else if (stage == INITSTAGE_TRANSPORT_LAYER)
+    else if (stage == INITSTAGE_NETWORK_LAYER_2)
     {
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(IP_PROT_IGMP);
