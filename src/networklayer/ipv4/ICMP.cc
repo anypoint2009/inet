@@ -36,7 +36,7 @@ void ICMP::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == INITSTAGE_TRANSPORT_LAYER)
+    if (stage == INITSTAGE_NETWORK_LAYER_2)
     {
         IPSocket socket(gate("sendOut"));
         socket.registerProtocol(IP_PROT_ICMP);
