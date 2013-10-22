@@ -83,10 +83,6 @@ void IPv6RoutingTable::initialize(int stage)
 
         mipv6Support = false; // 4.9.07 - CB
 #endif /* WITH_xMIPv6 */
-    }
-    if (stage == INITSTAGE_LOCAL)
-    {
-        //TODO isNodeUp???
 
         nb = NotificationBoardAccess().get();
 

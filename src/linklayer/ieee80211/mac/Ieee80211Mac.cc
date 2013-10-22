@@ -285,21 +285,11 @@ void Ieee80211Mac::initialize(int stage)
         endTimeout = new cMessage("Timeout");
         endReserve = new cMessage("Reserve");
         mediumStateChange = new cMessage("MediumStateChange");
-    }
-    if (stage == INITSTAGE_LOCAL)
-    {
+
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         // subscribe for the information of the carrier sense
         nb->subscribe(this, NF_RADIOSTATE_CHANGED);
-    }
-    else if (stage == INITSTAGE_LINK_LAYER)
-    {
-        // interface
-        if (isInterfaceRegistered().isUnspecified()) //TODO do we need multi-MAC feature? if so, should they share interfaceEntry??  --Andras
-            registerInterface();
-    }
-    if (stage == INITSTAGE_LOCAL)
-    {
+
         // obtain pointer to external queue
         initializeQueueModule();  //FIXME STAGE: this should be in L2 initialization!!!!
 
@@ -383,6 +373,12 @@ void Ieee80211Mac::initialize(int stage)
         validRecMode = false;
         initWatches();
         radioModule = gate("lowerLayerOut")->getNextGate()->getOwnerModule()->getId();
+    }
+    else if (stage == INITSTAGE_LINK_LAYER)
+    {
+        // interface
+        if (isInterfaceRegistered().isUnspecified()) //TODO do we need multi-MAC feature? if so, should they share interfaceEntry??  --Andras
+            registerInterface();
     }
 }
 

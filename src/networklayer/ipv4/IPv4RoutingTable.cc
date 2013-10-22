@@ -76,6 +76,12 @@ void IPv4RoutingTable::initialize(int stage)
     {
         // get a pointer to the NotificationBoard module and IInterfaceTable
         nb = NotificationBoardAccess().get();
+        nb->subscribe(this, NF_INTERFACE_CREATED);
+        nb->subscribe(this, NF_INTERFACE_DELETED);
+        nb->subscribe(this, NF_INTERFACE_STATE_CHANGED);
+        nb->subscribe(this, NF_INTERFACE_CONFIG_CHANGED);
+        nb->subscribe(this, NF_INTERFACE_IPv4CONFIG_CHANGED);
+
         ift = InterfaceTableAccess().get();
 
         IPForward = par("IPForward").boolValue();
@@ -87,15 +93,7 @@ void IPv4RoutingTable::initialize(int stage)
         WATCH(multicastForward);
         WATCH(routerId);
     }
-    if (stage == INITSTAGE_LOCAL)
-    {
-        nb->subscribe(this, NF_INTERFACE_CREATED);
-        nb->subscribe(this, NF_INTERFACE_DELETED);
-        nb->subscribe(this, NF_INTERFACE_STATE_CHANGED);
-        nb->subscribe(this, NF_INTERFACE_CONFIG_CHANGED);
-        nb->subscribe(this, NF_INTERFACE_IPv4CONFIG_CHANGED);
-    }
-    if (stage == INITSTAGE_NETWORK_LAYER)
+    else if (stage == INITSTAGE_NETWORK_LAYER)
     {
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isNodeUp = !nodeStatus || nodeStatus->getState() == NodeStatus::UP;
@@ -107,7 +105,7 @@ void IPv4RoutingTable::initialize(int stage)
                 routerId = IPv4Address(routerIdStr);
         }
     }
-    if (stage == INITSTAGE_NETWORK_LAYER_3)
+    else if (stage == INITSTAGE_NETWORK_LAYER_3)
     {
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
 
@@ -121,9 +119,7 @@ void IPv4RoutingTable::initialize(int stage)
             if (*filename && parser.readRoutingTableFromFile(filename)==-1)
                 error("Error reading routing table file %s", filename);
         }
-    }
-    if (stage == INITSTAGE_NETWORK_LAYER_3)
-    {
+
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
         // ASSERT(stage >= STAGE:INTERFACEENTRY_IP_PROTOCOLDATA_AVAILABLE);
         // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);

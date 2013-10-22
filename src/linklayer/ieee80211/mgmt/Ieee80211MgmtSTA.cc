@@ -99,6 +99,7 @@ void Ieee80211MgmtSTA::initialize(int stage)
         assocTimeoutMsg = NULL;
 
         nb = NotificationBoardAccess().get();
+        nb->subscribe(this, NF_LINK_FULL_PROMISCUOUS);
 
         WATCH(isScanning);
         WATCH(isAssociated);
@@ -112,10 +113,6 @@ void Ieee80211MgmtSTA::initialize(int stage)
         // determine numChannels (needed when we're told to scan "all" channels)
         IChannelControl *cc = ChannelAccess::getChannelControl();
         numChannels = cc->getNumChannels();
-    }
-    if (stage == INITSTAGE_LOCAL)
-    {
-        nb->subscribe(this, NF_LINK_FULL_PROMISCUOUS);
     }
 }
 

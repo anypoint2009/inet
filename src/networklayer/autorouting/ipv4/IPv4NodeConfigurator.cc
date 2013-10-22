@@ -36,11 +36,6 @@ IPv4NodeConfigurator::IPv4NodeConfigurator()
     networkConfigurator = NULL;
 }
 
-EXECUTE_ON_STARTUP(
-    ASSERT(INITSTAGE_NETWORK_LAYER_2 >= INITSTAGE_LOCAL);
-    ASSERT(INITSTAGE_NETWORK_LAYER_2 >= INITSTAGE_NETWORK_LAYER);
-);
-
 int IPv4NodeConfigurator::numInitStages() const { return NUM_INIT_STAGES; }
 
 void IPv4NodeConfigurator::initialize(int stage)

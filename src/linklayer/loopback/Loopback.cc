@@ -66,7 +66,7 @@ void Loopback::initialize(int stage)
     }
 
     // update display string when addresses have been autoconfigured etc.
-    if (stage == INITSTAGE_LAST)
+    else if (stage == INITSTAGE_LAST)
     {
         updateDisplayString();
     }

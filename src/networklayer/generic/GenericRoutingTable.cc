@@ -73,9 +73,7 @@ void GenericRoutingTable::initialize(int stage)
         WATCH(forwardingEnabled);
         WATCH(multicastForwardingEnabled);
         WATCH(routerId);
-    }
-    if (stage == INITSTAGE_LOCAL)
-    {
+
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         nb->subscribe(this, NF_INTERFACE_CREATED);
         nb->subscribe(this, NF_INTERFACE_DELETED);

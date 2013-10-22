@@ -92,9 +92,9 @@ void IPv4NetworkConfigurator::initialize(int stage)
         optimizeRoutesParameter = par("optimizeRoutes");
         configuration = par("config");
     }
-    if (stage == INITSTAGE_NETWORK_LAYER)
+    else if (stage == INITSTAGE_NETWORK_LAYER)
         ensureConfigurationComputed(topology);
-    if (stage == INITSTAGE_ROUTING_PROTOCOLS + 1)
+    else if (stage == INITSTAGE_LAST)
         dumpConfiguration();
 }
 
