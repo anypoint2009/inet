@@ -188,7 +188,7 @@ void RIPRouting::initialize(int stage)
         badResponseSignal = registerSignal("badResponse");
         numRoutesSignal = registerSignal("numRoutes");
     }
-    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
+    else if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     { // interfaces and static routes are already initialized
         // ASSERT(stage >= STAGE:ROUTERID_AVAILABLE);
         // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);

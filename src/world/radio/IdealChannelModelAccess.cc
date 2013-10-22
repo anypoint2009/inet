@@ -59,7 +59,7 @@ void IdealChannelModelAccess::initialize(int stage)
         mobilityStateChangedSignal = registerSignal("mobilityStateChanged");
         hostModule->subscribe(mobilityStateChangedSignal, this);
     }
-    if (stage == INITSTAGE_PHYSICAL_LAYER)
+    else if (stage == INITSTAGE_PHYSICAL_LAYER)
     {
         if (!positionUpdateArrived)
             throw cRuntimeError("The coordinates of '%s' host are invalid. Please configure Mobility for this host.", hostModule->getFullPath().c_str());

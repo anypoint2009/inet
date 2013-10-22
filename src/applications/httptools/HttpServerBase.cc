@@ -153,7 +153,7 @@ void HttpServerBase::initialize(int stage)
         WATCH(textResourcesServed);
         WATCH(badRequests);
     }
-    if (stage == INITSTAGE_APPLICATION_LAYER)
+    else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
@@ -161,7 +161,7 @@ void HttpServerBase::initialize(int stage)
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
     }
-    if (stage == INITSTAGE_LAST)
+    else if (stage == INITSTAGE_LAST)
     {
         updateDisplay();
     }

@@ -46,7 +46,7 @@ void TraCITestApp::initialize(int stage)
 
         EV_DEBUG << "TraCITestApp initialized with testNumber=" << testNumber << std::endl;
     }
-    if (stage == INITSTAGE_APPLICATION_LAYER)
+    else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

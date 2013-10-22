@@ -129,7 +129,7 @@ void LDP::initialize(int stage)
 
         maxFecid = 0;
     }
-    if (stage == INITSTAGE_APPLICATION_LAYER)
+    else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
         // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);

@@ -42,7 +42,7 @@ void ObstacleControl::initialize(int stage)
 
         obstaclesXml = par("obstacles");
     }
-    if (stage == INITSTAGE_PHYSICAL_ENVIRONMENT)
+    else if (stage == INITSTAGE_PHYSICAL_ENVIRONMENT)
     {
         annotations = AnnotationManagerAccess().getIfExists();
         if (annotations)

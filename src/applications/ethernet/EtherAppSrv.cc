@@ -50,7 +50,7 @@ void EtherAppSrv::initialize(int stage)
         WATCH(packetsSent);
         WATCH(packetsReceived);
     }
-    if (stage == INITSTAGE_APPLICATION_LAYER)
+    else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
 

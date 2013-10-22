@@ -87,7 +87,7 @@ void SimpleVoIPReceiver::initialize(int stage)
         mosSignal = registerSignal("VoIPMosSignal");
         taildropLossRateSignal = registerSignal("VoIPTaildropLossRate");
     }
-    if (stage == INITSTAGE_APPLICATION_LAYER)
+    else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

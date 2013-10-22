@@ -54,12 +54,12 @@ void Ieee80211MgmtBase::initialize(int stage)
         // configuration
         frameCapacity = par("frameCapacity");
     }
-    if (stage == INITSTAGE_LINK_LAYER)
+    else if (stage == INITSTAGE_LINK_LAYER)
     {
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
     }
-    if (stage == INITSTAGE_LINK_LAYER_2)
+    else if (stage == INITSTAGE_LINK_LAYER_2)
     {
         // obtain our address from MAC
         cModule *mac = getParentModule()->getSubmodule("mac");

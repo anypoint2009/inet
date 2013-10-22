@@ -35,7 +35,7 @@ void DSDV_2::initialize(int stage)
         ift = NULL;
         rt = NULL;
     }
-    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
+    else if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
         IPSocket socket(gate("to_ip"));
         socket.registerProtocol(IP_PROT_MANET);

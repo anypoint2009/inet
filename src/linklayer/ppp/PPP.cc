@@ -106,7 +106,7 @@ void PPP::initialize(int stage)
         // if we're connected, get the gate with transmission rate
         datarateChannel = connected ? physOutGate->getTransmissionChannel() : NULL;
     }
-    if (stage == INITSTAGE_LINK_LAYER)
+    else if (stage == INITSTAGE_LINK_LAYER)
     {
         // register our interface entry in IInterfaceTable
         registerInterface();

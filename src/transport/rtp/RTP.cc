@@ -58,7 +58,7 @@ void RTP::initialize(int stage)
 
         rcvdPkSignal = registerSignal("rcvdPk");
     }
-    if (stage == INITSTAGE_TRANSPORT_LAYER)
+    else if (stage == INITSTAGE_TRANSPORT_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

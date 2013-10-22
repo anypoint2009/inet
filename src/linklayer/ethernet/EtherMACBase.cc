@@ -179,7 +179,7 @@ void EtherMACBase::initialize(int stage)
         initializeMACAddress();
         initializeStatistics();
     }
-    if (stage == INITSTAGE_LINK_LAYER)
+    else if (stage == INITSTAGE_LINK_LAYER)
     {
         registerInterface(); // needs MAC address
         initializeQueueModule();

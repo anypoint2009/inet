@@ -76,7 +76,7 @@ void DHCPClient::initialize(int stage)
         bootpc_port = 68; // client
         bootps_port = 67; // server
     }
-    if (stage == INITSTAGE_APPLICATION_LAYER)
+    else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

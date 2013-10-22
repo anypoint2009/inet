@@ -146,7 +146,7 @@ void MultiFieldClassifier::initialize(int stage)
 
         pkClassSignal = registerSignal("pkClass");
     }
-    if (stage == INITSTAGE_NETWORK_LAYER_3)
+    else if (stage == INITSTAGE_NETWORK_LAYER_3)
     {
         cXMLElement *config = par("filters").xmlValue();
         configureFilters(config);

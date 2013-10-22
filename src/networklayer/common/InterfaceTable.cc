@@ -74,7 +74,7 @@ void InterfaceTable::initialize(int stage)
         nb = NotificationBoardAccess().get();
         WATCH_PTRVECTOR(idToInterface);
     }
-    if (stage == INITSTAGE_NETWORK_LAYER)
+    else if (stage == INITSTAGE_NETWORK_LAYER)
     {
         updateDisplayString();
     }

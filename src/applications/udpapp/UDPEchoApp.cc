@@ -38,7 +38,7 @@ void UDPEchoApp::initialize(int stage)
         numEchoed = 0;
         WATCH(numEchoed);
     }
-    if (stage == INITSTAGE_LAST)
+    else if (stage == INITSTAGE_LAST)
     {
         if (ev.isGUI())
             updateDisplay();

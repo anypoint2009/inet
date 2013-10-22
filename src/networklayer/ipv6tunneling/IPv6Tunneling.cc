@@ -77,7 +77,7 @@ void IPv6Tunneling::initialize(int stage)
 
         WATCH_MAP(tunnels);
     }
-    if (stage == INITSTAGE_NETWORK_LAYER)
+    else if (stage == INITSTAGE_NETWORK_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

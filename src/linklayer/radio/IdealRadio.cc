@@ -69,7 +69,7 @@ void IdealRadio::initialize(int stage)
         // signals
         radioStateSignal = registerSignal("radioState");
     }
-    if (stage == INITSTAGE_PHYSICAL_LAYER)
+    else if (stage == INITSTAGE_PHYSICAL_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

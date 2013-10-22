@@ -83,7 +83,7 @@ void GenericRoutingTable::initialize(int stage)
         nb->subscribe(this, NF_INTERFACE_CONFIG_CHANGED);
         nb->subscribe(this, NF_INTERFACE_IPv4CONFIG_CHANGED);
     }
-    if (stage == INITSTAGE_NETWORK_LAYER)
+    else if (stage == INITSTAGE_NETWORK_LAYER)
     {
 //        // L2 modules register themselves in stage 0, so we can only configure
 //        // the interfaces in stage 1.
@@ -108,7 +108,7 @@ void GenericRoutingTable::initialize(int stage)
 //        if (strcmp(routerIdStr, "") && strcmp(routerIdStr, "auto"))
 //            routerId = IPv4Address(routerIdStr);
     }
-    if (stage == INITSTAGE_NETWORK_LAYER_3)
+    else if (stage == INITSTAGE_NETWORK_LAYER_3)
     {
         // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
         // routerID selection must be after stage==STAGE_AUTOCONFIGURE_ADDRESSES

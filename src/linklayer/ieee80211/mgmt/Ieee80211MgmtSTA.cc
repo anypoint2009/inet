@@ -107,7 +107,7 @@ void Ieee80211MgmtSTA::initialize(int stage)
         WATCH(assocAP);
         WATCH_LIST(apList);
     }
-    if (stage == INITSTAGE_LINK_LAYER)
+    else if (stage == INITSTAGE_LINK_LAYER)
     {
         // determine numChannels (needed when we're told to scan "all" channels)
         IChannelControl *cc = ChannelAccess::getChannelControl();

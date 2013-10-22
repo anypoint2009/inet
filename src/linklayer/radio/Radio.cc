@@ -173,7 +173,7 @@ void Radio::initialize(int stage)
         else
             updateStringInterval = 0;
     }
-    if (stage == INITSTAGE_PHYSICAL_LAYER)
+    else if (stage == INITSTAGE_PHYSICAL_LAYER)
     {
         registerBattery();
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);

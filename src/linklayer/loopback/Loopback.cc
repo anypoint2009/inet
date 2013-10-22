@@ -59,7 +59,7 @@ void Loopback::initialize(int stage)
         packetSentToUpperSignal = registerSignal("packetSentToUpper");
         packetReceivedFromUpperSignal = registerSignal("packetReceivedFromUpper");
     }
-    if (stage == INITSTAGE_LINK_LAYER)
+    else if (stage == INITSTAGE_LINK_LAYER)
     {
         // register our interface entry in IInterfaceTable
         registerInterface();

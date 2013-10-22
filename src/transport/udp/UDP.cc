@@ -146,7 +146,7 @@ void UDP::initialize(int stage)
 
         isOperational = false;
     }
-    if (stage == INITSTAGE_TRANSPORT_LAYER)
+    else if (stage == INITSTAGE_TRANSPORT_LAYER)
     {
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(IP_PROT_UDP);

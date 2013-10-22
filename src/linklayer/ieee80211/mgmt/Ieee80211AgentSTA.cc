@@ -73,7 +73,7 @@ void Ieee80211AgentSTA::initialize(int stage)
     {
         nb->subscribe(this, NF_L2_BEACON_LOST);
     }
-    if (stage == INITSTAGE_LINK_LAYER_2)
+    else if (stage == INITSTAGE_LINK_LAYER_2)
     {
         InterfaceTable *ift = (InterfaceTable*)InterfaceTableAccess().getIfExists();
         if (ift)

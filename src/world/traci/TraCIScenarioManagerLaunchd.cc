@@ -45,7 +45,7 @@ void TraCIScenarioManagerLaunchd::initialize(int stage)
         launchConfig = par("launchConfig").xmlValue();
         seed = par("seed");
     }
-    if (stage == INITSTAGE_PHYSICAL_ENVIRONMENT)
+    else if (stage == INITSTAGE_PHYSICAL_ENVIRONMENT)
     {
         cXMLElementList basedir_nodes = launchConfig->getElementsByTagName("basedir");
         if (basedir_nodes.size() == 0) {

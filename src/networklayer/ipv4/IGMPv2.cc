@@ -384,7 +384,7 @@ void IGMPv2::initialize(int stage)
         WATCH(numLeavesSent);
         WATCH(numLeavesRecv);
     }
-    if (stage == INITSTAGE_TRANSPORT_LAYER)
+    else if (stage == INITSTAGE_TRANSPORT_LAYER)
     {
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(IP_PROT_IGMP);
@@ -395,7 +395,7 @@ void IGMPv2::initialize(int stage)
         nb->subscribe(this, NF_IPv4_MCAST_JOIN);
         nb->subscribe(this, NF_IPv4_MCAST_LEAVE);
     }
-    if (stage == INITSTAGE_NETWORK_LAYER)
+    else if (stage == INITSTAGE_NETWORK_LAYER)
     {
         for (int i = 0; i < (int)ift->getNumInterfaces(); ++i)
         {

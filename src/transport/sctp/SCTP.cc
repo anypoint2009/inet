@@ -117,7 +117,7 @@ void SCTP::initialize(int stage)
         }
     }
 
-    if (stage == INITSTAGE_TRANSPORT_LAYER_2)
+    else if (stage == INITSTAGE_TRANSPORT_LAYER_2)
     {
         if (par("udpEncapsEnabled").boolValue())
         {
@@ -125,7 +125,7 @@ void SCTP::initialize(int stage)
         }
     }
 
-    if (stage == INITSTAGE_TRANSPORT_LAYER)
+    else if (stage == INITSTAGE_TRANSPORT_LAYER)
     {
         IPSocket socket(gate("to_ip"));
         socket.registerProtocol(IP_PROT_SCTP);

@@ -45,7 +45,7 @@ void EtherMACFullDuplex::initialize(int stage)
             throw cRuntimeError("Half duplex operation is not supported by EtherMACFullDuplex, use the EtherMAC module for that! (Please enable csmacdSupport on EthernetInterface)");
     }
 
-    if (stage == INITSTAGE_LINK_LAYER)
+    else if (stage == INITSTAGE_LINK_LAYER)
     {
         beginSendFrames();      //FIXME choose an another stage for it
     }

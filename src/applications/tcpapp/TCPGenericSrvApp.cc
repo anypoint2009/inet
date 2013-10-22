@@ -49,7 +49,7 @@ void TCPGenericSrvApp::initialize(int stage)
         WATCH(bytesRcvd);
         WATCH(bytesSent);
     }
-    if (stage == INITSTAGE_APPLICATION_LAYER)
+    else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
         // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);

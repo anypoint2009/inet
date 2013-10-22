@@ -113,7 +113,7 @@ void TCP_lwIP::initialize(int stage)
         pLwipFastTimerM = new cMessage("lwip_fast_timer");
         tcpEV << "TCP_lwIP " << this << " has stack " << pLwipTcpLayerM << "\n";
     }
-    if (stage == INITSTAGE_TRANSPORT_LAYER)
+    else if (stage == INITSTAGE_TRANSPORT_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
@@ -123,7 +123,7 @@ void TCP_lwIP::initialize(int stage)
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(IP_PROT_TCP);
     }
-    if (stage == INITSTAGE_LAST)
+    else if (stage == INITSTAGE_LAST)
     {
         isAliveM = true;
     }
