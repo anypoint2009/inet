@@ -29,10 +29,7 @@ Define_Module(ObstacleControl);
 ObstacleControl::~ObstacleControl() {
 }
 
-int ObstacleControl::numInitStages() const
-{
-    return INITSTAGE_LOCAL + 1;
-}
+int ObstacleControl::numInitStages() const { return NUM_INIT_STAGES; }
 
 void ObstacleControl::initialize(int stage)
 {

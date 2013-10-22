@@ -35,10 +35,7 @@ TractorMobility::TractorMobility()
     step = 0;
 }
 
-int TractorMobility::numInitStages() const
-{
-    return std::max(INITSTAGE_LOCAL + 1, LineSegmentsMobilityBase::numInitStages());
-}
+int TractorMobility::numInitStages() const { return NUM_INIT_STAGES; }
 
 void TractorMobility::initialize(int stage)
 {

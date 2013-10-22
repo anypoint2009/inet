@@ -42,10 +42,7 @@ ANSimMobility::ANSimMobility()
     nextPositionChange = NULL;
 }
 
-int ANSimMobility::numInitStages() const
-{
-    return std::max(INITSTAGE_LOCAL + 1, LineSegmentsMobilityBase::numInitStages());
-}
+int ANSimMobility::numInitStages() const { return NUM_INIT_STAGES; }
 
 void ANSimMobility::initialize(int stage)
 {

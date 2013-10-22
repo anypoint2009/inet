@@ -35,10 +35,7 @@ CircleMobility::CircleMobility()
     angle = 0;
 }
 
-int CircleMobility::numInitStages() const
-{
-    return std::max(INITSTAGE_LOCAL + 1, MovingMobilityBase::numInitStages());
-}
+int CircleMobility::numInitStages() const { return NUM_INIT_STAGES; }
 
 void CircleMobility::initialize(int stage)
 {

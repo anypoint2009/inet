@@ -57,10 +57,7 @@ HttpBrowserBase::~HttpBrowserBase()
     cancelAndDelete(eventTimer);
 }
 
-int HttpBrowserBase::numInitStages() const
-{
-    return INITSTAGE_APPLICATION_LAYER + 1;
-}
+int HttpBrowserBase::numInitStages() const { return NUM_INIT_STAGES; }
 
 void HttpBrowserBase::initialize(int stage)
 {

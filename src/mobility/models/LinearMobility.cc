@@ -31,10 +31,7 @@ LinearMobility::LinearMobility()
     acceleration = 0;
 }
 
-int LinearMobility::numInitStages() const
-{
-    return std::max(INITSTAGE_LOCAL + 1, MovingMobilityBase::numInitStages());
-}
+int LinearMobility::numInitStages() const { return NUM_INIT_STAGES; }
 
 void LinearMobility::initialize(int stage)
 {

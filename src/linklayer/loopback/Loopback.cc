@@ -43,7 +43,7 @@ Loopback::~Loopback()
 {
 }
 
-int Loopback::numInitStages() const { return std::max(MACBase::numInitStages(), (int)INITSTAGE_LINK_LAYER + 1); }
+int Loopback::numInitStages() const { return NUM_INIT_STAGES; }
 
 void Loopback::initialize(int stage)
 {

@@ -39,10 +39,7 @@ IdealRadio::IdealRadio()
     concurrentReceives = 0;
 }
 
-int IdealRadio::numInitStages() const
-{
-    return std::max(INITSTAGE_PHYSICAL_LAYER + 1, IdealChannelModelAccess::numInitStages());
-}
+int IdealRadio::numInitStages() const { return NUM_INIT_STAGES; }
 
 void IdealRadio::initialize(int stage)
 {

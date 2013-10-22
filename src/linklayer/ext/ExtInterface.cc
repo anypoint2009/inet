@@ -38,7 +38,7 @@
 Define_Module(ExtInterface);
 
 
-int ExtInterface::numInitStages() const { return std::max((int)INITSTAGE_LINK_LAYER + 1, MACBase::numInitStages()); }
+int ExtInterface::numInitStages() const { return NUM_INIT_STAGES; }
 
 void ExtInterface::initialize(int stage)
 {

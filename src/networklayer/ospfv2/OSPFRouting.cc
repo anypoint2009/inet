@@ -45,7 +45,7 @@ OSPFRouting::~OSPFRouting()
     delete ospfRouter;
 }
 
-int OSPFRouting::numInitStages() const { return INITSTAGE_ROUTING_PROTOCOLS + 1; }
+int OSPFRouting::numInitStages() const { return NUM_INIT_STAGES; }
 
 void OSPFRouting::initialize(int stage)
 {

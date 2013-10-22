@@ -39,7 +39,7 @@ TED::~TED()
 {
 }
 
-int TED::numInitStages() const { return INITSTAGE_ROUTING_PROTOCOLS + 1; }
+int TED::numInitStages() const { return NUM_INIT_STAGES; }
 
 void TED::initialize(int stage)
 {

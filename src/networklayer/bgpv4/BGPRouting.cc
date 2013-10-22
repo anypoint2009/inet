@@ -36,10 +36,7 @@ BGPRouting::~BGPRouting(void)
     _prefixListOUT.erase(_prefixListOUT.begin(), _prefixListOUT.end());
 }
 
-int BGPRouting::numInitStages() const
-{
-    return INITSTAGE_ROUTING_PROTOCOLS + 1;
-}
+int BGPRouting::numInitStages() const { return NUM_INIT_STAGES; }
 
 void BGPRouting::initialize(int stage)
 {

@@ -36,10 +36,7 @@ BonnMotionMobility::~BonnMotionMobility()
     BonnMotionFileCache::deleteInstance();
 }
 
-int BonnMotionMobility::numInitStages() const
-{
-    return std::max(INITSTAGE_LOCAL + 1, LineSegmentsMobilityBase::numInitStages());
-}
+int BonnMotionMobility::numInitStages() const { return NUM_INIT_STAGES; }
 
 void BonnMotionMobility::initialize(int stage)
 {

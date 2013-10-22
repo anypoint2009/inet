@@ -194,10 +194,7 @@ void DSRUUTimer::cancel()
         a_->cancelEvent(&msgtimer);
 }
 
-int DSRUU::numInitStages() const
-{
-    return INITSTAGE_ROUTING_PROTOCOLS + 1;
-}
+int DSRUU::numInitStages() const { return NUM_INIT_STAGES; }
 
 void DSRUU::initialize(int stage)
 {

@@ -21,10 +21,7 @@
 Define_Module(LIBTable);
 
 
-int LIBTable::numInitStages() const
-{
-    return INITSTAGE_NETWORK_LAYER_4 + 1;
-}
+int LIBTable::numInitStages() const { return NUM_INIT_STAGES; }
 
 void LIBTable::initialize(int stage)
 {

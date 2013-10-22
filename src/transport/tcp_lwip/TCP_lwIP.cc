@@ -82,11 +82,7 @@ TCP_lwIP::TCP_lwIP()
     netIf.state = NULL;
 }
 
-int TCP_lwIP::numInitStages() const
-{
-    static int stages = std::max(INITSTAGE_TRANSPORT_LAYER, std::max(INITSTAGE_LOCAL, INITSTAGE_TRANSPORT_LAYER)) + 1;
-    return stages;
-}
+int TCP_lwIP::numInitStages() const { return NUM_INIT_STAGES; }
 
 void TCP_lwIP::initialize(int stage)
 {

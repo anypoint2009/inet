@@ -45,10 +45,7 @@ EtherAppCli::~EtherAppCli()
     cancelAndDelete(timerMsg);
 }
 
-int EtherAppCli::numInitStages() const
-{
-    return INITSTAGE_APPLICATION_LAYER + 1;
-}
+int EtherAppCli::numInitStages() const { return NUM_INIT_STAGES; }
 
 void EtherAppCli::initialize(int stage)
 {

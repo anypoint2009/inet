@@ -23,7 +23,7 @@
 Define_Module(Ieee80211MgmtSTASimplified);
 
 
-int Ieee80211MgmtSTASimplified::numInitStages() const { return Ieee80211MgmtBase::numInitStages(); }
+int Ieee80211MgmtSTASimplified::numInitStages() const { return NUM_INIT_STAGES; }
 
 void Ieee80211MgmtSTASimplified::initialize(int stage)
 {

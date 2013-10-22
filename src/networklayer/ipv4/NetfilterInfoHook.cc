@@ -63,10 +63,7 @@ class INET_API NetfilterInfoHook : public cSimpleModule, public INetfilter::IHoo
 
 Define_Module(NetfilterInfoHook);
 
-int NetfilterInfoHook::numInitStages() const
-{
-    return INITSTAGE_NETWORK_LAYER + 1;
-}
+int NetfilterInfoHook::numInitStages() const { return NUM_INIT_STAGES; }
 
 void NetfilterInfoHook::initialize(int stage)
 {

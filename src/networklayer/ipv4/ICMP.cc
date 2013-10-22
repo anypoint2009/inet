@@ -30,7 +30,7 @@
 Define_Module(ICMP);
 
 
-int ICMP::numInitStages() const  { return INITSTAGE_TRANSPORT_LAYER + 1; }
+int ICMP::numInitStages() const { return NUM_INIT_STAGES; }
 
 void ICMP::initialize(int stage)
 {

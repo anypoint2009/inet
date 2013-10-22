@@ -23,7 +23,7 @@
 Define_Module(SimpleClassifier);
 
 
-int SimpleClassifier::numInitStages() const { return INITSTAGE_ROUTING_PROTOCOLS + 1; }
+int SimpleClassifier::numInitStages() const { return NUM_INIT_STAGES; }
 
 void SimpleClassifier::initialize(int stage)
 {

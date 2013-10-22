@@ -36,10 +36,7 @@ IdealChannelModelAccess::~IdealChannelModelAccess()
     }
 }
 
-int IdealChannelModelAccess::numInitStages() const
-{
-    return INITSTAGE_PHYSICAL_LAYER + 1;
-}
+int IdealChannelModelAccess::numInitStages() const { return NUM_INIT_STAGES; }
 
 /**
  * Upon initialization IdealChannelModelAccess registers the nic parent module

@@ -42,10 +42,7 @@ Ieee80211MgmtAP::~Ieee80211MgmtAP()
     cancelAndDelete(beaconTimer);
 }
 
-int Ieee80211MgmtAP::numInitStages() const
-{
-    return std::max(INITSTAGE_LINK_LAYER + 1, Ieee80211MgmtAPBase::numInitStages());
-}
+int Ieee80211MgmtAP::numInitStages() const { return NUM_INIT_STAGES; }
 
 void Ieee80211MgmtAP::initialize(int stage)
 {

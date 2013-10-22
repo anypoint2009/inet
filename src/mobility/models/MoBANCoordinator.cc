@@ -50,10 +50,7 @@
 
 Define_Module(MoBANCoordinator);
 
-int MoBANCoordinator::numInitStages() const
-{
-    return std::max(INITSTAGE_PHYSICAL_ENVIRONMENT + 1, LineSegmentsMobilityBase::numInitStages());
-}
+int MoBANCoordinator::numInitStages() const { return NUM_INIT_STAGES; }
 
 void MoBANCoordinator::initialize(int stage)
 {

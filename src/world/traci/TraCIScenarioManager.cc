@@ -47,7 +47,7 @@ TraCIScenarioManager::~TraCIScenarioManager() {
     cancelAndDelete(executeOneTimestepTrigger);
 }
 
-int TraCIScenarioManager::numInitStages() const { return INITSTAGE_LOCAL + 1; }
+int TraCIScenarioManager::numInitStages() const { return NUM_INIT_STAGES; }
 
 void TraCIScenarioManager::initialize(int stage)
 {

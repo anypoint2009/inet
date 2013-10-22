@@ -25,7 +25,7 @@
 Define_Module(GlobalARP);
 
 
-int GlobalARP::numInitStages() const { return INITSTAGE_LOCAL + 1; }
+int GlobalARP::numInitStages() const { return NUM_INIT_STAGES; }
 
 void GlobalARP::initialize(int stage)
 {

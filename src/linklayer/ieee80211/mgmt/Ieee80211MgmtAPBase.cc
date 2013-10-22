@@ -24,7 +24,7 @@
 #endif
 
 
-int Ieee80211MgmtAPBase::numInitStages() const { return Ieee80211MgmtBase::numInitStages(); }
+int Ieee80211MgmtAPBase::numInitStages() const { return NUM_INIT_STAGES; }
 
 void Ieee80211MgmtAPBase::initialize(int stage)
 {

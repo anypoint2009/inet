@@ -34,10 +34,7 @@
 #include "NodeStatus.h"
 
 
-int HttpServerBase::numInitStages() const
-{
-    return std::max(INITSTAGE_APPLICATION_LAYER + 1, HttpNodeBase::numInitStages());
-}
+int HttpServerBase::numInitStages() const { return NUM_INIT_STAGES; }
 
 void HttpServerBase::initialize(int stage)
 {

@@ -55,10 +55,7 @@ SCTPClient::~SCTPClient()
     cancelAndDelete(primaryChangeTimer);
 }
 
-int SCTPClient::numInitStages() const
-{
-    return INITSTAGE_APPLICATION_LAYER + 1;
-}
+int SCTPClient::numInitStages() const { return NUM_INIT_STAGES; }
 
 void SCTPClient::initialize(int stage)
 {

@@ -213,7 +213,7 @@ Address const & TCP_NSC::mapNsc2Remote(uint32_t nscAddrP)
 }
 // x == mapNsc2Remote(mapRemote2Nsc(x))
 
-int TCP_NSC::numInitStages() const { return INITSTAGE_TRANSPORT_LAYER + 1; }
+int TCP_NSC::numInitStages() const { return NUM_INIT_STAGES; }
 
 void TCP_NSC::initialize(int stage)
 {

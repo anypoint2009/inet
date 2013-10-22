@@ -53,10 +53,7 @@ Radio::Radio() : rs(this->getId())
     noiseGenerator = NULL;
 }
 
-int Radio::numInitStages() const
-{
-    return INITSTAGE_PHYSICAL_LAYER + 1;
-}
+int Radio::numInitStages() const { return NUM_INIT_STAGES; }
 
 void Radio::initialize(int stage)
 {

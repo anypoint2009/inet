@@ -100,7 +100,7 @@ LDP::~LDP()
     //socketMap.deleteSockets();
 }
 
-int LDP::numInitStages() const  {return INITSTAGE_APPLICATION_LAYER + 1;}
+int LDP::numInitStages() const { return NUM_INIT_STAGES; }
 
 void LDP::initialize(int stage)
 {

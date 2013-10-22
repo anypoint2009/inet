@@ -35,10 +35,7 @@
 Define_Module(ICMPv6);
 
 
-int ICMPv6::numInitStages() const
-{
-    return INITSTAGE_NETWORK_LAYER + 1;
-}
+int ICMPv6::numInitStages() const { return NUM_INIT_STAGES; }
 
 void ICMPv6::initialize(int stage)
 {

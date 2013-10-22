@@ -55,7 +55,7 @@ MobilityBase::MobilityBase()
     lastPosition = Coord::ZERO;
 }
 
-int MobilityBase::numInitStages() const {return INITSTAGE_PHYSICAL_ENVIRONMENT_2 + 1;}
+int MobilityBase::numInitStages() const { return NUM_INIT_STAGES; }
 
 void MobilityBase::initialize(int stage)
 {

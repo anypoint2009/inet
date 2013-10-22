@@ -30,10 +30,7 @@ RectangleMobility::RectangleMobility()
     corner1 = corner2 = corner3 = corner4 = 0;
 }
 
-int RectangleMobility::numInitStages() const
-{
-    return std::max(INITSTAGE_LOCAL + 1, MovingMobilityBase::numInitStages());
-}
+int RectangleMobility::numInitStages() const { return NUM_INIT_STAGES; }
 
 void RectangleMobility::initialize(int stage)
 {

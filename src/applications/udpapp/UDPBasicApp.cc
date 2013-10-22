@@ -40,10 +40,7 @@ UDPBasicApp::~UDPBasicApp()
     cancelAndDelete(selfMsg);
 }
 
-int UDPBasicApp::numInitStages() const
-{
-    return std::max(INITSTAGE_APPLICATION_LAYER + 1, AppBase::numInitStages());
-}
+int UDPBasicApp::numInitStages() const { return NUM_INIT_STAGES; }
 
 void UDPBasicApp::initialize(int stage)
 {

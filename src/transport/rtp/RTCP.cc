@@ -40,7 +40,7 @@ RTCP::RTCP()
     _senderInfo = NULL;
 }
 
-int RTCP::numInitStages() const { return INITSTAGE_TRANSPORT_LAYER + 1; }
+int RTCP::numInitStages() const { return NUM_INIT_STAGES; }
 
 void RTCP::initialize(int stage)
 {

@@ -27,10 +27,7 @@
 Define_Module(RTPApplication)
 
 
-int RTPApplication::numInitStages() const
-{
-    return INITSTAGE_APPLICATION_LAYER + 1;
-}
+int RTPApplication::numInitStages() const { return NUM_INIT_STAGES; }
 
 void RTPApplication::initialize(int stage)
 {

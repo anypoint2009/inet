@@ -70,10 +70,7 @@ SCTPPeer::~SCTPPeer()
     rcvdBytesPerAssoc.clear();
 }
 
-int SCTPPeer::numInitStages() const
-{
-    return INITSTAGE_APPLICATION_LAYER + 1;
-}
+int SCTPPeer::numInitStages() const { return NUM_INIT_STAGES; }
 
 void SCTPPeer::initialize(int stage)
 {

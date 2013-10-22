@@ -33,7 +33,7 @@ typedef cTopology WeightedTopology;
 Define_Module(FlatNetworkConfigurator);
 
 
-int FlatNetworkConfigurator::numInitStages() const  { return INITSTAGE_NETWORK_LAYER_2 + 1; }
+int FlatNetworkConfigurator::numInitStages() const { return NUM_INIT_STAGES; }
 
 void FlatNetworkConfigurator::initialize(int stage)
 {

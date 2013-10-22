@@ -45,7 +45,7 @@ static void printElapsedTime(const char *name, long startTime)
 }
 
 
-int GenericNetworkConfigurator::numInitStages() const { return INITSTAGE_NETWORK_LAYER + 1; }
+int GenericNetworkConfigurator::numInitStages() const { return NUM_INIT_STAGES; }
 
 #define T(CODE)  {long startTime=clock(); CODE; printElapsedTime(#CODE, startTime);}
 void GenericNetworkConfigurator::initialize(int stage)

@@ -30,10 +30,7 @@
 Define_Module(HostAutoConfigurator);
 
 
-int HostAutoConfigurator::numInitStages() const
-{
-    return INITSTAGE_NETWORK_LAYER_2 + 1;
-}
+int HostAutoConfigurator::numInitStages() const { return NUM_INIT_STAGES; }
 
 void HostAutoConfigurator::initialize(int stage)
 {

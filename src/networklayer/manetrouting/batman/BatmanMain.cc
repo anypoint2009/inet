@@ -105,7 +105,7 @@ Batman::~Batman()
     hna_chg_list.clear();
 }
 
-int Batman::numInitStages() const  { return INITSTAGE_ROUTING_PROTOCOLS + 1; }
+int Batman::numInitStages() const { return NUM_INIT_STAGES; }
 
 void Batman::initialize(int stage)
 {

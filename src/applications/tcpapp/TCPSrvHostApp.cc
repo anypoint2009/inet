@@ -20,10 +20,7 @@
 Define_Module(TCPSrvHostApp);
 
 
-int TCPSrvHostApp::numInitStages() const
-{
-    return INITSTAGE_APPLICATION_LAYER + 1;
-}
+int TCPSrvHostApp::numInitStages() const { return NUM_INIT_STAGES; }
 
 void TCPSrvHostApp::initialize(int stage)
 {

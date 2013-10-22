@@ -38,10 +38,7 @@ SimpleVoIPSender::~SimpleVoIPSender()
     cancelAndDelete(selfSource);
 }
 
-int SimpleVoIPSender::numInitStages() const
-{
-    return INITSTAGE_APPLICATION_LAYER + 1;
-}
+int SimpleVoIPSender::numInitStages() const { return NUM_INIT_STAGES; }
 
 void SimpleVoIPSender::initialize(int stage)
 {

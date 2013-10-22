@@ -64,7 +64,7 @@ void IdealWirelessMac::clearQueue()
     queueModule->clear();
 }
 
-int IdealWirelessMac::numInitStages() const { return std::max((int)INITSTAGE_LINK_LAYER + 1, WirelessMacBase::numInitStages()); }
+int IdealWirelessMac::numInitStages() const { return NUM_INIT_STAGES; }
 
 void IdealWirelessMac::initialize(int stage)
 {

@@ -34,10 +34,7 @@
 Define_Module(SCTPServer);
 
 
-int SCTPServer::numInitStages() const
-{
-    return INITSTAGE_APPLICATION_LAYER + 1;
-}
+int SCTPServer::numInitStages() const { return NUM_INIT_STAGES; }
 
 void SCTPServer::initialize(int stage)
 {

@@ -72,10 +72,7 @@ void TraCIMobility::Statistics::recordScalars(cSimpleModule& module)
     module.recordScalar("totalCO2Emission", totalCO2Emission);
 }
 
-int TraCIMobility::numInitStages() const
-{
-    return std::max(INITSTAGE_LOCAL + 1, MobilityBase::numInitStages());
-}
+int TraCIMobility::numInitStages() const { return NUM_INIT_STAGES; }
 
 void TraCIMobility::initialize(int stage)
 {

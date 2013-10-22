@@ -54,10 +54,7 @@ MACRelayUnitNP::~MACRelayUnitNP()
     delete [] endProcEvents;
 }
 
-int MACRelayUnitNP::numInitStages() const
-{
-    return std::max(INITSTAGE_LOCAL + 1, MACRelayUnitBase::numInitStages());
-}
+int MACRelayUnitNP::numInitStages() const { return NUM_INIT_STAGES; }
 
 void MACRelayUnitNP::initialize(int stage)
 {

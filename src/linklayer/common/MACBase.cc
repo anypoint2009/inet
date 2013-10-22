@@ -42,10 +42,7 @@ MACBase::~MACBase()
 {
 }
 
-int MACBase::numInitStages() const
-{
-    return INITSTAGE_LOCAL + 1;
-}
+int MACBase::numInitStages() const { return NUM_INIT_STAGES; }
 
 void MACBase::initialize(int stage)
 {

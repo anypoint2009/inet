@@ -24,7 +24,7 @@ using namespace DiffservUtil;
 Define_Module(TwoRateThreeColorMeter);
 
 
-int TwoRateThreeColorMeter::numInitStages() const { return INITSTAGE_NETWORK_LAYER + 1; }
+int TwoRateThreeColorMeter::numInitStages() const { return NUM_INIT_STAGES; }
 
 void TwoRateThreeColorMeter::initialize(int stage)
 {

@@ -44,10 +44,7 @@ ChannelAccess::~ChannelAccess()
     }
 }
 
-int ChannelAccess::numInitStages() const
-{
-    return INITSTAGE_PHYSICAL_LAYER + 1;
-}
+int ChannelAccess::numInitStages() const { return NUM_INIT_STAGES; }
 
 /**
  * Upon initialization ChannelAccess registers the nic parent module

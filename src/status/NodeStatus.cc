@@ -28,10 +28,7 @@ Define_Module(NodeStatus);
 simsignal_t NodeStatus::nodeStatusChangedSignal = SIMSIGNAL_NULL;
 
 
-int NodeStatus::numInitStages() const
-{
-    return INITSTAGE_LOCAL + 1;
-}
+int NodeStatus::numInitStages() const { return NUM_INIT_STAGES; }
 
 void NodeStatus::initialize(int stage)
 {

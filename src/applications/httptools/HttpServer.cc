@@ -32,10 +32,7 @@
 
 Define_Module(HttpServer);
 
-int HttpServer::numInitStages() const
-{
-    return std::max(INITSTAGE_APPLICATION_LAYER + 1, HttpServerBase::numInitStages());
-}
+int HttpServer::numInitStages() const { return NUM_INIT_STAGES; }
 
 void HttpServer::initialize(int stage)
 {

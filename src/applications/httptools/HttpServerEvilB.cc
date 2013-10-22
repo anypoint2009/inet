@@ -33,10 +33,7 @@
 
 Define_Module(HttpServerEvilB);
 
-int HttpServerEvilB::numInitStages() const
-{
-    return std::max(INITSTAGE_LOCAL + 1, HttpServer::numInitStages());
-}
+int HttpServerEvilB::numInitStages() const { return NUM_INIT_STAGES; }
 
 void HttpServerEvilB::initialize(int stage)
 {

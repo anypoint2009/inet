@@ -28,10 +28,7 @@ simsignal_t TCPGenericSrvApp::rcvdPkSignal = SIMSIGNAL_NULL;
 simsignal_t TCPGenericSrvApp::sentPkSignal = SIMSIGNAL_NULL;
 
 
-int TCPGenericSrvApp::numInitStages() const
-{
-    return INITSTAGE_APPLICATION_LAYER + 1;
-}
+int TCPGenericSrvApp::numInitStages() const { return NUM_INIT_STAGES; }
 
 void TCPGenericSrvApp::initialize(int stage)
 {

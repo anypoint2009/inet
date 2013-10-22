@@ -49,10 +49,7 @@
 Define_Module(IPv6);
 
 
-int IPv6::numInitStages() const
-{
-    return INITSTAGE_NETWORK_LAYER + 1;
-}
+int IPv6::numInitStages() const { return NUM_INIT_STAGES; }
 
 void IPv6::initialize(int stage)
 {

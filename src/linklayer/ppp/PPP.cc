@@ -50,10 +50,7 @@ PPP::~PPP()
     cancelAndDelete(endTransmissionEvent);
 }
 
-int PPP::numInitStages() const
-{
-    return INITSTAGE_LINK_LAYER + 1;
-}
+int PPP::numInitStages() const { return NUM_INIT_STAGES; }
 
 void PPP::initialize(int stage)
 {

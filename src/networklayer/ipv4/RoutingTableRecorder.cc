@@ -60,7 +60,7 @@ RoutingTableRecorder::~RoutingTableRecorder()
 {
 }
 
-int RoutingTableRecorder::numInitStages() const  {return INITSTAGE_LOCAL + 1;}
+int RoutingTableRecorder::numInitStages() const { return NUM_INIT_STAGES; }
 
 void RoutingTableRecorder::initialize(int stage)
 {
@@ -252,10 +252,7 @@ RoutingTableRecorder::~RoutingTableRecorder()
 {
 }
 
-int RoutingTableRecorder::numInitStages() const
-{
-    return INITSTAGE_NETWORK_LAYER + 1;
-}
+int RoutingTableRecorder::numInitStages() const { return NUM_INIT_STAGES; }
 
 void RoutingTableRecorder::initialize(int stage)
 {

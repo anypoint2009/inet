@@ -39,10 +39,7 @@ CloudDelayerBase::~CloudDelayerBase()
         ipv4Layer->unregisterHook(0, this);
 }
 
-int CloudDelayerBase::numInitStages() const
-{
-    return INITSTAGE_NETWORK_LAYER + 1;
-}
+int CloudDelayerBase::numInitStages() const { return NUM_INIT_STAGES; }
 
 void CloudDelayerBase::initialize(int stage)
 {

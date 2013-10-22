@@ -31,10 +31,7 @@ static std::ostream& operator<<(std::ostream& out, cMessage *msg)
     return out;
 }
 
-int Ieee80211MgmtBase::numInitStages() const
-{
-    return INITSTAGE_LINK_LAYER_2 + 1;
-}
+int Ieee80211MgmtBase::numInitStages() const { return NUM_INIT_STAGES; }
 
 void Ieee80211MgmtBase::initialize(int stage)
 {

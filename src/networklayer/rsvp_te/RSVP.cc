@@ -51,7 +51,7 @@ RSVP::~RSVP()
     // TODO cancelAndDelete timers in all data structures
 }
 
-int RSVP::numInitStages() const { return INITSTAGE_ROUTING_PROTOCOLS + 1; }
+int RSVP::numInitStages() const { return NUM_INIT_STAGES; }
 
 void RSVP::initialize(int stage)
 {

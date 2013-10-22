@@ -33,10 +33,7 @@ MassMobility::MassMobility()
     angle = 0;
 }
 
-int MassMobility::numInitStages() const
-{
-    return std::max(INITSTAGE_LOCAL + 1, LineSegmentsMobilityBase::numInitStages());
-}
+int MassMobility::numInitStages() const { return NUM_INIT_STAGES; }
 
 void MassMobility::initialize(int stage)
 {

@@ -43,10 +43,7 @@ Define_Module(IPv4);
 // a local interface-k hasznalata eseten szinten hianyozhatnak bizonyos NetFilter hook-ok
 
 
-int IPv4::numInitStages() const
-{
-    return INITSTAGE_NETWORK_LAYER + 1;
-}
+int IPv4::numInitStages() const { return NUM_INIT_STAGES; }
 
 void IPv4::initialize(int stage)
 {

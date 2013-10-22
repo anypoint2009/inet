@@ -62,7 +62,7 @@ InterfaceTable::~InterfaceTable()
     delete [] tmpInterfaceList;
 }
 
-int InterfaceTable::numInitStages() const { return INITSTAGE_NETWORK_LAYER + 1; }
+int InterfaceTable::numInitStages() const { return NUM_INIT_STAGES; }
 
 void InterfaceTable::initialize(int stage)
 {

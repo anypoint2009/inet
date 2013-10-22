@@ -160,11 +160,7 @@ EtherMACBase::~EtherMACBase()
     cancelAndDelete(endPauseMsg);
 }
 
-int EtherMACBase::numInitStages() const
-{
-    static int stages = INITSTAGE_LINK_LAYER + 1;
-    return std::max(stages, MACBase::numInitStages());
-}
+int EtherMACBase::numInitStages() const { return NUM_INIT_STAGES; }
 
 void EtherMACBase::initialize(int stage)
 {

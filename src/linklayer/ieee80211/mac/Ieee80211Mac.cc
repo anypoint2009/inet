@@ -103,10 +103,7 @@ Ieee80211Mac::~Ieee80211Mac()
  * Initialization functions.
  */
 
-int Ieee80211Mac::numInitStages() const
-{
-    return std::max(INITSTAGE_LINK_LAYER + 1, WirelessMacBase::numInitStages());
-}
+int Ieee80211Mac::numInitStages() const { return NUM_INIT_STAGES; }
 
 void Ieee80211Mac::initialize(int stage)
 {

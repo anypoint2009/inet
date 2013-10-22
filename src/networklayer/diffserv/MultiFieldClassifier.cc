@@ -131,10 +131,7 @@ Define_Module(MultiFieldClassifier);
 simsignal_t MultiFieldClassifier::pkClassSignal = SIMSIGNAL_NULL;
 
 
-int MultiFieldClassifier::numInitStages() const
-{
-    return INITSTAGE_NETWORK_LAYER_3 + 1;
-}
+int MultiFieldClassifier::numInitStages() const { return NUM_INIT_STAGES; }
 
 void MultiFieldClassifier::initialize(int stage)
 {

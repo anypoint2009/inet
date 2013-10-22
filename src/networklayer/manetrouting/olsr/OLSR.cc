@@ -447,7 +447,7 @@ OLSR_MsgTimer::expire()
 
 ///
 ///
-int OLSR::numInitStages() const { return INITSTAGE_ROUTING_PROTOCOLS + 1; }
+int OLSR::numInitStages() const { return NUM_INIT_STAGES; }
 
 void OLSR::initialize(int stage)
 {

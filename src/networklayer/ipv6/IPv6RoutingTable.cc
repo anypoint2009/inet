@@ -57,10 +57,7 @@ IPv6Route *IPv6RoutingTable::createNewRoute(IPv6Address destPrefix, int prefixLe
     return new IPv6Route(destPrefix, prefixLength, src);
 }
 
-int IPv6RoutingTable::numInitStages() const
-{
-    return INITSTAGE_NETWORK_LAYER + 1;
-}
+int IPv6RoutingTable::numInitStages() const { return NUM_INIT_STAGES; }
 
 void IPv6RoutingTable::initialize(int stage)
 {

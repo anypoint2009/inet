@@ -35,10 +35,7 @@ GaussMarkovMobility::GaussMarkovMobility()
     variance = 0;
 }
 
-int GaussMarkovMobility::numInitStages() const
-{
-    return std::max(INITSTAGE_LOCAL + 1, LineSegmentsMobilityBase::numInitStages());
-}
+int GaussMarkovMobility::numInitStages() const { return NUM_INIT_STAGES; }
 
 void GaussMarkovMobility::initialize(int stage)
 {

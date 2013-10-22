@@ -39,7 +39,7 @@ LinkStateRouting::~LinkStateRouting()
     cancelAndDelete(announceMsg);
 }
 
-int LinkStateRouting::numInitStages() const { return INITSTAGE_ROUTING_PROTOCOLS + 1; }
+int LinkStateRouting::numInitStages() const { return NUM_INIT_STAGES; }
 
 void LinkStateRouting::initialize(int stage)
 {

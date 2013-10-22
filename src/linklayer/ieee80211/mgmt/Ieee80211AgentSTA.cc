@@ -31,10 +31,7 @@ simsignal_t Ieee80211AgentSTA::acceptConfirmSignal = SIMSIGNAL_NULL;
 simsignal_t Ieee80211AgentSTA::dropConfirmSignal = SIMSIGNAL_NULL;
 
 
-int Ieee80211AgentSTA::numInitStages() const
-{
-    return INITSTAGE_LINK_LAYER_2 + 1;
-}
+int Ieee80211AgentSTA::numInitStages() const { return NUM_INIT_STAGES; }
 
 void Ieee80211AgentSTA::initialize(int stage)
 {

@@ -115,11 +115,7 @@ UDP::~UDP()
     clearAllSockets();
 }
 
-int UDP::numInitStages() const
-{
-    static int stages = std::max(INITSTAGE_TRANSPORT_LAYER, INITSTAGE_TRANSPORT_LAYER) + 1;
-    return stages;
-}
+int UDP::numInitStages() const { return NUM_INIT_STAGES; }
 
 void UDP::initialize(int stage)
 {

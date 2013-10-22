@@ -22,7 +22,7 @@
 Define_Module(DSDV_2);
 
 
-int DSDV_2::numInitStages() const  { return INITSTAGE_ROUTING_PROTOCOLS + 1; }
+int DSDV_2::numInitStages() const { return NUM_INIT_STAGES; }
 
 void DSDV_2::initialize(int stage)
 {

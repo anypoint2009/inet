@@ -34,7 +34,7 @@ TraCIScenarioManagerLaunchd::~TraCIScenarioManagerLaunchd()
 {
 }
 
-int TraCIScenarioManagerLaunchd::numInitStages() const { return std::max(TraCIScenarioManager::numInitStages(), INITSTAGE_PHYSICAL_ENVIRONMENT + 1); }
+int TraCIScenarioManagerLaunchd::numInitStages() const { return NUM_INIT_STAGES; }
 
 void TraCIScenarioManagerLaunchd::initialize(int stage)
 {

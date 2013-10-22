@@ -33,10 +33,7 @@
 Define_Module(HttpController);
 
 
-int HttpController::numInitStages() const
-{
-    return INITSTAGE_APPLICATION_LAYER + 1;
-}
+int HttpController::numInitStages() const { return NUM_INIT_STAGES; }
 
 void HttpController::initialize(int stage)
 {

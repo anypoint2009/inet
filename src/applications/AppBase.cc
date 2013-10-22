@@ -38,10 +38,7 @@ void AppBase::finish()
     isOperational = false;
 }
 
-int AppBase::numInitStages() const
-{
-    return INITSTAGE_APPLICATION_LAYER + 1;
-}
+int AppBase::numInitStages() const { return NUM_INIT_STAGES; }
 
 void AppBase::initialize(int stage)
 {

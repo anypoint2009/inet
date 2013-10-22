@@ -46,10 +46,7 @@ DHCPClient::~DHCPClient()
     cancelTimer_TO();
 }
 
-int DHCPClient::numInitStages() const
-{
-    return INITSTAGE_APPLICATION_LAYER + 1;
-}
+int DHCPClient::numInitStages() const { return NUM_INIT_STAGES; }
 
 void DHCPClient::initialize(int stage)
 {

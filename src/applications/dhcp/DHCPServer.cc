@@ -43,10 +43,7 @@ DHCPServer::~DHCPServer()
 {
 }
 
-int DHCPServer::numInitStages() const
-{
-    return INITSTAGE_APPLICATION_LAYER + 1;
-}
+int DHCPServer::numInitStages() const { return NUM_INIT_STAGES; }
 
 void DHCPServer::initialize(int stage)
 {

@@ -74,11 +74,7 @@ static std::ostream& operator<<(std::ostream& os, const TCPConnection& conn)
     return os;
 }
 
-int TCP::numInitStages() const
-{
-    static int stages = std::max(INITSTAGE_TRANSPORT_LAYER, INITSTAGE_TRANSPORT_LAYER) + 1;
-    return stages;
-}
+int TCP::numInitStages() const { return NUM_INIT_STAGES; }
 
 void TCP::initialize(int stage)
 {

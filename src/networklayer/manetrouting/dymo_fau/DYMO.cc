@@ -53,7 +53,7 @@ DYMO::DYMO()
     DYMO_INTERFACES = NULL;
 }
 
-int DYMO::numInitStages() const { return INITSTAGE_ROUTING_PROTOCOLS + 1; }
+int DYMO::numInitStages() const { return NUM_INIT_STAGES; }
 
 void DYMO::initialize(int stage)
 {

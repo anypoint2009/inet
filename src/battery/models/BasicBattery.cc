@@ -27,10 +27,7 @@
 /**
  * Initialization routine
  */
-int BasicBattery::numInitStages() const
-{
-    return INITSTAGE_LOCAL + 1;
-}
+int BasicBattery::numInitStages() const { return NUM_INIT_STAGES; }
 
 void BasicBattery::initialize(int stage)
 {

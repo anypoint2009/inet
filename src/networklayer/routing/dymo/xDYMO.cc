@@ -58,10 +58,7 @@ xDYMO::~xDYMO()
 // module interface
 //
 
-int xDYMO::numInitStages() const
-{
-    return INITSTAGE_ROUTING_PROTOCOLS + 1;
-}
+int xDYMO::numInitStages() const { return NUM_INIT_STAGES; }
 
 void xDYMO::initialize(int stage)
 {

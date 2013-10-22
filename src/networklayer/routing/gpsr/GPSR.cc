@@ -63,10 +63,7 @@ GPSR::~GPSR()
 // module interface
 //
 
-int GPSR::numInitStages() const
-{
-    return INITSTAGE_ROUTING_PROTOCOLS + 1;
-}
+int GPSR::numInitStages() const { return NUM_INIT_STAGES; }
 
 void GPSR::initialize(int stage)
 {

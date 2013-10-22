@@ -128,10 +128,7 @@ MatrixCloudDelayer::~MatrixCloudDelayer()
     matrixEntries.clear();
 }
 
-int MatrixCloudDelayer::numInitStages() const
-{
-    return CloudDelayerBase::numInitStages();
-}
+int MatrixCloudDelayer::numInitStages() const { return NUM_INIT_STAGES; }
 
 void MatrixCloudDelayer::initialize(int stage)
 {

@@ -328,10 +328,7 @@ void IGMPv2::deleteRouterGroupData(InterfaceEntry *ie, const IPv4Address &group)
     }
 }
 
-int IGMPv2::numInitStages() const
-{
-    return INITSTAGE_TRANSPORT_LAYER + 1;
-}
+int IGMPv2::numInitStages() const { return NUM_INIT_STAGES; }
 
 void IGMPv2::initialize(int stage)
 {

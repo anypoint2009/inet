@@ -66,10 +66,7 @@ UDPBasicBurst::~UDPBasicBurst()
     cancelAndDelete(timerNext);
 }
 
-int UDPBasicBurst::numInitStages() const
-{
-    return std::max(INITSTAGE_LOCAL + 1, AppBase::numInitStages());
-}
+int UDPBasicBurst::numInitStages() const { return NUM_INIT_STAGES; }
 
 void UDPBasicBurst::initialize(int stage)
 {
