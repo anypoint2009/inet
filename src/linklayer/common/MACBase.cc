@@ -57,7 +57,7 @@ void MACBase::initialize(int stage)
         if (nb)
             nb->subscribe(this, NF_INTERFACE_DELETED);
     }
-    if (stage == numInitStages() - 1)
+    if (stage == INITSTAGE_LAST)
     {
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
         updateOperationalFlag(isNodeUp());  // needs to be done when interface is already registered (=last stage)

@@ -123,7 +123,7 @@ void TCP_lwIP::initialize(int stage)
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(IP_PROT_TCP);
     }
-    if (stage == numInitStages() - 1)
+    if (stage == INITSTAGE_LAST)
     {
         isAliveM = true;
     }

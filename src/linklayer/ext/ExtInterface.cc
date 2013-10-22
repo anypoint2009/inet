@@ -71,7 +71,7 @@ void ExtInterface::initialize(int stage)
     {
         registerInterface();
     }
-    if (stage == numInitStages()-1)
+    if (stage == INITSTAGE_LAST)
     {
         // if not connected, make it gray
         if (ev.isGUI() && !connected)
