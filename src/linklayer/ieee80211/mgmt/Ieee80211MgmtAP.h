@@ -66,7 +66,7 @@ class INET_API Ieee80211MgmtAP : public Ieee80211MgmtAPBase
 
   protected:
 
-    NotificationBoard *nb;
+    cModule *nb;
 
     // configuration
     std::string ssid;

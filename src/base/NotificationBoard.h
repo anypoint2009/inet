@@ -73,7 +73,7 @@
  * Obtaining a pointer to the NotificationBoard module of that host/router:
  *
  * <pre>
- * NotificationBoard *nb; // this is best made a module class member
+ * cModule *nb; // this is best made a module class member
  * nb = NotificationBoardAccess().get();  // best done in initialize()
  * </pre>
  *
@@ -138,15 +138,6 @@ class INET_API NotificationBoard : public cSimpleModule
      */
     virtual void fireChangeNotification(int category, const cObject *details = NULL);
     //@}
-};
-
-/**
- * Gives access to the NotificationBoard instance within the host/router.
- */
-class INET_API NotificationBoardAccess : public ModuleAccess<NotificationBoard>
-{
-  public:
-    NotificationBoardAccess() : ModuleAccess<NotificationBoard>("notificationBoard") {}
 };
 
 #endif

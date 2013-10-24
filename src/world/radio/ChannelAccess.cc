@@ -58,7 +58,7 @@ void ChannelAccess::initialize(int stage)
     {
         // ASSERT(stage < NEWSTAGE:PHYSICALENV_SECOND);
         cc = getChannelControl();
-        nb = NotificationBoardAccess().get();
+        nb = findContainingNode(this, true);
         hostModule = findContainingNode(this, true);
         myRadioRef = NULL;
 

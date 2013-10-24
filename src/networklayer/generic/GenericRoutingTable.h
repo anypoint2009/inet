@@ -37,7 +37,7 @@ class INET_API GenericRoutingTable : public cSimpleModule, public IRoutingTable,
 {
     private:
         IInterfaceTable *ift; // cached pointer
-        NotificationBoard *nb; // cached pointer
+        cModule *nb; // cached pointer
 
         Address routerId;
         Address::AddressType addressType;

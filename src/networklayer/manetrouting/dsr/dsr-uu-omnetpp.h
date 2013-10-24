@@ -266,7 +266,7 @@ class DSRUU:public cSimpleModule, public INotifiable, public ManetNetfilterHook
 
     void drop (cMessage *msg,int code) { delete msg;}
 
-    NotificationBoard *nb;
+    cModule *nb;
     virtual void receiveChangeNotification(int category, const cObject *details);
 
   protected:

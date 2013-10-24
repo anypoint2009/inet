@@ -84,7 +84,7 @@ void IPv6RoutingTable::initialize(int stage)
         mipv6Support = false; // 4.9.07 - CB
 #endif /* WITH_xMIPv6 */
 
-        nb = NotificationBoardAccess().get();
+        nb = findContainingNode(this, true);
 
         nb->subscribe(this, NF_INTERFACE_CREATED);
         nb->subscribe(this, NF_INTERFACE_DELETED);

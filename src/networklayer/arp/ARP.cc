@@ -143,7 +143,7 @@ void ARP::initialize(int stage)
             ASSERT(where->second == entry);
             entry->myIter = where; // note: "inserting a new element into a map does not invalidate iterators that point to existing elements"
         }
-        nb = NotificationBoardAccess().getIfExists();
+        nb = findContainingNode(this);
         if (nb != NULL)
             nb->subscribe(this, NF_INTERFACE_IPv4CONFIG_CHANGED);
     }

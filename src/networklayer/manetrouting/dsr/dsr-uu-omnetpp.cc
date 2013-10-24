@@ -377,7 +377,7 @@ void DSRUU::initialize(int stage)
         macaddr_ = interface80211ptr->getMacAddress();
 
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
-        nb = NotificationBoardAccess().get();
+        nb = findContainingNode(this, true);
         nb->subscribe(this, NF_LINK_BREAK);
         if (get_confval(PromiscOperation))
             nb->subscribe(this, NF_LINK_PROMISCUOUS);

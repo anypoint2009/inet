@@ -67,7 +67,7 @@
 class INET_API InterfaceTable : public cSimpleModule, public IInterfaceTable, protected INotifiable, public ILifecycle
 {
   protected:
-    NotificationBoard *nb; // cached pointer
+    cModule *nb; // cached pointer
 
     // primary storage for interfaces: vector indexed by id; may contain NULLs;
     // slots are never reused to ensure id uniqueness

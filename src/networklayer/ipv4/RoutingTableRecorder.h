@@ -69,7 +69,7 @@ class INET_API RoutingTableRecorder : public cSimpleModule, public cIndexedEvent
     virtual void initialize(int stage);
     virtual void handleMessage(cMessage *);
     virtual void hookListeners();
-    virtual void receiveChangeNotification(NotificationBoard *nb, int category, const cObject *details);
+    virtual void receiveChangeNotification(cModule *nb, int category, const cObject *details);
     virtual void recordSnapshot();
     virtual void recordIndex() {}
     virtual void recordInterface(cModule *host, const InterfaceEntry *ie, int category);
@@ -102,7 +102,7 @@ class INET_API RoutingTableRecorder : public cSimpleModule
     virtual void handleMessage(cMessage *);
     virtual void hookListeners();
     virtual void ensureRoutingLogFileOpen();
-    virtual void receiveChangeNotification(NotificationBoard *nb, int category, const cObject *details);
+    virtual void receiveChangeNotification(cModule *nb, int category, const cObject *details);
     virtual void recordInterfaceChange(cModule *host, const InterfaceEntry *ie, int category);
     virtual void recordRouteChange(cModule *host, const IRoute *route, int category);
 };

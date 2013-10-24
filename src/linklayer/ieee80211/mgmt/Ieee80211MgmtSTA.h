@@ -84,7 +84,7 @@ class INET_API Ieee80211MgmtSTA : public Ieee80211MgmtBase
     };
 
   protected:
-    NotificationBoard *nb;
+    cModule *nb;
 
     // number of channels in ChannelControl -- used if we're told to scan "all" channels
     int numChannels;

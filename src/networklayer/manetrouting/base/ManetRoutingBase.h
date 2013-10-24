@@ -75,7 +75,7 @@ class INET_API ManetRoutingBase : public cSimpleModule, public INotifiable, prot
 
     IIPv4RoutingTable *inet_rt;
     IInterfaceTable *inet_ift;
-    NotificationBoard *nb;
+    cModule *nb;
     ICMP *icmpModule;
     bool mac_layer_;
     ManetAddress    hostAddress;

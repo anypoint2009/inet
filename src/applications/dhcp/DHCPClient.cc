@@ -93,7 +93,7 @@ void DHCPClient::initialize(int stage)
         host_name = host->getFullName();
 
         // for a wireless interface subscribe the association event to start the DHCP protocol
-        nb = NotificationBoardAccess().get();
+        nb = findContainingNode(this, true);
         nb->subscribe(this, NF_L2_ASSOCIATED);
 
         // Get the interface to configure

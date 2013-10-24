@@ -98,7 +98,7 @@ void Ieee80211MgmtSTA::initialize(int stage)
         isAssociated = false;
         assocTimeoutMsg = NULL;
 
-        nb = NotificationBoardAccess().get();
+        nb = findContainingNode(this, true);
         nb->subscribe(this, NF_LINK_FULL_PROMISCUOUS);
 
         WATCH(isScanning);

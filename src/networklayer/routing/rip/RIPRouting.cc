@@ -452,7 +452,7 @@ void RIPRouting::startRIPRouting()
             socket.joinMulticastGroup(addressType->getLinkLocalRIPRoutersMulticastAddress(), it->ie->getInterfaceId());
 
     // subscribe to notifications
-    NotificationBoard *nb = NotificationBoardAccess().get();
+    cModule *nb = findContainingNode(this, true);
     nb->subscribe(this, NF_INTERFACE_CREATED);
     nb->subscribe(this, NF_INTERFACE_DELETED);
     nb->subscribe(this, NF_INTERFACE_STATE_CHANGED);
@@ -473,7 +473,7 @@ void RIPRouting::stopRIPRouting()
     socket.close();
 
     // subscribe to notifications
-    NotificationBoard *nb = NotificationBoardAccess().get();
+    cModule *nb = findContainingNode(this, true);
     nb->unsubscribe(this, NF_INTERFACE_CREATED);
     nb->unsubscribe(this, NF_INTERFACE_DELETED);
     nb->unsubscribe(this, NF_INTERFACE_STATE_CHANGED);

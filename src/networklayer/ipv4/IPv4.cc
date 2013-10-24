@@ -53,7 +53,7 @@ void IPv4::initialize(int stage)
 
         ift = InterfaceTableAccess().get();
         rt = check_and_cast<IIPv4RoutingTable *>(getModuleByPath(par("routingTableModule")));
-        nb = NotificationBoardAccess().getIfExists(); // needed only for multicast forwarding
+        nb = findContainingNode(this); // needed only for multicast forwarding
         arp = ARPCacheAccess().get();
 
         arpDgramOutGate = gate("arpDgramOut");

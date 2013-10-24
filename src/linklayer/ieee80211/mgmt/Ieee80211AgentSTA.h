@@ -40,7 +40,7 @@ class INET_API Ieee80211AgentSTA : public cSimpleModule, public INotifiable
 {
   protected:
     InterfaceEntry *myIface;
-    NotificationBoard *nb;
+    cModule *nb;
     MACAddress prevAP;
     bool activeScan;
     std::vector<int> channelsToScan;

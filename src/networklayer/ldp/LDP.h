@@ -121,7 +121,7 @@ class INET_API LDP: public cSimpleModule, public TCPSocket::CallbackInterface, p
     IIPv4RoutingTable *rt;
     LIBTable *lt;
     TED *tedmod;
-    NotificationBoard *nb;
+    cModule *nb;
 
     UDPSocket udpSocket; // for receiving Hello
     std::vector<UDPSocket> udpSockets;  // for sending Hello, one socket for each multicast interface

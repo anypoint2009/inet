@@ -89,7 +89,7 @@ class INET_API ARP : public cSimpleModule, public IARPCache, public ILifecycle, 
 
     IInterfaceTable *ift;
     IIPv4RoutingTable *rt;  // for answering ProxyARP requests
-    NotificationBoard *nb;
+    cModule *nb;
 
     // Maps an IP multicast address to an Ethernet multicast address.
     MACAddress mapMulticastAddress(IPv4Address addr);

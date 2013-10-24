@@ -37,7 +37,7 @@ class INET_API GenericNetworkProtocolInterfaceData : public InterfaceProtocolDat
     Address inetAddr;  ///< address of interface
     int metric;        ///< link "cost"; see e.g. MS KB article Q299540  //TODO needed???
 
-    NotificationBoard *nb; // cached pointer
+    cModule *nb; // cached pointer
 
   public:
     // field ids for change notifications

@@ -87,7 +87,7 @@ void ManetRoutingBase::registerRoutingModule()
     int  num_80211 = 0;
     inet_rt = IPv4RoutingTableAccess().getIfExists();
     inet_ift = InterfaceTableAccess().get();
-    nb = NotificationBoardAccess().get();
+    nb = findContainingNode(this, true);
 
     if (routesVector)
         routesVector->clear();

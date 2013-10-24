@@ -100,7 +100,7 @@ void xMIPv6::initialize(int stage)
     {
         EV << "Initializing xMIPv6 module" << endl;
 
-        nb = NotificationBoardAccess().get();
+        nb = findContainingNode(this, true);
 
         // statistic collection
         /*statVectorBUtoHA.setName("BU to HA");

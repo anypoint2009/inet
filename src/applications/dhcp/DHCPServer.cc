@@ -76,7 +76,7 @@ void DHCPServer::initialize(int stage)
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
 
-        nb = NotificationBoardAccess().get();
+        nb = findContainingNode(this, true);
         nb->subscribe(this, NF_INTERFACE_CREATED);
         nb->subscribe(this, NF_INTERFACE_DELETED);
 

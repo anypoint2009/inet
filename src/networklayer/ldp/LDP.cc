@@ -119,7 +119,7 @@ void LDP::initialize(int stage)
         rt = IPv4RoutingTableAccess().get();
         lt = LIBTableAccess().get();
         tedmod = TEDAccess().get();
-        nb = NotificationBoardAccess().get();
+        nb = findContainingNode(this, true);
 
         WATCH_VECTOR(myPeers);
         WATCH_VECTOR(fecUp);

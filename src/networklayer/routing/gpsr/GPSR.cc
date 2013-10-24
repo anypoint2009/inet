@@ -80,7 +80,7 @@ void GPSR::initialize(int stage)
         // context
         host = findContainingNode(this);
         nodeStatus = dynamic_cast<NodeStatus *>(host->getSubmodule("status"));
-        notificationBoard = NotificationBoardAccess().get(this);
+        notificationBoard = findContainingNode(this, true);
         interfaceTable = InterfaceTableAccess().get(this);
         mobility = check_and_cast<IMobility *>(host->getSubmodule("mobility"));
         routingTable = check_and_cast<IRoutingTable *>(getModuleByPath(par("routingTableModule")));

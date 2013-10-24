@@ -339,7 +339,7 @@ void IGMPv2::initialize(int stage)
         ift = InterfaceTableAccess().get();
         rt = check_and_cast<IIPv4RoutingTable *>(getModuleByPath(par("routingTableModule")));
 
-        nb = NotificationBoardAccess().get();
+        nb = findContainingNode(this, true);
         nb->subscribe(this, NF_INTERFACE_DELETED);
         nb->subscribe(this, NF_IPv4_MCAST_JOIN);
         nb->subscribe(this, NF_IPv4_MCAST_LEAVE);

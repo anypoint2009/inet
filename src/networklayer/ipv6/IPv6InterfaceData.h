@@ -134,7 +134,7 @@ class INET_API IPv6InterfaceData : public InterfaceProtocolData
     HostMulticastData *hostMcastData;
     RouterMulticastData *routerMcastData;
 
-    NotificationBoard *nb;
+    cModule *nb;
 
   public:
     /**

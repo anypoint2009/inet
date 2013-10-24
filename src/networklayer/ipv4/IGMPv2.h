@@ -131,7 +131,7 @@ class INET_API IGMPv2 : public cSimpleModule, protected INotifiable
   protected:
     IIPv4RoutingTable *rt;     // cached pointer
     IInterfaceTable *ift;  // cached pointer
-    NotificationBoard *nb; // cached pointer
+    cModule *nb; // cached pointer
 
     bool enabled;
     bool externalRouter;

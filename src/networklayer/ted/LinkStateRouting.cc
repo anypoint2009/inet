@@ -59,7 +59,7 @@ void LinkStateRouting::initialize(int stage)
         routerId = rt->getRouterId();
 
         // listen for TED modifications
-        NotificationBoard *nb = NotificationBoardAccess().get();
+        cModule *nb = findContainingNode(this, true);
         nb->subscribe(this, NF_TED_CHANGED);
 
         // peers are given as interface names in the "peers" module parameter;

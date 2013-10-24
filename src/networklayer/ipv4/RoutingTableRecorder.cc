@@ -40,11 +40,11 @@ Define_Module(RoutingTableRecorder);
 class RoutingTableNotificationBoardListener : public INotifiable
 {
   private:
-    NotificationBoard *nb;
+    cModule *nb;
     RoutingTableRecorder *recorder;
 
   public:
-    RoutingTableNotificationBoardListener(RoutingTableRecorder *recorder, NotificationBoard *nb) {this->recorder = recorder; this->nb = nb;}
+    RoutingTableNotificationBoardListener(RoutingTableRecorder *recorder, cModule *nb;}
     virtual void receiveChangeNotification(int category, const cObject *details) {
         recorder->receiveChangeNotification(nb, category, details);
     }
@@ -82,7 +82,7 @@ void RoutingTableRecorder::hookListeners()
 {
     // hook existing notification boards (we won't cover dynamically created hosts/routers, but oh well)
     for (int id = 0; id < simulation.getLastModuleId(); id++) {
-        NotificationBoard *nb = dynamic_cast<NotificationBoard *>(simulation.getModule(id));
+        cModule *nb = dynamic_cast<NotificationBoard *>(simulation.getModule(id));
         if (nb) {
             INotifiable *listener = new RoutingTableNotificationBoardListener(this, nb);
             nb->subscribe(listener, NF_INTERFACE_CREATED);
@@ -103,7 +103,7 @@ void RoutingTableRecorder::hookListeners()
         eventlogManager->addEventlogListener(this);
 }
 
-void RoutingTableRecorder::receiveChangeNotification(NotificationBoard *nb, int category, const cObject *details)
+void RoutingTableRecorder::receiveChangeNotification(cModule *nb, int category, const cObject *details)
 {
     cModule *host = nb->getParentModule();
     if (category==NF_ROUTE_ADDED || category==NF_ROUTE_DELETED || category==NF_ROUTE_CHANGED)
@@ -236,10 +236,10 @@ Register_PerRunConfigOption(CFGID_ROUTINGLOG_FILE, "routinglog-file", CFG_FILENA
 class RoutingTableRecorderListener : public INotifiable
 {
 private:
-    NotificationBoard *nb;
+    cModule *nb;
     RoutingTableRecorder *recorder;
 public:
-    RoutingTableRecorderListener(RoutingTableRecorder *recorder, NotificationBoard *nb) {this->recorder = recorder; this->nb = nb;}
+    RoutingTableRecorderListener(RoutingTableRecorder *recorder, cModule *nb;}
     virtual void receiveChangeNotification(int category, const cObject *details) {recorder->receiveChangeNotification(nb, category, details);}
 };
 
@@ -276,7 +276,7 @@ void RoutingTableRecorder::hookListeners()
     // hook existing notification boards (we won't cover dynamically created hosts/routers, but oh well)
     for (int id = 0; id < simulation.getLastModuleId(); id++)
     {
-        NotificationBoard *nb = dynamic_cast<NotificationBoard *>(simulation.getModule(id));
+        cModule *nb = dynamic_cast<NotificationBoard *>(simulation.getModule(id));
         if (nb)
         {
             INotifiable *listener = new RoutingTableRecorderListener(this, nb);
@@ -308,7 +308,7 @@ void RoutingTableRecorder::ensureRoutingLogFileOpen()
     }
 }
 
-void RoutingTableRecorder::receiveChangeNotification(NotificationBoard *nb, int category, const cObject *details)
+void RoutingTableRecorder::receiveChangeNotification(cModule *nb, int category, const cObject *details)
 {
     cModule *host = nb->getParentModule();
     if (category==NF_ROUTE_ADDED || category==NF_ROUTE_DELETED || category==NF_ROUTE_CHANGED)

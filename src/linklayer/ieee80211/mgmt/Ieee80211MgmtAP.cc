@@ -65,7 +65,7 @@ void Ieee80211MgmtAP::initialize(int stage)
 
         //TBD fill in supportedRates
 
-        nb = NotificationBoardAccess().get();
+        nb = findContainingNode(this, true);
         // subscribe for notifications
         nb->subscribe(this, NF_RADIO_CHANNEL_CHANGED);
 

@@ -71,7 +71,7 @@ void InterfaceTable::initialize(int stage)
     if (stage == INITSTAGE_LOCAL)
     {
         // get a pointer to the NotificationBoard module
-        nb = NotificationBoardAccess().get();
+        nb = findContainingNode(this, true);
         WATCH_PTRVECTOR(idToInterface);
     }
     else if (stage == INITSTAGE_NETWORK_LAYER)

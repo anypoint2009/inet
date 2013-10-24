@@ -235,7 +235,7 @@ class OLSR_ETX : public OLSR
         virtual void nb_loss(OLSR_link_tuple*);
 
         static bool seq_num_bigger_than(uint16_t, uint16_t);
-        NotificationBoard *nb;
+        cModule *nb;
         virtual int numInitStages() const;
         virtual void initialize(int stage);
         // virtual void receiveChangeNotification(int category, cObject *details);

@@ -64,7 +64,7 @@ void TED::initialize(int stage)
         routerId = rt->getRouterId();
         ASSERT(!routerId.isUnspecified());
 
-        nb = NotificationBoardAccess().get();
+        nb = findContainingNode(this, true);
 
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

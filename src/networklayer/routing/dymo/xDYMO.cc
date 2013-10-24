@@ -88,7 +88,7 @@ void xDYMO::initialize(int stage)
         // context
         host = findContainingNode(this);
         nodeStatus = dynamic_cast<NodeStatus *>(host->getSubmodule("status"));
-        notificationBoard = NotificationBoardAccess().get(this);
+        notificationBoard = findContainingNode(this, true);
         interfaceTable = InterfaceTableAccess().get(this);
         routingTable = check_and_cast<IRoutingTable *>(getModuleByPath(par("routingTableModule")));
         networkProtocol = check_and_cast<INetfilter *>(getModuleByPath(par("networkProtocolModule")));

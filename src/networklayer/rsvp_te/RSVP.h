@@ -176,7 +176,7 @@ class INET_API RSVP : public cSimpleModule, public IScriptable, public ILifecycl
     IIPv4RoutingTable *rt;
     IInterfaceTable *ift;
     LIBTable *lt;
-    NotificationBoard *nb;
+    cModule *nb;
 
     IRSVPClassifier *rpct;
 

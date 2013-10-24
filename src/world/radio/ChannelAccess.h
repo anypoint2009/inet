@@ -52,7 +52,7 @@ class INET_API ChannelAccess : public cSimpleModule, protected cListener
 {
   protected:
     static simsignal_t mobilityStateChangedSignal;
-    NotificationBoard *nb; // Cached pointer to the NotificationBoard module
+    cModule *nb; // Cached pointer to the NotificationBoard module
     IChannelControl* cc;  // Pointer to the ChannelControl module
     IChannelControl::RadioRef myRadioRef;  // Identifies this radio in the ChannelControl module
     cModule *hostModule;    // the host that contains this radio model

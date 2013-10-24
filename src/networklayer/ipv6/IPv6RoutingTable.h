@@ -51,7 +51,7 @@ class INET_API IPv6RoutingTable : public cSimpleModule, public IRoutingTable, pr
 {
   protected:
     IInterfaceTable *ift; // cached pointer
-    NotificationBoard *nb; // cached pointer
+    cModule *nb; // cached pointer
 
     bool isrouter;
     bool multicastForward;  //If node is forwarding multicast info
