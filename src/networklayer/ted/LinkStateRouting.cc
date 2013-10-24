@@ -102,7 +102,7 @@ void LinkStateRouting::handleMessage(cMessage * msg)
         ASSERT(false);
 }
 
-void LinkStateRouting::receiveChangeNotification(int category, const cObject *details)
+void LinkStateRouting::receiveSignal(cComponent *source, simsignal_t category, cObject *details)
 {
     Enter_Method_Silent();
     printNotificationBanner(category, details);

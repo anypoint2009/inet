@@ -52,7 +52,7 @@ typedef std::set<ManetAddress>::const_iterator AddressGroupConstIterator;
 /**
  * Base class for Manet Routing
  */
-class INET_API ManetRoutingBase : public cSimpleModule, public INotifiable, protected cListener, public ManetNetfilterHook
+class INET_API ManetRoutingBase : public cSimpleModule, public cListener, protected cListener, public ManetNetfilterHook
 {
   private:
     static simsignal_t mobilityStateChangedSignal;
@@ -211,7 +211,7 @@ class INET_API ManetRoutingBase : public cSimpleModule, public INotifiable, prot
      * ManetRoutingBase is subscribed to position changes.
      */
     virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj);
-    virtual void receiveChangeNotification(int category, const cObject *details);
+    virtual void receiveSignal(cComponent *source, simsignal_t category, cObject *details);
     virtual void processLinkBreak(const cObject *details);
     virtual void processLinkBreakManagement(const cObject *details);
     virtual void processPromiscuous(const cObject *details);

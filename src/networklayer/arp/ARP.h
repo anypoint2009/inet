@@ -38,7 +38,7 @@ class IIPv4RoutingTable;
 /**
  * ARP implementation.
  */
-class INET_API ARP : public cSimpleModule, public IARPCache, public ILifecycle, public INotifiable
+class INET_API ARP : public cSimpleModule, public IARPCache, public ILifecycle, public cListener
 {
   public:
     struct ARPCacheEntry;
@@ -101,7 +101,7 @@ class INET_API ARP : public cSimpleModule, public IARPCache, public ILifecycle, 
     virtual MACAddress getDirectAddressResolution(const IPv4Address &) const;
     virtual IPv4Address getInverseAddressResolution(const MACAddress &) const;
     void setChangeAddress(const IPv4Address &);
-    virtual void receiveChangeNotification(int category, const cObject *details);
+    virtual void receiveSignal(cComponent *source, simsignal_t category, cObject *details);
 
   protected:
     virtual void initialize(int stage);

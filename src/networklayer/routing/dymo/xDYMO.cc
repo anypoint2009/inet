@@ -1425,7 +1425,7 @@ bool xDYMO::handleOperationStage(LifecycleOperation * operation, int stage, IDon
 // notification
 //
 
-void xDYMO::receiveChangeNotification(int category, const cObject *details)
+void xDYMO::receiveSignal(cComponent *source, simsignal_t category, cObject *details)
 {
     Enter_Method("receiveChangeNotification");
     if (category == NF_LINK_BREAK) {

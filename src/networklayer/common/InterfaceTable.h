@@ -64,7 +64,7 @@
  *
  * @see InterfaceEntry
  */
-class INET_API InterfaceTable : public cSimpleModule, public IInterfaceTable, protected INotifiable, public ILifecycle
+class INET_API InterfaceTable : public cSimpleModule, public IInterfaceTable, protected cListener, public ILifecycle
 {
   protected:
     cModule *nb; // cached pointer
@@ -115,7 +115,7 @@ class INET_API InterfaceTable : public cSimpleModule, public IInterfaceTable, pr
      * Called by the NotificationBoard whenever a change of a category
      * occurs to which this client has subscribed.
      */
-    virtual void receiveChangeNotification(int category, const cObject *details);
+    virtual void receiveSignal(cComponent *source, simsignal_t category, cObject *details);
 
     /**
      * Returns the host or router this interface table lives in.

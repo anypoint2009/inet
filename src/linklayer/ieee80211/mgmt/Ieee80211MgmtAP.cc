@@ -115,7 +115,7 @@ void Ieee80211MgmtAP::handleCommand(int msgkind, cObject *ctrl)
     error("handleCommand(): no commands supported");
 }
 
-void Ieee80211MgmtAP::receiveChangeNotification(int category, const cObject *details)
+void Ieee80211MgmtAP::receiveSignal(cComponent *source, simsignal_t category, cObject *details)
 {
     Enter_Method_Silent();
     printNotificationBanner(category, details);

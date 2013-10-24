@@ -179,7 +179,7 @@ void IPv6RoutingTable::handleMessage(cMessage *msg)
     throw cRuntimeError("This module doesn't process messages");
 }
 
-void IPv6RoutingTable::receiveChangeNotification(int category, const cObject *details)
+void IPv6RoutingTable::receiveSignal(cComponent *source, simsignal_t category, cObject *details)
 {
     if (simulation.getContextType()==CTX_INITIALIZE)
         return;  // ignore notifications during initialize

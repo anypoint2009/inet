@@ -95,7 +95,7 @@ cPacket *Ieee80211MgmtSTASimplified::decapsulate(Ieee80211DataFrame *frame)
     return payload;
 }
 
-void Ieee80211MgmtSTASimplified::receiveChangeNotification(int category, const cObject *details)
+void Ieee80211MgmtSTASimplified::receiveSignal(cComponent *source, simsignal_t category, cObject *details)
 {
     Enter_Method_Silent();
     printNotificationBanner(category, details);

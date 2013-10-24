@@ -695,7 +695,7 @@ void ARP::setChangeAddress(const IPv4Address &oldAddress)
 }
 
 
-void ARP::receiveChangeNotification(int category, const cObject *details)
+void ARP::receiveSignal(cComponent *source, simsignal_t category, cObject *details)
 {
     Enter_Method_Silent();
     // host associated. Link is up. Change the state to init.

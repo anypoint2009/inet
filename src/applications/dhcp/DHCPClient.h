@@ -27,10 +27,9 @@
 #include "InterfaceTable.h"
 #include "IPv4RoutingTable.h"
 #include "UDPSocket.h"
-#include "INotifiable.h"
 #include "ILifecycle.h"
 
-class INET_API DHCPClient : public cSimpleModule, public INotifiable, public ILifecycle
+class INET_API DHCPClient : public cSimpleModule, public cListener, public ILifecycle
 {
     protected:
         int bootps_port; // server

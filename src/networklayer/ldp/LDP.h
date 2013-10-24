@@ -48,7 +48,7 @@ class TED;
 /**
  * LDP (rfc 3036) protocol implementation.
  */
-class INET_API LDP: public cSimpleModule, public TCPSocket::CallbackInterface, public IClassifier, public INotifiable, public ILifecycle
+class INET_API LDP: public cSimpleModule, public TCPSocket::CallbackInterface, public IClassifier, public cListener, public ILifecycle
 {
   public:
 
@@ -217,8 +217,8 @@ class INET_API LDP: public cSimpleModule, public TCPSocket::CallbackInterface, p
     // IClassifier
     virtual bool lookupLabel(IPv4Datagram *ipdatagram, LabelOpVector& outLabel, std::string& outInterface, int& color);
 
-    // INotifiable
-    virtual void receiveChangeNotification(int category, const cObject *details);
+    // cListener
+    virtual void receiveSignal(cComponent *source, simsignal_t category, cObject *details);
 };
 
 #endif

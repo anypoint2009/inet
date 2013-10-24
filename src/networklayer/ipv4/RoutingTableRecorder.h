@@ -24,7 +24,6 @@
 
 #include <map>
 #include "IIPv4RoutingTable.h"
-#include "INotifiable.h"
 #include "IRoute.h"
 
 /**
@@ -81,7 +80,6 @@ class INET_API RoutingTableRecorder : public cSimpleModule, public cIndexedEvent
 
 
 #include "IIPv4RoutingTable.h"
-#include "INotifiable.h"
 
 /**
  * Records routing table changes into a file.

@@ -52,7 +52,7 @@ class INET_API Ieee80211MgmtAdhoc : public Ieee80211MgmtBase
     virtual cPacket *decapsulate(Ieee80211DataFrame *frame);
 
     /** Called by the NotificationBoard whenever a change occurs we're interested in */
-    virtual void receiveChangeNotification(int category, const cObject *details);
+    virtual void receiveSignal(cComponent *source, simsignal_t category, cObject *details);
 
     /** @name Processing of different frame types */
     //@{

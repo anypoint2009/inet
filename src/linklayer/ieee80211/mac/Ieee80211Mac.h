@@ -451,7 +451,7 @@ class INET_API Ieee80211Mac : public WirelessMacBase
      */
     //@{
     /** @brief Called by the NotificationBoard whenever a change occurs we're interested in */
-    virtual void receiveChangeNotification(int category, const cObject * details);
+    virtual void receiveSignal(cComponent *source, simsignal_t category, cObject *details);
 
     /** @brief Handle commands (msg kind+control info) coming from upper layers */
     virtual void handleCommand(cMessage *msg);

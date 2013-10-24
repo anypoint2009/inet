@@ -47,7 +47,7 @@ class IPv6RoutingTable;
  * be read and modified during simulation, typically by routing protocol
  * implementations.
  */
-class INET_API IPv6RoutingTable : public cSimpleModule, public IRoutingTable, protected INotifiable, public ILifecycle
+class INET_API IPv6RoutingTable : public cSimpleModule, public IRoutingTable, protected cListener, public ILifecycle
 {
   protected:
     IInterfaceTable *ift; // cached pointer
@@ -128,7 +128,7 @@ class INET_API IPv6RoutingTable : public cSimpleModule, public IRoutingTable, pr
      * Called by the NotificationBoard whenever a change of a category
      * occurs to which this client has subscribed.
      */
-    virtual void receiveChangeNotification(int category, const cObject *details);
+    virtual void receiveSignal(cComponent *source, simsignal_t category, cObject *details);
 
   public:
     /** @name Interfaces */

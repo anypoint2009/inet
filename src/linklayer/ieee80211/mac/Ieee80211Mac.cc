@@ -828,7 +828,7 @@ void Ieee80211Mac::handleLowerMsg(cPacket *msg)
     EV<<"Leave handleLowerMsg...\n";
 }
 
-void Ieee80211Mac::receiveChangeNotification(int category, const cObject *details)
+void Ieee80211Mac::receiveSignal(cComponent *source, simsignal_t category, cObject *details)
 {
     Enter_Method_Silent();
     MACBase::receiveChangeNotification(category, details);

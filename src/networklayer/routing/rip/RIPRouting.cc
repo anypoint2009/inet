@@ -283,7 +283,7 @@ void RIPRouting::sendRIPRequest(const RIPInterfaceEntry &ripInterface)
 /**
  * Listen on interface/route changes and update private data structures.
  */
-void RIPRouting::receiveChangeNotification(int category, const cObject *details)
+void RIPRouting::receiveSignal(cComponent *source, simsignal_t category, cObject *details)
 {
     Enter_Method_Silent("RIPRouting::receiveChangeNotification(%s)", notificationCategoryName(category));
 

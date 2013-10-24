@@ -184,7 +184,7 @@ static inline char *print_pkt(char *p, int len)
 class DSRUU:public cSimpleModule, public ImNotifiable
 {
 #else
-class DSRUU:public cSimpleModule, public INotifiable, public ManetNetfilterHook
+class DSRUU:public cSimpleModule, public cListener, public ManetNetfilterHook
 {
 #endif
   public:
@@ -267,7 +267,7 @@ class DSRUU:public cSimpleModule, public INotifiable, public ManetNetfilterHook
     void drop (cMessage *msg,int code) { delete msg;}
 
     cModule *nb;
-    virtual void receiveChangeNotification(int category, const cObject *details);
+    virtual void receiveSignal(cComponent *source, simsignal_t category, cObject *details);
 
   protected:
     struct in_addr ifaddr;

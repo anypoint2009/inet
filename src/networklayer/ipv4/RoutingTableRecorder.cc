@@ -36,8 +36,8 @@ Define_Module(RoutingTableRecorder);
 
 
 // We need this because we want to know which NotificationBoard the notification comes from
-// (INotifiable::receiveChangeNotification() doesn't have NotificationBoard* as arg).
-class RoutingTableNotificationBoardListener : public INotifiable
+// (cListener::receiveChangeNotification() doesn't have NotificationBoard* as arg).
+class RoutingTableNotificationBoardListener : public cListener
 {
   private:
     cModule *nb;
@@ -45,7 +45,7 @@ class RoutingTableNotificationBoardListener : public INotifiable
 
   public:
     RoutingTableNotificationBoardListener(RoutingTableRecorder *recorder, cModule *nb;}
-    virtual void receiveChangeNotification(int category, const cObject *details) {
+    virtual void receiveSignal(cComponent *source, simsignal_t category, cObject *details) {
         recorder->receiveChangeNotification(nb, category, details);
     }
 };
@@ -84,7 +84,7 @@ void RoutingTableRecorder::hookListeners()
     for (int id = 0; id < simulation.getLastModuleId(); id++) {
         cModule *nb = dynamic_cast<NotificationBoard *>(simulation.getModule(id));
         if (nb) {
-            INotifiable *listener = new RoutingTableNotificationBoardListener(this, nb);
+            cListener *listener = new RoutingTableNotificationBoardListener(this, nb);
             nb->subscribe(listener, NF_INTERFACE_CREATED);
             nb->subscribe(listener, NF_INTERFACE_DELETED);
             nb->subscribe(listener, NF_INTERFACE_CONFIG_CHANGED);
@@ -232,15 +232,15 @@ Register_PerRunConfigOption(CFGID_ROUTINGLOG_FILE, "routinglog-file", CFG_FILENA
 
 
 // We need this because we want to know which NotificationBoard the notification comes from
-// (INotifiable::receiveChangeNotification() doesn't have NotificationBoard* as arg).
-class RoutingTableRecorderListener : public INotifiable
+// (cListener::receiveChangeNotification() doesn't have NotificationBoard* as arg).
+class RoutingTableRecorderListener : public cListener
 {
 private:
     cModule *nb;
     RoutingTableRecorder *recorder;
 public:
     RoutingTableRecorderListener(RoutingTableRecorder *recorder, cModule *nb;}
-    virtual void receiveChangeNotification(int category, const cObject *details) {recorder->receiveChangeNotification(nb, category, details);}
+    virtual void receiveSignal(cComponent *source, simsignal_t category, cObject *details);}
 };
 
 RoutingTableRecorder::RoutingTableRecorder()
@@ -279,7 +279,7 @@ void RoutingTableRecorder::hookListeners()
         cModule *nb = dynamic_cast<NotificationBoard *>(simulation.getModule(id));
         if (nb)
         {
-            INotifiable *listener = new RoutingTableRecorderListener(this, nb);
+            cListener *listener = new RoutingTableRecorderListener(this, nb);
             nb->subscribe(listener, NF_INTERFACE_CREATED);
             nb->subscribe(listener, NF_INTERFACE_DELETED);
             nb->subscribe(listener, NF_INTERFACE_CONFIG_CHANGED);

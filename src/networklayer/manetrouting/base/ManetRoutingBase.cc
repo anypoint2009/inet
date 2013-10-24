@@ -771,7 +771,7 @@ void ManetRoutingBase::omnet_clean_rte()
 //
 // generic receiveChangeNotification, the protocols must implement processLinkBreak and processPromiscuous only
 //
-void ManetRoutingBase::receiveChangeNotification(int category, const cObject *details)
+void ManetRoutingBase::receiveSignal(cComponent *source, simsignal_t category, cObject *details)
 {
     Enter_Method("Manet llf");
     if (!isRegistered)

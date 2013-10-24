@@ -20,7 +20,6 @@
 #define __INET_IGMP_H
 
 #include "INETDefs.h"
-#include "INotifiable.h"
 #include "IPv4Address.h"
 #include "IGMPMessage_m.h"
 #include "InterfaceEntry.h"
@@ -31,7 +30,7 @@ class IInterfaceTable;
 class IIPv4RoutingTable;
 class NotificationBoard;
 
-class INET_API IGMPv2 : public cSimpleModule, protected INotifiable
+class INET_API IGMPv2 : public cSimpleModule, protected cListener
 {
   protected:
     enum RouterState

@@ -22,7 +22,6 @@
 
 #include "INETDefs.h"
 
-#include "INotifiable.h"
 #include "GenericRoute.h"
 #include "IRoutingTable.h"
 
@@ -33,7 +32,7 @@ class NotificationBoard;
 /**
  * A C++ interface to abstract the functionality of a routing table, regardless of address type.
  */
-class INET_API GenericRoutingTable : public cSimpleModule, public IRoutingTable, public INotifiable
+class INET_API GenericRoutingTable : public cSimpleModule, public IRoutingTable, public cListener
 {
     private:
         IInterfaceTable *ift; // cached pointer
@@ -63,7 +62,7 @@ class INET_API GenericRoutingTable : public cSimpleModule, public IRoutingTable,
          * Called by the NotificationBoard whenever a change of a category
          * occurs to which this client has subscribed.
          */
-        virtual void receiveChangeNotification(int category, const cObject *details);
+        virtual void receiveSignal(cComponent *source, simsignal_t category, cObject *details);
 
         virtual void configureRouterId();
 

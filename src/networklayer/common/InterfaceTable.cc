@@ -95,7 +95,7 @@ void InterfaceTable::handleMessage(cMessage *msg)
     throw cRuntimeError("This module doesn't process messages");
 }
 
-void InterfaceTable::receiveChangeNotification(int category, const cObject *details)
+void InterfaceTable::receiveSignal(cComponent *source, simsignal_t category, cObject *details)
 {
     // nothing needed here at the moment
     Enter_Method_Silent();

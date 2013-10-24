@@ -32,7 +32,6 @@
 
 #include "INETDefs.h"
 
-#include "INotifiable.h"
 #include "IPv4Address.h"
 #include "IIPv4RoutingTable.h"
 #include "ILifecycle.h"
@@ -73,7 +72,7 @@ class IRoutingTable;
  *
  * @see InterfaceEntry, IPv4InterfaceData, IPv4Route
  */
-class INET_API IPv4RoutingTable: public cSimpleModule, public IIPv4RoutingTable, protected INotifiable, public ILifecycle
+class INET_API IPv4RoutingTable: public cSimpleModule, public IIPv4RoutingTable, protected cListener, public ILifecycle
 {
   protected:
     IInterfaceTable *ift; // cached pointer
@@ -161,7 +160,7 @@ class INET_API IPv4RoutingTable: public cSimpleModule, public IIPv4RoutingTable,
      * Called by the NotificationBoard whenever a change of a category
      * occurs to which this client has subscribed.
      */
-    virtual void receiveChangeNotification(int category, const cObject *details);
+    virtual void receiveSignal(cComponent *source, simsignal_t category, cObject *details);
 
   public:
     /**

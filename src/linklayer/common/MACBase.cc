@@ -93,7 +93,7 @@ bool MACBase::handleOperationStage(LifecycleOperation *operation, int stage, IDo
     return true;
 }
 
-void MACBase::receiveChangeNotification(int category, const cObject *details)
+void MACBase::receiveSignal(cComponent *source, simsignal_t category, cObject *details)
 {
     if (category == NF_INTERFACE_DELETED)
     {

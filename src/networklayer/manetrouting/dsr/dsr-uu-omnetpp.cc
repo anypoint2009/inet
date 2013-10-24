@@ -415,7 +415,7 @@ void DSRUU::finish()
     maint_buf_cleanup();
 }
 
-DSRUU::DSRUU():cSimpleModule(), INotifiable()
+DSRUU::DSRUU():cSimpleModule(), cListener()
 {
     lifoDsrPkt = NULL;
     lifo_token = 0;
@@ -579,7 +579,7 @@ void DSRUU::handleMessage(cMessage* msg)
     return;
 }
 
-void DSRUU::receiveChangeNotification(int category, const cObject *details)
+void DSRUU::receiveSignal(cComponent *source, simsignal_t category, cObject *details)
 {
     IPv4Datagram  *dgram = NULL;
     //current_time = simTime();

@@ -22,7 +22,6 @@
 #include "INETDefs.h"
 #include "Coord.h"
 #include "ILifecycle.h"
-#include "INotifiable.h"
 #include "IMobility.h"
 #include "IAddressType.h"
 #include "INetfilter.h"
@@ -44,7 +43,7 @@
 // KLUDGE: implement position registry protocol instead of using a global variable
 // KLUDGE: the GPSR packet is now used to wrap the content of network datagrams
 // KLUDGE: we should rather add these fields as header extensions
-class INET_API GPSR : public cSimpleModule, public ILifecycle, public INotifiable, public INetfilter::IHook
+class INET_API GPSR : public cSimpleModule, public ILifecycle, public cListener, public INetfilter::IHook
 {
     private:
         // GPSR parameters
@@ -150,7 +149,7 @@ class INET_API GPSR : public cSimpleModule, public ILifecycle, public INotifiabl
         virtual bool handleOperationStage(LifecycleOperation * operation, int stage, IDoneCallback * doneCallback);
 
         // notification
-        virtual void receiveChangeNotification(int category, const cObject * details);
+        virtual void receiveSignal(cComponent *source, simsignal_t category, cObject *details);
 };
 
 #endif

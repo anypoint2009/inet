@@ -31,7 +31,7 @@
 
 class NotificationBoard;
 
-class INET_API DHCPServer : public cSimpleModule, public INotifiable, public ILifecycle
+class INET_API DHCPServer : public cSimpleModule, public cListener, public ILifecycle
 {
     protected:
         // Transmission Timer

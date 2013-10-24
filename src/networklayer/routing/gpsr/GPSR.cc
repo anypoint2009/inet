@@ -643,7 +643,7 @@ bool GPSR::handleOperationStage(LifecycleOperation * operation, int stage, IDone
 // notification
 //
 
-void GPSR::receiveChangeNotification(int category, const cObject *details)
+void GPSR::receiveSignal(cComponent *source, simsignal_t category, cObject *details)
 {
     Enter_Method("receiveChangeNotification");
     if (category == NF_LINK_BREAK) {

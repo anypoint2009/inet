@@ -23,7 +23,6 @@
 
 #include "PPPFrame_m.h"
 #include "TxNotifDetails.h"
-#include "INotifiable.h"
 #include "ILifecycle.h"
 #include "NodeStatus.h"
 #include "MACBase.h"
