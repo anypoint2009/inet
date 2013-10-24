@@ -136,7 +136,7 @@ void Ieee80211AgentSTA::receiveChangeNotification(int category, const cObject *d
         getParentModule()->getParentModule()->bubble("Beacon lost!");
         //sendDisassociateRequest();
         sendScanRequest();
-        nb->fireChangeNotification(NF_L2_DISASSOCIATED, myIface);
+        emit(NF_L2_DISASSOCIATED, myIface);
     }
 }
 
@@ -327,11 +327,11 @@ void Ieee80211AgentSTA::processAssociateConfirm(Ieee80211Prim_AssociateConfirm *
         getParentModule()->getParentModule()->bubble("Associated with AP");
         if(prevAP.isUnspecified() || prevAP != resp->getAddress())
         {
-            nb->fireChangeNotification(NF_L2_ASSOCIATED_NEWAP, myIface); //XXX detail: InterfaceEntry?
+            emit(NF_L2_ASSOCIATED_NEWAP, myIface); //XXX detail: InterfaceEntry?
             prevAP = resp->getAddress();
         }
         else
-            nb->fireChangeNotification(NF_L2_ASSOCIATED_OLDAP, myIface);
+            emit(NF_L2_ASSOCIATED_OLDAP, myIface);
     }
 }
 
@@ -348,7 +348,7 @@ void Ieee80211AgentSTA::processReassociateConfirm(Ieee80211Prim_ReassociateConfi
     else
     {
         EV << "Reassociation successful\n";
-        nb->fireChangeNotification(NF_L2_ASSOCIATED_OLDAP, myIface); //XXX detail: InterfaceEntry?
+        emit(NF_L2_ASSOCIATED_OLDAP, myIface); //XXX detail: InterfaceEntry?
         emit(acceptConfirmSignal, PR_REASSOCIATE_CONFIRM);
         // we are happy!
     }

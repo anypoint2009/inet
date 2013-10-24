@@ -270,7 +270,7 @@ void InterfaceTable::addInterface(InterfaceEntry *entry)
     // fill in networkLayerGateIndex, nodeOutputGateId, nodeInputGateId
     discoverConnectingGates(entry);
 
-    nb->fireChangeNotification(NF_INTERFACE_CREATED, entry);
+    emit(NF_INTERFACE_CREATED, entry);
 }
 
 void InterfaceTable::discoverConnectingGates(InterfaceEntry *entry)
@@ -339,7 +339,7 @@ void InterfaceTable::deleteInterface(InterfaceEntry *entry)
     if (entry != getInterfaceById(id))
         throw cRuntimeError("deleteInterface(): interface '%s' not found in interface table", entry->getName());
 
-    nb->fireChangeNotification(NF_INTERFACE_DELETED, entry);  // actually, only going to be deleted
+    emit(NF_INTERFACE_DELETED, entry);  // actually, only going to be deleted
 
     idToInterface[id - INTERFACEIDS_START] = NULL;
     delete entry;
@@ -355,7 +355,7 @@ void InterfaceTable::invalidateTmpInterfaceList()
 
 void InterfaceTable::interfaceChanged(int category, const InterfaceEntryChangeDetails *details)
 {
-    nb->fireChangeNotification(category, details);
+    emit(category, details);
 
     if (ev.isGUI() && par("displayAddresses").boolValue())
         updateLinkDisplayString(details->getInterfaceEntry());

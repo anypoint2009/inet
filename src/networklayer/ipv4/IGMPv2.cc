@@ -340,7 +340,7 @@ void IGMPv2::initialize(int stage)
         rt = check_and_cast<IIPv4RoutingTable *>(getModuleByPath(par("routingTableModule")));
 
         nb = findContainingNode(this, true);
-        nb->subscribe(this, NF_INTERFACE_DELETED);
+        nb->subscribe(NF_INTERFACE_DELETED, this);
         nb->subscribe(this, NF_IPv4_MCAST_JOIN);
         nb->subscribe(this, NF_IPv4_MCAST_LEAVE);
 
@@ -396,7 +396,7 @@ void IGMPv2::initialize(int stage)
             if (ie->isMulticast())
                 configureInterface(ie);
         }
-        nb->subscribe(this, NF_INTERFACE_CREATED);
+        nb->subscribe(NF_INTERFACE_CREATED, this);
     }
     else if (stage == INITSTAGE_NETWORK_LAYER_2)
     {
@@ -696,7 +696,7 @@ void IGMPv2::processLeaveTimer(cMessage *msg)
     ctx->ie->ipv4Data()->removeMulticastListener(ctx->routerGroup->groupAddr);
 
     IPv4MulticastGroupInfo info(ctx->ie, ctx->routerGroup->groupAddr);
-    nb->fireChangeNotification(NF_IPv4_MCAST_UNREGISTERED, &info);
+    emit(NF_IPv4_MCAST_UNREGISTERED, &info);
     numRouterGroups--;
 
     if (ctx->routerGroup->state ==  IGMP_RGS_CHECKING_MEMBERSHIP)
@@ -848,7 +848,7 @@ void IGMPv2::processV2Report(InterfaceEntry *ie, IGMPMessage *msg)
             ie->ipv4Data()->addMulticastListener(groupAddr);
             // notify routing
             IPv4MulticastGroupInfo info(ie, routerGroupData->groupAddr);
-            nb->fireChangeNotification(NF_IPv4_MCAST_REGISTERED, &info);
+            emit(NF_IPv4_MCAST_REGISTERED, &info);
             numRouterGroups++;
         }
         else if (routerGroupData->state == IGMP_RGS_CHECKING_MEMBERSHIP)

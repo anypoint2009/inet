@@ -77,8 +77,8 @@ void DHCPServer::initialize(int stage)
         // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
 
         nb = findContainingNode(this, true);
-        nb->subscribe(this, NF_INTERFACE_CREATED);
-        nb->subscribe(this, NF_INTERFACE_DELETED);
+        nb->subscribe(NF_INTERFACE_CREATED, this);
+        nb->subscribe(NF_INTERFACE_DELETED, this);
 
         IInterfaceTable* ift = InterfaceTableAccess().get();
         ie = ift->getInterfaceByName(par("interface"));

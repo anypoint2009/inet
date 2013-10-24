@@ -57,7 +57,7 @@ class INET_API GPSR : public cSimpleModule, public ILifecycle, public INotifiabl
         // context
         cModule * host;
         NodeStatus * nodeStatus;
-        NotificationBoard * notificationBoard;
+        cModule *nb;
         IMobility * mobility;
         IAddressType * addressType;
         IInterfaceTable * interfaceTable;

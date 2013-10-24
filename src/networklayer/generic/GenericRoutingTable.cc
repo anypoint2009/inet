@@ -75,10 +75,10 @@ void GenericRoutingTable::initialize(int stage)
         WATCH(routerId);
 
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
-        nb->subscribe(this, NF_INTERFACE_CREATED);
-        nb->subscribe(this, NF_INTERFACE_DELETED);
-        nb->subscribe(this, NF_INTERFACE_STATE_CHANGED);
-        nb->subscribe(this, NF_INTERFACE_CONFIG_CHANGED);
+        nb->subscribe(NF_INTERFACE_CREATED, this);
+        nb->subscribe(NF_INTERFACE_DELETED, this);
+        nb->subscribe(NF_INTERFACE_STATE_CHANGED, this);
+        nb->subscribe(NF_INTERFACE_CONFIG_CHANGED, this);
         nb->subscribe(this, NF_INTERFACE_IPv4CONFIG_CHANGED);
     }
     else if (stage == INITSTAGE_NETWORK_LAYER)
@@ -142,7 +142,7 @@ void GenericRoutingTable::routeChanged(GenericRoute *entry, int fieldCode)
         //invalidateCache();
         updateDisplayString();
     }
-    nb->fireChangeNotification(NF_ROUTE_CHANGED, entry); // TODO include fieldCode in the notification
+    emit(NF_ROUTE_CHANGED, entry); // TODO include fieldCode in the notification
 }
 
 void GenericRoutingTable::configureRouterId()
@@ -354,7 +354,7 @@ void GenericRoutingTable::addRoute(IRoute* route)
     internalAddRoute(entry);
 
     updateDisplayString();
-    nb->fireChangeNotification(NF_ROUTE_ADDED, entry);
+    emit(NF_ROUTE_ADDED, entry);
 }
 
 IRoute* GenericRoutingTable::removeRoute(IRoute* route)
@@ -365,7 +365,7 @@ IRoute* GenericRoutingTable::removeRoute(IRoute* route)
     if (entry)
     {
         updateDisplayString();
-        nb->fireChangeNotification(NF_ROUTE_DELETED, entry);
+        emit(NF_ROUTE_DELETED, entry);
     }
 
     return entry;

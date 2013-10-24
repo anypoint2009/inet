@@ -453,12 +453,12 @@ void RIPRouting::startRIPRouting()
 
     // subscribe to notifications
     cModule *nb = findContainingNode(this, true);
-    nb->subscribe(this, NF_INTERFACE_CREATED);
-    nb->subscribe(this, NF_INTERFACE_DELETED);
-    nb->subscribe(this, NF_INTERFACE_STATE_CHANGED);
-    nb->subscribe(this, NF_ROUTE_DELETED);
-    nb->subscribe(this, NF_ROUTE_ADDED);
-    nb->subscribe(this, NF_ROUTE_CHANGED);
+    nb->subscribe(NF_INTERFACE_CREATED, this);
+    nb->subscribe(NF_INTERFACE_DELETED, this);
+    nb->subscribe(NF_INTERFACE_STATE_CHANGED, this);
+    nb->subscribe(NF_ROUTE_DELETED, this);
+    nb->subscribe(NF_ROUTE_ADDED, this);
+    nb->subscribe(NF_ROUTE_CHANGED, this);
 
     for (InterfaceVector::iterator it = ripInterfaces.begin(); it != ripInterfaces.end(); ++it)
         if (it->mode != NO_RIP)

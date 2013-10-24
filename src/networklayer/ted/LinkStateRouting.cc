@@ -60,7 +60,7 @@ void LinkStateRouting::initialize(int stage)
 
         // listen for TED modifications
         cModule *nb = findContainingNode(this, true);
-        nb->subscribe(this, NF_TED_CHANGED);
+        nb->subscribe(NF_TED_CHANGED, this);
 
         // peers are given as interface names in the "peers" module parameter;
         // store corresponding interface addresses in peerIfAddrs[]

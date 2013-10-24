@@ -134,7 +134,7 @@ class INET_API BasicBattery : public cSimpleModule, public INotifiable
 
 
     // pointer to the notification board
-    NotificationBoard*  mpNb;
+    cModule *nb;
 
   private:
     // OPERATIONS

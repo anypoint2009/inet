@@ -146,7 +146,7 @@ void IPv4InterfaceData::joinMulticastGroup(const IPv4Address& multicastAddress)
     if (!nb)
         nb = findContainingNode(this, true);
     IPv4MulticastGroupInfo info(ownerp, multicastAddress);
-    nb->fireChangeNotification(NF_IPv4_MCAST_JOIN, &info);
+    emit(NF_IPv4_MCAST_JOIN, &info);
 }
 
 void IPv4InterfaceData::leaveMulticastGroup(const IPv4Address& multicastAddress)
@@ -170,7 +170,7 @@ void IPv4InterfaceData::leaveMulticastGroup(const IPv4Address& multicastAddress)
                 if (!nb)
                     nb = findContainingNode(this, true);
                 IPv4MulticastGroupInfo info(ownerp, multicastAddress);
-                nb->fireChangeNotification(NF_IPv4_MCAST_LEAVE, &info);
+                emit(NF_IPv4_MCAST_LEAVE, &info);
             }
         }
     }

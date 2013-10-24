@@ -347,21 +347,21 @@ void ManetRoutingBase::linkLayerFeeback()
 {
     if (!isRegistered)
         opp_error("Manet routing protocol is not register");
-    nb->subscribe(this, NF_LINK_BREAK);
+    nb->subscribe(NF_LINK_BREAK, this);
 }
 
 void ManetRoutingBase::linkPromiscuous()
 {
     if (!isRegistered)
         opp_error("Manet routing protocol is not register");
-    nb->subscribe(this, NF_LINK_PROMISCUOUS);
+    nb->subscribe(NF_LINK_PROMISCUOUS, this);
 }
 
 void ManetRoutingBase::linkFullPromiscuous()
 {
     if (!isRegistered)
         opp_error("Manet routing protocol is not register");
-    nb->subscribe(this, NF_LINK_FULL_PROMISCUOUS);
+    nb->subscribe(NF_LINK_FULL_PROMISCUOUS, this);
 }
 
 void ManetRoutingBase::registerPosition()

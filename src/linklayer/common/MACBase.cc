@@ -52,7 +52,7 @@ void MACBase::initialize(int stage)
     {
         nb = findContainingNode(this);
         if (nb)
-            nb->subscribe(this, NF_INTERFACE_DELETED);
+            nb->subscribe(NF_INTERFACE_DELETED, this);
     }
     else if (stage == INITSTAGE_LAST)
     {

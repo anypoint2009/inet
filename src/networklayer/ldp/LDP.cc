@@ -167,8 +167,8 @@ void LDP::initialize(int stage)
         rebuildFecList();
 
         // listen for routing table modifications
-        nb->subscribe(this, NF_ROUTE_ADDED);
-        nb->subscribe(this, NF_ROUTE_DELETED);
+        nb->subscribe(NF_ROUTE_ADDED, this);
+        nb->subscribe(NF_ROUTE_DELETED, this);
     }
 }
 
@@ -1327,7 +1327,7 @@ void LDP::announceLinkChange(int tedlinkindex)
     TEDChangeInfo d;
     d.setTedLinkIndicesArraySize(1);
     d.setTedLinkIndices(0, tedlinkindex);
-    nb->fireChangeNotification(NF_TED_CHANGED, &d);
+    emit(NF_TED_CHANGED, &d);
 }
 
 

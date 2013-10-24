@@ -43,7 +43,7 @@ GPSR::GPSR()
 {
     host = NULL;
     nodeStatus = NULL;
-    notificationBoard = NULL;
+    nb = NULL;
     mobility = NULL;
     addressType = NULL;
     interfaceTable = NULL;
@@ -80,7 +80,7 @@ void GPSR::initialize(int stage)
         // context
         host = findContainingNode(this);
         nodeStatus = dynamic_cast<NodeStatus *>(host->getSubmodule("status"));
-        notificationBoard = findContainingNode(this, true);
+        nb = findContainingNode(this, true);
         interfaceTable = InterfaceTableAccess().get(this);
         mobility = check_and_cast<IMobility *>(host->getSubmodule("mobility"));
         routingTable = check_and_cast<IRoutingTable *>(getModuleByPath(par("routingTableModule")));
@@ -99,7 +99,7 @@ void GPSR::initialize(int stage)
         // ASSERT(stage >= STAGE:IP_LAYER_READY_FOR_HOOK_REGISTRATION);
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         globalPositionTable.clear();
-        notificationBoard->subscribe(this, NF_LINK_BREAK);
+        nb->subscribe(NF_LINK_BREAK, this);
         addressType = getSelfAddress().getAddressType();
         networkProtocol->registerHook(0, this);
         if (isNodeUp())

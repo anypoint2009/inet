@@ -67,7 +67,7 @@ void Ieee80211MgmtAP::initialize(int stage)
 
         nb = findContainingNode(this, true);
         // subscribe for notifications
-        nb->subscribe(this, NF_RADIO_CHANNEL_CHANGED);
+        nb->subscribe(NF_RADIO_CHANNEL_CHANGED, this);
 
         // start beacon timer (randomize startup time)
         beaconTimer = new cMessage("beaconTimer");
@@ -422,7 +422,7 @@ void Ieee80211MgmtAP::sendAssocNotification(const MACAddress &addr)
     NotificationInfoSta notif;
     notif.setApAddress(myAddress);
     notif.setStaAddress(addr);
-    nb->fireChangeNotification(NF_L2_AP_ASSOCIATED,&notif);
+    emit(NF_L2_AP_ASSOCIATED,&notif);
 }
 
 void Ieee80211MgmtAP::sendDisAssocNotification(const MACAddress &addr)
@@ -430,7 +430,7 @@ void Ieee80211MgmtAP::sendDisAssocNotification(const MACAddress &addr)
     NotificationInfoSta notif;
     notif.setApAddress(myAddress);
     notif.setStaAddress(addr);
-    nb->fireChangeNotification(NF_L2_AP_DISASSOCIATED,&notif);
+    emit(NF_L2_AP_DISASSOCIATED,&notif);
 }
 
 void Ieee80211MgmtAP::start()

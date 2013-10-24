@@ -1329,7 +1329,7 @@ void xMIPv6::processBAMessage(BindingAcknowledgement* ba, IPv6ControlInfo* ctrlI
                     /*statVectorBAfromCN.record(1);*/
 
                     // fire event to MIH subscribers
-                    nb->fireChangeNotification(NF_MIPv6_RO_COMPLETED, NULL);
+                    emit(NF_MIPv6_RO_COMPLETED, NULL);
                 }
 
                 // set BAck flag in BUL

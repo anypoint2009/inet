@@ -278,7 +278,7 @@ void PPP::startTransmitting(cPacket *msg)
 
     // fire notification
     notifDetails.setPacket(pppFrame);
-    nb->fireChangeNotification(NF_PP_TX_BEGIN, &notifDetails);
+    emit(NF_PP_TX_BEGIN, &notifDetails);
 
     // send
     EV << "Starting transmission of " << pppFrame << endl;
@@ -313,7 +313,7 @@ void PPP::handleMessage(cMessage *msg)
 
         // fire notification
         notifDetails.setPacket(NULL);
-        nb->fireChangeNotification(NF_PP_TX_END, &notifDetails);
+        emit(NF_PP_TX_END, &notifDetails);
 
         if (!txQueue.empty())
         {
@@ -332,7 +332,7 @@ void PPP::handleMessage(cMessage *msg)
 
         // fire notification
         notifDetails.setPacket(PK(msg));
-        nb->fireChangeNotification(NF_PP_RX_END, &notifDetails);
+        emit(NF_PP_RX_END, &notifDetails);
 
         emit(packetReceivedFromLowerSignal, msg);
 

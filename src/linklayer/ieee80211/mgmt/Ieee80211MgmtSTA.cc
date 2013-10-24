@@ -99,7 +99,7 @@ void Ieee80211MgmtSTA::initialize(int stage)
         assocTimeoutMsg = NULL;
 
         nb = findContainingNode(this, true);
-        nb->subscribe(this, NF_LINK_FULL_PROMISCUOUS);
+        nb->subscribe(NF_LINK_FULL_PROMISCUOUS, this);
 
         WATCH(isScanning);
         WATCH(isAssociated);
@@ -282,7 +282,7 @@ void Ieee80211MgmtSTA::changeChannel(int channelNum)
 void Ieee80211MgmtSTA::beaconLost()
 {
     EV << "Missed a few consecutive beacons -- AP is considered lost\n";
-    nb->fireChangeNotification(NF_L2_BEACON_LOST, NULL);  //XXX use InterfaceEntry as detail, etc...
+    emit(NF_L2_BEACON_LOST, NULL);  //XXX use InterfaceEntry as detail, etc...
 }
 
 void Ieee80211MgmtSTA::sendManagementFrame(Ieee80211ManagementFrame *frame, const MACAddress& address)
@@ -419,7 +419,7 @@ void Ieee80211MgmtSTA::processScanCommand(Ieee80211Prim_ScanRequest *ctrl)
 
     // start scanning
     if (scanning.activeScan)
-        nb->subscribe(this, NF_RADIOSTATE_CHANGED);
+        nb->subscribe(NF_RADIOSTATE_CHANGED, this);
     scanning.currentChannelIndex = -1; // so we'll start with index==0
     isScanning = true;
     scanNextChannel();
@@ -766,7 +766,7 @@ void Ieee80211MgmtSTA::handleAssociationResponseFrame(Ieee80211AssociationRespon
         isAssociated = true;
         (APInfo&)assocAP = (*ap);
 
-        nb->fireChangeNotification(NF_L2_ASSOCIATED, NULL); //XXX detail: InterfaceEntry?
+        emit(NF_L2_ASSOCIATED, NULL); //XXX detail: InterfaceEntry?
 
         assocAP.beaconTimeoutMsg = new cMessage("beaconTimeout", MK_BEACON_TIMEOUT);
         scheduleAt(simTime()+MAX_BEACONS_MISSED*assocAP.beaconInterval, assocAP.beaconTimeoutMsg);

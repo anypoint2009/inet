@@ -491,7 +491,7 @@ void IPv6InterfaceData::joinMulticastGroup(const IPv6Address& multicastAddress)
     if(!nb)
         nb = findContainingNode(this, true);
     IPv6MulticastGroupInfo info(ownerp, multicastAddress);
-    nb->fireChangeNotification(NF_IPv6_MCAST_JOIN, &info);
+    emit(NF_IPv6_MCAST_JOIN, &info);
 }
 
 void IPv6InterfaceData::leaveMulticastGroup(const IPv6Address& multicastAddress)
@@ -515,7 +515,7 @@ void IPv6InterfaceData::leaveMulticastGroup(const IPv6Address& multicastAddress)
                 if (!nb)
                     nb = findContainingNode(this, true);
                 IPv6MulticastGroupInfo info(ownerp, multicastAddress);
-                nb->fireChangeNotification(NF_IPv6_MCAST_LEAVE, &info);
+                emit(NF_IPv6_MCAST_LEAVE, &info);
             }
         }
     }

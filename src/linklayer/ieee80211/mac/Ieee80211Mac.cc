@@ -288,7 +288,7 @@ void Ieee80211Mac::initialize(int stage)
 
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         // subscribe for the information of the carrier sense
-        nb->subscribe(this, NF_RADIOSTATE_CHANGED);
+        nb->subscribe(NF_RADIOSTATE_CHANGED, this);
 
         // obtain pointer to external queue
         initializeQueueModule();  //FIXME STAGE: this should be in L2 initialization!!!!
@@ -751,7 +751,7 @@ void Ieee80211Mac::handleLowerMsg(cPacket *msg)
         double frameDuration = cinfo->getTestFrameDuration() + computeFrameDuration(LENGTH_ACK, basicBitrate)+rtsTime;
         cinfo->setTestFrameDuration(frameDuration);
     }
-    nb->fireChangeNotification(NF_LINK_FULL_PROMISCUOUS, msg);
+    emit(NF_LINK_FULL_PROMISCUOUS, msg);
     validRecMode = false;
     if (msg->getControlInfo() && dynamic_cast<Radio80211aControlInfo *>(msg->getControlInfo()))
     {
@@ -2020,7 +2020,7 @@ void Ieee80211Mac::finishCurrentTransmission()
 void Ieee80211Mac::giveUpCurrentTransmission()
 {
     Ieee80211DataOrMgmtFrame *temp = (Ieee80211DataOrMgmtFrame*) transmissionQueue()->front();
-    nb->fireChangeNotification(NF_LINK_BREAK, temp);
+    emit(NF_LINK_BREAK, temp);
     popTransmissionQueue();
     resetStateVariables();
     numGivenUp()++;
@@ -2823,7 +2823,7 @@ bool Ieee80211Mac::isDuplicated(cMessage *msg)
 void Ieee80211Mac::promiscousFrame(cMessage *msg)
 {
     if (!isDuplicated(msg)) // duplicate detection filter
-        nb->fireChangeNotification(NF_LINK_PROMISCUOUS, msg);
+        emit(NF_LINK_PROMISCUOUS, msg);
 }
 
 bool Ieee80211Mac::isBackoffPending()

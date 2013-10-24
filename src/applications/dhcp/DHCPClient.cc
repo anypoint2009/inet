@@ -94,7 +94,7 @@ void DHCPClient::initialize(int stage)
 
         // for a wireless interface subscribe the association event to start the DHCP protocol
         nb = findContainingNode(this, true);
-        nb->subscribe(this, NF_L2_ASSOCIATED);
+        nb->subscribe(NF_L2_ASSOCIATED, this);
 
         // Get the interface to configure
         IInterfaceTable* ift = InterfaceTableAccess().get();

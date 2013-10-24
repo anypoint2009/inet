@@ -378,9 +378,9 @@ void DSRUU::initialize(int stage)
 
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         nb = findContainingNode(this, true);
-        nb->subscribe(this, NF_LINK_BREAK);
+        nb->subscribe(NF_LINK_BREAK, this);
         if (get_confval(PromiscOperation))
-            nb->subscribe(this, NF_LINK_PROMISCUOUS);
+            nb->subscribe(NF_LINK_PROMISCUOUS, this);
         // clear routing entries related to wlan interfaces and autoassign ip adresses
         bool manetPurgeRoutingTables = (bool) par("manetPurgeRoutingTables");
         if (manetPurgeRoutingTables)

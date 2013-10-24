@@ -185,8 +185,8 @@ void Radio::initialize(int stage)
         {
             // tell initial values to MAC; must be done in stage STAGE_OTHER_MODULES_AVAILABLE+1 or later, because they
             // subscribe in stage STAGE_OTHER_MODULES_AVAILABLE
-            nb->fireChangeNotification(NF_RADIOSTATE_CHANGED, &rs);
-            nb->fireChangeNotification(NF_RADIO_CHANNEL_CHANGED, &rs);
+            emit(NF_RADIOSTATE_CHANGED, &rs);
+            emit(NF_RADIO_CHANNEL_CHANGED, &rs);
 
             // tell initial channel number to ChannelControl; should be done in
             // stage==STAGE_REGISTER_RADIO or later, because base class initializes myRadioRef in that stage
@@ -203,7 +203,7 @@ void Radio::initialize(int stage)
             setRadioState(RadioState::OFF);
             // tell initial values to MAC; must be done in stage 1, because they
             // subscribe in stage 0
-            nb->fireChangeNotification(NF_RADIO_CHANNEL_CHANGED, &rs);
+            emit(NF_RADIO_CHANNEL_CHANGED, &rs);
         }
 
         // draw the interference distance
@@ -868,8 +868,8 @@ void Radio::changeChannel(int channel)
     }
 
     // notify other modules about the channel switch; and actually, radio state has changed too
-    nb->fireChangeNotification(NF_RADIO_CHANNEL_CHANGED, &rs);
-    nb->fireChangeNotification(NF_RADIOSTATE_CHANGED, &rs);
+    emit(NF_RADIO_CHANNEL_CHANGED, &rs);
+    emit(NF_RADIOSTATE_CHANGED, &rs);
 }
 
 void Radio::setBitrate(double bitrate)
@@ -905,7 +905,7 @@ void Radio::setRadioState(RadioState::State newState)
         }
 
         rs.setState(newState);
-        nb->fireChangeNotification(NF_RADIOSTATE_CHANGED, &rs);
+        emit(NF_RADIOSTATE_CHANGED, &rs);
     }
 }
 /*
@@ -1140,7 +1140,7 @@ void Radio::connectReceiver()
     }
 
     // notify other modules about the channel switch; and actually, radio state has changed too
-    nb->fireChangeNotification(NF_RADIOSTATE_CHANGED, &rs);
+    emit(NF_RADIOSTATE_CHANGED, &rs);
 }
 
 

@@ -35,7 +35,7 @@ void BasicBattery::initialize(int stage)
 
     if (stage == INITSTAGE_LOCAL)
     {
-        mpNb = findContainingNode(this, true);
+        nb = findContainingNode(this, true);
     }
 }
 

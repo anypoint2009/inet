@@ -64,7 +64,7 @@ class INET_API DHCPClient : public cSimpleModule, public INotifiable, public ILi
 
         MACAddress client_mac_address; // client_mac_address
 
-        NotificationBoard* nb; // Notification board
+        cModule *nb; // Notification board
         InterfaceEntry* ie; // interface to configure
         IIPv4RoutingTable* irt; // Routing table to update
 
