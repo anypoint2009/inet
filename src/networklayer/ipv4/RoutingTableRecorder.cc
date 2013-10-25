@@ -40,14 +40,11 @@ Define_Module(RoutingTableRecorder);
 class RoutingTableNotificationBoardListener : public cListener
 {
   private:
-    cModule *nb;
     RoutingTableRecorder *recorder;
 
   public:
-    RoutingTableNotificationBoardListener(RoutingTableRecorder *recorder, cModule *nb) { this->recorder = recorder; this->nb = nb; }
-    virtual void receiveSignal(cComponent *source, simsignal_t category, cObject *details) {
-        recorder->receiveChangeNotification(nb, category, details);
-    }
+    RoutingTableNotificationBoardListener(RoutingTableRecorder *recorder) { this->recorder = recorder; }
+    virtual void receiveSignal(cComponent *source, simsignal_t category, cObject *details) { recorder->receiveChangeNotification(source, category, details); }
 };
 
 RoutingTableRecorder::RoutingTableRecorder()
@@ -103,9 +100,12 @@ void RoutingTableRecorder::hookListeners()
         eventlogManager->addEventlogListener(this);
 }
 
-void RoutingTableRecorder::receiveChangeNotification(cModule *nb, int category, const cObject *details)
+void RoutingTableRecorder::receiveChangeNotification(cComponent *nb, int category, const cObject *details)
 {
-    cModule *host = nb->getParentModule();
+    cModule *m = dynamic_cast<cModule *>(nb);
+    if (!m)
+        m = nb->getParentModule();
+    cModule *host = findContainingNode(m, true);
     if (category==NF_ROUTE_ADDED || category==NF_ROUTE_DELETED || category==NF_ROUTE_CHANGED)
         recordRoute(host, check_and_cast<const IRoute *>(details), category);
     else if (category==NF_INTERFACE_CREATED || category==NF_INTERFACE_DELETED)
