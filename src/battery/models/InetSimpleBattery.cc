@@ -147,7 +147,7 @@ void InetSimpleBattery::registerWirelessDevice(int id, double mUsageRadioIdle, d
     deviceEntryMap.insert(std::pair<int,DeviceEntry*>(id, device));
     if (mustSubscribe)
     {
-        cModule *host = findContainingNode(this, true);
+        cModule *host = getContainingNode(this);
         host->subscribe(NF_RADIOSTATE_CHANGED, this);
         mustSubscribe = false;
     }

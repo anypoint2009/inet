@@ -76,7 +76,7 @@ void DHCPClient::initialize(int stage)
         bootpc_port = 68; // client
         bootps_port = 67; // server
 
-        host = findContainingNode(this, true);
+        host = getContainingNode(this);
     }
     else if (stage == INITSTAGE_APPLICATION_LAYER)
     {

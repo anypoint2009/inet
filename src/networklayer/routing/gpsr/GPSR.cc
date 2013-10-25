@@ -76,7 +76,7 @@ void GPSR::initialize(int stage)
         maxJitter = par("maxJitter");
         neighborValidityInterval = par("neighborValidityInterval");
         // context
-        host = findContainingNode(this, true);
+        host = getContainingNode(this);
         nodeStatus = dynamic_cast<NodeStatus *>(host->getSubmodule("status"));
         interfaceTable = InterfaceTableAccess().get(this);
         mobility = check_and_cast<IMobility *>(host->getSubmodule("mobility"));

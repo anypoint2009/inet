@@ -84,7 +84,7 @@ void xDYMO::initialize(int stage)
         minHopLimit = par("minHopLimit");
         maxHopLimit = par("maxHopLimit");
         // context
-        host = findContainingNode(this, true);
+        host = getContainingNode(this);
         nodeStatus = dynamic_cast<NodeStatus *>(host->getSubmodule("status"));
         interfaceTable = InterfaceTableAccess().get(this);
         routingTable = check_and_cast<IRoutingTable *>(getModuleByPath(par("routingTableModule")));

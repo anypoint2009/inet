@@ -58,7 +58,7 @@ void LinkStateRouting::initialize(int stage)
         routerId = rt->getRouterId();
 
         // listen for TED modifications
-        cModule *host = findContainingNode(this, true);
+        cModule *host = getContainingNode(this);
         host->subscribe(NF_TED_CHANGED, this);
 
         // peers are given as interface names in the "peers" module parameter;

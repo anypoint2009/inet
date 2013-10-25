@@ -179,7 +179,7 @@ void Radio::initialize(int stage)
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
         // ASSERT(stage >= STAGE:CHANNELCONTROL_AVAILABLE);
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
-        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
+        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(getContainingNode(this)->getSubmodule("status"));
         bool isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
         if (isOperational)
         {
@@ -814,7 +814,7 @@ void Radio::changeChannel(int channel)
 
     cc->setRadioChannel(myRadioRef, rs.getChannelNumber());
 
-    cModule *myHost = findContainingNode(this, true);
+    cModule *myHost = getContainingNode(this);
 
     //cGate *radioGate = myHost->gate("radioIn");
 
@@ -1095,7 +1095,7 @@ void Radio::connectReceiver()
         rs.setState(RadioState::IDLE); // Force radio to Idle
 
     cc->setRadioChannel(myRadioRef, rs.getChannelNumber());
-    cModule *myHost = findContainingNode(this, true);
+    cModule *myHost = getContainingNode(this);
 
     //cGate *radioGate = myHost->gate("radioIn");
 

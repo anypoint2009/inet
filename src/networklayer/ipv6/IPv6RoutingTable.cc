@@ -84,7 +84,7 @@ void IPv6RoutingTable::initialize(int stage)
         mipv6Support = false; // 4.9.07 - CB
 #endif /* WITH_xMIPv6 */
 
-        cModule *host = findContainingNode(this, true);
+        cModule *host = getContainingNode(this);
 
         host->subscribe(NF_INTERFACE_CREATED, this);
         host->subscribe(NF_INTERFACE_DELETED, this);

@@ -70,7 +70,7 @@ void IPv6NeighbourDiscovery::initialize(int stage)
     if (stage == INITSTAGE_NETWORK_LAYER)
     {
         bool isOperational;
-        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
+        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(getContainingNode(this)->getSubmodule("status"));
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
@@ -2701,7 +2701,7 @@ bool IPv6NeighbourDiscovery::canServeWirelessNodes(InterfaceEntry *ie)
         return true;
 
     // check if this interface is directly connected to an AccessPoint.
-    cModule* node = findContainingNode(this, true);
+    cModule* node = getContainingNode(this);
     cGate* gate = node->gate(ie->getNodeOutputGateId());
     ASSERT(gate != NULL);
     cGate* connectedGate = gate->getNextGate();

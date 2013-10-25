@@ -307,7 +307,7 @@ void RoutingTableRecorder::receiveChangeNotification(cComponent *nsource, int ca
     cModule *m = dynamic_cast<cModule *>(nsource);
     if (!m)
         m = nsource->getParentModule();
-    cModule *host = findContainingNode(m, true);
+    cModule *host = getContainingNode(m);
     if (category==NF_ROUTE_ADDED || category==NF_ROUTE_DELETED || category==NF_ROUTE_CHANGED)
         recordRouteChange(host, check_and_cast<const IRoute *>(details), category);
     else if (category==NF_INTERFACE_CREATED || category==NF_INTERFACE_DELETED)

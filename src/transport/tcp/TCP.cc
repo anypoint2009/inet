@@ -105,7 +105,7 @@ void TCP::initialize(int stage)
     }
     else if (stage == INITSTAGE_TRANSPORT_LAYER)
     {
-        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
+        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(getContainingNode(this)->getSubmodule("status"));
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(IP_PROT_TCP);

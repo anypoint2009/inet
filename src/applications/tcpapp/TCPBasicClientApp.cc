@@ -58,7 +58,7 @@ void TCPBasicClientApp::initialize(int stage)
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
 
         timeoutMsg = new cMessage("timer");
-        nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
+        nodeStatus = dynamic_cast<NodeStatus *>(getContainingNode(this)->getSubmodule("status"));
 
         if (isNodeUp()) {
             timeoutMsg->setKind(MSGKIND_CONNECT);

@@ -59,7 +59,7 @@ void ChannelAccess::initialize(int stage)
     {
         // ASSERT(stage < NEWSTAGE:PHYSICALENV_SECOND);
         cc = getChannelControl();
-        hostModule = findContainingNode(this, true);
+        hostModule = getContainingNode(this);
         myRadioRef = NULL;
 
         positionUpdateArrived = false;

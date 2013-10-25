@@ -136,7 +136,7 @@ void LDP::initialize(int stage)
         // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
         // schedule first hello
         sendHelloMsg = new cMessage("LDPSendHello");
-        nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
+        nodeStatus = dynamic_cast<NodeStatus *>(getContainingNode(this)->getSubmodule("status"));
         if (isNodeUp())
             scheduleAt(simTime() + exponential(0.1), sendHelloMsg);
 
@@ -166,7 +166,7 @@ void LDP::initialize(int stage)
         rebuildFecList();
 
         // listen for routing table modifications
-        cModule *host = findContainingNode(this, true);
+        cModule *host = getContainingNode(this);
         host->subscribe(NF_ROUTE_ADDED, this);
         host->subscribe(NF_ROUTE_DELETED, this);
     }

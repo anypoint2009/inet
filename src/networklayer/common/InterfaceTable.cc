@@ -72,7 +72,7 @@ void InterfaceTable::initialize(int stage)
     if (stage == INITSTAGE_LOCAL)
     {
         // get a pointer to the NotificationBoard module
-        host = findContainingNode(this, true);
+        host = getContainingNode(this);
         WATCH_PTRVECTOR(idToInterface);
     }
     else if (stage == INITSTAGE_NETWORK_LAYER)
@@ -108,7 +108,7 @@ void InterfaceTable::receiveSignal(cComponent *source, simsignal_t category, cOb
 cModule *InterfaceTable::getHostModule()
 {
     if (!host)
-        host = findContainingNode(this, true);
+        host = getContainingNode(this);
     return host;
 }
 

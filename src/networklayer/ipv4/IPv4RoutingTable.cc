@@ -73,7 +73,7 @@ void IPv4RoutingTable::initialize(int stage)
     if (stage == INITSTAGE_LOCAL)
     {
         // get a pointer to the NotificationBoard module and IInterfaceTable
-        cModule *host = findContainingNode(this, true);
+        cModule *host = getContainingNode(this);
         host->subscribe(NF_INTERFACE_CREATED, this);
         host->subscribe(NF_INTERFACE_DELETED, this);
         host->subscribe(NF_INTERFACE_STATE_CHANGED, this);
@@ -93,7 +93,7 @@ void IPv4RoutingTable::initialize(int stage)
     }
     else if (stage == INITSTAGE_NETWORK_LAYER)
     {
-        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
+        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(getContainingNode(this)->getSubmodule("status"));
         isNodeUp = !nodeStatus || nodeStatus->getState() == NodeStatus::UP;
         if (isNodeUp) {
             // set routerId if param is not "" (==no routerId) or "auto" (in which case we'll

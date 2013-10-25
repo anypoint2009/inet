@@ -87,7 +87,7 @@ void ManetRoutingBase::registerRoutingModule()
     int  num_80211 = 0;
     inet_rt = IPv4RoutingTableAccess().getIfExists();
     inet_ift = InterfaceTableAccess().get();
-    hostModule = findContainingNode(this, true);
+    hostModule = getContainingNode(this);
 
     if (routesVector)
         routesVector->clear();
@@ -370,7 +370,7 @@ void ManetRoutingBase::registerPosition()
         opp_error("Manet routing protocol is not register");
     regPosition = true;
     mobilityStateChangedSignal = registerSignal("mobilityStateChanged");
-    cModule *mod = findContainingNode(getParentModule(), false);
+    cModule *mod = findContainingNode(getParentModule());
     if (!mod)
         mod = getParentModule();
     mod->subscribe(mobilityStateChangedSignal, this);

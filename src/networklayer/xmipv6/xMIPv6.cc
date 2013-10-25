@@ -121,7 +121,7 @@ void xMIPv6::initialize(int stage)
         // moved rt6 initialization to here, as we should
         // set the MIPv6 flag as soon as possible for use
         // with other modules.
-        cModule *host = findContainingNode(this, true);
+        cModule *host = getContainingNode(this);
         rt6 = AddressResolver().routingTable6Of(host);
         rt6->setMIPv6Support(true); // 4.9.07 - CB
 

@@ -99,7 +99,7 @@ void Ieee80211MgmtSTA::initialize(int stage)
         isAssociated = false;
         assocTimeoutMsg = NULL;
 
-        host = findContainingNode(this, true);
+        host = getContainingNode(this);
         host->subscribe(NF_LINK_FULL_PROMISCUOUS, this);
 
         WATCH(isScanning);

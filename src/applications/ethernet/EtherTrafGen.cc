@@ -79,7 +79,7 @@ void EtherTrafGen::initialize(int stage)
         if (isGenerator())
             timerMsg = new cMessage("generateNextPacket");
 
-        nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
+        nodeStatus = dynamic_cast<NodeStatus *>(getContainingNode(this)->getSubmodule("status"));
         if (isNodeUp() && isGenerator())
             scheduleNextPacket(-1);
     }

@@ -377,7 +377,7 @@ void DSRUU::initialize(int stage)
         macaddr_ = interface80211ptr->getMacAddress();
 
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
-        cModule *host = findContainingNode(this, true);
+        cModule *host = getContainingNode(this);
         host->subscribe(NF_LINK_BREAK, this);
         if (get_confval(PromiscOperation))
             host->subscribe(NF_LINK_PROMISCUOUS, this);

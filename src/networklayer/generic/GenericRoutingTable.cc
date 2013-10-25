@@ -72,7 +72,7 @@ void GenericRoutingTable::initialize(int stage)
         WATCH(routerId);
 
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
-        cModule *host = findContainingNode(this, true);
+        cModule *host = getContainingNode(this);
         host->subscribe(NF_INTERFACE_CREATED, this);
         host->subscribe(NF_INTERFACE_DELETED, this);
         host->subscribe(NF_INTERFACE_STATE_CHANGED, this);

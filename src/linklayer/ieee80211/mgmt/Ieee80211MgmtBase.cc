@@ -57,7 +57,7 @@ void Ieee80211MgmtBase::initialize(int stage)
     }
     else if (stage == INITSTAGE_LINK_LAYER)
     {
-        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this, true)->getSubmodule("status"));
+        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(getContainingNode(this)->getSubmodule("status"));
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
     }
     else if (stage == INITSTAGE_LINK_LAYER_2)

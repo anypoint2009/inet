@@ -96,7 +96,7 @@ void PingApp::initialize(int stage)
     else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         // startup
-        nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
+        nodeStatus = dynamic_cast<NodeStatus *>(getContainingNode(this)->getSubmodule("status"));
         if (isEnabled() && isNodeUp())
             startSendingPingRequests();
     }

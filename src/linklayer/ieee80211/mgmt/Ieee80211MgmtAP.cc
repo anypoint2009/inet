@@ -66,7 +66,7 @@ void Ieee80211MgmtAP::initialize(int stage)
 
         //TBD fill in supportedRates
 
-        cModule *host = findContainingNode(this, true);
+        cModule *host = getContainingNode(this);
         // subscribe for notifications
         host->subscribe(NF_RADIO_CHANNEL_CHANGED, this);
 

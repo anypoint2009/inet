@@ -65,7 +65,7 @@ void DHCPServer::initialize(int stage)
     }
     else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
-        cModule *host = findContainingNode(this, true);
+        cModule *host = getContainingNode(this);
 
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(host->getSubmodule("status"));
