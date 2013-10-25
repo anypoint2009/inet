@@ -58,4 +58,7 @@ simple IPv4RoutingTable like IRoutingTable
         bool IPForward = default(true);  // turns IP forwarding on/off
         bool forwardMulticast = default(false); // turns multicast forwarding on/off
         string routingFile = default("");  // routing table file name
+        @signal[NF_ROUTE_ADDED](type=IPv4Route);
+        @signal[NF_ROUTE_DELETED](type=IPv4Route);
+        @signal[NF_ROUTE_CHANGED](type=IPv4Route);
 }
