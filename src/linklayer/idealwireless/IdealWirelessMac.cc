@@ -146,7 +146,7 @@ InterfaceEntry *IdealWirelessMac::createInterfaceEntry()
 
 void IdealWirelessMac::receiveSignal(cComponent *src, simsignal_t id, long x)
 {
-    WirelessMacBase::receiveSignal(src, id, x);
+    //WirelessMacBase::receiveSignal(src, id, x);
 
     if (id == radioStateSignal && src == radioModule)
     {

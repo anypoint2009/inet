@@ -413,7 +413,7 @@ IGMPv2::~IGMPv2()
         deleteRouterInterfaceData(routerData.begin()->first);
 }
 
-void IGMPv2::receiveChangeNotification(int category, const cPolymorphic *details)
+void IGMPv2::receiveSignal(cComponent *source, simsignal_t category, cObject *details)
 {
     Enter_Method_Silent();
 

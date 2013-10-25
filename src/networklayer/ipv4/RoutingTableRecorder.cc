@@ -240,12 +240,12 @@ Register_PerRunConfigOption(CFGID_ROUTINGLOG_FILE, "routinglog-file", CFG_FILENA
 // (cListener::receiveChangeNotification() doesn't have NotificationBoard* as arg).
 class RoutingTableRecorderListener : public cListener
 {
-private:
-    cModule *nb;
+  private:
     RoutingTableRecorder *recorder;
-public:
-    RoutingTableRecorderListener(RoutingTableRecorder *recorder, cModule *nb) { this->recorder = recorder; this->nb = nb; }
-    virtual void receiveSignal(cComponent *source, simsignal_t category, cObject *details) { recorder->receiveChangeNotification(nb, category, details); }
+
+  public:
+    RoutingTableRecorderListener(RoutingTableRecorder *recorder) : recorder(recorder) {}
+    virtual void receiveSignal(cComponent *source, simsignal_t category, cObject *details) { recorder->receiveChangeNotification(source, category, details); }
 };
 
 RoutingTableRecorder::RoutingTableRecorder()
@@ -279,7 +279,7 @@ void RoutingTableRecorder::handleMessage(cMessage *)
 void RoutingTableRecorder::hookListeners()
 {
     cModule *nb = simulation.getSystemModule();
-    cListener *listener = new RoutingTableRecorderListener(this, nb);
+    cListener *listener = new RoutingTableRecorderListener(this);
     nb->subscribe(NF_INTERFACE_CREATED, listener);
     nb->subscribe(NF_INTERFACE_DELETED, listener);
     nb->subscribe(NF_INTERFACE_CONFIG_CHANGED, listener);
@@ -306,9 +306,12 @@ void RoutingTableRecorder::ensureRoutingLogFileOpen()
     }
 }
 
-void RoutingTableRecorder::receiveChangeNotification(cModule *nb, int category, const cObject *details)
+void RoutingTableRecorder::receiveChangeNotification(cComponent *nb, int category, const cObject *details)
 {
-    cModule *host = nb->getParentModule();
+    cModule *m = dynamic_cast<cModule *>(nb);
+    if (!m)
+        m = nb->getParentModule();
+    cModule *host = findContainingNode(m, true);
     if (category==NF_ROUTE_ADDED || category==NF_ROUTE_DELETED || category==NF_ROUTE_CHANGED)
         recordRouteChange(host, check_and_cast<const IRoute *>(details), category);
     else if (category==NF_INTERFACE_CREATED || category==NF_INTERFACE_DELETED)

@@ -171,7 +171,7 @@ class INET_API IGMPv2 : public cSimpleModule, protected cListener
     virtual int numInitStages() const;
     virtual void initialize(int stage);
     virtual void handleMessage(cMessage *msg);
-    virtual void receiveChangeNotification(int category, const cPolymorphic *details);
+    virtual void receiveSignal(cComponent *source, simsignal_t category, cObject *details);
     virtual ~IGMPv2();
 
   protected:

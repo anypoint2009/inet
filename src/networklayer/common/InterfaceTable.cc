@@ -355,7 +355,7 @@ void InterfaceTable::invalidateTmpInterfaceList()
 
 void InterfaceTable::interfaceChanged(int category, const InterfaceEntryChangeDetails *details)
 {
-    emit(category, details);
+    emit(category, const_cast<InterfaceEntryChangeDetails *>(details));
 
     if (ev.isGUI() && par("displayAddresses").boolValue())
         updateLinkDisplayString(details->getInterfaceEntry());

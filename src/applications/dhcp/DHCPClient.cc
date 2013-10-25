@@ -432,7 +432,7 @@ void DHCPClient::handleDHCPMessage(DHCPMessage* msg)
     }
 }
 
-void DHCPClient::receiveChangeNotification(int category, const cPolymorphic *details)
+void DHCPClient::receiveSignal(cComponent *source, int category, cObject *details)
 {
     Enter_Method_Silent();
     printNotificationBanner(category, details);
@@ -443,8 +443,7 @@ void DHCPClient::receiveChangeNotification(int category, const cPolymorphic *det
         InterfaceEntry * ie = NULL;
         if (details)
         {
-            cPolymorphic *detailsAux = const_cast<cPolymorphic*>(details);
-            ie = dynamic_cast<InterfaceEntry*>(detailsAux);
+            ie = dynamic_cast<InterfaceEntry*>(details);
         }
         if (!ie || (ie && (ie == ie)))
         {

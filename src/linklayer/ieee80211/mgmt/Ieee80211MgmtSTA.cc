@@ -766,7 +766,7 @@ void Ieee80211MgmtSTA::handleAssociationResponseFrame(Ieee80211AssociationRespon
         isAssociated = true;
         (APInfo&)assocAP = (*ap);
 
-        emit(NF_L2_ASSOCIATED, NULL); //XXX detail: InterfaceEntry?
+        emit(NF_L2_ASSOCIATED, (cObject *)NULL); //XXX detail: InterfaceEntry?
 
         assocAP.beaconTimeoutMsg = new cMessage("beaconTimeout", MK_BEACON_TIMEOUT);
         scheduleAt(simTime()+MAX_BEACONS_MISSED*assocAP.beaconInterval, assocAP.beaconTimeoutMsg);
