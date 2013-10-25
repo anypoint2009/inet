@@ -159,7 +159,7 @@ class INET_API IPv4RoutingTable: public cSimpleModule, public IIPv4RoutingTable,
      * Called by the NotificationBoard whenever a change of a category
      * occurs to which this client has subscribed.
      */
-    virtual void receiveSignal(cComponent *source, simsignal_t category, cObject *details);
+    virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj);
 
   public:
     /**

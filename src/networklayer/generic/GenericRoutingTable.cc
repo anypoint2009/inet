@@ -124,7 +124,7 @@ void GenericRoutingTable::handleMessage(cMessage *msg)
     throw cRuntimeError("This module doesn't process messages");
 }
 
-void GenericRoutingTable::receiveSignal(cComponent *source, simsignal_t category, cObject *details)
+void GenericRoutingTable::receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj)
 {
     // TODO:
 }
