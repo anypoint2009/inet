@@ -174,6 +174,11 @@ InterfaceEntry *PPP::createInterfaceEntry()
 
 void PPP::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
 {
+    MACBase::receiveSignal(src, id, obj);
+
+    if (id != POST_MODEL_CHANGE)
+        return;
+
     if (dynamic_cast<cPostPathCreateNotification *>(obj))
     {
         cPostPathCreateNotification *gcobj = (cPostPathCreateNotification *)obj;

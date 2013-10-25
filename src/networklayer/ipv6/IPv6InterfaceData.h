@@ -134,8 +134,6 @@ class INET_API IPv6InterfaceData : public InterfaceProtocolData
     HostMulticastData *hostMcastData;
     RouterMulticastData *routerMcastData;
 
-    cModule *nb;
-
   public:
     /**
      * For routers: advertised prefix configuration.

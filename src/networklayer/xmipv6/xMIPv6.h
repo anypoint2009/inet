@@ -95,7 +95,7 @@ class INET_API xMIPv6 : public cSimpleModule
 
 
     /** NB is used for MIH signalling */
-    NotificationBoard* nb; // 14.01.08 - CB
+    cModule *nb; // 14.01.08 - CB
 
     /**
      * The base class for all other timers that are used for retransmissions.

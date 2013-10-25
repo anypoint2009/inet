@@ -19,30 +19,12 @@
 #include <algorithm>
 #include "NotificationBoard.h"
 #include "NotifierConsts.h"
+#include "INotifiable.h"
 
 Define_Module(NotificationBoard);
 
 std::ostream& operator<<(std::ostream& os, const NotificationBoard::NotifiableVector& v)
 {
-    os << v.size() << " client(s)";
-    for (unsigned int i=0; i<v.size(); i++)
-    {
-        os << (i==0 ? ": " : ", ");
-        if (dynamic_cast<cModule*>(v[i]))
-        {
-            cModule *mod = dynamic_cast<cModule*>(v[i]);
-            os << "mod (" << mod->getClassName() << ")" << mod->getFullName() << " id=" << mod->getId();
-        }
-        else if (dynamic_cast<cObject*>(v[i]))
-        {
-            cObject *obj = dynamic_cast<cObject*>(v[i]);
-            os << "a " << obj->getClassName();
-        }
-        else
-        {
-            os << "a " << opp_typename(typeid(v[i]));
-        }
-    }
     return os;
 }
 
@@ -60,50 +42,19 @@ void NotificationBoard::handleMessage(cMessage *msg)
 
 void NotificationBoard::subscribe(INotifiable *client, int category)
 {
-    Enter_Method("subscribe(%s)", notificationCategoryName(category));
-
-    // find or create entry for this category
-    NotifiableVector& clients = clientMap[category];
-
-    // add client if not already there
-    if (std::find(clients.begin(), clients.end(), client) == clients.end())
-        clients.push_back(client);
-
-    fireChangeNotification(NF_SUBSCRIBERLIST_CHANGED, NULL);
 }
 
 void NotificationBoard::unsubscribe(INotifiable *client, int category)
 {
-    Enter_Method("unsubscribe(%s)", notificationCategoryName(category));
-
-    // find (or create) entry for this category
-    NotifiableVector& clients = clientMap[category];
-
-    // remove client if there
-    NotifiableVector::iterator it = std::find(clients.begin(), clients.end(), client);
-    if (it!=clients.end())
-        clients.erase(it);
-
-    fireChangeNotification(NF_SUBSCRIBERLIST_CHANGED, NULL);
 }
 
 bool NotificationBoard::hasSubscribers(int category)
 {
-    ClientMap::iterator it = clientMap.find(category);
-    return it!=clientMap.end() && !it->second.empty();
+    return true;
 }
 
 void NotificationBoard::fireChangeNotification(int category, const cObject *details)
 {
-    Enter_Method("fireChangeNotification(%s, %s)", notificationCategoryName(category),
-                 details?details->info().c_str() : "n/a");
-
-    ClientMap::iterator it = clientMap.find(category);
-    if (it==clientMap.end())
-        return;
-    NotifiableVector& clients = it->second;
-    for (NotifiableVector::iterator j=clients.begin(); j!=clients.end(); j++)
-        (*j)->receiveChangeNotification(category, details);
 }
 
 

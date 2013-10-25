@@ -90,7 +90,7 @@ void IPv6RoutingTable::initialize(int stage)
         nb->subscribe(NF_INTERFACE_DELETED, this);
         nb->subscribe(NF_INTERFACE_STATE_CHANGED, this);
         nb->subscribe(NF_INTERFACE_CONFIG_CHANGED, this);
-        nb->subscribe(this, NF_INTERFACE_IPv6CONFIG_CHANGED);
+        nb->subscribe(NF_INTERFACE_IPv6CONFIG_CHANGED, this);
     }
     else if (stage == INITSTAGE_NETWORK_LAYER)
     {

@@ -52,7 +52,7 @@ void Ieee80211AgentSTA::initialize(int stage)
             channelsToScan.push_back(atoi(token));
 
         nb = findContainingNode(this, true);
-        nb->subscribe(this, NF_L2_BEACON_LOST);
+        nb->subscribe(NF_L2_BEACON_LOST, this);
 
         // JcM add: get the default ssid, if there is one.
         default_ssid = par("default_ssid").stringValue();

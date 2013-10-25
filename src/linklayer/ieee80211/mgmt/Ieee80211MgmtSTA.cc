@@ -282,7 +282,7 @@ void Ieee80211MgmtSTA::changeChannel(int channelNum)
 void Ieee80211MgmtSTA::beaconLost()
 {
     EV << "Missed a few consecutive beacons -- AP is considered lost\n";
-    emit(NF_L2_BEACON_LOST, NULL);  //XXX use InterfaceEntry as detail, etc...
+    emit(NF_L2_BEACON_LOST, (cObject *)NULL);  //XXX use InterfaceEntry as detail, etc...
 }
 
 void Ieee80211MgmtSTA::sendManagementFrame(Ieee80211ManagementFrame *frame, const MACAddress& address)
@@ -432,7 +432,7 @@ bool Ieee80211MgmtSTA::scanNextChannel()
     {
         EV << "Finished scanning last channel\n";
         if (scanning.activeScan)
-            nb->unsubscribe(this, NF_RADIOSTATE_CHANGED);
+            nb->unsubscribe(NF_RADIOSTATE_CHANGED, this);
         isScanning = false;
         return true; // we're done
     }

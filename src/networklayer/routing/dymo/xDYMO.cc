@@ -39,7 +39,7 @@ Define_Module(DYMO::xDYMO);
 
 xDYMO::xDYMO()
 {
-    notificationBoard = NULL;
+    nb = NULL;
     addressType = NULL;
     interfaceTable = NULL;
     routingTable = NULL;
@@ -88,7 +88,7 @@ void xDYMO::initialize(int stage)
         // context
         host = findContainingNode(this);
         nodeStatus = dynamic_cast<NodeStatus *>(host->getSubmodule("status"));
-        notificationBoard = findContainingNode(this, true);
+        nb = findContainingNode(this, true);
         interfaceTable = InterfaceTableAccess().get(this);
         routingTable = check_and_cast<IRoutingTable *>(getModuleByPath(par("routingTableModule")));
         networkProtocol = check_and_cast<INetfilter *>(getModuleByPath(par("networkProtocolModule")));
@@ -122,7 +122,7 @@ void xDYMO::initialize(int stage)
 
         // ASSERT(stage >= STAGE:IP_LAYER_READY_FOR_HOOK_REGISTRATION);
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
-        notificationBoard->subscribe(this, NF_LINK_BREAK);
+        nb->subscribe(NF_LINK_BREAK, this);
         addressType = getSelfAddress().getAddressType();
         networkProtocol->registerHook(0, this);
         if (isNodeUp())

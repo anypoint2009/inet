@@ -34,7 +34,7 @@ class NotificationBoard;
 /**
  * PPP implementation.
  */
-class INET_API PPP : public MACBase, public cListener
+class INET_API PPP : public MACBase
 {
   protected:
     long txQueueLimit;

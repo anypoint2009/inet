@@ -41,6 +41,7 @@ class INET_API MACBase : public cSimpleModule, public ILifecycle, public cListen
         virtual ~MACBase();
 
     protected:
+        using cListener::receiveSignal;
         virtual void initialize(int stage);
         virtual int numInitStages() const;
         void registerInterface(); // do not override! override createInterfaceEntry()

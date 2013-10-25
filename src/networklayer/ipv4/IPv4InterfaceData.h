@@ -83,8 +83,6 @@ class INET_API IPv4InterfaceData : public InterfaceProtocolData
     HostMulticastData *hostData;
     RouterMulticastData *routerData;
 
-    cModule *nb; // cached pointer
-
   protected:
     void changed1(int fieldId) {changed(NF_INTERFACE_IPv4CONFIG_CHANGED, fieldId);}
     HostMulticastData *getHostData() { if (!hostData) hostData = new HostMulticastData(); return hostData; }

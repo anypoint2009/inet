@@ -831,7 +831,7 @@ void Ieee80211Mac::handleLowerMsg(cPacket *msg)
 void Ieee80211Mac::receiveSignal(cComponent *source, simsignal_t category, cObject *details)
 {
     Enter_Method_Silent();
-    MACBase::receiveChangeNotification(category, details);
+    WirelessMacBase::receiveSignal(source, category, details);
 
     printNotificationBanner(category, details);
 

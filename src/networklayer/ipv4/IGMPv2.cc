@@ -341,8 +341,8 @@ void IGMPv2::initialize(int stage)
 
         nb = findContainingNode(this, true);
         nb->subscribe(NF_INTERFACE_DELETED, this);
-        nb->subscribe(this, NF_IPv4_MCAST_JOIN);
-        nb->subscribe(this, NF_IPv4_MCAST_LEAVE);
+        nb->subscribe(NF_IPv4_MCAST_JOIN, this);
+        nb->subscribe(NF_IPv4_MCAST_LEAVE, this);
 
         enabled = par("enabled");
         externalRouter = gate("routerIn")->isPathOK() && gate("routerOut")->isPathOK();
@@ -420,30 +420,32 @@ void IGMPv2::receiveChangeNotification(int category, const cPolymorphic *details
     InterfaceEntry *ie;
     int interfaceId;
     const IPv4MulticastGroupInfo *info;
-    switch (category)
+
+    if (category == NF_INTERFACE_CREATED)
     {
-        case NF_INTERFACE_CREATED:
-            ie = const_cast<InterfaceEntry *>(check_and_cast<const InterfaceEntry*>(details));
-            if (ie->isMulticast())
-                configureInterface(ie);
-            break;
-        case NF_INTERFACE_DELETED:
-            ie = const_cast<InterfaceEntry *>(check_and_cast<const InterfaceEntry*>(details));
-            if (ie->isMulticast())
-            {
-                interfaceId = ie->getInterfaceId();
-                deleteHostInterfaceData(interfaceId);
-                deleteRouterInterfaceData(interfaceId);
-            }
-            break;
-        case NF_IPv4_MCAST_JOIN:
-            info = check_and_cast<const IPv4MulticastGroupInfo*>(details);
-            multicastGroupJoined(info->ie, info->groupAddress);
-            break;
-        case NF_IPv4_MCAST_LEAVE:
-            info = check_and_cast<const IPv4MulticastGroupInfo*>(details);
-            multicastGroupLeft(info->ie, info->groupAddress);
-            break;
+        ie = const_cast<InterfaceEntry *>(check_and_cast<const InterfaceEntry*>(details));
+        if (ie->isMulticast())
+            configureInterface(ie);
+    }
+    else if (category == NF_INTERFACE_DELETED)
+    {
+        ie = const_cast<InterfaceEntry *>(check_and_cast<const InterfaceEntry*>(details));
+        if (ie->isMulticast())
+        {
+            interfaceId = ie->getInterfaceId();
+            deleteHostInterfaceData(interfaceId);
+            deleteRouterInterfaceData(interfaceId);
+        }
+    }
+    else if (category == NF_IPv4_MCAST_JOIN)
+    {
+        info = check_and_cast<const IPv4MulticastGroupInfo*>(details);
+        multicastGroupJoined(info->ie, info->groupAddress);
+    }
+    else if (category == NF_IPv4_MCAST_LEAVE)
+    {
+        info = check_and_cast<const IPv4MulticastGroupInfo*>(details);
+        multicastGroupLeft(info->ie, info->groupAddress);
     }
 }
 

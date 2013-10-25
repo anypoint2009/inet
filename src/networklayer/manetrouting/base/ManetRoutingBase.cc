@@ -246,8 +246,8 @@ void ManetRoutingBase::registerRoutingModule()
         }
         arp = ARPCacheAccess().get();
     }
-    nb->subscribe(this,NF_L2_AP_DISASSOCIATED);
-    nb->subscribe(this,NF_L2_AP_ASSOCIATED);
+    nb->subscribe(NF_L2_AP_DISASSOCIATED, this);
+    nb->subscribe(NF_L2_AP_ASSOCIATED, this);
 
     if (par("PublicRoutingTables").boolValue())
     {
@@ -843,13 +843,9 @@ void ManetRoutingBase::receiveSignal(cComponent *source, simsignal_t category, c
             }
         }
     }
-}
-
-void ManetRoutingBase::receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj)
-{
-    if (signalID == mobilityStateChangedSignal)
+    else if (category == mobilityStateChangedSignal)
     {
-        IMobility *mobility = check_and_cast<IMobility*>(obj);
+        IMobility *mobility = check_and_cast<IMobility*>(details);
         curPosition = mobility->getCurrentPosition();
         curSpeed = mobility->getCurrentSpeed();
         posTimer = simTime();

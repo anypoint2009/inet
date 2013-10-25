@@ -369,7 +369,10 @@ void EtherMACBase::receiveSignal(cComponent *src, simsignal_t signalId, cObject 
 {
     Enter_Method_Silent();
 
-    ASSERT(signalId == POST_MODEL_CHANGE);
+    MACBase::receiveSignal(src, signalId, obj);
+
+    if (signalId != POST_MODEL_CHANGE)
+        return;
 
     if (dynamic_cast<cPostPathCreateNotification *>(obj))
     {

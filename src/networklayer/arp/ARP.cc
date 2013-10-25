@@ -145,7 +145,7 @@ void ARP::initialize(int stage)
         }
         nb = findContainingNode(this);
         if (nb != NULL)
-            nb->subscribe(this, NF_INTERFACE_IPv4CONFIG_CHANGED);
+            nb->subscribe(NF_INTERFACE_IPv4CONFIG_CHANGED, this);
     }
 }
 

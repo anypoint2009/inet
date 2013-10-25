@@ -78,7 +78,7 @@ class INET_API xDYMO : public cSimpleModule, public ILifecycle, public cListener
     // context
     cModule * host;
     NodeStatus * nodeStatus;
-    cModule* notificationBoard;
+    cModule* nb;
     IAddressType * addressType;
     IInterfaceTable * interfaceTable;
     IRoutingTable * routingTable;
