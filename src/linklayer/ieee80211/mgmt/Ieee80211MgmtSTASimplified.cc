@@ -98,7 +98,6 @@ cPacket *Ieee80211MgmtSTASimplified::decapsulate(Ieee80211DataFrame *frame)
 void Ieee80211MgmtSTASimplified::receiveSignal(cComponent *source, simsignal_t category, cObject *details)
 {
     Enter_Method_Silent();
-    printNotificationBanner(category, details);
 }
 
 void Ieee80211MgmtSTASimplified::handleDataFrame(Ieee80211DataFrame *frame)

@@ -67,7 +67,6 @@ ARP::ARP()
 
     ift = NULL;
     rt = NULL;
-    nb = NULL;
 }
 
 int ARP::numInitStages() const { return NUM_INIT_STAGES; }
@@ -143,9 +142,9 @@ void ARP::initialize(int stage)
             ASSERT(where->second == entry);
             entry->myIter = where; // note: "inserting a new element into a map does not invalidate iterators that point to existing elements"
         }
-        nb = findContainingNode(this);
-        if (nb != NULL)
-            nb->subscribe(NF_INTERFACE_IPv4CONFIG_CHANGED, this);
+        cModule *host = findContainingNode(this);
+        if (host != NULL)
+            host->subscribe(NF_INTERFACE_IPv4CONFIG_CHANGED, this);
     }
 }
 

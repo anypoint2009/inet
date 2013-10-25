@@ -33,7 +33,7 @@ DHCPClient::DHCPClient()
     timer_t1 = NULL;
     timer_t2 = NULL;
     timer_to = NULL;
-    nb = NULL;
+    host = NULL;
     ie = NULL;
     irt = NULL;
     lease = NULL;
@@ -75,11 +75,13 @@ void DHCPClient::initialize(int stage)
         // DHCP UDP ports
         bootpc_port = 68; // client
         bootps_port = 67; // server
+
+        host = findContainingNode(this, true);
     }
     else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         bool isOperational;
-        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
+        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(host->getSubmodule("status"));
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
@@ -89,12 +91,10 @@ void DHCPClient::initialize(int stage)
         // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
 
         // get the hostname
-        cModule* host = getContainingNode();
         host_name = host->getFullName();
 
         // for a wireless interface subscribe the association event to start the DHCP protocol
-        nb = findContainingNode(this, true);
-        nb->subscribe(NF_L2_ASSOCIATED, this);
+        host->subscribe(NF_L2_ASSOCIATED, this);
 
         // Get the interface to configure
         IInterfaceTable* ift = InterfaceTableAccess().get();
@@ -194,7 +194,7 @@ void DHCPClient::changeFSMState(CLIENT_STATE new_state)
         ie->ipv4Data()->setNetmask(lease->netmask);
 
         std::string banner = "Got IP " + lease->ip.str();
-        getContainingNode()->bubble(banner.c_str());
+        host->bubble(banner.c_str());
 
         EV << "Configuring interface : " << ie->getName() << " ip:" << lease->ip << "/"
            << lease->netmask << " leased time: " << lease->lease_time << " (secs)" << endl;
@@ -591,16 +591,6 @@ void DHCPClient::scheduleTimer_T2()
     cancelTimer_T2();
     timer_t2 = new cMessage("DHCP T2", T2);
     scheduleAt(simTime() + (lease->rebind_time), timer_t2); // RFC 2131 4.4.5
-}
-
-cModule *DHCPClient::getContainingNode()
-{
-    cModule *mod = findContainingNode(this);
-
-    if (!mod)
-        error("getContainingNode(): host module not found");
-
-    return mod;
 }
 
 // Overwrite the sendToUDP in order to add the interface to use to allow the packet be routed by the IP stack

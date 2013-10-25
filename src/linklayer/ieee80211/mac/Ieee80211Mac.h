@@ -30,7 +30,6 @@
 #include "IPassiveQueue.h"
 #include "Ieee80211Frame_m.h"
 #include "Ieee80211Consts.h"
-#include "NotificationBoard.h"
 #include "RadioState.h"
 #include "FSMA.h"
 #include "IQoSClassifier.h"

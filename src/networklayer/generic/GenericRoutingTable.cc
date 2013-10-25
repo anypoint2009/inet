@@ -24,7 +24,6 @@
 #include "InterfaceTableAccess.h"
 #include "GenericRoute.h"
 #include "GenericNetworkProtocolInterfaceData.h"
-#include "NotificationBoard.h"
 #include "NotifierConsts.h"
 
 
@@ -33,7 +32,6 @@ Define_Module(GenericRoutingTable);
 GenericRoutingTable::GenericRoutingTable()
 {
     ift = NULL;
-    nb = NULL;
 }
 
 GenericRoutingTable::~GenericRoutingTable()
@@ -53,7 +51,6 @@ void GenericRoutingTable::initialize(int stage)
     if (stage == INITSTAGE_LOCAL)
     {
         // get a pointer to the NotificationBoard module and IInterfaceTable
-        nb = findContainingNode(this, true);
         ift = InterfaceTableAccess().get();
 
         const char * addressTypeString = par("addressType");
@@ -75,11 +72,12 @@ void GenericRoutingTable::initialize(int stage)
         WATCH(routerId);
 
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
-        nb->subscribe(NF_INTERFACE_CREATED, this);
-        nb->subscribe(NF_INTERFACE_DELETED, this);
-        nb->subscribe(NF_INTERFACE_STATE_CHANGED, this);
-        nb->subscribe(NF_INTERFACE_CONFIG_CHANGED, this);
-        nb->subscribe(NF_INTERFACE_IPv4CONFIG_CHANGED, this);
+        cModule *host = findContainingNode(this, true);
+        host->subscribe(NF_INTERFACE_CREATED, this);
+        host->subscribe(NF_INTERFACE_DELETED, this);
+        host->subscribe(NF_INTERFACE_STATE_CHANGED, this);
+        host->subscribe(NF_INTERFACE_CONFIG_CHANGED, this);
+        host->subscribe(NF_INTERFACE_IPv4CONFIG_CHANGED, this);
     }
     else if (stage == INITSTAGE_NETWORK_LAYER)
     {

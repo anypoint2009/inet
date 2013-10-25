@@ -26,7 +26,6 @@
 #include "ModuleAccess.h"
 #include "IPv4Address.h"
 #include "ILifecycle.h"
-#include "NotificationBoard.h"
 #include "IARPCache.h"
 
 // Forward declarations:
@@ -89,7 +88,6 @@ class INET_API ARP : public cSimpleModule, public IARPCache, public ILifecycle, 
 
     IInterfaceTable *ift;
     IIPv4RoutingTable *rt;  // for answering ProxyARP requests
-    cModule *nb;
 
     // Maps an IP multicast address to an Ethernet multicast address.
     MACAddress mapMulticastAddress(IPv4Address addr);

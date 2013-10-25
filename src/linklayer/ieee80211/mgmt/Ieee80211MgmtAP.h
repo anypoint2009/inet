@@ -23,7 +23,6 @@
 #include "INETDefs.h"
 
 #include "Ieee80211MgmtAPBase.h"
-#include "NotificationBoard.h"
 
 
 /**
@@ -65,9 +64,6 @@ class INET_API Ieee80211MgmtAP : public Ieee80211MgmtAPBase
     typedef std::map<MACAddress,STAInfo, MAC_compare> STAList;
 
   protected:
-
-    cModule *nb;
-
     // configuration
     std::string ssid;
     int channelNumber;
@@ -80,8 +76,9 @@ class INET_API Ieee80211MgmtAP : public Ieee80211MgmtAPBase
     cMessage *beaconTimer;
 
   public:
-    Ieee80211MgmtAP() :  nb(NULL), beaconTimer(NULL) {}
+    Ieee80211MgmtAP() : beaconTimer(NULL) {}
     virtual ~Ieee80211MgmtAP();
+
   protected:
     virtual int numInitStages() const;
     virtual void initialize(int);

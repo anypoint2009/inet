@@ -28,7 +28,6 @@
 #include "ICMPAccess.h"
 #include "IPv4InterfaceData.h"
 #include "IInterfaceTable.h"
-#include "NotificationBoard.h"
 #include "ProtocolMap.h"
 #include "ControlManetRouting_m.h"
 #include "IPv4ControlInfo.h"
@@ -266,7 +265,6 @@ class DSRUU:public cSimpleModule, public cListener, public ManetNetfilterHook
 
     void drop (cMessage *msg,int code) { delete msg;}
 
-    cModule *nb;
     virtual void receiveSignal(cComponent *source, simsignal_t category, cObject *details);
 
   protected:

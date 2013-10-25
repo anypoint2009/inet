@@ -31,7 +31,6 @@
 #include "Ieee802Ctrl_m.h"
 #include "NodeOperations.h"
 #include "NodeStatus.h"
-#include "NotificationBoard.h"
 #include "IPSocket.h"
 #include "IARPCache.h"
 #include "Ieee802Ctrl_m.h"
@@ -53,7 +52,6 @@ void IPv4::initialize(int stage)
 
         ift = InterfaceTableAccess().get();
         rt = check_and_cast<IIPv4RoutingTable *>(getModuleByPath(par("routingTableModule")));
-        nb = findContainingNode(this); // needed only for multicast forwarding
         arp = ARPCacheAccess().get();
 
         arpDgramOutGate = gate("arpDgramOut");
@@ -522,9 +520,6 @@ void IPv4::forwardMulticastPacket(IPv4Datagram *datagram, const InterfaceEntry *
     const IPv4Address &destAddr = datagram->getDestAddress();
     ASSERT(destAddr.isMulticast());
     ASSERT(!destAddr.isLinkLocalMulticast());
-
-    if (!nb)
-        throw cRuntimeError("If multicast forwarding is enabled, then the node must contain a NotificationBoard.");
 
     EV << "Forwarding multicast datagram `" << datagram->getName() << "' with dest=" << destAddr << "\n";
 

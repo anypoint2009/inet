@@ -87,7 +87,7 @@ void ManetRoutingBase::registerRoutingModule()
     int  num_80211 = 0;
     inet_rt = IPv4RoutingTableAccess().getIfExists();
     inet_ift = InterfaceTableAccess().get();
-    nb = findContainingNode(this, true);
+    hostModule = findContainingNode(this, true);
 
     if (routesVector)
         routesVector->clear();
@@ -246,8 +246,8 @@ void ManetRoutingBase::registerRoutingModule()
         }
         arp = ARPCacheAccess().get();
     }
-    nb->subscribe(NF_L2_AP_DISASSOCIATED, this);
-    nb->subscribe(NF_L2_AP_ASSOCIATED, this);
+    hostModule->subscribe(NF_L2_AP_DISASSOCIATED, this);
+    hostModule->subscribe(NF_L2_AP_ASSOCIATED, this);
 
     if (par("PublicRoutingTables").boolValue())
     {
@@ -347,21 +347,21 @@ void ManetRoutingBase::linkLayerFeeback()
 {
     if (!isRegistered)
         opp_error("Manet routing protocol is not register");
-    nb->subscribe(NF_LINK_BREAK, this);
+    hostModule->subscribe(NF_LINK_BREAK, this);
 }
 
 void ManetRoutingBase::linkPromiscuous()
 {
     if (!isRegistered)
         opp_error("Manet routing protocol is not register");
-    nb->subscribe(NF_LINK_PROMISCUOUS, this);
+    hostModule->subscribe(NF_LINK_PROMISCUOUS, this);
 }
 
 void ManetRoutingBase::linkFullPromiscuous()
 {
     if (!isRegistered)
         opp_error("Manet routing protocol is not register");
-    nb->subscribe(NF_LINK_FULL_PROMISCUOUS, this);
+    hostModule->subscribe(NF_LINK_FULL_PROMISCUOUS, this);
 }
 
 void ManetRoutingBase::registerPosition()

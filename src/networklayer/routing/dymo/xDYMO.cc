@@ -17,7 +17,6 @@
 //
 
 #include "xDYMO.h"
-#include "NotificationBoard.h"
 #include "InterfaceTableAccess.h"
 #include "IPSocket.h"
 #include "IPProtocolId_m.h"
@@ -39,7 +38,6 @@ Define_Module(DYMO::xDYMO);
 
 xDYMO::xDYMO()
 {
-    nb = NULL;
     addressType = NULL;
     interfaceTable = NULL;
     routingTable = NULL;
@@ -86,9 +84,8 @@ void xDYMO::initialize(int stage)
         minHopLimit = par("minHopLimit");
         maxHopLimit = par("maxHopLimit");
         // context
-        host = findContainingNode(this);
+        host = findContainingNode(this, true);
         nodeStatus = dynamic_cast<NodeStatus *>(host->getSubmodule("status"));
-        nb = findContainingNode(this, true);
         interfaceTable = InterfaceTableAccess().get(this);
         routingTable = check_and_cast<IRoutingTable *>(getModuleByPath(par("routingTableModule")));
         networkProtocol = check_and_cast<INetfilter *>(getModuleByPath(par("networkProtocolModule")));
@@ -122,7 +119,7 @@ void xDYMO::initialize(int stage)
 
         // ASSERT(stage >= STAGE:IP_LAYER_READY_FOR_HOOK_REGISTRATION);
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
-        nb->subscribe(NF_LINK_BREAK, this);
+        host->subscribe(NF_LINK_BREAK, this);
         addressType = getSelfAddress().getAddressType();
         networkProtocol->registerHook(0, this);
         if (isNodeUp())

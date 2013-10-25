@@ -51,8 +51,8 @@ void Ieee80211AgentSTA::initialize(int stage)
         while ((token = tokenizer.nextToken())!=NULL)
             channelsToScan.push_back(atoi(token));
 
-        nb = findContainingNode(this, true);
-        nb->subscribe(NF_L2_BEACON_LOST, this);
+        cModule *host = findContainingNode(this, true);
+        host->subscribe(NF_L2_BEACON_LOST, this);
 
         // JcM add: get the default ssid, if there is one.
         default_ssid = par("default_ssid").stringValue();

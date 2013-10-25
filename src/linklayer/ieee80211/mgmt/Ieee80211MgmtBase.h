@@ -22,7 +22,6 @@
 
 #include "MACAddress.h"
 #include "PassiveQueueBase.h"
-#include "NotificationBoard.h"
 #include "Ieee80211Frame_m.h"
 #include "Ieee80211MgmtFrames_m.h"
 #include "ILifecycle.h"

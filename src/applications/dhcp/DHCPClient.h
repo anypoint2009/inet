@@ -20,7 +20,6 @@
 #define __DHCPCLIENT_H__
 
 #include <vector>
-#include "NotificationBoard.h"
 #include "MACAddress.h"
 #include "DHCP_m.h"
 #include "DHCPLease.h"
@@ -63,7 +62,7 @@ class INET_API DHCPClient : public cSimpleModule, public cListener, public ILife
 
         MACAddress client_mac_address; // client_mac_address
 
-        cModule *nb; // Notification board
+        cModule *host;
         InterfaceEntry* ie; // interface to configure
         IIPv4RoutingTable* irt; // Routing table to update
 
@@ -78,7 +77,6 @@ class INET_API DHCPClient : public cSimpleModule, public cListener, public ILife
         virtual void handleTimer(cMessage *msg);
         virtual void handleDHCPMessage(DHCPMessage* msg);
         virtual void receiveSignal(cComponent *source, int category, cObject *details);
-        virtual cModule* getContainingNode();
         virtual void sendToUDP(cPacket *msg, int srcPort, const Address& destAddr, int destPort);
 
         // internal client methods

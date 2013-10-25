@@ -93,10 +93,6 @@ class INET_API xMIPv6 : public cSimpleModule
     cOutVector statVectorHoTtoMN, statVectorCoTtoMN;
     cOutVector statVectorHoTfromCN, statVectorCoTfromCN;
 
-
-    /** NB is used for MIH signalling */
-    cModule *nb; // 14.01.08 - CB
-
     /**
      * The base class for all other timers that are used for retransmissions.
      */

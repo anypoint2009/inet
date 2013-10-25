@@ -84,13 +84,13 @@ void IPv6RoutingTable::initialize(int stage)
         mipv6Support = false; // 4.9.07 - CB
 #endif /* WITH_xMIPv6 */
 
-        nb = findContainingNode(this, true);
+        cModule *host = findContainingNode(this, true);
 
-        nb->subscribe(NF_INTERFACE_CREATED, this);
-        nb->subscribe(NF_INTERFACE_DELETED, this);
-        nb->subscribe(NF_INTERFACE_STATE_CHANGED, this);
-        nb->subscribe(NF_INTERFACE_CONFIG_CHANGED, this);
-        nb->subscribe(NF_INTERFACE_IPv6CONFIG_CHANGED, this);
+        host->subscribe(NF_INTERFACE_CREATED, this);
+        host->subscribe(NF_INTERFACE_DELETED, this);
+        host->subscribe(NF_INTERFACE_STATE_CHANGED, this);
+        host->subscribe(NF_INTERFACE_CONFIG_CHANGED, this);
+        host->subscribe(NF_INTERFACE_IPv6CONFIG_CHANGED, this);
     }
     else if (stage == INITSTAGE_NETWORK_LAYER)
     {

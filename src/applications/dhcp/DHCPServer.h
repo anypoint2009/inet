@@ -55,7 +55,6 @@ class INET_API DHCPServer : public cSimpleModule, public cListener, public ILife
         simtime_t proc_delay; // process delay
 
         InterfaceEntry* ie; // interface to listen
-        cModule *nb;
         UDPSocket socket;
 
     protected:

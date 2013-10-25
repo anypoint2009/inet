@@ -377,10 +377,10 @@ void DSRUU::initialize(int stage)
         macaddr_ = interface80211ptr->getMacAddress();
 
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
-        nb = findContainingNode(this, true);
-        nb->subscribe(NF_LINK_BREAK, this);
+        cModule *host = findContainingNode(this, true);
+        host->subscribe(NF_LINK_BREAK, this);
         if (get_confval(PromiscOperation))
-            nb->subscribe(NF_LINK_PROMISCUOUS, this);
+            host->subscribe(NF_LINK_PROMISCUOUS, this);
         // clear routing entries related to wlan interfaces and autoassign ip adresses
         bool manetPurgeRoutingTables = (bool) par("manetPurgeRoutingTables");
         if (manetPurgeRoutingTables)

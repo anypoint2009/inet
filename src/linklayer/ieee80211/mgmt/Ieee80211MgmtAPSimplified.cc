@@ -55,7 +55,6 @@ void Ieee80211MgmtAPSimplified::handleCommand(int msgkind, cObject *ctrl)
 void Ieee80211MgmtAPSimplified::receiveSignal(cComponent *source, simsignal_t category, cObject *details)
 {
     Enter_Method_Silent();
-    printNotificationBanner(category, details);
 }
 
 void Ieee80211MgmtAPSimplified::handleDataFrame(Ieee80211DataFrame *frame)

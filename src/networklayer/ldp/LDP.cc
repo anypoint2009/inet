@@ -119,7 +119,6 @@ void LDP::initialize(int stage)
         rt = IPv4RoutingTableAccess().get();
         lt = LIBTableAccess().get();
         tedmod = TEDAccess().get();
-        nb = findContainingNode(this, true);
 
         WATCH_VECTOR(myPeers);
         WATCH_VECTOR(fecUp);
@@ -167,8 +166,9 @@ void LDP::initialize(int stage)
         rebuildFecList();
 
         // listen for routing table modifications
-        nb->subscribe(NF_ROUTE_ADDED, this);
-        nb->subscribe(NF_ROUTE_DELETED, this);
+        cModule *host = findContainingNode(this, true);
+        host->subscribe(NF_ROUTE_ADDED, this);
+        host->subscribe(NF_ROUTE_DELETED, this);
     }
 }
 

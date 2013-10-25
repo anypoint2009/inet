@@ -25,7 +25,6 @@
 #include "InterfaceEntry.h"
 #include "InterfaceTableAccess.h"
 #include "IPassiveQueue.h"
-#include "NotificationBoard.h"
 #include "NodeOperations.h"
 #include "opp_utils.h"
 

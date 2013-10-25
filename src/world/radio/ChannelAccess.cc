@@ -18,6 +18,7 @@
 
 #include "ChannelAccess.h"
 #include "IMobility.h"
+#include "ModuleAccess.h"
 
 simsignal_t ChannelAccess::mobilityStateChangedSignal = SIMSIGNAL_NULL;
 
@@ -58,7 +59,6 @@ void ChannelAccess::initialize(int stage)
     {
         // ASSERT(stage < NEWSTAGE:PHYSICALENV_SECOND);
         cc = getChannelControl();
-        nb = findContainingNode(this, true);
         hostModule = findContainingNode(this, true);
         myRadioRef = NULL;
 

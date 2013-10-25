@@ -22,7 +22,6 @@
 
 #include "INETDefs.h"
 
-#include "NotificationBoard.h"
 #include "InterfaceEntry.h"
 #include "Address.h"
 

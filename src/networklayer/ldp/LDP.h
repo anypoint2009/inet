@@ -28,7 +28,6 @@
 #include "TCPSocket.h"
 #include "TCPSocketMap.h"
 #include "IClassifier.h"
-#include "NotificationBoard.h"
 #include "ILifecycle.h"
 #include "NodeStatus.h"
 
@@ -121,7 +120,6 @@ class INET_API LDP: public cSimpleModule, public TCPSocket::CallbackInterface, p
     IIPv4RoutingTable *rt;
     LIBTable *lt;
     TED *tedmod;
-    cModule *nb;
 
     UDPSocket udpSocket; // for receiving Hello
     std::vector<UDPSocket> udpSockets;  // for sending Hello, one socket for each multicast interface

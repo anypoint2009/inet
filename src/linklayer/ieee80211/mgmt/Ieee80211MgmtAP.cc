@@ -25,6 +25,7 @@
 #include "EtherFrame_m.h"
 #endif
 
+#include "ModuleAccess.h"
 #include "NotifierConsts.h"
 #include "RadioState.h"
 
@@ -65,9 +66,9 @@ void Ieee80211MgmtAP::initialize(int stage)
 
         //TBD fill in supportedRates
 
-        nb = findContainingNode(this, true);
+        cModule *host = findContainingNode(this, true);
         // subscribe for notifications
-        nb->subscribe(NF_RADIO_CHANNEL_CHANGED, this);
+        host->subscribe(NF_RADIO_CHANNEL_CHANGED, this);
 
         // start beacon timer (randomize startup time)
         beaconTimer = new cMessage("beaconTimer");

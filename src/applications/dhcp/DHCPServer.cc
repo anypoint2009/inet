@@ -28,7 +28,6 @@
 #include "ModuleAccess.h"
 #include "NodeOperations.h"
 #include "NodeStatus.h"
-#include "NotificationBoard.h"
 #include "NotifierConsts.h"
 
 
@@ -66,8 +65,10 @@ void DHCPServer::initialize(int stage)
     }
     else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
+        cModule *host = findContainingNode(this, true);
+
         bool isOperational;
-        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
+        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(host->getSubmodule("status"));
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
@@ -76,9 +77,8 @@ void DHCPServer::initialize(int stage)
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
 
-        nb = findContainingNode(this, true);
-        nb->subscribe(NF_INTERFACE_CREATED, this);
-        nb->subscribe(NF_INTERFACE_DELETED, this);
+        host->subscribe(NF_INTERFACE_CREATED, this);
+        host->subscribe(NF_INTERFACE_DELETED, this);
 
         IInterfaceTable* ift = InterfaceTableAccess().get();
         ie = ift->getInterfaceByName(par("interface"));

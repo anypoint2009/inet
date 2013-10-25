@@ -100,8 +100,6 @@ void xMIPv6::initialize(int stage)
     {
         EV << "Initializing xMIPv6 module" << endl;
 
-        nb = findContainingNode(this, true);
-
         // statistic collection
         /*statVectorBUtoHA.setName("BU to HA");
         statVectorBUtoCN.setName("BU to CN");
@@ -1329,7 +1327,7 @@ void xMIPv6::processBAMessage(BindingAcknowledgement* ba, IPv6ControlInfo* ctrlI
                     /*statVectorBAfromCN.record(1);*/
 
                     // fire event to MIH subscribers
-                    emit(NF_MIPv6_RO_COMPLETED, NULL);
+                    emit(NF_MIPv6_RO_COMPLETED, (cObject *)NULL);
                 }
 
                 // set BAck flag in BUL

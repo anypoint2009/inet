@@ -24,7 +24,6 @@
 
 #include "IInterfaceTable.h"
 #include "InterfaceEntry.h"
-#include "NotificationBoard.h"
 #include "ILifecycle.h"
 
 /**
@@ -67,7 +66,7 @@
 class INET_API InterfaceTable : public cSimpleModule, public IInterfaceTable, protected cListener, public ILifecycle
 {
   protected:
-    cModule *nb; // cached pointer
+    cModule *host; // cached pointer
 
     // primary storage for interfaces: vector indexed by id; may contain NULLs;
     // slots are never reused to ensure id uniqueness

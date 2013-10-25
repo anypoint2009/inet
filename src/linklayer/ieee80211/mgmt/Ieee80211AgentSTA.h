@@ -23,7 +23,6 @@
 #include "INETDefs.h"
 
 #include "Ieee80211Primitives_m.h"
-#include "NotificationBoard.h"
 #include "InterfaceTable.h"
 
 
@@ -40,7 +39,6 @@ class INET_API Ieee80211AgentSTA : public cSimpleModule, public cListener
 {
   protected:
     InterfaceEntry *myIface;
-    cModule *nb;
     MACAddress prevAP;
     bool activeScan;
     std::vector<int> channelsToScan;

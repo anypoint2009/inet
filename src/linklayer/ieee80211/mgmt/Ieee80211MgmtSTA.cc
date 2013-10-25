@@ -18,6 +18,7 @@
 
 #include "Ieee80211MgmtSTA.h"
 #include "Ieee802Ctrl_m.h"
+#include "ModuleAccess.h"
 #include "NotifierConsts.h"
 #include "PhyControlInfo_m.h"
 #include "RadioState.h"
@@ -98,8 +99,8 @@ void Ieee80211MgmtSTA::initialize(int stage)
         isAssociated = false;
         assocTimeoutMsg = NULL;
 
-        nb = findContainingNode(this, true);
-        nb->subscribe(NF_LINK_FULL_PROMISCUOUS, this);
+        host = findContainingNode(this, true);
+        host->subscribe(NF_LINK_FULL_PROMISCUOUS, this);
 
         WATCH(isScanning);
         WATCH(isAssociated);
@@ -419,7 +420,7 @@ void Ieee80211MgmtSTA::processScanCommand(Ieee80211Prim_ScanRequest *ctrl)
 
     // start scanning
     if (scanning.activeScan)
-        nb->subscribe(NF_RADIOSTATE_CHANGED, this);
+        host->subscribe(NF_RADIOSTATE_CHANGED, this);
     scanning.currentChannelIndex = -1; // so we'll start with index==0
     isScanning = true;
     scanNextChannel();
@@ -432,7 +433,7 @@ bool Ieee80211MgmtSTA::scanNextChannel()
     {
         EV << "Finished scanning last channel\n";
         if (scanning.activeScan)
-            nb->unsubscribe(NF_RADIOSTATE_CHANGED, this);
+            host->unsubscribe(NF_RADIOSTATE_CHANGED, this);
         isScanning = false;
         return true; // we're done
     }

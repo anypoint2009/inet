@@ -27,7 +27,6 @@
 #include "INetfilter.h"
 #include "IRoutingTable.h"
 #include "NodeStatus.h"
-#include "NotificationBoard.h"
 #include "UDPPacket.h"
 #include "DYMOdefs.h"
 #include "DYMORouteData.h"
@@ -78,7 +77,6 @@ class INET_API xDYMO : public cSimpleModule, public ILifecycle, public cListener
     // context
     cModule * host;
     NodeStatus * nodeStatus;
-    cModule* nb;
     IAddressType * addressType;
     IInterfaceTable * interfaceTable;
     IRoutingTable * routingTable;

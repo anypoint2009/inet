@@ -76,7 +76,6 @@ class INET_API IPv4RoutingTable: public cSimpleModule, public IIPv4RoutingTable,
 {
   protected:
     IInterfaceTable *ift; // cached pointer
-    cModule *nb; // cached pointer
 
     IPv4Address routerId;
     bool IPForward;

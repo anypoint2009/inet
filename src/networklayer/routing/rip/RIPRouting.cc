@@ -22,7 +22,6 @@
 #include "InterfaceMatcher.h"
 #include "InterfaceTableAccess.h"
 #include "NodeOperations.h"
-#include "NotificationBoard.h"
 #include "NotifierConsts.h"
 #include "UDP.h"
 
@@ -154,7 +153,7 @@ void RIPRouting::initialize(int stage)
 
     if (stage == INITSTAGE_LOCAL)
     {
-        host = findContainingNode(this);
+        host = findContainingNode(this, true);
         ift = InterfaceTableAccess().get();
         rt = check_and_cast<IRoutingTable *>(getModuleByPath(par("routingTableModule")));
         socket.setOutputGate(gate("udpOut"));
@@ -455,13 +454,12 @@ void RIPRouting::startRIPRouting()
             socket.joinMulticastGroup(addressType->getLinkLocalRIPRoutersMulticastAddress(), it->ie->getInterfaceId());
 
     // subscribe to notifications
-    cModule *nb = findContainingNode(this, true);
-    nb->subscribe(NF_INTERFACE_CREATED, this);
-    nb->subscribe(NF_INTERFACE_DELETED, this);
-    nb->subscribe(NF_INTERFACE_STATE_CHANGED, this);
-    nb->subscribe(NF_ROUTE_DELETED, this);
-    nb->subscribe(NF_ROUTE_ADDED, this);
-    nb->subscribe(NF_ROUTE_CHANGED, this);
+    host->subscribe(NF_INTERFACE_CREATED, this);
+    host->subscribe(NF_INTERFACE_DELETED, this);
+    host->subscribe(NF_INTERFACE_STATE_CHANGED, this);
+    host->subscribe(NF_ROUTE_DELETED, this);
+    host->subscribe(NF_ROUTE_ADDED, this);
+    host->subscribe(NF_ROUTE_CHANGED, this);
 
     for (InterfaceVector::iterator it = ripInterfaces.begin(); it != ripInterfaces.end(); ++it)
         if (it->mode != NO_RIP)
@@ -476,13 +474,12 @@ void RIPRouting::stopRIPRouting()
     socket.close();
 
     // subscribe to notifications
-    cModule *nb = findContainingNode(this, true);
-    nb->unsubscribe(NF_INTERFACE_CREATED, this);
-    nb->unsubscribe(NF_INTERFACE_DELETED, this);
-    nb->unsubscribe(NF_INTERFACE_STATE_CHANGED, this);
-    nb->unsubscribe(NF_ROUTE_DELETED, this);
-    nb->unsubscribe(NF_ROUTE_ADDED, this);
-    nb->unsubscribe(NF_ROUTE_CHANGED, this);
+    host->unsubscribe(NF_INTERFACE_CREATED, this);
+    host->unsubscribe(NF_INTERFACE_DELETED, this);
+    host->unsubscribe(NF_INTERFACE_STATE_CHANGED, this);
+    host->unsubscribe(NF_ROUTE_DELETED, this);
+    host->unsubscribe(NF_ROUTE_ADDED, this);
+    host->unsubscribe(NF_ROUTE_CHANGED, this);
 
     // cancel timers
     cancelEvent(updateTimer);

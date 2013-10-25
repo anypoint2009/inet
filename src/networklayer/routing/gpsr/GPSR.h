@@ -27,7 +27,6 @@
 #include "INetfilter.h"
 #include "IRoutingTable.h"
 #include "NodeStatus.h"
-#include "NotificationBoard.h"
 #include "PositionTable.h"
 #include "UDPPacket.h"
 #include "GPSR_m.h"
@@ -56,7 +55,6 @@ class INET_API GPSR : public cSimpleModule, public ILifecycle, public cListener,
         // context
         cModule * host;
         NodeStatus * nodeStatus;
-        cModule *nb;
         IMobility * mobility;
         IAddressType * addressType;
         IInterfaceTable * interfaceTable;

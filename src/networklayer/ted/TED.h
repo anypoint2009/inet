@@ -99,7 +99,6 @@ class TED : public cSimpleModule, public ILifecycle
     IIPv4RoutingTable *rt;
     IInterfaceTable *ift;
     IPv4Address routerId;
-    cModule *nb;
 
     IPAddressVector interfaceAddrs; // list of local interface addresses
 

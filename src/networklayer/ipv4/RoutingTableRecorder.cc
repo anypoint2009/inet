@@ -20,13 +20,13 @@
 #if OMNETPP_VERSION >= 0x0500 && defined HAVE_CEVENTLOGLISTENER  /* cEventlogListener is only supported from 5.0 */
 
 #include "NotifierConsts.h"
-#include "NotificationBoard.h"
 #include "IInterfaceTable.h"
 #include "IRoutingTable.h"
 #include "IPv4RoutingTable.h"
 #include "IPv6RoutingTable.h"
 #include "GenericRoutingTable.h"
 #include "IPv4InterfaceData.h" // TODO: remove?
+#include "ModuleAccess.h"
 #include "RoutingTableRecorder.h"
 
 
@@ -77,22 +77,18 @@ void RoutingTableRecorder::handleMessage(cMessage *)
 
 void RoutingTableRecorder::hookListeners()
 {
-    // hook existing notification boards (we won't cover dynamically created hosts/routers, but oh well)
-    for (int id = 0; id < simulation.getLastModuleId(); id++) {
-        cModule *nb = dynamic_cast<NotificationBoard *>(simulation.getModule(id));
-        if (nb) {
-            cListener *listener = new RoutingTableNotificationBoardListener(this, nb);
-            nb->subscribe(NF_INTERFACE_CREATED, listener);
-            nb->subscribe(NF_INTERFACE_DELETED, listener);
-            nb->subscribe(NF_INTERFACE_CONFIG_CHANGED, listener);
-            nb->subscribe(NF_INTERFACE_IPv4CONFIG_CHANGED, listener);
-            //nb->subscribe(NF_INTERFACE_IPv6CONFIG_CHANGED, listener);
-            //nb->subscribe(NF_INTERFACE_STATE_CHANGED, listener);
-            nb->subscribe(NF_ROUTE_ADDED, listener);
-            nb->subscribe(NF_ROUTE_DELETED, listener);
-            nb->subscribe(NF_ROUTE_CHANGED, listener);
-        }
-    }
+    cModule *systemModule = simulation.getSystemModule();
+    cListener *listener = new RoutingTableNotificationBoardListener(this);
+    systemModule->subscribe(NF_INTERFACE_CREATED, listener);
+    systemModule->subscribe(NF_INTERFACE_DELETED, listener);
+    systemModule->subscribe(NF_INTERFACE_CONFIG_CHANGED, listener);
+    systemModule->subscribe(NF_INTERFACE_IPv4CONFIG_CHANGED, listener);
+    //systemModule->subscribe(NF_INTERFACE_IPv6CONFIG_CHANGED, listener);
+    //systemModule->subscribe(NF_INTERFACE_STATE_CHANGED, listener);
+    systemModule->subscribe(NF_ROUTE_ADDED, listener);
+    systemModule->subscribe(NF_ROUTE_DELETED, listener);
+    systemModule->subscribe(NF_ROUTE_CHANGED, listener);
+
     // hook on eventlog manager
     cEnvir* envir = simulation.getEnvir();
     cIndexedEventlogManager *eventlogManager = dynamic_cast<cIndexedEventlogManager *>(envir->getEventlogManager());
@@ -100,11 +96,11 @@ void RoutingTableRecorder::hookListeners()
         eventlogManager->addEventlogListener(this);
 }
 
-void RoutingTableRecorder::receiveChangeNotification(cComponent *nb, int category, const cObject *details)
+void RoutingTableRecorder::receiveChangeNotification(cComponent *source, int category, const cObject *details)
 {
-    cModule *m = dynamic_cast<cModule *>(nb);
+    cModule *m = dynamic_cast<cModule *>(source);
     if (!m)
-        m = nb->getParentModule();
+        m = source->getParentModule();
     cModule *host = findContainingNode(m, true);
     if (category==NF_ROUTE_ADDED || category==NF_ROUTE_DELETED || category==NF_ROUTE_CHANGED)
         recordRoute(host, check_and_cast<const IRoute *>(details), category);
@@ -221,11 +217,11 @@ void RoutingTableRecorder::recordRoute(cModule *host, const IRoute *route, int c
 
 
 #include "NotifierConsts.h"
-#include "NotificationBoard.h"
 #include "IIPv4RoutingTable.h"
 #include "IPv4Route.h"
 #include "IInterfaceTable.h"
 #include "IPv4InterfaceData.h"
+#include "ModuleAccess.h"
 #include "RoutingTableRecorder.h"
 
 
@@ -278,18 +274,18 @@ void RoutingTableRecorder::handleMessage(cMessage *)
 
 void RoutingTableRecorder::hookListeners()
 {
-    cModule *nb = simulation.getSystemModule();
+    cModule *systemModule = simulation.getSystemModule();
     cListener *listener = new RoutingTableRecorderListener(this);
-    nb->subscribe(NF_INTERFACE_CREATED, listener);
-    nb->subscribe(NF_INTERFACE_DELETED, listener);
-    nb->subscribe(NF_INTERFACE_CONFIG_CHANGED, listener);
-    nb->subscribe(NF_INTERFACE_IPv4CONFIG_CHANGED, listener);
-    //nb->subscribe(NF_INTERFACE_IPv6CONFIG_CHANGED, listener);
-    //nb->subscribe(NF_INTERFACE_STATE_CHANGED, listener);
+    systemModule->subscribe(NF_INTERFACE_CREATED, listener);
+    systemModule->subscribe(NF_INTERFACE_DELETED, listener);
+    systemModule->subscribe(NF_INTERFACE_CONFIG_CHANGED, listener);
+    systemModule->subscribe(NF_INTERFACE_IPv4CONFIG_CHANGED, listener);
+    //systemModule->subscribe(NF_INTERFACE_IPv6CONFIG_CHANGED, listener);
+    //systemModule->subscribe(NF_INTERFACE_STATE_CHANGED, listener);
 
-    nb->subscribe(NF_ROUTE_ADDED, listener);
-    nb->subscribe(NF_ROUTE_DELETED, listener);
-    nb->subscribe(NF_ROUTE_CHANGED, listener);
+    systemModule->subscribe(NF_ROUTE_ADDED, listener);
+    systemModule->subscribe(NF_ROUTE_DELETED, listener);
+    systemModule->subscribe(NF_ROUTE_CHANGED, listener);
 }
 
 void RoutingTableRecorder::ensureRoutingLogFileOpen()
@@ -306,11 +302,11 @@ void RoutingTableRecorder::ensureRoutingLogFileOpen()
     }
 }
 
-void RoutingTableRecorder::receiveChangeNotification(cComponent *nb, int category, const cObject *details)
+void RoutingTableRecorder::receiveChangeNotification(cComponent *nsource, int category, const cObject *details)
 {
-    cModule *m = dynamic_cast<cModule *>(nb);
+    cModule *m = dynamic_cast<cModule *>(nsource);
     if (!m)
-        m = nb->getParentModule();
+        m = nsource->getParentModule();
     cModule *host = findContainingNode(m, true);
     if (category==NF_ROUTE_ADDED || category==NF_ROUTE_DELETED || category==NF_ROUTE_CHANGED)
         recordRouteChange(host, check_and_cast<const IRoute *>(details), category);

@@ -29,7 +29,6 @@
 #include "compatibility.h"
 #include "Coord.h"
 #include "IIPv4RoutingTable.h"
-#include "NotificationBoard.h"
 #include "IInterfaceTable.h"
 #include "Address.h"
 #include "ManetAddress.h"
@@ -75,7 +74,7 @@ class INET_API ManetRoutingBase : public cSimpleModule, public cListener, public
 
     IIPv4RoutingTable *inet_rt;
     IInterfaceTable *inet_ift;
-    cModule *nb;
+    cModule *hostModule;
     ICMP *icmpModule;
     bool mac_layer_;
     ManetAddress    hostAddress;

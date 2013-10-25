@@ -25,7 +25,6 @@
 #include "IRoutingTable.h"
 #include "IPv6Route.h"
 #include "IPv6Address.h"
-#include "NotificationBoard.h"
 #include "ILifecycle.h"
 
 class IInterfaceTable;
@@ -51,7 +50,6 @@ class INET_API IPv6RoutingTable : public cSimpleModule, public IRoutingTable, pr
 {
   protected:
     IInterfaceTable *ift; // cached pointer
-    cModule *nb; // cached pointer
 
     bool isrouter;
     bool multicastForward;  //If node is forwarding multicast info

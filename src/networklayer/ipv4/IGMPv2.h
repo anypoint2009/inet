@@ -130,7 +130,6 @@ class INET_API IGMPv2 : public cSimpleModule, protected cListener
   protected:
     IIPv4RoutingTable *rt;     // cached pointer
     IInterfaceTable *ift;  // cached pointer
-    cModule *nb; // cached pointer
 
     bool enabled;
     bool externalRouter;

@@ -17,7 +17,6 @@
 
 #include "INETDefs.h"
 
-#include "NotificationBoard.h"
 #include "LinkStatePacket_m.h"
 #include "IntServ.h"
 

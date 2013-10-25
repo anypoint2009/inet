@@ -21,7 +21,6 @@
 #include "INETDefs.h"
 
 #include "Ieee80211MgmtBase.h"
-#include "NotificationBoard.h"
 #include "Ieee80211Primitives_m.h"
 
 
@@ -84,7 +83,7 @@ class INET_API Ieee80211MgmtSTA : public Ieee80211MgmtBase
     };
 
   protected:
-    cModule *nb;
+    cModule *host;
 
     // number of channels in ChannelControl -- used if we're told to scan "all" channels
     int numChannels;

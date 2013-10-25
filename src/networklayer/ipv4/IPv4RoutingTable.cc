@@ -28,7 +28,6 @@
 #include "InterfaceTableAccess.h"
 #include "IPv4InterfaceData.h"
 #include "IPv4Route.h"
-#include "NotificationBoard.h"
 #include "NotifierConsts.h"
 #include "RoutingTableParser.h"
 #include "NodeOperations.h"
@@ -55,7 +54,6 @@ std::ostream& operator<<(std::ostream& os, const IPv4MulticastRoute& e)
 IPv4RoutingTable::IPv4RoutingTable()
 {
     ift = NULL;
-    nb = NULL;
 }
 
 IPv4RoutingTable::~IPv4RoutingTable()
@@ -75,12 +73,12 @@ void IPv4RoutingTable::initialize(int stage)
     if (stage == INITSTAGE_LOCAL)
     {
         // get a pointer to the NotificationBoard module and IInterfaceTable
-        nb = findContainingNode(this, true);
-        nb->subscribe(NF_INTERFACE_CREATED, this);
-        nb->subscribe(NF_INTERFACE_DELETED, this);
-        nb->subscribe(NF_INTERFACE_STATE_CHANGED, this);
-        nb->subscribe(NF_INTERFACE_CONFIG_CHANGED, this);
-        nb->subscribe(NF_INTERFACE_IPv4CONFIG_CHANGED, this);
+        cModule *host = findContainingNode(this, true);
+        host->subscribe(NF_INTERFACE_CREATED, this);
+        host->subscribe(NF_INTERFACE_DELETED, this);
+        host->subscribe(NF_INTERFACE_STATE_CHANGED, this);
+        host->subscribe(NF_INTERFACE_CONFIG_CHANGED, this);
+        host->subscribe(NF_INTERFACE_IPv4CONFIG_CHANGED, this);
 
         ift = InterfaceTableAccess().get();
 

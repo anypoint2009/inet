@@ -17,7 +17,6 @@
 //
 
 #include "GPSR.h"
-#include "NotificationBoard.h"
 #include "InterfaceTableAccess.h"
 #include "IPProtocolId_m.h"
 #include "IPSocket.h"
@@ -43,7 +42,6 @@ GPSR::GPSR()
 {
     host = NULL;
     nodeStatus = NULL;
-    nb = NULL;
     mobility = NULL;
     addressType = NULL;
     interfaceTable = NULL;
@@ -78,9 +76,8 @@ void GPSR::initialize(int stage)
         maxJitter = par("maxJitter");
         neighborValidityInterval = par("neighborValidityInterval");
         // context
-        host = findContainingNode(this);
+        host = findContainingNode(this, true);
         nodeStatus = dynamic_cast<NodeStatus *>(host->getSubmodule("status"));
-        nb = findContainingNode(this, true);
         interfaceTable = InterfaceTableAccess().get(this);
         mobility = check_and_cast<IMobility *>(host->getSubmodule("mobility"));
         routingTable = check_and_cast<IRoutingTable *>(getModuleByPath(par("routingTableModule")));
@@ -99,7 +96,7 @@ void GPSR::initialize(int stage)
         // ASSERT(stage >= STAGE:IP_LAYER_READY_FOR_HOOK_REGISTRATION);
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         globalPositionTable.clear();
-        nb->subscribe(NF_LINK_BREAK, this);
+        host->subscribe(NF_LINK_BREAK, this);
         addressType = getSelfAddress().getAddressType();
         networkProtocol->registerHook(0, this);
         if (isNodeUp())

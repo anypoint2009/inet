@@ -27,7 +27,6 @@
 
 #include "INETDefs.h"
 
-#include "NotificationBoard.h"
 #include "InterfaceEntry.h"
 #include "IPv4Address.h"
 

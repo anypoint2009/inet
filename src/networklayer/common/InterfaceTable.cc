@@ -24,6 +24,7 @@
 #include <sstream>
 
 #include "InterfaceTable.h"
+#include "ModuleAccess.h"
 #include "NotifierConsts.h"
 #include "NodeStatus.h"
 #include "NodeOperations.h"
@@ -50,7 +51,7 @@ std::ostream& operator<<(std::ostream& os, const InterfaceEntry& e)
 
 InterfaceTable::InterfaceTable()
 {
-    nb = NULL;
+    host = NULL;
     tmpNumInterfaces = -1;
     tmpInterfaceList = NULL;
 }
@@ -71,7 +72,7 @@ void InterfaceTable::initialize(int stage)
     if (stage == INITSTAGE_LOCAL)
     {
         // get a pointer to the NotificationBoard module
-        nb = findContainingNode(this, true);
+        host = findContainingNode(this, true);
         WATCH_PTRVECTOR(idToInterface);
     }
     else if (stage == INITSTAGE_NETWORK_LAYER)
@@ -106,7 +107,9 @@ void InterfaceTable::receiveSignal(cComponent *source, simsignal_t category, cOb
 
 cModule *InterfaceTable::getHostModule()
 {
-    return findContainingNode(this);
+    if (!host)
+        host = findContainingNode(this, true);
+    return host;
 }
 
 bool InterfaceTable::isLocalAddress(const Address& address) const {
@@ -255,7 +258,7 @@ int InterfaceTable::getBiggestInterfaceId()
 
 void InterfaceTable::addInterface(InterfaceEntry *entry)
 {
-    if (!nb)
+    if (!host)
         throw cRuntimeError("InterfaceTable must precede all network interface modules in the node's NED definition");
     // check name is unique
     if (getInterfaceByName(entry->getName())!=NULL)

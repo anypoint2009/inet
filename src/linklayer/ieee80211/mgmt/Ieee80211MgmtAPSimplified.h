@@ -21,7 +21,6 @@
 #include "INETDefs.h"
 
 #include "Ieee80211MgmtAPBase.h"
-#include "NotificationBoard.h"
 
 
 /**

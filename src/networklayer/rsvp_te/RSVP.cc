@@ -67,7 +67,6 @@ void RSVP::initialize(int stage)
         ift = InterfaceTableAccess().get();
         routerId = rt->getRouterId();
         lt = LIBTableAccess().get();
-        nb = findContainingNode(this, true);
 
         rpct = check_and_cast<IRSVPClassifier*>(getParentModule()->getSubmodule("classifier"));
 

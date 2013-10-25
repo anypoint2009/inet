@@ -22,7 +22,6 @@
 #include "InterfaceTableAccess.h"
 #include "IPv4ControlInfo.h"
 #include "IPv4InterfaceData.h"
-#include "NotificationBoard.h"
 
 #include <algorithm>
 
@@ -339,10 +338,10 @@ void IGMPv2::initialize(int stage)
         ift = InterfaceTableAccess().get();
         rt = check_and_cast<IIPv4RoutingTable *>(getModuleByPath(par("routingTableModule")));
 
-        nb = findContainingNode(this, true);
-        nb->subscribe(NF_INTERFACE_DELETED, this);
-        nb->subscribe(NF_IPv4_MCAST_JOIN, this);
-        nb->subscribe(NF_IPv4_MCAST_LEAVE, this);
+        cModule *host = findContainingNode(this, true);
+        host->subscribe(NF_INTERFACE_DELETED, this);
+        host->subscribe(NF_IPv4_MCAST_JOIN, this);
+        host->subscribe(NF_IPv4_MCAST_LEAVE, this);
 
         enabled = par("enabled");
         externalRouter = gate("routerIn")->isPathOK() && gate("routerOut")->isPathOK();
@@ -396,7 +395,8 @@ void IGMPv2::initialize(int stage)
             if (ie->isMulticast())
                 configureInterface(ie);
         }
-        nb->subscribe(NF_INTERFACE_CREATED, this);
+        cModule *host = findContainingNode(this, true);
+        host->subscribe(NF_INTERFACE_CREATED, this);
     }
     else if (stage == INITSTAGE_NETWORK_LAYER_2)
     {

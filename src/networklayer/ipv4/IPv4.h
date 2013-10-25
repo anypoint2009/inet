@@ -68,7 +68,6 @@ class INET_API IPv4 : public QueueBase, public INetfilter, public ILifecycle
     IIPv4RoutingTable *rt;
     IInterfaceTable *ift;
     IARPCache *arp;
-    cModule *nb;
     ICMPAccess icmpAccess;
     cGate *arpDgramOutGate;
     cGate *arpInGate;

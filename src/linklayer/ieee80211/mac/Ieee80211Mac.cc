@@ -288,7 +288,7 @@ void Ieee80211Mac::initialize(int stage)
 
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         // subscribe for the information of the carrier sense
-        nb->subscribe(NF_RADIOSTATE_CHANGED, this);
+        hostModule->subscribe(NF_RADIOSTATE_CHANGED, this);
 
         // obtain pointer to external queue
         initializeQueueModule();  //FIXME STAGE: this should be in L2 initialization!!!!
