@@ -151,7 +151,7 @@ void UDP::initialize(int stage)
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(IP_PROT_UDP);
 
-        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(getContainingNode(this)->getSubmodule("status"));
+        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
     }
 }

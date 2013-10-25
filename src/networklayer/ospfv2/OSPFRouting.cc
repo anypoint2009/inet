@@ -138,7 +138,7 @@ bool OSPFRouting::handleOperationStage(LifecycleOperation *operation, int stage,
 
 bool OSPFRouting::isNodeUp()
 {
-    NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(getContainingNode(this)->getSubmodule("status"));
+    NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
     return !nodeStatus || nodeStatus->getState() == NodeStatus::UP;
 }
 

@@ -106,7 +106,7 @@ void MACRelayUnitBase::initialize(int stage)
     }
     else if (stage == INITSTAGE_LINK_LAYER)
     {
-        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(getContainingNode(this)->getSubmodule("status"));
+        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
     }
 }

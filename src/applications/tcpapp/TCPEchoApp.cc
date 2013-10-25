@@ -46,7 +46,7 @@ void TCPEchoApp::initialize(int stage)
         socket.setOutputGate(gate("tcpOut"));
         socket.readDataTransferModePar(*this);
 
-        nodeStatus = dynamic_cast<NodeStatus *>(getContainingNode(this)->getSubmodule("status"));
+        nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
     }
     else if (stage == INITSTAGE_APPLICATION_LAYER)
     {

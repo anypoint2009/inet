@@ -179,7 +179,7 @@ void Radio::initialize(int stage)
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
         // ASSERT(stage >= STAGE:CHANNELCONTROL_AVAILABLE);
         // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
-        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(getContainingNode(this)->getSubmodule("status"));
+        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         bool isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
         if (isOperational)
         {

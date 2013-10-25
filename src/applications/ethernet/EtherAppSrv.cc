@@ -54,7 +54,7 @@ void EtherAppSrv::initialize(int stage)
     {
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
 
-        nodeStatus = dynamic_cast<NodeStatus *>(getContainingNode(this)->getSubmodule("status"));
+        nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
 
         if (isNodeUp())
             startApp();

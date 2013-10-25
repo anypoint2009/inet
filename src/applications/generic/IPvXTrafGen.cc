@@ -82,7 +82,7 @@ void IPvXTrafGen::initialize(int stage)
         // ASSERT(stage >= NEWSTAGE:TRANSPORT);
 
         timer = new cMessage("sendTimer");
-        nodeStatus = dynamic_cast<NodeStatus *>(getContainingNode(this)->getSubmodule("status"));
+        nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
 
         if (isNodeUp())

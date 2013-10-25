@@ -62,7 +62,7 @@ void EtherLLC::initialize(int stage)
     else if (stage == INITSTAGE_LINK_LAYER)
     {
         // lifecycle
-        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(getContainingNode(this)->getSubmodule("status"));
+        NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isUp = !nodeStatus || nodeStatus->getState() == NodeStatus::UP;
         if (isUp)
             start();
