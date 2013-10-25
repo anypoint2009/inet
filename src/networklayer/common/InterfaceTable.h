@@ -56,7 +56,7 @@
  * stale Ids can be detected, and they are also invariant to insertion/deletion.
  *
  * Clients can get notified about interface changes by subscribing to
- * the following notifications in NotificationBoard: NF_INTERFACE_CREATED,
+ * the following signals on host module: NF_INTERFACE_CREATED,
  * NF_INTERFACE_DELETED, NF_INTERFACE_STATE_CHANGED, NF_INTERFACE_CONFIG_CHANGED.
  * State change gets fired for up/down events; all other changes fire as
  * config change.

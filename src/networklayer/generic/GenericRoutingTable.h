@@ -26,7 +26,6 @@
 #include "IRoutingTable.h"
 
 class IInterfaceTable;
-class NotificationBoard;
 
 
 /**
@@ -58,7 +57,7 @@ class INET_API GenericRoutingTable : public cSimpleModule, public IRoutingTable,
         virtual void handleMessage(cMessage *);
 
         /**
-         * Called by the NotificationBoard whenever a change of a category
+         * Called by the signal handler whenever a change of a category
          * occurs to which this client has subscribed.
          */
         virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj);

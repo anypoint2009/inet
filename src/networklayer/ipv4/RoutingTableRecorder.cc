@@ -35,8 +35,6 @@ Define_Module(RoutingTableRecorder);
 #define LL INT64_PRINTF_FORMAT  // for eventnumber_t
 
 
-// We need this because we want to know which NotificationBoard the notification comes from
-// (cListener::receiveChangeNotification() doesn't have NotificationBoard* as arg).
 class RoutingTableNotificationBoardListener : public cListener
 {
   private:
@@ -232,8 +230,6 @@ Define_Module(RoutingTableRecorder);
 Register_PerRunConfigOption(CFGID_ROUTINGLOG_FILE, "routinglog-file", CFG_FILENAME, "${resultdir}/${configname}-${runnumber}.rt", "Name of the routing log file to generate.");
 
 
-// We need this because we want to know which NotificationBoard the notification comes from
-// (cListener::receiveChangeNotification() doesn't have NotificationBoard* as arg).
 class RoutingTableRecorderListener : public cListener
 {
   private:

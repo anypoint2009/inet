@@ -29,7 +29,6 @@
 
 class InterfaceEntry;
 class IPassiveQueue;
-class NotificationBoard;
 
 /**
  * PPP implementation.

@@ -23,7 +23,6 @@
 #include "INETDefs.h"
 #include "ILifecycle.h"
 
-class NotificationBoard;
 class InterfaceEntry;
 
 /**

@@ -42,7 +42,7 @@ class IPv6Datagram;
 class IPv6NeighbourDiscovery;
 class IPv6Tunneling;
 class IPv6RoutingTable;
-class NotificationBoard;
+
 
 // 13.9.07
 // Keys for timer list (=message type)

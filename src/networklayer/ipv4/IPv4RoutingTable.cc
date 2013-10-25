@@ -72,7 +72,7 @@ void IPv4RoutingTable::initialize(int stage)
 
     if (stage == INITSTAGE_LOCAL)
     {
-        // get a pointer to the NotificationBoard module and IInterfaceTable
+        // get a pointer to the host module and IInterfaceTable
         cModule *host = getContainingNode(this);
         host->subscribe(NF_INTERFACE_CREATED, this);
         host->subscribe(NF_INTERFACE_DELETED, this);

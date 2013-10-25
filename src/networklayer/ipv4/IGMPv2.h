@@ -28,7 +28,7 @@
 
 class IInterfaceTable;
 class IIPv4RoutingTable;
-class NotificationBoard;
+
 
 class INET_API IGMPv2 : public cSimpleModule, protected cListener
 {

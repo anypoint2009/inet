@@ -27,7 +27,6 @@ class TED;
 class IIPv4RoutingTable;
 class IInterfaceTable;
 class InterfaceEntry;
-class NotificationBoard;
 
 
 /**

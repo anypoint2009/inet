@@ -50,7 +50,7 @@ void GenericRoutingTable::initialize(int stage)
 
     if (stage == INITSTAGE_LOCAL)
     {
-        // get a pointer to the NotificationBoard module and IInterfaceTable
+        // get a pointer to the IInterfaceTable
         ift = InterfaceTableAccess().get();
 
         const char * addressTypeString = par("addressType");

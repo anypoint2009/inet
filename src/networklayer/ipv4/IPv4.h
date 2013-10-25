@@ -35,7 +35,6 @@ class ARPPacket;
 class ICMPMessage;
 class IInterfaceTable;
 class IIPv4RoutingTable;
-class NotificationBoard;
 class IARPCache;
 
 // ICMP type 2, code 4: fragmentation needed, but don't-fragment bit set

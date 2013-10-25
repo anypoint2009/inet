@@ -29,7 +29,6 @@
 #include "ARP.h"
 #include "UDPSocket.h"
 
-class NotificationBoard;
 
 class INET_API DHCPServer : public cSimpleModule, public cListener, public ILifecycle
 {

@@ -68,7 +68,7 @@ class INET_API Ieee80211AgentSTA : public cSimpleModule, public cListener
     /** Handle responses from mgmgt */
     virtual void handleResponse(cMessage *msg);
 
-    /** Redefined from cListener; called by NotificationBoard */
+    /** Redefined from cListener; called by signal handler */
     virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj);
 
     // utility method: attaches object to a message as controlInfo, and sends it to mgmt

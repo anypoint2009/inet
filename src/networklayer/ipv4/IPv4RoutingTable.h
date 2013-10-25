@@ -37,7 +37,6 @@
 #include "ILifecycle.h"
 
 class IInterfaceTable;
-class NotificationBoard;
 class RoutingTableParser;
 class IRoutingTable;
 
@@ -156,7 +155,7 @@ class INET_API IPv4RoutingTable: public cSimpleModule, public IIPv4RoutingTable,
     virtual void handleMessage(cMessage *);
 
     /**
-     * Called by the NotificationBoard whenever a change of a category
+     * Called by the signal handler whenever a change of a category
      * occurs to which this client has subscribed.
      */
     virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj);
