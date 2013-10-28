@@ -183,13 +183,9 @@ void Radio::initialize(int stage)
         bool isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
         if (isOperational)
         {
-            // tell initial values to MAC; must be done in stage STAGE_OTHER_MODULES_AVAILABLE+1 or later, because they
-            // subscribe in stage STAGE_OTHER_MODULES_AVAILABLE
+            // emit initial values
             nb->fireChangeNotification(NF_RADIOSTATE_CHANGED, &rs);
             nb->fireChangeNotification(NF_RADIO_CHANNEL_CHANGED, &rs);
-
-            // tell initial channel number to ChannelControl; should be done in
-            // stage==STAGE_REGISTER_RADIO or later, because base class initializes myRadioRef in that stage
             cc->setRadioChannel(myRadioRef, rs.getChannelNumber());
 
             // statistics
@@ -200,9 +196,8 @@ void Radio::initialize(int stage)
         else
         {
             // ASSERT(stage > STAGE:NOTIFICATIONBOARD_AVAILABLE);
+            // tell initial values to MAC
             setRadioState(RadioState::OFF);
-            // tell initial values to MAC; must be done in stage 1, because they
-            // subscribe in stage 0
             nb->fireChangeNotification(NF_RADIO_CHANNEL_CHANGED, &rs);
         }
 

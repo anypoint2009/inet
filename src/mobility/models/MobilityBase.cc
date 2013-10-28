@@ -79,9 +79,10 @@ void MobilityBase::initialize(int stage)
                       " (3rd argument of 'p' tag) from '@display' attribute.", visualRepresentation->getFullPath().c_str());
         }
     }
-    // initial position is set in stage 1 to allow subscribers to start listening in stage 0
-    if (stage == INITSTAGE_PHYSICAL_ENVIRONMENT_2)
+    else if (stage == INITSTAGE_PHYSICAL_ENVIRONMENT_2)
+    {
         initializePosition();
+    }
 }
 
 void MobilityBase::initializePosition()

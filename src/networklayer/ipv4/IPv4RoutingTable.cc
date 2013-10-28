@@ -99,7 +99,7 @@ void IPv4RoutingTable::initialize(int stage)
         isNodeUp = !nodeStatus || nodeStatus->getState() == NodeStatus::UP;
         if (isNodeUp) {
             // set routerId if param is not "" (==no routerId) or "auto" (in which case we'll
-            // do it later in STAGE_DO_ASSIGN_ROUTER_ID, after network configurators configured the interfaces)
+            // do it later in a later stage, after network configurators configured the interfaces)
             const char *routerIdStr = par("routerId").stringValue();
             if (strcmp(routerIdStr, "") && strcmp(routerIdStr, "auto"))
                 routerId = IPv4Address(routerIdStr);
@@ -109,12 +109,10 @@ void IPv4RoutingTable::initialize(int stage)
     {
         // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
 
-        if (isNodeUp) {
-            // L2 modules register themselves in stage 0, so we can only configure
-            // the interfaces in stage 1.
-            const char *filename = par("routingFile");
-
+        if (isNodeUp)
+        {
             // read routing table file (and interface configuration)
+            const char *filename = par("routingFile");
             RoutingTableParser parser(ift, this);
             if (*filename && parser.readRoutingTableFromFile(filename)==-1)
                 error("Error reading routing table file %s", filename);
@@ -124,8 +122,7 @@ void IPv4RoutingTable::initialize(int stage)
         // ASSERT(stage >= STAGE:INTERFACEENTRY_IP_PROTOCOLDATA_AVAILABLE);
         // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
 
-        // routerID selection must be after stage==2 when network autoconfiguration
-        // assigns interface addresses
+        // routerID selection must be after network autoconfiguration assigned interface addresses
         if (isNodeUp)
             configureRouterId();
 
@@ -139,7 +136,7 @@ void IPv4RoutingTable::configureRouterId()
     if (routerId.isUnspecified())  // not yet configured
     {
         const char *routerIdStr = par("routerId").stringValue();
-        if (!strcmp(routerIdStr, "auto"))  // non-"auto" cases already handled in stage 1
+        if (!strcmp(routerIdStr, "auto"))  // non-"auto" cases already handled earlier
         {
             // choose highest interface address as routerId
             for (int i=0; i<ift->getNumInterfaces(); ++i)
@@ -897,10 +894,8 @@ bool IPv4RoutingTable::handleOperationStage(LifecycleOperation *operation, int s
     Enter_Method_Silent();
     if (dynamic_cast<NodeStartOperation *>(operation)) {
         if (stage == NodeStartOperation::STAGE_NETWORK_LAYER) {
-            // L2 modules register themselves in stage 0, so we can only configure
-            // the interfaces in stage 1.
-            const char *filename = par("routingFile");
             // read routing table file (and interface configuration)
+            const char *filename = par("routingFile");
             RoutingTableParser parser(ift, this);
             if (*filename && parser.readRoutingTableFromFile(filename)==-1)
                 error("Error reading routing table file %s", filename);

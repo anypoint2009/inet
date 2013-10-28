@@ -45,7 +45,6 @@ void LinkStateRouting::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    // we have to wait until routerId gets assigned in stage 3
     if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
         // ASSERT(stage >= STAGE:ROUTERID_AVAILABLE);
