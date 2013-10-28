@@ -100,7 +100,7 @@ LDP::~LDP()
     //socketMap.deleteSockets();
 }
 
-int LDP::numInitStages() const  {return STAGE_DO_INIT_APPLICATION + 1;}
+int LDP::numInitStages() const { return NUM_INIT_STAGES; }
 
 void LDP::initialize(int stage)
 {
@@ -110,7 +110,7 @@ void LDP::initialize(int stage)
     //FIXME register to InterfaceEntry changes, for detecting the interface add/delete, and detecting multicast config changes:
     //      should be refresh the udpSockets vector when interface added/deleted, or isMulticast() value changed.
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == INITSTAGE_LOCAL)
     {
         holdTime = par("holdTime").doubleValue();
         helloInterval = par("helloInterval").doubleValue();
@@ -129,12 +129,12 @@ void LDP::initialize(int stage)
 
         maxFecid = 0;
     }
-    if (stage == STAGE_DO_INIT_APPLICATION)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
-        ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
-        ASSERT(stage >= STAGE_INTERFACEENTRY_REGISTERED);
-        ASSERT(stage >= STAGE_NOTIFICATIONBOARD_AVAILABLE);
-        ASSERT(stage >= STAGE_TRANSPORT_LAYER_AVAILABLE);
+        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
+        // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
+        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
+        // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
         // schedule first hello
         sendHelloMsg = new cMessage("LDPSendHello");
         nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

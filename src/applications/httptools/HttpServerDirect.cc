@@ -33,16 +33,12 @@
 Define_Module(HttpServerDirect);
 
 
-int HttpServerDirect::numInitStages() const
-{
-    return std::max(0 + 1, HttpServerBase::numInitStages());
-}
+int HttpServerDirect::numInitStages() const { return NUM_INIT_STAGES; }
 
 void HttpServerDirect::initialize(int stage)
 {
     HttpServerBase::initialize(stage);
-
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == INITSTAGE_LOCAL)
     {
         EV_DEBUG << "Initializing direct server component\n";
 

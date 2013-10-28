@@ -49,11 +49,11 @@
 Define_Module(IPv6);
 
 
-int IPv6::numInitStages() const { return STAGE_NODESTATUS_AVAILABLE + 1; }
+int IPv6::numInitStages() const { return NUM_INIT_STAGES; }
 
 void IPv6::initialize(int stage)
 {
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == INITSTAGE_LOCAL)
     {
         QueueBase::initialize();
 
@@ -79,7 +79,7 @@ void IPv6::initialize(int stage)
         WATCH(numUnroutable);
         WATCH(numForwarded);
     }
-    if (stage == STAGE_NODESTATUS_AVAILABLE)
+    if (stage == INITSTAGE_NETWORK_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

@@ -31,15 +31,11 @@ static std::ostream& operator<<(std::ostream& out, cMessage *msg)
     return out;
 }
 
-int Ieee80211MgmtBase::numInitStages() const
-{
-    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, STAGE_MACADDRESS_AVAILABLE) + 1;
-    return stages;
-}
+int Ieee80211MgmtBase::numInitStages() const { return NUM_INIT_STAGES; }
 
 void Ieee80211MgmtBase::initialize(int stage)
 {
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == INITSTAGE_LOCAL)
     {
         PassiveQueueBase::initialize();
 
@@ -58,12 +54,12 @@ void Ieee80211MgmtBase::initialize(int stage)
         // configuration
         frameCapacity = par("frameCapacity");
     }
-    if (stage == STAGE_NODESTATUS_AVAILABLE)
+    if (stage == INITSTAGE_LINK_LAYER)
     {
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
     }
-    if (stage == STAGE_MACADDRESS_AVAILABLE)
+    if (stage == INITSTAGE_LINK_LAYER_2)
     {
         // obtain our address from MAC
         cModule *mac = getParentModule()->getSubmodule("mac");

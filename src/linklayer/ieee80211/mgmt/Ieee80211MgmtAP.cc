@@ -42,17 +42,13 @@ Ieee80211MgmtAP::~Ieee80211MgmtAP()
     cancelAndDelete(beaconTimer);
 }
 
-int Ieee80211MgmtAP::numInitStages() const
-{
-    static int stages = std::max(STAGE_NOTIFICATIONBOARD_AVAILABLE, STAGE_NODESTATUS_AVAILABLE) + 1;
-    return std::max(Ieee80211MgmtAPBase::numInitStages(), stages);
-}
+int Ieee80211MgmtAP::numInitStages() const { return NUM_INIT_STAGES; }
 
 void Ieee80211MgmtAP::initialize(int stage)
 {
     Ieee80211MgmtAPBase::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == INITSTAGE_LOCAL)
     {
         // read params and init vars
         ssid = par("ssid").stringValue();
@@ -74,12 +70,12 @@ void Ieee80211MgmtAP::initialize(int stage)
         // start beacon timer (randomize startup time)
         beaconTimer = new cMessage("beaconTimer");
     }
-    if (stage == STAGE_NOTIFICATIONBOARD_AVAILABLE)
+    if (stage == INITSTAGE_LOCAL)
     {
         // subscribe for notifications
         nb->subscribe(this, NF_RADIO_CHANNEL_CHANGED);
     }
-    if (stage == STAGE_NODESTATUS_AVAILABLE)
+    if (stage == INITSTAGE_LINK_LAYER)
     {
         if (isOperational)
             scheduleAt(simTime()+uniform(0, beaconInterval), beaconTimer);

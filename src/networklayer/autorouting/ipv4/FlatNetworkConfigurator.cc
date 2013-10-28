@@ -33,13 +33,13 @@ typedef cTopology WeightedTopology;
 Define_Module(FlatNetworkConfigurator);
 
 
-int FlatNetworkConfigurator::numInitStages() const  { return STAGE_DO_CONFIGURE_IP_ADDRESSES + 1; }
+int FlatNetworkConfigurator::numInitStages() const { return NUM_INIT_STAGES; }
 
 void FlatNetworkConfigurator::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_CONFIGURE_IP_ADDRESSES)
+    if (stage == INITSTAGE_NETWORK_LAYER_2)
     {
         WeightedTopology topo("topo");
         NodeInfoVector nodeInfo; // will be of size topo.nodes[]

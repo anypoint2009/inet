@@ -45,16 +45,16 @@ static void printElapsedTime(const char *name, long startTime)
 }
 
 
-int GenericNetworkConfigurator::numInitStages() const { return STAGE_DO_COMPUTE_IP_AUTOCONFIGURATION + 1; }
+int GenericNetworkConfigurator::numInitStages() const { return NUM_INIT_STAGES; }
 
 #define T(CODE)  {long startTime=clock(); CODE; printElapsedTime(#CODE, startTime);}
 void GenericNetworkConfigurator::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_COMPUTE_IP_AUTOCONFIGURATION)
+    if (stage == INITSTAGE_NETWORK_LAYER)
     {
-        ASSERT(stage >= STAGE_INTERFACEENTRY_REGISTERED);
+        // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
 
         long initializeStartTime = clock();
 

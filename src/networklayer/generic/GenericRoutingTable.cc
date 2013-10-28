@@ -44,18 +44,13 @@ GenericRoutingTable::~GenericRoutingTable()
         delete multicastRoutes[i];
 }
 
-int GenericRoutingTable::numInitStages() const
-{
-    static int stages = std::max(STAGE_INTERFACEENTRY_REGISTERED, std::max(STAGE_DO_ASSIGN_ROUTERID, STAGE_NOTIFICATIONBOARD_AVAILABLE)) + 1;
-
-    return stages;
-}
+int GenericRoutingTable::numInitStages() const { return NUM_INIT_STAGES; }
 
 void GenericRoutingTable::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == INITSTAGE_LOCAL)
     {
         // get a pointer to the NotificationBoard module and IInterfaceTable
         nb = NotificationBoardAccess().get();
@@ -79,16 +74,16 @@ void GenericRoutingTable::initialize(int stage)
         WATCH(multicastForwardingEnabled);
         WATCH(routerId);
     }
-    if (stage == STAGE_NOTIFICATIONBOARD_AVAILABLE)
+    if (stage == INITSTAGE_LOCAL)
     {
-        ASSERT(stage >= STAGE_NOTIFICATIONBOARD_AVAILABLE);
+        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         nb->subscribe(this, NF_INTERFACE_CREATED);
         nb->subscribe(this, NF_INTERFACE_DELETED);
         nb->subscribe(this, NF_INTERFACE_STATE_CHANGED);
         nb->subscribe(this, NF_INTERFACE_CONFIG_CHANGED);
         nb->subscribe(this, NF_INTERFACE_IPv4CONFIG_CHANGED);
     }
-    if (stage == STAGE_INTERFACEENTRY_REGISTERED)
+    if (stage == INITSTAGE_NETWORK_LAYER)
     {
 //        // L2 modules register themselves in stage 0, so we can only configure
 //        // the interfaces in stage 1.
@@ -113,9 +108,9 @@ void GenericRoutingTable::initialize(int stage)
 //        if (strcmp(routerIdStr, "") && strcmp(routerIdStr, "auto"))
 //            routerId = IPv4Address(routerIdStr);
     }
-    if (stage == STAGE_DO_ASSIGN_ROUTERID)
+    if (stage == INITSTAGE_NETWORK_LAYER_3)
     {
-        ASSERT(stage >= STAGE_IP_ADDRESS_AVAILABLE);
+        // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
         // routerID selection must be after stage==STAGE_AUTOCONFIGURE_ADDRESSES
         // when network autoconfiguration assigns interface addresses
         configureRouterId();

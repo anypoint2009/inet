@@ -28,23 +28,20 @@ Define_Module(NodeStatus);
 simsignal_t NodeStatus::nodeStatusChangedSignal = SIMSIGNAL_NULL;
 
 
-int NodeStatus::numInitStages() const
-{
-    return STAGE_DO_LOCAL + 1;
-}
+int NodeStatus::numInitStages() const { return NUM_INIT_STAGES; }
 
 void NodeStatus::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == INITSTAGE_LOCAL)
     {
         nodeStatusChangedSignal = registerSignal("nodeStatusChanged");
         state = getStateByName(par("initialStatus"));
         origIcon = getDisplayString().getTagArg("i", 0);
         updateDisplayString();
 
-        ASSERT(stage < STAGE_NODESTATUS_AVAILABLE);
+        // ASSERT(stage < STAGE:NODESTATUS_AVAILABLE);
     }
 }
 

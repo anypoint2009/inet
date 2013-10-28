@@ -66,22 +66,13 @@ IPv4RoutingTable::~IPv4RoutingTable()
         delete multicastRoutes[i];
 }
 
-int IPv4RoutingTable::numInitStages() const
-{
-    static int stages = std::max(std::max(std::max(std::max(
-            STAGE_NOTIFICATIONBOARD_AVAILABLE,
-            STAGE_NODESTATUS_AVAILABLE),
-            STAGE_DO_ASSIGN_ROUTERID),
-            STAGE_DO_ADD_STATIC_ROUTES),
-            STAGE_DO_ASSIGN_ROUTERID) + 1;
-    return stages;
-}
+int IPv4RoutingTable::numInitStages() const { return NUM_INIT_STAGES; }
 
 void IPv4RoutingTable::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == INITSTAGE_LOCAL)
     {
         // get a pointer to the NotificationBoard module and IInterfaceTable
         nb = NotificationBoardAccess().get();
@@ -96,7 +87,7 @@ void IPv4RoutingTable::initialize(int stage)
         WATCH(multicastForward);
         WATCH(routerId);
     }
-    if (stage == STAGE_NOTIFICATIONBOARD_AVAILABLE)
+    if (stage == INITSTAGE_LOCAL)
     {
         nb->subscribe(this, NF_INTERFACE_CREATED);
         nb->subscribe(this, NF_INTERFACE_DELETED);
@@ -104,7 +95,7 @@ void IPv4RoutingTable::initialize(int stage)
         nb->subscribe(this, NF_INTERFACE_CONFIG_CHANGED);
         nb->subscribe(this, NF_INTERFACE_IPv4CONFIG_CHANGED);
     }
-    if (stage == STAGE_NODESTATUS_AVAILABLE)
+    if (stage == INITSTAGE_NETWORK_LAYER)
     {
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isNodeUp = !nodeStatus || nodeStatus->getState() == NodeStatus::UP;
@@ -116,9 +107,9 @@ void IPv4RoutingTable::initialize(int stage)
                 routerId = IPv4Address(routerIdStr);
         }
     }
-    if (stage == STAGE_DO_ADD_STATIC_ROUTES)
+    if (stage == INITSTAGE_NETWORK_LAYER_3)
     {
-        ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
+        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
 
         if (isNodeUp) {
             // L2 modules register themselves in stage 0, so we can only configure
@@ -131,11 +122,11 @@ void IPv4RoutingTable::initialize(int stage)
                 error("Error reading routing table file %s", filename);
         }
     }
-    if (stage == STAGE_DO_ASSIGN_ROUTERID)
+    if (stage == INITSTAGE_NETWORK_LAYER_3)
     {
-        ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
-        ASSERT(stage >= STAGE_INTERFACEENTRY_IP_PROTOCOLDATA_AVAILABLE);
-        ASSERT(stage >= STAGE_IP_ADDRESS_AVAILABLE);
+        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
+        // ASSERT(stage >= STAGE:INTERFACEENTRY_IP_PROTOCOLDATA_AVAILABLE);
+        // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
 
         // routerID selection must be after stage==2 when network autoconfiguration
         // assigns interface addresses

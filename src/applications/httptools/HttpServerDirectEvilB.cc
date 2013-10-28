@@ -34,16 +34,13 @@
 Define_Module(HttpServerDirectEvilB);
 
 
-int HttpServerDirectEvilB::numInitStages() const
-{
-    return std::max(0 + 1, HttpServerDirect::numInitStages());
-}
+int HttpServerDirectEvilB::numInitStages() const { return NUM_INIT_STAGES; }
 
 void HttpServerDirectEvilB::initialize(int stage)
 {
     HttpServerDirect::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == INITSTAGE_LOCAL)
     {
         badLow = par("minBadRequests");
         badHigh = par("maxBadRequests");

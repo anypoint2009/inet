@@ -30,13 +30,13 @@
 Define_Module(ICMP);
 
 
-int ICMP::numInitStages() const  { return STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP + 1; }
+int ICMP::numInitStages() const { return NUM_INIT_STAGES; }
 
 void ICMP::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP)
+    if (stage == INITSTAGE_TRANSPORT_LAYER)
     {
         IPSocket socket(gate("sendOut"));
         socket.registerProtocol(IP_PROT_ICMP);

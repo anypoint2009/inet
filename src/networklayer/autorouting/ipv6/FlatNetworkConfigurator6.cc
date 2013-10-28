@@ -30,13 +30,13 @@
 Define_Module(FlatNetworkConfigurator6);
 
 
-int FlatNetworkConfigurator6::numInitStages() const { return STAGE_DO_CONFIGURE_IP_ADDRESSES + 1; }
+int FlatNetworkConfigurator6::numInitStages() const { return NUM_INIT_STAGES; }
 
 void FlatNetworkConfigurator6::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_CONFIGURE_IP_ADDRESSES)
+    if (stage == INITSTAGE_NETWORK_LAYER_2)
     {
         cTopology topo("topo");
 

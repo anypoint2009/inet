@@ -63,16 +63,13 @@ class INET_API NetfilterInfoHook : public cSimpleModule, public INetfilter::IHoo
 
 Define_Module(NetfilterInfoHook);
 
-int NetfilterInfoHook::numInitStages() const
-{
-    return STAGE_IP_LAYER_READY_FOR_HOOK_REGISTRATION + 1;
-}
+int NetfilterInfoHook::numInitStages() const { return NUM_INIT_STAGES; }
 
 void NetfilterInfoHook::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_IP_LAYER_READY_FOR_HOOK_REGISTRATION)
+    if (stage == INITSTAGE_NETWORK_LAYER)
     {
         netfilter = check_and_cast<INetfilter*>(findModuleWhereverInNode("ip", this));
         netfilter->registerHook(0, this);

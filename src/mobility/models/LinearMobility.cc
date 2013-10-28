@@ -31,17 +31,14 @@ LinearMobility::LinearMobility()
     acceleration = 0;
 }
 
-int LinearMobility::numInitStages() const
-{
-    return std::max(STAGE_DO_LOCAL + 1, MovingMobilityBase::numInitStages());
-}
+int LinearMobility::numInitStages() const { return NUM_INIT_STAGES; }
 
 void LinearMobility::initialize(int stage)
 {
     MovingMobilityBase::initialize(stage);
 
     EV_TRACE << "initializing LinearMobility stage " << stage << endl;
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == INITSTAGE_LOCAL)
     {
         speed = par("speed");
         angle = fmod((double)par("angle"), 360);

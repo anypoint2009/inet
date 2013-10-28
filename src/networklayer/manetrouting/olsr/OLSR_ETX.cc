@@ -85,14 +85,14 @@ void OLSR_ETX_LinkQualityTimer::expire()
 ///
 ///
 
-int OLSR_ETX::numInitStages() const { return STAGE_DO_INIT_ROUTING_PROTOCOLS + 1; }
+int OLSR_ETX::numInitStages() const { return NUM_INIT_STAGES; }
 
 void
 OLSR_ETX::initialize(int stage)
 {
     OLSR::initialize(stage);
 
-    if (stage == STAGE_DO_INIT_ROUTING_PROTOCOLS)
+    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
         if (isInMacLayer())
             OlsrAddressSize::ADDR_SIZE = 6;
@@ -160,8 +160,8 @@ OLSR_ETX::initialize(int stage)
         msg_seq_ = OLSR_MAX_SEQ_NUM;
         ansn_ = OLSR_MAX_SEQ_NUM;
 
-        ASSERT(stage >= STAGE_IP_LAYER_READY_FOR_HOOK_REGISTRATION);
-        ASSERT(stage >= STAGE_NOTIFICATIONBOARD_AVAILABLE);
+        // ASSERT(stage >= STAGE:IP_LAYER_READY_FOR_HOOK_REGISTRATION);
+        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         registerRoutingModule();
 
         ra_addr_ = getAddress();

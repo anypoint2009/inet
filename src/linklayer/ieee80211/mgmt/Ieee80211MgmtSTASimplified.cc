@@ -23,13 +23,13 @@
 Define_Module(Ieee80211MgmtSTASimplified);
 
 
-int Ieee80211MgmtSTASimplified::numInitStages() const { return Ieee80211MgmtBase::numInitStages(); }
+int Ieee80211MgmtSTASimplified::numInitStages() const { return NUM_INIT_STAGES; }
 
 void Ieee80211MgmtSTASimplified::initialize(int stage)
 {
     Ieee80211MgmtBase::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == INITSTAGE_LOCAL)
     {
         accessPointAddress.setAddress(par("accessPointAddress").stringValue());
         receiveSequence = 0;

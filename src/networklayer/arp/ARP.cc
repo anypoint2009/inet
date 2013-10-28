@@ -70,13 +70,13 @@ ARP::ARP()
     nb = NULL;
 }
 
-int ARP::numInitStages() const { return STAGE_IP_ADDRESS_AVAILABLE + 1; }
+int ARP::numInitStages() const { return NUM_INIT_STAGES; }
 
 void ARP::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == INITSTAGE_LOCAL)
     {
         sentReqSignal = registerSignal("sentReq");
         sentReplySignal = registerSignal("sentReply");
@@ -104,12 +104,12 @@ void ARP::initialize(int stage)
         WATCH_PTRMAP(arpCache);
         WATCH_PTRMAP(globalArpCache);
     }
-    if (stage == STAGE_IP_ADDRESS_AVAILABLE)
+    if (stage == INITSTAGE_NETWORK_LAYER_3)  // IP addresses should be available
     {
-        ASSERT(stage > STAGE_DO_CONFIGURE_IP_ADDRESSES);
-        ASSERT(stage >= STAGE_NOTIFICATIONBOARD_AVAILABLE);
-        ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
-        ASSERT(stage >= STAGE_INTERFACEENTRY_REGISTERED);
+        // ASSERT(stage > NEWSTAGE:L3_IPADDRESSES);
+        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
+        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
+        // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
 
         ift = InterfaceTableAccess().get();
         rt = check_and_cast<IIPv4RoutingTable *>(getModuleByPath(par("routingTableModule")));

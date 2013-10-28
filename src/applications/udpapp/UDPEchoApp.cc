@@ -25,20 +25,20 @@ Define_Module(UDPEchoApp);
 simsignal_t UDPEchoApp::pkSignal = SIMSIGNAL_NULL;
 
 
-int UDPEchoApp::numInitStages() const { return std::max(STAGE_DO_LOCAL + 1, AppBase::numInitStages()); }
+int UDPEchoApp::numInitStages() const { return NUM_INIT_STAGES; }
 
 void UDPEchoApp::initialize(int stage)
 {
     AppBase::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == INITSTAGE_LOCAL)
     {
         // init statistics
         pkSignal = registerSignal("pk");
         numEchoed = 0;
         WATCH(numEchoed);
     }
-    if (stage == numInitStages()-1)
+    if (stage == INITSTAGE_LAST)
     {
         if (ev.isGUI())
             updateDisplay();

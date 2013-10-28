@@ -42,24 +42,24 @@ MACBase::~MACBase()
 {
 }
 
-int MACBase::numInitStages() const { return STAGE_NOTIFICATIONBOARD_AVAILABLE + 1; }
+int MACBase::numInitStages() const { return NUM_INIT_STAGES; }
 
 void MACBase::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == INITSTAGE_LOCAL)
     {
         nb = NotificationBoardAccess().getIfExists();
     }
-    if (stage == STAGE_NOTIFICATIONBOARD_AVAILABLE)
+    if (stage == INITSTAGE_LOCAL)
     {
         if (nb)
             nb->subscribe(this, NF_INTERFACE_DELETED);
     }
-    if (stage == numInitStages() - 1)
+    if (stage == INITSTAGE_LAST)
     {
-        ASSERT(stage >= STAGE_NODESTATUS_AVAILABLE);
+        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
         updateOperationalFlag(isNodeUp());  // needs to be done when interface is already registered (=last stage)
     }
 }

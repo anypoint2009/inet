@@ -31,17 +31,13 @@ simsignal_t Ieee80211AgentSTA::acceptConfirmSignal = SIMSIGNAL_NULL;
 simsignal_t Ieee80211AgentSTA::dropConfirmSignal = SIMSIGNAL_NULL;
 
 
-int Ieee80211AgentSTA::numInitStages() const
-{
-    static int stages = std::max(STAGE_NOTIFICATIONBOARD_AVAILABLE, STAGE_INTERFACEENTRY_REGISTERED) + 1;
-    return stages;
-}
+int Ieee80211AgentSTA::numInitStages() const { return NUM_INIT_STAGES; }
 
 void Ieee80211AgentSTA::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == INITSTAGE_LOCAL)
     {
         // read parameters
         activeScan = par("activeScan");
@@ -73,11 +69,11 @@ void Ieee80211AgentSTA::initialize(int stage)
 
         myIface = NULL;
     }
-    if (stage == STAGE_NOTIFICATIONBOARD_AVAILABLE)
+    if (stage == INITSTAGE_LOCAL)
     {
         nb->subscribe(this, NF_L2_BEACON_LOST);
     }
-    if (stage == STAGE_INTERFACEENTRY_REGISTERED)
+    if (stage == INITSTAGE_LINK_LAYER_2)
     {
         InterfaceTable *ift = (InterfaceTable*)InterfaceTableAccess().getIfExists();
         if (ift)

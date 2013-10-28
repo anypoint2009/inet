@@ -72,16 +72,13 @@ void TraCIMobility::Statistics::recordScalars(cSimpleModule& module)
     module.recordScalar("totalCO2Emission", totalCO2Emission);
 }
 
-int TraCIMobility::numInitStages() const
-{
-    return std::max(STAGE_DO_LOCAL + 1, MobilityBase::numInitStages());
-}
+int TraCIMobility::numInitStages() const { return NUM_INIT_STAGES; }
 
 void TraCIMobility::initialize(int stage)
 {
     //TODO why call the base::initialize() at the end?
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == INITSTAGE_LOCAL)
     {
         accidentCount = par("accidentCount");
 

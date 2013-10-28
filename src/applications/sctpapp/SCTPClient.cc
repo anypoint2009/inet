@@ -55,18 +55,14 @@ SCTPClient::~SCTPClient()
     cancelAndDelete(primaryChangeTimer);
 }
 
-int SCTPClient::numInitStages() const
-{
-    static int stages = std::max(STAGE_NODESTATUS_AVAILABLE, STAGE_DO_INIT_APPLICATION) + 1;
-    return stages;
-}
+int SCTPClient::numInitStages() const { return NUM_INIT_STAGES; }
 
 void SCTPClient::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
     sctpEV3 << "initialize SCTP Client stage "<< stage << endl;
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == INITSTAGE_LOCAL)
     {
         numSessions = numBroken = packetsSent = packetsRcvd = bytesSent = echoedBytesSent = bytesRcvd = 0;
 
@@ -101,17 +97,15 @@ void SCTPClient::initialize(int stage)
         rcvdPkSignal = registerSignal("rcvdPk");
         echoedPkSignal = registerSignal("echoedPk");
     }
-    if (stage == STAGE_NODESTATUS_AVAILABLE)
+    if (stage == INITSTAGE_APPLICATION_LAYER)
     {
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
-    }
-    if (stage == STAGE_DO_INIT_APPLICATION)
-    {
-        ASSERT(stage >= STAGE_IP_ADDRESS_AVAILABLE);
+
+        // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
         // parameters
         const char *addressesString = par("localAddress");
         AddressVector addresses = AddressResolver().resolve(cStringTokenizer(addressesString).asVector());

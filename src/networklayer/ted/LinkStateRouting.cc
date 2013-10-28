@@ -39,19 +39,19 @@ LinkStateRouting::~LinkStateRouting()
     cancelAndDelete(announceMsg);
 }
 
-int LinkStateRouting::numInitStages() const { return STAGE_DO_INIT_ROUTING_PROTOCOLS + 1; }
+int LinkStateRouting::numInitStages() const { return NUM_INIT_STAGES; }
 
 void LinkStateRouting::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
     // we have to wait until routerId gets assigned in stage 3
-    if (stage == STAGE_DO_INIT_ROUTING_PROTOCOLS)
+    if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
-        ASSERT(stage >= STAGE_ROUTERID_AVAILABLE);
-        ASSERT(stage >= STAGE_NOTIFICATIONBOARD_AVAILABLE);
-        ASSERT(stage >= STAGE_INTERFACEENTRY_REGISTERED);
-        ASSERT(stage >= STAGE_IP_ADDRESS_AVAILABLE);
+        // ASSERT(stage >= STAGE:ROUTERID_AVAILABLE);
+        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
+        // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
+        // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
 
         tedmod = TEDAccess().get();
 
@@ -77,7 +77,7 @@ void LinkStateRouting::initialize(int stage)
         announceMsg = new cMessage("announce");
         scheduleAt(simTime() + exponential(0.01), announceMsg);
 
-        ASSERT(stage >= STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP);
+        // ASSERT(stage >= NEWSTAGE:TRANSPORT);
         IPSocket socket(gate("ipOut"));
         socket.registerProtocol(IP_PROT_OSPF);
     }

@@ -90,13 +90,13 @@ void SCTP::bindPortForUDP()
     udpSocket.bind(SCTP_UDP_PORT);
 }
 
-int SCTP::numInitStages() const { return STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP + 1; }
+int SCTP::numInitStages() const { return NUM_INIT_STAGES; }
 
 void SCTP::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == INITSTAGE_LOCAL)
     {
         this->auth = (bool)par("auth");
         this->pktdrop = (bool)par("packetDrop");
@@ -117,7 +117,7 @@ void SCTP::initialize(int stage)
         }
     }
 
-    if (stage == STAGE_TRANSPORT_LAYER_AVAILABLE)
+    if (stage == INITSTAGE_TRANSPORT_LAYER_2)
     {
         if (par("udpEncapsEnabled").boolValue())
         {
@@ -125,7 +125,7 @@ void SCTP::initialize(int stage)
         }
     }
 
-    if (stage == STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP)
+    if (stage == INITSTAGE_TRANSPORT_LAYER)
     {
         IPSocket socket(gate("to_ip"));
         socket.registerProtocol(IP_PROT_SCTP);

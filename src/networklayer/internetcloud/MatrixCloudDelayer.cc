@@ -128,13 +128,13 @@ MatrixCloudDelayer::~MatrixCloudDelayer()
     matrixEntries.clear();
 }
 
-int MatrixCloudDelayer::numInitStages() const { return CloudDelayerBase::numInitStages(); }
+int MatrixCloudDelayer::numInitStages() const { return NUM_INIT_STAGES; }
 
 void MatrixCloudDelayer::initialize(int stage)
 {
     CloudDelayerBase::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == INITSTAGE_LOCAL)
     {
         host = findContainingNode(this);
         ift = InterfaceTableAccess().get(this);

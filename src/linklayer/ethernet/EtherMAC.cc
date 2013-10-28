@@ -58,16 +58,13 @@ EtherMAC::~EtherMAC()
     cancelAndDelete(endJammingMsg);
 }
 
-int EtherMAC::numInitStages() const
-{
-    return std::max(0 + 1, EtherMACBase::numInitStages());
-}
+int EtherMAC::numInitStages() const { return NUM_INIT_STAGES; }
 
 void EtherMAC::initialize(int stage)
 {
     EtherMACBase::initialize(stage);
 
-    if (stage == STAGE_DO_LOCAL)
+    if (stage == INITSTAGE_LOCAL)
     {
         endRxMsg = new cMessage("EndReception", ENDRECEPTION);
         endBackoffMsg = new cMessage("EndBackoff", ENDBACKOFF);
