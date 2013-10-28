@@ -74,7 +74,6 @@ void GenericRoutingTable::initialize(int stage)
         WATCH(multicastForwardingEnabled);
         WATCH(routerId);
 
-        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         nb->subscribe(this, NF_INTERFACE_CREATED);
         nb->subscribe(this, NF_INTERFACE_DELETED);
         nb->subscribe(this, NF_INTERFACE_STATE_CHANGED);
@@ -104,7 +103,6 @@ void GenericRoutingTable::initialize(int stage)
     }
     else if (stage == INITSTAGE_NETWORK_LAYER_3)
     {
-        // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
         // routerID selection must be after network autoconfiguration assigned interface addresses
         configureRouterId();
 

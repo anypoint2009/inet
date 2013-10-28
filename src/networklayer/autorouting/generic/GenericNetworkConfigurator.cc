@@ -54,8 +54,6 @@ void GenericNetworkConfigurator::initialize(int stage)
 
     if (stage == INITSTAGE_NETWORK_LAYER)
     {
-        // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
-
         long initializeStartTime = clock();
 
         GenericTopology topology;

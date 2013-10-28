@@ -286,7 +286,6 @@ void Ieee80211Mac::initialize(int stage)
         endReserve = new cMessage("Reserve");
         mediumStateChange = new cMessage("MediumStateChange");
 
-        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         // subscribe for the information of the carrier sense
         nb->subscribe(this, NF_RADIOSTATE_CHANGED);
 

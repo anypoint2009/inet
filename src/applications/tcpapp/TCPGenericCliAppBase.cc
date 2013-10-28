@@ -47,8 +47,6 @@ void TCPGenericCliAppBase::initialize(int stage)
     }
     else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
-        // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
-        // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
         // parameters
         const char *localAddress = par("localAddress");
         int localPort = par("localPort");

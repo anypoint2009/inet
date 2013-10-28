@@ -84,10 +84,6 @@ void DHCPClient::initialize(int stage)
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
 
-        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
-        // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
-        // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
-
         // get the hostname
         cModule* host = getContainingNode();
         host_name = host->getFullName();

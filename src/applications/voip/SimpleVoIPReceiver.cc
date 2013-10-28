@@ -95,8 +95,6 @@ void SimpleVoIPReceiver::initialize(int stage)
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
 
-        // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
-
         int port = par("localPort");
         EV << "VoIPReceiver::initialize - binding to port: local:" << port << endl;
         if (port != -1) {

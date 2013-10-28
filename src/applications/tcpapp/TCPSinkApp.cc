@@ -45,9 +45,6 @@ void TCPSinkApp::initialize(int stage)
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
 
-        // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
-        // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
-
         const char *localAddress = par("localAddress");
         int localPort = par("localPort");
         TCPSocket socket;

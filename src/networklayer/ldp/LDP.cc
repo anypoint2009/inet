@@ -131,10 +131,6 @@ void LDP::initialize(int stage)
     }
     else if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
-        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
-        // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
-        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
-        // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
         // schedule first hello
         sendHelloMsg = new cMessage("LDPSendHello");
         nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));

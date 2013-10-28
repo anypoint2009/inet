@@ -41,7 +41,6 @@ void NodeStatus::initialize(int stage)
         origIcon = getDisplayString().getTagArg("i", 0);
         updateDisplayString();
 
-        // ASSERT(stage < STAGE:NODESTATUS_AVAILABLE);
     }
 }
 

@@ -90,8 +90,6 @@ void VoIPStreamSender::initialize(int stage)
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
 
-        // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
-        // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
         // say HELLO to the world
         EV << "VoIPSourceApp -> initialize(" << stage << ")" << endl;
 

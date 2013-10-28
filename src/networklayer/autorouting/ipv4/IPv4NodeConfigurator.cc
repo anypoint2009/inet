@@ -67,17 +67,11 @@ void IPv4NodeConfigurator::initialize(int stage)
     }
     else if (stage == INITSTAGE_NETWORK_LAYER)
     {
-        // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
-        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
-
         if (!nodeStatus || nodeStatus->getState() == NodeStatus::UP)
             prepareNode();
     }
     else if (stage == INITSTAGE_NETWORK_LAYER_2)
     {
-        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
-        // ASSERT(stage > NEWSTAGE:L3_INITIALIZATION);
-
         if ((!nodeStatus || nodeStatus->getState() == NodeStatus::UP) && networkConfigurator)
             configureNode();
     }

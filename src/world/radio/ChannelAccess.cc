@@ -56,7 +56,6 @@ void ChannelAccess::initialize(int stage)
 
     if (stage == INITSTAGE_LOCAL)
     {
-        // ASSERT(stage < NEWSTAGE:PHYSICALENV_SECOND);
         cc = getChannelControl();
         nb = NotificationBoardAccess().get();
         hostModule = findContainingNode(this, true);
@@ -69,7 +68,6 @@ void ChannelAccess::initialize(int stage)
     }
     else if (stage == INITSTAGE_PHYSICAL_LAYER)
     {
-        // ASSERT(stage > NEWSTAGE:PHYSICALENV_SECOND);
         if (!positionUpdateArrived)
         {
             radioPos.x = parseInt(hostModule->getDisplayString().getTagArg("p", 0), -1);

@@ -53,13 +53,8 @@ void OSPFRouting::initialize(int stage)
 
     if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
-        // ASSERT(stage >= NEWSTAGE:TRANSPORT);
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(IP_PROT_OSPF);
-
-        // ASSERT(stage >= STAGE:ROUTERID_AVAILABLE);
-        // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
-        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
 
         isUp = isNodeUp();
         if (isUp)

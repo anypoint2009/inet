@@ -50,8 +50,6 @@ void IPvXTrafSink::initialize(int stage)
         IPSocket ipSocket(gate("ipOut"));
         ipSocket.registerProtocol(protocol);
 
-        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
-
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
     }

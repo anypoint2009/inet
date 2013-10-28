@@ -176,9 +176,6 @@ void Radio::initialize(int stage)
     else if (stage == INITSTAGE_PHYSICAL_LAYER)
     {
         registerBattery();
-        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
-        // ASSERT(stage >= STAGE:CHANNELCONTROL_AVAILABLE);
-        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         bool isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;
         if (isOperational)
@@ -195,7 +192,6 @@ void Radio::initialize(int stage)
         }
         else
         {
-            // ASSERT(stage > STAGE:NOTIFICATIONBOARD_AVAILABLE);
             // tell initial values to MAC
             setRadioState(RadioState::OFF);
             nb->fireChangeNotification(NF_RADIO_CHANNEL_CHANGED, &rs);

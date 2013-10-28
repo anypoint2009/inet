@@ -67,9 +67,6 @@ void RTPApplication::initialize(int stage)
     }
     else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
-        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
-        // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
-
         bool isOperational;
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(findContainingNode(this)->getSubmodule("status"));
         isOperational = (!nodeStatus) || nodeStatus->getState() == NodeStatus::UP;

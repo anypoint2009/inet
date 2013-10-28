@@ -72,10 +72,6 @@ void DHCPServer::initialize(int stage)
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
 
-        // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
-        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
-        // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
-
         nb = NotificationBoardAccess().get();
         nb->subscribe(this, NF_INTERFACE_CREATED);
         nb->subscribe(this, NF_INTERFACE_DELETED);

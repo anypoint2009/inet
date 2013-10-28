@@ -160,8 +160,6 @@ OLSR_ETX::initialize(int stage)
         msg_seq_ = OLSR_MAX_SEQ_NUM;
         ansn_ = OLSR_MAX_SEQ_NUM;
 
-        // ASSERT(stage >= STAGE:IP_LAYER_READY_FOR_HOOK_REGISTRATION);
-        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         registerRoutingModule();
 
         ra_addr_ = getAddress();

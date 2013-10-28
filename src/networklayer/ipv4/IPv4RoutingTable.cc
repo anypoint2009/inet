@@ -107,8 +107,6 @@ void IPv4RoutingTable::initialize(int stage)
     }
     else if (stage == INITSTAGE_NETWORK_LAYER_3)
     {
-        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
-
         if (isNodeUp)
         {
             // read routing table file (and interface configuration)
@@ -117,10 +115,6 @@ void IPv4RoutingTable::initialize(int stage)
             if (*filename && parser.readRoutingTableFromFile(filename)==-1)
                 error("Error reading routing table file %s", filename);
         }
-
-        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
-        // ASSERT(stage >= STAGE:INTERFACEENTRY_IP_PROTOCOLDATA_AVAILABLE);
-        // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
 
         // routerID selection must be after network autoconfiguration assigned interface addresses
         if (isNodeUp)

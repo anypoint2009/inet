@@ -190,10 +190,6 @@ void RIPRouting::initialize(int stage)
     }
     else if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     { // interfaces and static routes are already initialized
-        // ASSERT(stage >= STAGE:ROUTERID_AVAILABLE);
-        // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
-        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
-
         addressType = rt->getRouterIdAsGeneric().getAddressType();
         startRIPRouting();
     }

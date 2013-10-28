@@ -91,9 +91,6 @@ void SCTPPeer::initialize(int stage)
     }
     else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
-        // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
-        // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
-
         // parameters
         const char *addressesString = par("localAddress");
         AddressVector addresses = AddressResolver().resolve(cStringTokenizer(addressesString).asVector());

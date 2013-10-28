@@ -163,8 +163,6 @@ void HttpBrowserBase::initialize(int stage)
     }
     else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
-        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
-
         EV_DEBUG << "Initializing base HTTP browser component -- phase 1\n";
 
         bool isOperational;

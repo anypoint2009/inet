@@ -114,7 +114,6 @@ void PPP::initialize(int stage)
         // prepare to fire notifications
         notifDetails.setInterfaceEntry(interfaceEntry);
 
-        // ASSERT(stage > NEWSTAGE:LOCAL_INITIALIZATION);       // stage should be larger than 0 for call queueModule member function
         // request first frame to send
         if (queueModule && 0 == queueModule->getNumPendingRequests())
         {

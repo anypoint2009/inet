@@ -106,11 +106,6 @@ void ARP::initialize(int stage)
     }
     else if (stage == INITSTAGE_NETWORK_LAYER_3)  // IP addresses should be available
     {
-        // ASSERT(stage > NEWSTAGE:L3_IPADDRESSES);
-        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
-        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
-        // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
-
         ift = InterfaceTableAccess().get();
         rt = check_and_cast<IIPv4RoutingTable *>(getModuleByPath(par("routingTableModule")));
 

@@ -47,11 +47,6 @@ void LinkStateRouting::initialize(int stage)
 
     if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
-        // ASSERT(stage >= STAGE:ROUTERID_AVAILABLE);
-        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
-        // ASSERT(stage >= STAGE:INTERFACEENTRY_REGISTERED);
-        // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
-
         tedmod = TEDAccess().get();
 
         IIPv4RoutingTable *rt = IPv4RoutingTableAccess().get();
@@ -76,7 +71,6 @@ void LinkStateRouting::initialize(int stage)
         announceMsg = new cMessage("announce");
         scheduleAt(simTime() + exponential(0.01), announceMsg);
 
-        // ASSERT(stage >= NEWSTAGE:TRANSPORT);
         IPSocket socket(gate("ipOut"));
         socket.registerProtocol(IP_PROT_OSPF);
     }

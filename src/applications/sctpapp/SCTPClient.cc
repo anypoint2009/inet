@@ -105,7 +105,6 @@ void SCTPClient::initialize(int stage)
         if (!isOperational)
             throw cRuntimeError("This module doesn't support starting in node DOWN state");
 
-        // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
         // parameters
         const char *addressesString = par("localAddress");
         AddressVector addresses = AddressResolver().resolve(cStringTokenizer(addressesString).asVector());

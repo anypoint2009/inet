@@ -51,9 +51,6 @@ void TCPGenericSrvApp::initialize(int stage)
     }
     else if (stage == INITSTAGE_APPLICATION_LAYER)
     {
-        // ASSERT(stage >= STAGE:TRANSPORT_LAYER_AVAILABLE);
-        // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
-
         const char *localAddress = par("localAddress");
         int localPort = par("localPort");
         TCPSocket socket;

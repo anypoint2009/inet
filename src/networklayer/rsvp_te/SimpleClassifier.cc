@@ -36,7 +36,6 @@ void SimpleClassifier::initialize(int stage)
     }
     else if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
-        // ASSERT(stage > NEWSTAGE:L3_STATICROUTES);
         IPv4RoutingTableAccess routingTableAccess;
         IIPv4RoutingTable *rt = routingTableAccess.get();
         routerId = rt->getRouterId();

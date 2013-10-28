@@ -145,8 +145,6 @@ void NS_CLASS initialize(int stage)
         }
 
         /* Initialize common manet routing protocol structures */
-        // ASSERT(stage >= STAGE:IP_LAYER_READY_FOR_HOOK_REGISTRATION);
-        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         registerRoutingModule();
         if (llfeedback)
             linkLayerFeeback();

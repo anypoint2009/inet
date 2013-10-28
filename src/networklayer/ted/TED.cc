@@ -47,11 +47,6 @@ void TED::initialize(int stage)
 
     if (stage == INITSTAGE_ROUTING_PROTOCOLS)
     {
-        // ASSERT(stage >= STAGE:ROUTERID_AVAILABLE);
-        // ASSERT(stage >= STAGE:IP_ADDRESS_AVAILABLE);
-        // ASSERT(stage >= STAGE:NODESTATUS_AVAILABLE);
-        // ASSERT(stage >= STAGE:INTERFACEENTRY_IP_PROTOCOLDATA_AVAILABLE);
-
         maxMessageId = 0;
 
         WATCH_VECTOR(ted);

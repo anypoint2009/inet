@@ -120,8 +120,6 @@ void xDYMO::initialize(int stage)
         IPSocket socket(gate("ipOut"));
         socket.registerProtocol(IP_PROT_MANET);
 
-        // ASSERT(stage >= STAGE:IP_LAYER_READY_FOR_HOOK_REGISTRATION);
-        // ASSERT(stage >= STAGE:NOTIFICATIONBOARD_AVAILABLE);
         notificationBoard->subscribe(this, NF_LINK_BREAK);
         addressType = getSelfAddress().getAddressType();
         networkProtocol->registerHook(0, this);
