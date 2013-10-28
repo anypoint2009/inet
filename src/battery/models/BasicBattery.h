@@ -79,7 +79,7 @@ class DrawAmount
 };
 
 
-class INET_API BasicBattery : public cSimpleModule, public INotifiable
+class INET_API BasicBattery : public cSimpleModule
 {
   public:
     // LIFECYCLE
@@ -139,9 +139,6 @@ class INET_API BasicBattery : public cSimpleModule, public INotifiable
   private:
     // OPERATIONS
     // void         handleMessage(cMessage *msg);
-
-    virtual void receiveChangeNotification(int, const cObject*) = 0;
-
 };
 
 
