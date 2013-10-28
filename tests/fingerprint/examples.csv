@@ -321,3 +321,14 @@
 /examples/wireless/throughput/,      -f omnetpp.ini -c Throughput1 -r 0,            20s,             ff5e-d4ec
 /examples/wireless/throughput/,      -f omnetpp.ini -c Throughput2 -r 0,            10s,             8934-c4ef
 /examples/wireless/wiredandwirelesshostswithap/, -f omnetpp.ini -c General -r 0,                100s,            056e-9ecf
+
+/examples/wireless/nic/,             -f omnetpp.ini -c IdealMacWithIdealRadio -r 0,          100s,             ae9d-096e
+/examples/wireless/nic/,             -f omnetpp.ini -c IdealMacWithSimplifiedRadio -r 0,     100s,             10dc-1660
+/examples/wireless/nic/,             -f omnetpp.ini -c IdealMacWithDetailedRadio -r 0,       100s,             c20c-2265
+/examples/wireless/nic/,             -f omnetpp.ini -c BMacWithIdealRadio -r 0,              100s,             5efd-7395
+/examples/wireless/nic/,             -f omnetpp.ini -c BMacWithSimplifiedRadio -r 0,         100s,             193d-ac94
+/examples/wireless/nic/,             -f omnetpp.ini -c BMacWithDetailedRadio -r 0,           100s,             8ed7-dfea
+/examples/wireless/nic/,             -f omnetpp.ini -c Ieee80211MacWithIdealRadio -r 0,      100s,             dfce-e339
+/examples/wireless/nic/,             -f omnetpp.ini -c Ieee80211MacWithSimplifiedRadio -r 0, 100s,             9820-7d5c
+/examples/wireless/nic/,             -f omnetpp.ini -c Ieee80211MacWithDetailedRadio -r 0,   100s,             c042-e063
+
