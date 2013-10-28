@@ -66,8 +66,6 @@ class INET_API MobilityBase : public cSimpleModule, public IMobility
     };
 
   protected:
-    /** @brief A signal used to publish mobility state changes. */
-    static simsignal_t mobilityStateChangedSignal;
 
     /** @brief Pointer to visual representation module, to speed up repeated access. */
     cModule* visualRepresentation;
