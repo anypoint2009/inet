@@ -30,8 +30,6 @@ const char *notificationCategoryName(int category)
         case NF_NODE_FAILURE: return "FAILURE";
         case NF_NODE_RECOVERY: return "RECOVERY";
 
-        case NF_RADIOSTATE_CHANGED: return "RADIO-STATE";
-        case NF_RADIO_CHANNEL_CHANGED: return "RADIO-CHANNEL";
         case NF_PP_TX_BEGIN: return "TX-BEG";
         case NF_PP_TX_END: return "TX-END";
         case NF_PP_RX_END: return "RX-END";
