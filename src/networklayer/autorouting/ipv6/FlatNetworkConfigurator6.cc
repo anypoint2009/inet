@@ -30,8 +30,6 @@
 Define_Module(FlatNetworkConfigurator6);
 
 
-int FlatNetworkConfigurator6::numInitStages() const { return NUM_INIT_STAGES; }
-
 void FlatNetworkConfigurator6::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

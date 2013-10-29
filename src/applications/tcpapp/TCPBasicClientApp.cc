@@ -36,8 +36,6 @@ TCPBasicClientApp::~TCPBasicClientApp()
     cancelAndDelete(timeoutMsg);
 }
 
-int TCPBasicClientApp::numInitStages() const { return NUM_INIT_STAGES; }
-
 void TCPBasicClientApp::initialize(int stage)
 {
     TCPGenericCliAppBase::initialize(stage);

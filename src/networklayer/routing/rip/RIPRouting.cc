@@ -146,8 +146,6 @@ simsignal_t RIPRouting::rcvdResponseSignal = SIMSIGNAL_NULL;
 simsignal_t RIPRouting::badResponseSignal = SIMSIGNAL_NULL;
 simsignal_t RIPRouting::numRoutesSignal = SIMSIGNAL_NULL;
 
-int RIPRouting::numInitStages() const { return NUM_INIT_STAGES; }
-
 void RIPRouting::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

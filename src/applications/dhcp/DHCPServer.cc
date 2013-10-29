@@ -43,8 +43,6 @@ DHCPServer::~DHCPServer()
 {
 }
 
-int DHCPServer::numInitStages() const { return NUM_INIT_STAGES; }
-
 void DHCPServer::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

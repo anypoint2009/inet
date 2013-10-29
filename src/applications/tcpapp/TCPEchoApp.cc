@@ -25,8 +25,6 @@ simsignal_t TCPEchoApp::rcvdPkSignal = SIMSIGNAL_NULL;
 simsignal_t TCPEchoApp::sentPkSignal = SIMSIGNAL_NULL;
 
 
-int TCPEchoApp::numInitStages() const { return NUM_INIT_STAGES; }
-
 void TCPEchoApp::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

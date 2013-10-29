@@ -74,8 +74,6 @@ static std::ostream& operator<<(std::ostream& os, const TCPConnection& conn)
     return os;
 }
 
-int TCP::numInitStages() const { return NUM_INIT_STAGES; }
-
 void TCP::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

@@ -33,8 +33,6 @@ EtherMACFullDuplex::EtherMACFullDuplex()
 {
 }
 
-int EtherMACFullDuplex::numInitStages() const { return NUM_INIT_STAGES; }
-
 void EtherMACFullDuplex::initialize(int stage)
 {
     EtherMACBase::initialize(stage);

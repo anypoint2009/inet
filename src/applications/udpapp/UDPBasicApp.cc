@@ -40,8 +40,6 @@ UDPBasicApp::~UDPBasicApp()
     cancelAndDelete(selfMsg);
 }
 
-int UDPBasicApp::numInitStages() const { return NUM_INIT_STAGES; }
-
 void UDPBasicApp::initialize(int stage)
 {
     AppBase::initialize(stage);

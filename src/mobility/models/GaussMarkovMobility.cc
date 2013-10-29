@@ -35,8 +35,6 @@ GaussMarkovMobility::GaussMarkovMobility()
     variance = 0;
 }
 
-int GaussMarkovMobility::numInitStages() const { return NUM_INIT_STAGES; }
-
 void GaussMarkovMobility::initialize(int stage)
 {
     LineSegmentsMobilityBase::initialize(stage);

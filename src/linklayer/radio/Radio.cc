@@ -53,8 +53,6 @@ Radio::Radio() : rs(this->getId())
     noiseGenerator = NULL;
 }
 
-int Radio::numInitStages() const { return NUM_INIT_STAGES; }
-
 void Radio::initialize(int stage)
 {
     ChannelAccess::initialize(stage);

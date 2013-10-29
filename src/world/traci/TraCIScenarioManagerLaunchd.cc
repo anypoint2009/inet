@@ -34,8 +34,6 @@ TraCIScenarioManagerLaunchd::~TraCIScenarioManagerLaunchd()
 {
 }
 
-int TraCIScenarioManagerLaunchd::numInitStages() const { return NUM_INIT_STAGES; }
-
 void TraCIScenarioManagerLaunchd::initialize(int stage)
 {
     //TODO why call the base initialize() at the end?

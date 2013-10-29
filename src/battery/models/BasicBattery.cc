@@ -27,8 +27,6 @@
 /**
  * Initialization routine
  */
-int BasicBattery::numInitStages() const { return NUM_INIT_STAGES; }
-
 void BasicBattery::initialize(int stage)
 {
     cSimpleModule::initialize(stage); //DO NOT DELETE!!

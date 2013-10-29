@@ -32,8 +32,6 @@ simsignal_t EtherAppSrv::sentPkSignal = SIMSIGNAL_NULL;
 simsignal_t EtherAppSrv::rcvdPkSignal = SIMSIGNAL_NULL;
 
 
-int EtherAppSrv::numInitStages() const { return NUM_INIT_STAGES; }
-
 void EtherAppSrv::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

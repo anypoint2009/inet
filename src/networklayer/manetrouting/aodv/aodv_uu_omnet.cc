@@ -65,8 +65,6 @@ int AODVUU::totalRerrSend=0;
 int AODVUU::totalRerrRec=0;
 #endif
 
-int NS_CLASS numInitStages() const  { return NUM_INIT_STAGES; }
-
 void NS_CLASS initialize(int stage)
 {
      /*

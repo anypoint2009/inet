@@ -28,8 +28,6 @@ RandomWPMobility::RandomWPMobility()
     nextMoveIsWait = false;
 }
 
-int RandomWPMobility::numInitStages() const { return NUM_INIT_STAGES; }
-
 void RandomWPMobility::initialize(int stage)
 {
     LineSegmentsMobilityBase::initialize(stage);

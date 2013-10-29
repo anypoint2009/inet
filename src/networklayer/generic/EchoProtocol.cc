@@ -23,8 +23,6 @@
 
 Define_Module(EchoProtocol);
 
-int EchoProtocol::numInitStages() const { return NUM_INIT_STAGES; }
-
 void EchoProtocol::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

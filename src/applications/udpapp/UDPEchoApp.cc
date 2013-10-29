@@ -25,8 +25,6 @@ Define_Module(UDPEchoApp);
 simsignal_t UDPEchoApp::pkSignal = SIMSIGNAL_NULL;
 
 
-int UDPEchoApp::numInitStages() const { return NUM_INIT_STAGES; }
-
 void UDPEchoApp::initialize(int stage)
 {
     AppBase::initialize(stage);

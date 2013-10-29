@@ -39,8 +39,6 @@ IdealRadio::IdealRadio()
     concurrentReceives = 0;
 }
 
-int IdealRadio::numInitStages() const { return NUM_INIT_STAGES; }
-
 void IdealRadio::initialize(int stage)
 {
     IdealChannelModelAccess::initialize(stage);

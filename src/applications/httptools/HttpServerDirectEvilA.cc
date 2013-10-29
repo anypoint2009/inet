@@ -33,8 +33,6 @@
 Define_Module(HttpServerDirectEvilA);
 
 
-int HttpServerDirectEvilA::numInitStages() const { return NUM_INIT_STAGES; }
-
 void HttpServerDirectEvilA::initialize(int stage)
 {
     HttpServerDirect::initialize(stage);

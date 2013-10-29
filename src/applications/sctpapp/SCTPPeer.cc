@@ -70,8 +70,6 @@ SCTPPeer::~SCTPPeer()
     rcvdBytesPerAssoc.clear();
 }
 
-int SCTPPeer::numInitStages() const { return NUM_INIT_STAGES; }
-
 void SCTPPeer::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

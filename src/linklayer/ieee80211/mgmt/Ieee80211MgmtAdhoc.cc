@@ -23,8 +23,6 @@
 Define_Module(Ieee80211MgmtAdhoc);
 
 
-int Ieee80211MgmtAdhoc::numInitStages() const { return NUM_INIT_STAGES; }
-
 void Ieee80211MgmtAdhoc::initialize(int stage)
 {
     Ieee80211MgmtBase::initialize(stage);

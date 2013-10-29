@@ -21,8 +21,6 @@
 Define_Module(LIBTable);
 
 
-int LIBTable::numInitStages() const { return NUM_INIT_STAGES; }
-
 void LIBTable::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

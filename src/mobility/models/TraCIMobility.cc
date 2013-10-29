@@ -72,8 +72,6 @@ void TraCIMobility::Statistics::recordScalars(cSimpleModule& module)
     module.recordScalar("totalCO2Emission", totalCO2Emission);
 }
 
-int TraCIMobility::numInitStages() const { return NUM_INIT_STAGES; }
-
 void TraCIMobility::initialize(int stage)
 {
     //TODO why call the base::initialize() at the end?

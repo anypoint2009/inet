@@ -20,8 +20,6 @@
 Define_Module(TCPSrvHostApp);
 
 
-int TCPSrvHostApp::numInitStages() const { return NUM_INIT_STAGES; }
-
 void TCPSrvHostApp::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

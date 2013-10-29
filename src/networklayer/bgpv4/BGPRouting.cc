@@ -36,8 +36,6 @@ BGPRouting::~BGPRouting(void)
     _prefixListOUT.erase(_prefixListOUT.begin(), _prefixListOUT.end());
 }
 
-int BGPRouting::numInitStages() const { return NUM_INIT_STAGES; }
-
 void BGPRouting::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

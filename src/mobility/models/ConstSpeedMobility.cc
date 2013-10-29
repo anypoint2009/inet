@@ -30,8 +30,6 @@ ConstSpeedMobility::ConstSpeedMobility()
     speed = 0;
 }
 
-int ConstSpeedMobility::numInitStages() const { return NUM_INIT_STAGES; }
-
 void ConstSpeedMobility::initialize(int stage)
 {
     LineSegmentsMobilityBase::initialize(stage);

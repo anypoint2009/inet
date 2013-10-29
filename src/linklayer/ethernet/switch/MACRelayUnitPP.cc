@@ -49,8 +49,6 @@ MACRelayUnitPP::~MACRelayUnitPP()
     delete [] buffer;
 }
 
-int MACRelayUnitPP::numInitStages() const { return NUM_INIT_STAGES; }
-
 void MACRelayUnitPP::initialize(int stage)
 {
     MACRelayUnitBase::initialize(stage);

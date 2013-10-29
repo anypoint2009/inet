@@ -55,8 +55,6 @@ MobilityBase::MobilityBase()
     lastPosition = Coord::ZERO;
 }
 
-int MobilityBase::numInitStages() const { return NUM_INIT_STAGES; }
-
 void MobilityBase::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

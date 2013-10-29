@@ -48,8 +48,6 @@ simsignal_t PingTestApp::pingTxSeqSignal = SIMSIGNAL_NULL;
 simsignal_t PingTestApp::pingRxSeqSignal = SIMSIGNAL_NULL;
 
 
-int PingTestApp::numInitStages() const { return NUM_INIT_STAGES; }
-
 void PingTestApp::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

@@ -61,8 +61,6 @@ IPv6NeighbourDiscovery::~IPv6NeighbourDiscovery()
     //   AdvIfList advIfList;
 }
 
-int IPv6NeighbourDiscovery::numInitStages() const { return NUM_INIT_STAGES; }
-
 void IPv6NeighbourDiscovery::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

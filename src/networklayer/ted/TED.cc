@@ -39,8 +39,6 @@ TED::~TED()
 {
 }
 
-int TED::numInitStages() const { return NUM_INIT_STAGES; }
-
 void TED::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

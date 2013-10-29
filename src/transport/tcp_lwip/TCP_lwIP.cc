@@ -82,8 +82,6 @@ TCP_lwIP::TCP_lwIP()
     netIf.state = NULL;
 }
 
-int TCP_lwIP::numInitStages() const { return NUM_INIT_STAGES; }
-
 void TCP_lwIP::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

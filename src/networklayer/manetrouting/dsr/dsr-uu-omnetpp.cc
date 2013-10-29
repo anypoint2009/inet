@@ -194,8 +194,6 @@ void DSRUUTimer::cancel()
         a_->cancelEvent(&msgtimer);
 }
 
-int DSRUU::numInitStages() const { return NUM_INIT_STAGES; }
-
 void DSRUU::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

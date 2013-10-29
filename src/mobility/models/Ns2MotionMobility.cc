@@ -126,8 +126,6 @@ void Ns2MotionMobility::parseFile(const char *filename)
 
 }
 
-int Ns2MotionMobility::numInitStages() const { return NUM_INIT_STAGES; }
-
 void Ns2MotionMobility::initialize(int stage)
 {
     LineSegmentsMobilityBase::initialize(stage);

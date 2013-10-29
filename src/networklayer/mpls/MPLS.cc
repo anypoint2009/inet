@@ -35,8 +35,6 @@
 Define_Module(MPLS);
 
 
-int MPLS::numInitStages() const { return NUM_INIT_STAGES; }
-
 void MPLS::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

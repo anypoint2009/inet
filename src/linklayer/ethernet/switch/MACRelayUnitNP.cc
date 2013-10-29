@@ -54,8 +54,6 @@ MACRelayUnitNP::~MACRelayUnitNP()
     delete [] endProcEvents;
 }
 
-int MACRelayUnitNP::numInitStages() const { return NUM_INIT_STAGES; }
-
 void MACRelayUnitNP::initialize(int stage)
 {
     MACRelayUnitBase::initialize(stage);

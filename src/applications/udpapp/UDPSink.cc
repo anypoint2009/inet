@@ -25,8 +25,6 @@ Define_Module(UDPSink);
 simsignal_t UDPSink::rcvdPkSignal = SIMSIGNAL_NULL;
 
 
-int UDPSink::numInitStages() const { return NUM_INIT_STAGES; }
-
 void UDPSink::initialize(int stage)
 {
     AppBase::initialize(stage);

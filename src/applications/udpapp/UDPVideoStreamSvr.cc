@@ -48,8 +48,6 @@ UDPVideoStreamSvr::~UDPVideoStreamSvr()
         cancelAndDelete(it->second.timer);
 }
 
-int UDPVideoStreamSvr::numInitStages() const { return NUM_INIT_STAGES; }
-
 void UDPVideoStreamSvr::initialize(int stage)
 {
     AppBase::initialize(stage);

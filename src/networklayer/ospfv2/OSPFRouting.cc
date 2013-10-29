@@ -45,8 +45,6 @@ OSPFRouting::~OSPFRouting()
     delete ospfRouter;
 }
 
-int OSPFRouting::numInitStages() const { return NUM_INIT_STAGES; }
-
 void OSPFRouting::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

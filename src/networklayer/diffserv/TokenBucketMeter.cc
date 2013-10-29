@@ -24,8 +24,6 @@ using namespace DiffservUtil;
 Define_Module(TokenBucketMeter);
 
 
-int TokenBucketMeter::numInitStages() const { return NUM_INIT_STAGES; }
-
 void TokenBucketMeter::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

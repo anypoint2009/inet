@@ -31,8 +31,6 @@ LinearNodeDistributionMobility::LinearNodeDistributionMobility()
     orientation = 0;
 }
 
-int LinearNodeDistributionMobility::numInitStages() const { return NUM_INIT_STAGES; }
-
 void LinearNodeDistributionMobility::initialize(int stage)
 {
     StationaryMobility::initialize(stage);

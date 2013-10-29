@@ -42,8 +42,6 @@ int TelnetApp::checkedScheduleAt(simtime_t t, cMessage *msg)
     return 0;
 }
 
-int TelnetApp::numInitStages() const { return NUM_INIT_STAGES; }
-
 
 void TelnetApp::initialize(int stage)
 {

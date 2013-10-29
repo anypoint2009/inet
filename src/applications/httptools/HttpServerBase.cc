@@ -34,8 +34,6 @@
 #include "NodeStatus.h"
 
 
-int HttpServerBase::numInitStages() const { return NUM_INIT_STAGES; }
-
 void HttpServerBase::initialize(int stage)
 {
     HttpNodeBase::initialize(stage);

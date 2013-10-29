@@ -57,8 +57,6 @@ HttpBrowserBase::~HttpBrowserBase()
     cancelAndDelete(eventTimer);
 }
 
-int HttpBrowserBase::numInitStages() const { return NUM_INIT_STAGES; }
-
 void HttpBrowserBase::initialize(int stage)
 {
     EV_DEBUG << "Initializing base HTTP browser component -- stage " << stage << endl;

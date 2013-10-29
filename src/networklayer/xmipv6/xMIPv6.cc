@@ -90,8 +90,6 @@ xMIPv6::~xMIPv6()
     }
 }
 
-int xMIPv6::numInitStages() const { return NUM_INIT_STAGES; }
-
 void xMIPv6::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

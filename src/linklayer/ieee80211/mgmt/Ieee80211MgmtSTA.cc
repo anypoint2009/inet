@@ -86,8 +86,6 @@ std::ostream& operator<<(std::ostream& os, const Ieee80211MgmtSTA::AssociatedAPI
     return os;
 }
 
-int Ieee80211MgmtSTA::numInitStages() const { return NUM_INIT_STAGES; }
-
 void Ieee80211MgmtSTA::initialize(int stage)
 {
     Ieee80211MgmtBase::initialize(stage);

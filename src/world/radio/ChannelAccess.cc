@@ -44,8 +44,6 @@ ChannelAccess::~ChannelAccess()
     }
 }
 
-int ChannelAccess::numInitStages() const { return NUM_INIT_STAGES; }
-
 /**
  * Upon initialization ChannelAccess registers the nic parent module
  * to have all its connections handled by ChannelControl

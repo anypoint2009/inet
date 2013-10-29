@@ -33,8 +33,6 @@
 Define_Module(HttpController);
 
 
-int HttpController::numInitStages() const { return NUM_INIT_STAGES; }
-
 void HttpController::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

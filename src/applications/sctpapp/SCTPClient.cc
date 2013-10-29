@@ -55,8 +55,6 @@ SCTPClient::~SCTPClient()
     cancelAndDelete(primaryChangeTimer);
 }
 
-int SCTPClient::numInitStages() const { return NUM_INIT_STAGES; }
-
 void SCTPClient::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

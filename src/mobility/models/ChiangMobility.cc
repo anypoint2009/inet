@@ -38,8 +38,6 @@ ChiangMobility::ChiangMobility()
     yState = 0;
 }
 
-int ChiangMobility::numInitStages() const { return NUM_INIT_STAGES; }
-
 void ChiangMobility::initialize(int stage)
 {
     LineSegmentsMobilityBase::initialize(stage);

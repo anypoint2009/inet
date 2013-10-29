@@ -32,8 +32,6 @@
 
 Define_Module(HttpServer);
 
-int HttpServer::numInitStages() const { return NUM_INIT_STAGES; }
-
 void HttpServer::initialize(int stage)
 {
     HttpServerBase::initialize(stage);

@@ -24,8 +24,6 @@ Define_Module(TCPSinkApp);
 
 simsignal_t TCPSinkApp::rcvdPkSignal = SIMSIGNAL_NULL;
 
-int TCPSinkApp::numInitStages() const { return NUM_INIT_STAGES; }
-
 void TCPSinkApp::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

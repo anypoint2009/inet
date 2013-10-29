@@ -71,8 +71,6 @@ int DYMOUM::totalRerrRec = 0;
 std::map<ManetAddress,u_int32_t *> DYMOUM::mapSeqNum;
 
 
-int DYMOUM::numInitStages() const { return NUM_INIT_STAGES; }
-
 void DYMOUM::initialize(int stage)
 {
     ManetRoutingBase::initialize(stage);

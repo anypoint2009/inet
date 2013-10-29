@@ -61,8 +61,6 @@ SimpleVoIPReceiver::~SimpleVoIPReceiver()
     cancelAndDelete(selfTalkspurtFinished);
 }
 
-int SimpleVoIPReceiver::numInitStages() const { return NUM_INIT_STAGES; }
-
 void SimpleVoIPReceiver::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

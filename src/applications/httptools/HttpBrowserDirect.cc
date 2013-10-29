@@ -34,8 +34,6 @@
 Define_Module(HttpBrowserDirect);
 
 
-int HttpBrowserDirect::numInitStages() const { return NUM_INIT_STAGES; }
-
 void HttpBrowserDirect::initialize(int stage)
 {
     EV_DEBUG << "Initializing HTTP direct browser component - stage " << stage << endl;

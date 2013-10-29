@@ -67,8 +67,6 @@ static char *fgetline(FILE *fp)
     return line;
 }
 
-int MACRelayUnitBase::numInitStages() const { return NUM_INIT_STAGES; }
-
 void MACRelayUnitBase::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

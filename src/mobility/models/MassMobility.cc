@@ -33,8 +33,6 @@ MassMobility::MassMobility()
     angle = 0;
 }
 
-int MassMobility::numInitStages() const { return NUM_INIT_STAGES; }
-
 void MassMobility::initialize(int stage)
 {
     LineSegmentsMobilityBase::initialize(stage);

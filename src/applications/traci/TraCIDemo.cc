@@ -27,8 +27,6 @@
 
 Define_Module(TraCIDemo);
 
-int TraCIDemo::numInitStages() const { return NUM_INIT_STAGES; }
-
 void TraCIDemo::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

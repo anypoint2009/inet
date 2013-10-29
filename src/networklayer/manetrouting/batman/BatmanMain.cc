@@ -105,8 +105,6 @@ Batman::~Batman()
     hna_chg_list.clear();
 }
 
-int Batman::numInitStages() const { return NUM_INIT_STAGES; }
-
 void Batman::initialize(int stage)
 {
     ManetRoutingBase::initialize(stage);

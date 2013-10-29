@@ -33,8 +33,6 @@
 Define_Module(HttpServerDirect);
 
 
-int HttpServerDirect::numInitStages() const { return NUM_INIT_STAGES; }
-
 void HttpServerDirect::initialize(int stage)
 {
     HttpServerBase::initialize(stage);

@@ -42,8 +42,6 @@ ANSimMobility::ANSimMobility()
     nextPositionChange = NULL;
 }
 
-int ANSimMobility::numInitStages() const { return NUM_INIT_STAGES; }
-
 void ANSimMobility::initialize(int stage)
 {
     LineSegmentsMobilityBase::initialize(stage);

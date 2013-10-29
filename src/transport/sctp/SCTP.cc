@@ -90,8 +90,6 @@ void SCTP::bindPortForUDP()
     udpSocket.bind(SCTP_UDP_PORT);
 }
 
-int SCTP::numInitStages() const { return NUM_INIT_STAGES; }
-
 void SCTP::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

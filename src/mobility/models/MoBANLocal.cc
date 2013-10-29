@@ -53,8 +53,6 @@ MoBANLocal::MoBANLocal()
     speed = 0;
 }
 
-int MoBANLocal::numInitStages() const { return NUM_INIT_STAGES; }
-
 void MoBANLocal::initialize(int stage)
 {
     LineSegmentsMobilityBase::initialize(stage);

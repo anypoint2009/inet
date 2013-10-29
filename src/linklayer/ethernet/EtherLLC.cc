@@ -33,8 +33,6 @@ simsignal_t EtherLLC::droppedPkUnknownDSAPSignal = SIMSIGNAL_NULL;
 simsignal_t EtherLLC::pauseSentSignal = SIMSIGNAL_NULL;
 
 
-int EtherLLC::numInitStages() const { return NUM_INIT_STAGES; }
-
 void EtherLLC::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

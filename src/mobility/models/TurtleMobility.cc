@@ -31,8 +31,6 @@ TurtleMobility::TurtleMobility()
     angle = 0;
 }
 
-int TurtleMobility::numInitStages() const { return NUM_INIT_STAGES; }
-
 void TurtleMobility::initialize(int stage)
 {
     LineSegmentsMobilityBase::initialize(stage);

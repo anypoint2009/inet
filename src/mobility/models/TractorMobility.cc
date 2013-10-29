@@ -35,8 +35,6 @@ TractorMobility::TractorMobility()
     step = 0;
 }
 
-int TractorMobility::numInitStages() const { return NUM_INIT_STAGES; }
-
 void TractorMobility::initialize(int stage)
 {
     LineSegmentsMobilityBase::initialize(stage);

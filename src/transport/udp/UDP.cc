@@ -115,8 +115,6 @@ UDP::~UDP()
     clearAllSockets();
 }
 
-int UDP::numInitStages() const { return NUM_INIT_STAGES; }
-
 void UDP::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

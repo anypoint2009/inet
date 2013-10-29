@@ -103,8 +103,6 @@ Ieee80211Mac::~Ieee80211Mac()
  * Initialization functions.
  */
 
-int Ieee80211Mac::numInitStages() const { return NUM_INIT_STAGES; }
-
 void Ieee80211Mac::initialize(int stage)
 {
     EV_DEBUG << "Initializing stage " << stage << endl;

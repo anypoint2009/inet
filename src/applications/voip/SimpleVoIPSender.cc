@@ -38,8 +38,6 @@ SimpleVoIPSender::~SimpleVoIPSender()
     cancelAndDelete(selfSource);
 }
 
-int SimpleVoIPSender::numInitStages() const { return NUM_INIT_STAGES; }
-
 void SimpleVoIPSender::initialize(int stage)
 {
     EV << "VoIP Sender initialize: stage " << stage << endl;

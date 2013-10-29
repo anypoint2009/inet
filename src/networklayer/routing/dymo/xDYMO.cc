@@ -58,8 +58,6 @@ xDYMO::~xDYMO()
 // module interface
 //
 
-int xDYMO::numInitStages() const { return NUM_INIT_STAGES; }
-
 void xDYMO::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

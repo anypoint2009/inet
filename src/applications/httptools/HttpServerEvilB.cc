@@ -33,8 +33,6 @@
 
 Define_Module(HttpServerEvilB);
 
-int HttpServerEvilB::numInitStages() const { return NUM_INIT_STAGES; }
-
 void HttpServerEvilB::initialize(int stage)
 {
     HttpServer::initialize(stage);

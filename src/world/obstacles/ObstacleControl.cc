@@ -29,8 +29,6 @@ Define_Module(ObstacleControl);
 ObstacleControl::~ObstacleControl() {
 }
 
-int ObstacleControl::numInitStages() const { return NUM_INIT_STAGES; }
-
 void ObstacleControl::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

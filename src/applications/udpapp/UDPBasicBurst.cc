@@ -66,8 +66,6 @@ UDPBasicBurst::~UDPBasicBurst()
     cancelAndDelete(timerNext);
 }
 
-int UDPBasicBurst::numInitStages() const { return NUM_INIT_STAGES; }
-
 void UDPBasicBurst::initialize(int stage)
 {
     AppBase::initialize(stage);

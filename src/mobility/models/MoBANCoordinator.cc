@@ -50,8 +50,6 @@
 
 Define_Module(MoBANCoordinator);
 
-int MoBANCoordinator::numInitStages() const { return NUM_INIT_STAGES; }
-
 void MoBANCoordinator::initialize(int stage)
 {
     LineSegmentsMobilityBase::initialize(stage);

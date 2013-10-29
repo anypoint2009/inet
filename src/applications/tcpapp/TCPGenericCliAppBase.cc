@@ -23,8 +23,6 @@ simsignal_t TCPGenericCliAppBase::rcvdPkSignal = SIMSIGNAL_NULL;
 simsignal_t TCPGenericCliAppBase::sentPkSignal = SIMSIGNAL_NULL;
 
 
-int TCPGenericCliAppBase::numInitStages() const { return NUM_INIT_STAGES; }
-
 void TCPGenericCliAppBase::initialize(int stage)
 {
     cSimpleModule::initialize(stage);

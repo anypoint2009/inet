@@ -43,8 +43,6 @@ HttpBrowser::~HttpBrowser()
     //
 }
 
-int HttpBrowser::numInitStages() const { return NUM_INIT_STAGES; }
-
 void HttpBrowser::initialize(int stage)
 {
     EV_DEBUG << "Initializing HTTP browser component (sockets version), stage " << stage << endl;

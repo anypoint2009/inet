@@ -35,8 +35,6 @@ CircleMobility::CircleMobility()
     angle = 0;
 }
 
-int CircleMobility::numInitStages() const { return NUM_INIT_STAGES; }
-
 void CircleMobility::initialize(int stage)
 {
     MovingMobilityBase::initialize(stage);

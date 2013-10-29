@@ -45,8 +45,6 @@ IPvXTrafGen::~IPvXTrafGen()
     cancelAndDelete(timer);
 }
 
-int IPvXTrafGen::numInitStages() const { return NUM_INIT_STAGES; }
-
 void IPvXTrafGen::initialize(int stage)
 {
     cSimpleModule::initialize(stage);
