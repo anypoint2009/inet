@@ -37,7 +37,7 @@ int FlatNetworkConfigurator::numInitStages() const  { return STAGE_DO_CONFIGURE_
 
 void FlatNetworkConfigurator::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_CONFIGURE_IP_ADDRESSES)
     {

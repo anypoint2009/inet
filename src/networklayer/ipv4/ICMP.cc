@@ -34,7 +34,7 @@ int ICMP::numInitStages() const  { return STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_
 
 void ICMP::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP)
     {

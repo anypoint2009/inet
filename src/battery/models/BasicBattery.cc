@@ -34,7 +34,7 @@ int BasicBattery::numInitStages() const
 
 void BasicBattery::initialize(int stage)
 {
-    cSimpleModule::initialize(stage); //DO NOT DELETE!!
+    InetSimpleModule::initialize(stage); //DO NOT DELETE!!
 
     if (stage == STAGE_DO_LOCAL)
     {

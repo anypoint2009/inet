@@ -27,7 +27,7 @@ int SimpleClassifier::numInitStages() const { return STAGE_DO_INIT_ROUTING_PROTO
 
 void SimpleClassifier::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_LOCAL)
     {

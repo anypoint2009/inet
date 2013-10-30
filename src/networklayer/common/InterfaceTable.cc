@@ -66,7 +66,7 @@ int InterfaceTable::numInitStages() const { return STAGE_INTERFACEENTRY_REGISTER
 
 void InterfaceTable::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_LOCAL)
     {

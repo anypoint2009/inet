@@ -48,7 +48,7 @@ class INET_API UDPVideoStreamCli : public AppBase
     virtual ~UDPVideoStreamCli() { cancelAndDelete(selfMsg); }
 
   protected:
-    ///@name Overridden cSimpleModule functions
+    ///@name Overridden InetSimpleModule functions
     //@{
     virtual int numInitStages() const;
     virtual void initialize(int stage);

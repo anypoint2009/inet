@@ -44,7 +44,7 @@ int BGPRouting::numInitStages() const
 
 void BGPRouting::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_NODESTATUS_AVAILABLE)
     {

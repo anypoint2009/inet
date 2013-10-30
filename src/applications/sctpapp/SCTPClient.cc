@@ -63,7 +63,7 @@ int SCTPClient::numInitStages() const
 
 void SCTPClient::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     sctpEV3 << "initialize SCTP Client stage "<< stage << endl;
     if (stage == STAGE_DO_LOCAL)

@@ -30,7 +30,7 @@ int EchoProtocol::numInitStages() const
 
 void EchoProtocol::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP)
     {

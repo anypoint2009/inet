@@ -37,7 +37,7 @@ int HttpController::numInitStages() const { return STAGE_NODESTATUS_AVAILABLE + 
 
 void HttpController::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     EV_DEBUG << "Initializing stage " << stage << endl;
 

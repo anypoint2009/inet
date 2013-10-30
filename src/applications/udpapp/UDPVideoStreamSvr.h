@@ -85,7 +85,7 @@ class INET_API UDPVideoStreamSvr : public AppBase
     virtual ~UDPVideoStreamSvr();
 
   protected:
-    ///@name Overridden cSimpleModule functions
+    ///@name Overridden InetSimpleModule functions
     //@{
     virtual int numInitStages() const;
     virtual void initialize(int stage);

@@ -39,7 +39,7 @@ int Ieee80211AgentSTA::numInitStages() const
 
 void Ieee80211AgentSTA::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_LOCAL)
     {

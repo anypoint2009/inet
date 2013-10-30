@@ -184,7 +184,7 @@ void DSRUU::omnet_deliver(struct dsr_pkt *dp)
 void  DSRUUTimer::resched(double delay)
 {
     if (msgtimer.isScheduled())
-        a_->cSimpleModule::cancelEvent(&msgtimer);
+        a_->InetSimpleModule::cancelEvent(&msgtimer);
     a_->scheduleAt(simTime()+delay, &msgtimer);
 }
 
@@ -202,7 +202,7 @@ int DSRUU::numInitStages() const
 
 void DSRUU::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     //current_time =simTime();
     if (stage == STAGE_DO_REGISTER_TRANSPORTPROTOCOLID_IN_IP)
@@ -422,7 +422,7 @@ void DSRUU::finish()
     maint_buf_cleanup();
 }
 
-DSRUU::DSRUU():cSimpleModule(), INotifiable()
+DSRUU::DSRUU():InetSimpleModule(), INotifiable()
 {
     lifoDsrPkt = NULL;
     lifo_token = 0;

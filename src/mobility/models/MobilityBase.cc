@@ -59,7 +59,7 @@ int MobilityBase::numInitStages() const {return STAGE_DO_INITIALIZE_AND_PUBLISH_
 
 void MobilityBase::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     EV_TRACE << "initializing MobilityBase stage " << stage << endl;
     if (stage == STAGE_DO_LOCAL)

@@ -50,7 +50,7 @@ int GenericNetworkConfigurator::numInitStages() const { return STAGE_DO_COMPUTE_
 #define T(CODE)  {long startTime=clock(); CODE; printElapsedTime(#CODE, startTime);}
 void GenericNetworkConfigurator::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_COMPUTE_IP_AUTOCONFIGURATION)
     {
@@ -333,7 +333,7 @@ const char *GenericNetworkConfigurator::getWirelessId(InterfaceEntry *interfaceE
     cModule *module = interfaceEntry->getInterfaceModule();
     if (!module)
         module = hostModule;
-    cSimpleModule *mgmtModule = ModuleAccess<cSimpleModule>("mgmt").getIfExists(module);
+    InetSimpleModule *mgmtModule = ModuleAccess<InetSimpleModule>("mgmt").getIfExists(module);
     if (mgmtModule)
     {
         if (mgmtModule->hasPar("ssid"))

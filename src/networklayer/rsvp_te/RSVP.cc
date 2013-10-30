@@ -55,7 +55,7 @@ int RSVP::numInitStages() const { return STAGE_DO_INIT_ROUTING_PROTOCOLS + 1; }
 
 void RSVP::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     // we have to wait for stage 2 until interfaces get registered (stage 0)
     // and get their auto-assigned IP addresses (stage 2); routerId gets

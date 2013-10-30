@@ -53,7 +53,7 @@ int IPvXTrafGen::numInitStages() const
 
 void IPvXTrafGen::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     // because of IPvXAddressResolver, we need to wait until interfaces are registered,
     // address auto-assignment takes place etc.

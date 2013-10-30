@@ -26,7 +26,7 @@ int DSDV_2::numInitStages() const  { return STAGE_DO_INIT_ROUTING_PROTOCOLS + 1;
 
 void DSDV_2::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     //reads from omnetpp.ini
     if (stage == STAGE_DO_LOCAL)

@@ -69,7 +69,7 @@ int IPv6NeighbourDiscovery::numInitStages() const
 
 void IPv6NeighbourDiscovery::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     // We have to wait until the 3rd stage (stage 2) with scheduling messages,
     // because interface registration and IPv6 configuration takes places

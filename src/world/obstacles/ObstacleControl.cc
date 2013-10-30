@@ -33,7 +33,7 @@ int ObstacleControl::numInitStages() const { return STAGE_ANNOTATIONMANAGER_AVAI
 
 void ObstacleControl::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_LOCAL)
     {

@@ -46,7 +46,7 @@ int AppBase::numInitStages() const
 
 void AppBase::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_LOCAL)
     {

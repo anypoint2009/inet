@@ -123,7 +123,7 @@ int UDP::numInitStages() const
 
 void UDP::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_LOCAL)
     {

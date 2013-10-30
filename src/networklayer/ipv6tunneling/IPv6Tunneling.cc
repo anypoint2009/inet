@@ -65,7 +65,7 @@ int IPv6Tunneling::numInitStages() const { return STAGE_NODESTATUS_AVAILABLE + 1
 
 void IPv6Tunneling::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_LOCAL)
     {

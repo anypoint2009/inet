@@ -22,7 +22,7 @@
 #include "INetfilter.h"
 #include "INetworkDatagram.h"
 
-class INET_API NetfilterInfoHook : public cSimpleModule, public INetfilter::IHook
+class INET_API NetfilterInfoHook : public InetSimpleModule, public INetfilter::IHook
 {
   protected:
     INetfilter *netfilter;
@@ -70,7 +70,7 @@ int NetfilterInfoHook::numInitStages() const
 
 void NetfilterInfoHook::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_IP_LAYER_READY_FOR_HOOK_REGISTRATION)
     {

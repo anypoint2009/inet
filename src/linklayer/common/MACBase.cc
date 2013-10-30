@@ -46,7 +46,7 @@ int MACBase::numInitStages() const { return STAGE_NOTIFICATIONBOARD_AVAILABLE + 
 
 void MACBase::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_LOCAL)
     {

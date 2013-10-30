@@ -36,7 +36,7 @@ int TCPGenericSrvApp::numInitStages() const
 
 void TCPGenericSrvApp::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_LOCAL)
     {

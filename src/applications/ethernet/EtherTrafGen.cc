@@ -48,7 +48,7 @@ int EtherTrafGen::numInitStages() const { return STAGE_NODESTATUS_AVAILABLE + 1;
 
 void EtherTrafGen::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     // we can only initialize in the 2nd stage (stage==1), because
     // assignment of "auto" MAC addresses takes place in stage 0

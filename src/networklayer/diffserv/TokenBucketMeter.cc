@@ -28,7 +28,7 @@ int TokenBucketMeter::numInitStages() const { return STAGE_INTERFACEENTRY_REGIST
 
 void TokenBucketMeter::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_LOCAL)
     {

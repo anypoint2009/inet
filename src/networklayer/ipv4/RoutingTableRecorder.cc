@@ -64,7 +64,7 @@ int RoutingTableRecorder::numInitStages() const  {return STAGE_DO_LOCAL + 1;}
 
 void RoutingTableRecorder::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_LOCAL)
     {
@@ -256,7 +256,7 @@ int RoutingTableRecorder::numInitStages() const  {return STAGE_NOTIFICATIONBOARD
 
 void RoutingTableRecorder::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_NOTIFICATIONBOARD_AVAILABLE)
     {

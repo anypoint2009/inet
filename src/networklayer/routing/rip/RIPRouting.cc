@@ -150,7 +150,7 @@ int RIPRouting::numInitStages() const { return STAGE_DO_INIT_ROUTING_PROTOCOLS +
 
 void RIPRouting::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_LOCAL)
     {

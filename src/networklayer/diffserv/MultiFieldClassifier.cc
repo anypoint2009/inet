@@ -135,7 +135,7 @@ int MultiFieldClassifier::numInitStages() const  {return STAGE_IP_ADDRESS_AVAILA
 
 void MultiFieldClassifier::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_LOCAL)
     {

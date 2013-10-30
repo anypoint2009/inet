@@ -44,7 +44,7 @@ int IdealChannelModelAccess::numInitStages() const { return STAGE_LOCATION_AVAIL
  */
 void IdealChannelModelAccess::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_LOCAL)
     {

@@ -28,7 +28,7 @@ int TCPSrvHostApp::numInitStages() const
 
 void TCPSrvHostApp::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_INIT_APPLICATION)
     {

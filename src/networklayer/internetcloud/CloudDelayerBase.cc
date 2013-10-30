@@ -46,7 +46,7 @@ int CloudDelayerBase::numInitStages() const
 
 void CloudDelayerBase::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_IP_LAYER_READY_FOR_HOOK_REGISTRATION)
     {

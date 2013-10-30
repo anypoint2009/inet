@@ -74,7 +74,7 @@ int ARP::numInitStages() const { return STAGE_IP_ADDRESS_AVAILABLE + 1; }
 
 void ARP::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_LOCAL)
     {

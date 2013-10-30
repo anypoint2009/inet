@@ -38,14 +38,14 @@ Define_Module(RTP);
 simsignal_t RTP::rcvdPkSignal = SIMSIGNAL_NULL;
 
 //
-// methods inherited from cSimpleModule
+// methods inherited from InetSimpleModule
 //
 
 int RTP::numInitStages() const { return STAGE_NODESTATUS_AVAILABLE + 1; }
 
 void RTP::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_LOCAL)
     {

@@ -49,7 +49,7 @@ int OSPFRouting::numInitStages() const { return STAGE_DO_INIT_ROUTING_PROTOCOLS 
 
 void OSPFRouting::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     // we have to wait for stage 2 until interfaces are registered (stage 0)
     // and routerId is assigned (stage 3)

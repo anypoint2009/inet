@@ -28,7 +28,7 @@ int TwoRateThreeColorMeter::numInitStages() const { return STAGE_INTERFACEENTRY_
 
 void TwoRateThreeColorMeter::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_LOCAL)
     {

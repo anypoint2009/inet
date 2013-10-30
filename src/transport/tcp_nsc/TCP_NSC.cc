@@ -217,7 +217,7 @@ int TCP_NSC::numInitStages() const { return STAGE_NODESTATUS_AVAILABLE + 1; }
 
 void TCP_NSC::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     tcpEV << this << ": initialize stage " << stage << endl;
 

@@ -34,7 +34,7 @@ int HostAutoConfigurator::numInitStages() const { return STAGE_DO_CONFIGURE_IP_A
 
 void HostAutoConfigurator::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_CONFIGURE_IP_ADDRESSES) {
         setupNetworkLayer();

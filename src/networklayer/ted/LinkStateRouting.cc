@@ -43,7 +43,7 @@ int LinkStateRouting::numInitStages() const { return STAGE_DO_INIT_ROUTING_PROTO
 
 void LinkStateRouting::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     // we have to wait until routerId gets assigned in stage 3
     if (stage == STAGE_DO_INIT_ROUTING_PROTOCOLS)

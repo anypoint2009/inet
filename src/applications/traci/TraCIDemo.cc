@@ -35,7 +35,7 @@ int TraCIDemo::numInitStages() const
 
 void TraCIDemo::initialize(int stage)
 {
-    cSimpleModule::initialize(stage);
+    InetSimpleModule::initialize(stage);
 
     if (stage == STAGE_DO_LOCAL)
     {
