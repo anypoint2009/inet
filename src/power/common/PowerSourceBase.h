@@ -40,7 +40,14 @@ class INET_API PowerSourceBase : public cSimpleModule, public IPowerSource
             powerConsumer(powerConsumer), consumedPower(consumedPower) { }
     };
 
+    /**
+     * List of currently known power consumers.
+     */
     std::vector<PowerConsumerEntry> powerConsumers;
+
+    /**
+     * Current total power consumption.
+     */
     double consumedPower;
 
   public:
