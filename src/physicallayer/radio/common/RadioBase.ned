@@ -1,5 +1,5 @@
 //
-// Copyright (C) 2013 OpenSim Ltd
+// Copyright (C) 2013 Andras Varga
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -15,23 +15,22 @@
 // along with this program; if not, see <http://www.gnu.org/licenses/>.
 //
 
-package inet.physicallayer.radio.ideal;
+package inet.physicallayer.radio.common;
 
-import inet.physicallayer.radio.common.RadioBase;
+import inet.physicallayer.radio.contract.IRadio;
 
 //
-// Implements a unit disk radio for use in ~IdealWirelessNic.
+// Abstract base module for radio models.
 //
-// See ~IdealWirelessNic for rationale and details.
-//
-// See ~IdealRadioChannel, ~IdealWirelessMac, ~IdealWirelessNic
-//
-simple IdealRadio extends RadioBase
+simple RadioBase like IRadio
 {
     parameters:
-        double bitrate @unit("bps");            // transmission speed [bit/sec]
-        double transmissionRange @unit("m");    // max. distance from sender where reception is possible
-        bool drawCoverage = default(true);      // draw the coverage area in Tkenv
-
-        @class(IdealRadio);
+        @display("i=block/wrxtx");
+        @signal[radioModeChanged](type=long);
+        @signal[radioChannelStateChanged](type=long);
+        @signal[radioChannelChanged](type=long);
+    gates:
+        input upperLayerIn @labels(ILinkLayerFrame/down);
+        output upperLayerOut @labels(ILinkLayerFrame/up);
+        input radioIn @labels(IRadioFrame);
 }
