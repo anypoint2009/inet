@@ -106,7 +106,7 @@ void Loopback::handleMessage(cMessage *msg)
     numRcvdOK++;
     emit(packetSentToUpperSignal, msg);
     numSent++;
-    send(msg, "netwOut");
+    sendSync(msg, "netwOut");
 
     if (ev.isGUI())
         updateDisplayString();

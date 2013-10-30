@@ -101,7 +101,7 @@ void Ieee80211MgmtAPBase::sendToUpperLayer(Ieee80211DataFrame *frame)
             throw cRuntimeError("Unknown encapDecap value: %d", encapDecap);
             break;
     }
-    send(outFrame, "upperLayerOut");
+    sendSync(outFrame, "upperLayerOut");
 }
 
 EtherFrame *Ieee80211MgmtAPBase::convertToEtherFrame(Ieee80211DataFrame *frame_)

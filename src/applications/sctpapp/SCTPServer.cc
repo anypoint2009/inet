@@ -124,7 +124,7 @@ void SCTPServer::initialize(int stage)
 void SCTPServer::sendOrSchedule(cPacket *msg)
 {
     if (delay == 0)
-        send(msg, "sctpOut");
+        sendSync(msg, "sctpOut");
     else
         scheduleAt(simulation.getSimTime()+delay, msg);
 }

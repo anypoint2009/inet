@@ -72,7 +72,7 @@ void MPLS::handleMessage(cMessage * msg)
 
 void MPLS::sendToL2(cMessage *msg, int gateIndex)
 {
-    send(msg, "ifOut", gateIndex);
+    sendSync(msg, "ifOut", gateIndex);
 }
 
 void MPLS::processPacketFromL3(cMessage * msg)
@@ -203,7 +203,7 @@ void MPLS::processPacketFromL2(cMessage *msg)
         if (!tryLabelAndForwardIPv4Datagram(ipdatagram))
         {
             int gateIndex = ipdatagram->getArrivalGate()->getIndex();
-            send(ipdatagram, "netwOut", gateIndex);
+            sendSync(ipdatagram, "netwOut", gateIndex);
         }
     }
     else
@@ -230,7 +230,7 @@ void MPLS::processMPLSPacketFromL2(MPLSPacket *mplsPacket)
 
         IPv4Datagram *ipdatagram = check_and_cast<IPv4Datagram *>(mplsPacket->decapsulate());
         delete mplsPacket;
-        send(ipdatagram, "netwOut", gateIndex);
+        sendSync(ipdatagram, "netwOut", gateIndex);
         return;
     }
 
@@ -285,7 +285,7 @@ void MPLS::processMPLSPacketFromL2(MPLSPacket *mplsPacket)
         }
         else
         {
-            send(nativeIP, "netwOut", gateIndex);
+            sendSync(nativeIP, "netwOut", gateIndex);
         }
     }
 }

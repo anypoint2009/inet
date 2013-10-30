@@ -352,7 +352,7 @@ void IPv6::routePacket(IPv6Datagram *datagram, const InterfaceEntry *destIE___, 
     {
         // a virtual tunnel interface provides a path to the destination: do tunneling
         EV << "tunneling: src addr=" << datagram->getSrcAddress() << ", dest addr=" << destAddress << std::endl;
-        send(datagram, "lowerTunnelingOut");
+        sendSync(datagram, "lowerTunnelingOut");
         return;
     }
 
@@ -391,7 +391,7 @@ void IPv6::routePacket(IPv6Datagram *datagram, const InterfaceEntry *destIE___, 
         {
             EV << "no link-layer address for next hop yet, passing datagram to Neighbour Discovery module\n";
             datagram->addPar("IPv6-fromHL") = fromHL;
-            send(datagram, "ndOut");
+            sendSync(datagram, "ndOut");
             return;
         }
     }
@@ -573,7 +573,7 @@ void IPv6::localDeliver(IPv6Datagram *datagram)
     if (protocol == IP_PROT_IPv6_ICMP && dynamic_cast<IPv6NDMessage*>(packet))
     {
         EV << "Neigbour Discovery packet: passing it to ND module\n";
-        send(packet, "ndOut");
+        sendSync(packet, "ndOut");
     }
 #ifdef WITH_xMIPv6
     else if (protocol == IP_PROT_IPv6EXT_MOB && dynamic_cast<MobilityHeader*>(packet))
@@ -583,7 +583,7 @@ void IPv6::localDeliver(IPv6Datagram *datagram)
         if (rt->hasMIPv6Support())
         {
             EV << "MIPv6 packet: passing it to xMIPv6 module\n";
-            send(check_and_cast<MobilityHeader*>(packet), "xMIPv6Out");
+            sendSync(check_and_cast<MobilityHeader*>(packet), "xMIPv6Out");
         }
         else
         {
@@ -606,7 +606,7 @@ void IPv6::localDeliver(IPv6Datagram *datagram)
     else if (protocol == IP_PROT_IP || protocol == IP_PROT_IPv6)
     {
         EV << "Tunnelled IP datagram\n";
-        send(packet, "upperTunnelingOut");
+        sendSync(packet, "upperTunnelingOut");
     }
     else
     {
@@ -619,7 +619,7 @@ void IPv6::localDeliver(IPv6Datagram *datagram)
             {
                 EV << "Protocol " << protocol << ", passing up on gate " << gateindex << "\n";
                 //TODO: Indication of forward progress
-                send(packet, outGate);
+                sendSync(packet, outGate);
                 return;
             }
         }
@@ -641,7 +641,7 @@ void IPv6::handleReceivedICMP(ICMPv6Message *msg)
         IPv6Datagram *bogusPacket = check_and_cast<IPv6Datagram *>(msg->getEncapsulatedPacket());
         int protocol = bogusPacket->getTransportProtocol();
         int gateindex = mapping.getOutputGateForProtocol(protocol);
-        send(msg, "transportOut", gateindex);
+        sendSync(msg, "transportOut", gateindex);
     }
     else
     {
@@ -650,7 +650,7 @@ void IPv6::handleReceivedICMP(ICMPv6Message *msg)
         // ICMPv6_MLD_DONE, ICMPv6_ROUTER_SOL, ICMPv6_ROUTER_AD, ICMPv6_NEIGHBOUR_SOL,
         // ICMPv6_NEIGHBOUR_AD, ICMPv6_MLDv2_REPORT
         EV << "ICMPv6 packet: passing it to ICMPv6 module\n";
-        send(msg, "icmpOut");
+        sendSync(msg, "icmpOut");
     }
 }
 
@@ -830,7 +830,7 @@ void IPv6::sendDatagramToOutput(IPv6Datagram *datagram, const InterfaceEntry *de
     }
 
     // send datagram to link layer
-    send(datagram, "queueOut", destIE->getNetworkLayerGateIndex());
+    sendSync(datagram, "queueOut", destIE->getNetworkLayerGateIndex());
 }
 
 bool IPv6::determineOutputInterface(const IPv6Address& destAddress, IPv6Address& nextHop,
@@ -858,7 +858,7 @@ bool IPv6::determineOutputInterface(const IPv6Address& destAddress, IPv6Address&
             {
                 EV << "no match in routing table, passing datagram to Neighbour Discovery module for default router selection\n";
                 datagram->addPar("IPv6-fromHL") = fromHL;
-                send(datagram, "ndOut");
+                sendSync(datagram, "ndOut");
             }
             return false;
         }
@@ -897,7 +897,7 @@ bool IPv6::processExtensionHeaders(IPv6Datagram* datagram)
                 // for simplicity, we set a context pointer on the datagram
                 datagram->setContextPointer(rh);
                 EV << "Sending datagram with RH2 to MIPv6 module" << endl;
-                send(datagram, "xMIPv6Out");
+                sendSync(datagram, "xMIPv6Out");
                 return false;
             }
             else
@@ -915,7 +915,7 @@ bool IPv6::processExtensionHeaders(IPv6Datagram* datagram)
             {
                 datagram->setContextPointer(eh);
                 EV << "Sending datagram with HoA Option to MIPv6 module" << endl;
-                send(datagram, "xMIPv6Out");
+                sendSync(datagram, "xMIPv6Out");
                 return false;
             }
             else

@@ -115,7 +115,7 @@ void RTPApplication::handleMessage(cMessage* msgIn)
                 ci->setPort(_port);
                 cMessage *msg = new RTPControlMsg("Enter Session");
                 msg->setControlInfo(ci);
-                send(msg, "rtpOut");
+                sendSync(msg, "rtpOut");
             }
             break;
 
@@ -132,7 +132,7 @@ void RTPApplication::handleMessage(cMessage* msgIn)
                 ci->setSsrc(ssrc);
                 cMessage *msg = new RTPControlMsg("senderModuleControl(PLAY)");
                 msg->setControlInfo(ci);
-                send(msg, "rtpOut");
+                sendSync(msg, "rtpOut");
 
                 cMessage *selfMsg = new cMessage("stopTransmission", STOP_TRANSMISSION);
                 scheduleAt(simTime() + _transmissionStopDelay, selfMsg);
@@ -152,7 +152,7 @@ void RTPApplication::handleMessage(cMessage* msgIn)
                 ci->setSsrc(ssrc);
                 cMessage *msg = new RTPControlMsg("senderModuleControl(STOP)");
                 msg->setControlInfo(ci);
-                send(msg, "rtpOut");
+                sendSync(msg, "rtpOut");
             }
             break;
 
@@ -167,7 +167,7 @@ void RTPApplication::handleMessage(cMessage* msgIn)
                 RTPCILeaveSession* ci = new RTPCILeaveSession();
                 cMessage *msg = new RTPControlMsg("Leave Session");
                 msg->setControlInfo(ci);
-                send(msg, "rtpOut");
+                sendSync(msg, "rtpOut");
             }
             break;
 
@@ -198,7 +198,7 @@ void RTPApplication::handleMessage(cMessage* msgIn)
                         ci->setFileName(_fileName);
                         cMessage *msg = new RTPControlMsg("createSenderModule()");
                         msg->setControlInfo(ci);
-                        send(msg, "rtpOut");
+                        sendSync(msg, "rtpOut");
                     }
                     else
                     {

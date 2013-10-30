@@ -242,7 +242,7 @@ void PingTestApp::sendToICMP(cMessage *msg, const Address& destAddr, const Addre
         ctrl->setDestAddr(destAddr.toIPv4());
         ctrl->setTimeToLive(hopLimit);
         msg->setControlInfo(ctrl);
-        send(msg, "pingOut");
+        sendSync(msg, "pingOut");
 #else
         throw cRuntimeError("INET compiled without IPv4 features!");
 #endif
@@ -256,7 +256,7 @@ void PingTestApp::sendToICMP(cMessage *msg, const Address& destAddr, const Addre
         ctrl->setDestAddr(destAddr.toIPv6());
         ctrl->setHopLimit(hopLimit);
         msg->setControlInfo(ctrl);
-        send(msg, "pingv6Out");
+        sendSync(msg, "pingv6Out");
 #else
         throw cRuntimeError("INET compiled without IPv6 features!");
 #endif

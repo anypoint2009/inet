@@ -102,7 +102,7 @@ void WirelessMacBase::sendDown(cMessage *msg)
     if (msg->isPacket())
         emit(packetSentToLowerSignal, msg);
 
-    send(msg, lowerLayerOut);
+    sendSync(msg, lowerLayerOut);
 }
 
 void WirelessMacBase::sendUp(cMessage *msg)
@@ -112,6 +112,6 @@ void WirelessMacBase::sendUp(cMessage *msg)
     if (msg->isPacket())
         emit(packetSentToUpperSignal, msg);
 
-    send(msg, upperLayerOut);
+    sendSync(msg, upperLayerOut);
 }
 

@@ -162,9 +162,9 @@ void MultiFieldClassifier::handleMessage(cMessage *msg)
     emit(pkClassSignal, gateIndex);
 
     if (gateIndex >= 0)
-        send(packet, "outs", gateIndex);
+        sendSync(packet, "outs", gateIndex);
     else
-        send(packet, "defaultOut");
+        sendSync(packet, "defaultOut");
 
     if (ev.isGUI())
     {

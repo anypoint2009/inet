@@ -490,7 +490,7 @@ void IPv6Tunneling::encapsulateDatagram(IPv6Datagram* dgram)
         controlInfo->setDestAddr(dest);
 
         packet->setControlInfo(controlInfo);
-        send(packet, "upperLayerOut");
+        sendSync(packet, "upperLayerOut");
     }
     else
     {
@@ -505,7 +505,7 @@ void IPv6Tunneling::encapsulateDatagram(IPv6Datagram* dgram)
         controlInfo->setInterfaceId(-1);
 
         dgram->setControlInfo(controlInfo);
-        send(dgram, "upperLayerOut");
+        sendSync(dgram, "upperLayerOut");
 #ifdef WITH_xMIPv6
     }
 #endif
@@ -546,7 +546,7 @@ void IPv6Tunneling::decapsulateDatagram(IPv6Datagram* dgram)
     //controlInfo->setInterfaceId(-1);
     dgram->setControlInfo(controlInfo);
 
-    send(dgram, "linkLayerOut");
+    sendSync(dgram, "linkLayerOut");
 
 #ifdef WITH_xMIPv6
     // Alain Tigyo, 21.03.2008

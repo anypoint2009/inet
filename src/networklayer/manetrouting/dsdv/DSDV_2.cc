@@ -201,7 +201,7 @@ void DSDV_2::handleMessage(cMessage *msg)
             Hello->setControlInfo(controlInfo);
 
             //broadcast to other nodes the hello message
-            send(Hello, "to_ip");
+            sendSync(Hello, "to_ip");
             Hello = NULL;
 
             //schedule new brodcast hello message event
@@ -219,7 +219,7 @@ void DSDV_2::handleMessage(cMessage *msg)
                         EV << "Vou mandar forward do " << (*it)->hello->getSrcIPAddress() << endl;
                         if ( (*it)->hello->getControlInfo() == NULL )
                             error("Apanhei-o a nulo no for");
-                        send((*it)->hello, "to_ip");
+                        sendSync((*it)->hello, "to_ip");
                         (*it)->hello = NULL;
                         delete (*it)->event;
                         (*it)->event = NULL;
@@ -380,7 +380,7 @@ void DSDV_2::handleMessage(cMessage *msg)
                 recHello->setNextIPAddress(source);
                 numHops++;
                 recHello->setHopdistance(numHops);
-                //send(HelloForward, "to_ip");//
+                //sendSync(HelloForward, "to_ip");//
                 //HelloForward=NULL;//
                 double waitTime = intuniform(1, 50);
                 waitTime = waitTime/100;
@@ -395,7 +395,7 @@ void DSDV_2::handleMessage(cMessage *msg)
                     fhp->hello->setNextIPAddress(source);
                     numHops++;
                     fhp->hello->setHopdistance(numHops);
-                    //send(HelloForward, "to_ip");//
+                    //sendSync(HelloForward, "to_ip");//
                     //HelloForward=NULL;//
                     double waitTime = intuniform(1, 50);
                     waitTime = waitTime/100;
